@@ -1,0 +1,215 @@
+// Variables
+$highlightColor: #B2CF42;
+$tabColor: #4C4C4C;
+$lightGrey: #ff0000;
+$defaultFont: Verdana,Arial,Helvetica,sans-serif; 	 	
+$baseUrlImg: "http://csszengarden.com/205/images/";
+
+//Mixins
+@mixin my-link-style{
+	background: $highlightColor;
+	color: #eee;
+	text-decoration: none; 
+}
+
+/* basic elements */
+* {
+	margin: 0;
+	padding: 0;	
+}
+
+body { 
+	background: #DFDBD3 url(#{$baseUrlImg}bg.gif) top left repeat-x;
+	color: $tabColor;
+	font-family: $defaultFont;
+}
+
+p { 	
+	font-size: .8em;
+	line-height: 2em;
+}
+
+h3 { 	
+	font:{
+		size:.7em;
+		weight:bold;
+	}
+	line-height: 1.3em;
+	padding-top: 2.5em;	
+}
+
+abbr,abbr {
+	background: transparent url(#{$baseUrlImg}abbr.gif) bottom left repeat-x;
+	border: 0 none;
+	cursor: help;
+	font-style: italic;
+}
+a {
+	&:link,&:visited {
+		background: #EBF3CE;
+		color: #5D7403;
+		text-decoration: none;
+	}
+	&:hover,&:active, &:focus {
+		background: $highlightColor;
+		color: #FFF;
+	}
+}
+
+.page-wrapper { 
+	background: transparent url(#{$baseUrlImg}contbg.gif) top left repeat-y;
+	width: 700px;		
+}
+ 
+.supporting {
+	padding: 0 69px 0 86px;
+	width: 545px;	
+}
+
+.intro {	
+	@extend .supporting;
+	background: transparent url(#{$baseUrlImg}logo.gif) top left no-repeat;
+	padding-top: 230px;	
+}
+
+.preamble,.supporting {
+	h3,p {
+		padding:{
+			left:10px;
+			right:40px;
+		}
+	}
+}
+
+.preamble,.explanation,.participation,.benefits,.requirements {
+	border-bottom: 1px solid #E4E1DB;
+	padding-bottom: 20pt;	
+}
+
+header, 
+.sidebar h3 {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.summary {
+	p {
+		&:first-child {
+			display: none;
+		}
+		&:last-child {
+			background: transparent url(#{$baseUrlImg}nav_dl.gif) top left no-repeat;
+			display: block;	
+			font-size: .6em;
+			font-weight: bold;
+			left: 661px;
+			line-height: 1.4em;
+			padding: 40px 40px 0 30px;
+			position: absolute; 	 	
+			top: 160px;	
+			width: 141px;
+			z-index: 20;
+			a{
+				&:link,
+				&:visited{
+					background: transparent;
+					color: $lightGrey;
+					text-decoration: none; 
+				}
+			}
+		}
+	}
+
+}
+
+.sidebar {	
+	background: transparent url(#{$baseUrlImg}navbg.gif) top left repeat-y;
+	left: 661px; 	
+	padding-top: 10em;
+	position: absolute;
+	top: 130px;	
+	width: 285px;
+	z-index: 10;
+
+	.wrapper {
+		background: transparent url(#{$baseUrlImg}navbtmbg.gif) bottom left no-repeat;
+		font: .6em/1.4em verdana, sans-serif; 				
+		padding-bottom: 160px;
+		h3 {
+			background: transparent top left no-repeat;
+			display: block;	
+			height: 26px;
+			padding: 0 0 10px 0;
+			width: 285px;
+		}
+		.select {
+			background-image: url(#{$baseUrlImg}nav_des.gif);
+		}
+		.archives {
+			background-image: url(#{$baseUrlImg}nav_arch.gif);
+		}
+		.resources {
+			background-image: url(#{$baseUrlImg}nav_res.gif);
+		}
+		ul {
+			list-style-type: none;
+			padding: 0 75px 25px 15px;	
+		}
+		li {
+			color: $lightGrey;	
+			padding: 6px 10px;	
+		}
+		a{
+			&:link,&:visited{
+				background: transparent;
+				color: $tabColor;
+				font-weight: bold;
+			}
+			&.designer-name{
+				&:visited,&:link{
+					color: $lightGrey;
+					font-weight: normal;
+				}
+				&:hover,&:active,&:focus{
+					@include my-link-style;
+				}
+			}
+			&:hover,&:active,&:focus{
+				@include my-link-style;
+			}
+		}
+	}
+
+	.design-selection{
+		li{
+			background: transparent url(#{$baseUrlImg}navico.gif) 3pt 5pt no-repeat;
+			border-bottom: 1px solid #CFCCC4;	
+			padding: 7px 10px 7px 25px;
+		}
+	}
+}
+
+.summary{
+	p:last-child{
+		a{
+			&:hover,&:active,&:focus{
+				@include my-link-style;
+			}
+		}
+	}
+}
+
+footer { 	
+	font-size: .7em;
+	line-height: 1.5em;
+	padding-top: 10px;
+	padding-bottom: 40px;
+	text-align: center;
+	a{
+		&:link,&:visited,&:hover,&:active,&:focus{
+				background: transparent;
+				color: #857E70;
+		}
+	}
+}

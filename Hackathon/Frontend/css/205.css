@@ -1,0 +1,145 @@
+/* basic elements */
+* {
+  margin: 0;
+  padding: 0; }
+
+body {
+  background: #DFDBD3 url(http://csszengarden.com/205/images/bg.gif) top left repeat-x;
+  color: #4C4C4C;
+  font-family: Verdana, Arial, Helvetica, sans-serif; }
+
+p {
+  font-size: .8em;
+  line-height: 2em; }
+
+h3 {
+  font-size: .7em;
+  font-weight: bold;
+  line-height: 1.3em;
+  padding-top: 2.5em; }
+
+abbr, abbr {
+  background: transparent url(http://csszengarden.com/205/images/abbr.gif) bottom left repeat-x;
+  border: 0 none;
+  cursor: help;
+  font-style: italic; }
+
+a:link, a:visited {
+  background: #EBF3CE;
+  color: #5D7403;
+  text-decoration: none; }
+
+a:hover, a:active, a:focus {
+  background: #B2CF42;
+  color: #FFF; }
+
+.page-wrapper {
+  background: transparent url(http://csszengarden.com/205/images/contbg.gif) top left repeat-y;
+  width: 700px; }
+
+.supporting, .intro {
+  padding: 0 69px 0 86px;
+  width: 545px; }
+
+.intro {
+  background: transparent url(http://csszengarden.com/205/images/logo.gif) top left no-repeat;
+  padding-top: 230px; }
+
+.preamble h3, .preamble p, .supporting h3, .intro h3, .supporting p, .intro p {
+  padding-left: 10px;
+  padding-right: 40px; }
+
+.preamble, .explanation, .participation, .benefits, .requirements {
+  border-bottom: 1px solid #E4E1DB;
+  padding-bottom: 20pt; }
+
+header,
+.sidebar h3 {
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden; }
+
+.summary p:first-child {
+  display: none; }
+
+.summary p:last-child {
+  background: transparent url(http://csszengarden.com/205/images/nav_dl.gif) top left no-repeat;
+  display: block;
+  font-size: .6em;
+  font-weight: bold;
+  left: 661px;
+  line-height: 1.4em;
+  padding: 40px 40px 0 30px;
+  position: absolute;
+  top: 160px;
+  width: 141px;
+  z-index: 20; }
+  .summary p:last-child a:link, .summary p:last-child a:visited {
+    background: transparent;
+    color: #ff0000;
+    text-decoration: none; }
+
+.sidebar {
+  background: transparent url(http://csszengarden.com/205/images/navbg.gif) top left repeat-y;
+  left: 661px;
+  padding-top: 10em;
+  position: absolute;
+  top: 130px;
+  width: 285px;
+  z-index: 10; }
+  .sidebar .wrapper {
+    background: transparent url(http://csszengarden.com/205/images/navbtmbg.gif) bottom left no-repeat;
+    font: .6em/1.4em verdana, sans-serif;
+    padding-bottom: 160px; }
+    .sidebar .wrapper h3 {
+      background: transparent top left no-repeat;
+      display: block;
+      height: 26px;
+      padding: 0 0 10px 0;
+      width: 285px; }
+    .sidebar .wrapper .select {
+      background-image: url(http://csszengarden.com/205/images/nav_des.gif); }
+    .sidebar .wrapper .archives {
+      background-image: url(http://csszengarden.com/205/images/nav_arch.gif); }
+    .sidebar .wrapper .resources {
+      background-image: url(http://csszengarden.com/205/images/nav_res.gif); }
+    .sidebar .wrapper ul {
+      list-style-type: none;
+      padding: 0 75px 25px 15px; }
+    .sidebar .wrapper li {
+      color: #ff0000;
+      padding: 6px 10px; }
+    .sidebar .wrapper a:link, .sidebar .wrapper a:visited {
+      background: transparent;
+      color: #4C4C4C;
+      font-weight: bold; }
+    .sidebar .wrapper a.designer-name:visited, .sidebar .wrapper a.designer-name:link {
+      color: #ff0000;
+      font-weight: normal; }
+    .sidebar .wrapper a.designer-name:hover, .sidebar .wrapper a.designer-name:active, .sidebar .wrapper a.designer-name:focus {
+      background: #B2CF42;
+      color: #eee;
+      text-decoration: none; }
+    .sidebar .wrapper a:hover, .sidebar .wrapper a:active, .sidebar .wrapper a:focus {
+      background: #B2CF42;
+      color: #eee;
+      text-decoration: none; }
+  .sidebar .design-selection li {
+    background: transparent url(http://csszengarden.com/205/images/navico.gif) 3pt 5pt no-repeat;
+    border-bottom: 1px solid #CFCCC4;
+    padding: 7px 10px 7px 25px; }
+
+.summary p:last-child a:hover, .summary p:last-child a:active, .summary p:last-child a:focus {
+  background: #B2CF42;
+  color: #eee;
+  text-decoration: none; }
+
+footer {
+  font-size: .7em;
+  line-height: 1.5em;
+  padding-top: 10px;
+  padding-bottom: 40px;
+  text-align: center; }
+  footer a:link, footer a:visited, footer a:hover, footer a:active, footer a:focus {
+    background: transparent;
+    color: #857E70; }

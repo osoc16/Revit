@@ -1,0 +1,6 @@
+[
+  {"id": 0, "name": "John Doe", "email": "john.doe@student.odisee.be", "age": 21, "grades" : [{"course": "maths", "grade": 9}, {"course": "programming", "grade": 7}]},
+  {"id": 1, "name": "Jane Doe", "email": "jane.doe@student.odisee.be", "age": 24, "grades" : [{"course": "maths", "grade": 6}, {"course": "programming", "grade": 9}]},
+  {"id": 2, "name": "Mike How", "email": "mike.how@student.odisee.be", "age": 21, "grades" : [{"course": "maths", "grade": 3}, {"course": "programming", "grade": 4}]},
+  {"id": 3, "name": "Peter What", "email": "peter.what@student.odisee.be", "age": 22, "grades" : [{"course": "maths", "grade": 10}, {"course": "programming", "grade": 3}]}
+]
