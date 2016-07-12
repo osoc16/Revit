@@ -3,3 +3,17 @@
 .competence-card{
 	background: $primary-color;
 }
+
+.competence-card.neutral{
+	background: $primary-color;
+}
+
+.competence-card.success{
+	background:$success-color;
+}
+
+.competence-card.warning{
+
+	background:$warning-color;
+}
+

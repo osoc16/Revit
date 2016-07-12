@@ -24,10 +24,10 @@
                 name: "Test eval form",
 
                 description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi odio, amet doloremque animi id ex autem inventore delectus consectetur ipsam, asperiores fugiat nam magnam fugit. Commodi, pariatur odio voluptas eum.",
-                scoreMax:6,
-                scoreMin:0,
+                scoreMax: 6,
+                scoreMin: 0,
 
-                total:6,
+                total: 6,
 
 
                 candidate: {
@@ -36,23 +36,49 @@
                 },
                 competences: [{
                     name: "Competence 1",
+                    competenceId:1,
                     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, explicabo fuga quibusdam ex, blanditiis ea magni minima tempora at totam sit. Repellendus similique iusto cum officiis quibusdam facilis quaerat, enim?",
                     score: 5,
-                    dimensions:[
-                    {
-                        name:"Diomension 1 "
+                    status: "success",
+                    statusMessage: "Completed",
+                    dimensions: [{
+                        name: "Dimension 1 "
 
 
                     }]
 
                 }, {
                     name: "Competence 2",
-                    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
+                       competenceId:2,
+                    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a.",
+                    status: "warning",
+                    statusMessage: "No comment written"
+
                 }, {
                     name: "Competence 3",
+                            competenceId:3,
+                    status: "neutral",
+                    statusMessage: "Not evaluated yet",
                     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
                 }, {
                     name: "Competence 4",
+                            competenceId:4,
+                     status: "neutral",
+                    statusMessage: "Not evaluated yet",
+                    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
+                },
+                {
+                    name: "Competence 5",
+                            competenceId:5,
+                     status: "neutral",
+                    statusMessage: "Not evaluated yet",
+                    description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
+                },
+                {
+                    name: "Competence 6",
+                            competenceId:6,
+                     status: "neutral",
+                    statusMessage: "Not evaluated yet",
                     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
                 }],
 

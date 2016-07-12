@@ -1,27 +1,30 @@
 <div class="evaluation-page-content">
+  <!-- Page Content Title -->
   <div class="row valign-wrapper" >
     <h4 class="col s8 m6 valign page-title"> Candidate Evaluation :
     </h4>
     <div class="input-field col s4 m6">
       <select>
         <option selected>{{form.candidate.name}}</option>
-        <option ng-repeat="otherCandidate in form.candidates" value="{{otherCandidate.candidateId}}">{{ otherCandidate.name }}</option>     
+        <option ng-repeat="otherCandidate in form.candidates" value="{{otherCandidate.candidateId}}">{{ otherCandidate.name }}</option>
       </select>
     </div>
     <div class="divider"></div>
   </div>
-  <div class="row">
-    <div ng-repeat="competence in form.competences" class="col s12 m4">
-      <div class="card competence-card">
+  <!-- Competence Overview -->
+  <div ng-show="!competenceEditMode" class="row">
+    <div ng-repeat="competence in form.competences" class="col s12 m6 l4">
+      <div class="card competence-card {{competence.status}}">
         <div class="card-content white-text">
+          <a ng-click="editCompetence(competence)" class="btn-floating right btn-small waves-effect waves-light"><i class="material-icons">edit</i></a>
           <span class="card-title">{{ competence.name }}</span>
           <p> {{competence.description}}</p>
           <p class="range-field">
             <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" value={{competence.score}} />
           </p>
         </div>
-        <div class="card-action">
-          <a href="#">Evaluate</a>
+        <div class="card-action ">
+          <span class="white-text">{{competence.statusMessage}}</span>
         </div>
       </div>
     </div>
@@ -31,16 +34,59 @@
       <div class="card competence-card">
         <div class="card-content white-text">
           <div class="valign-wrapper">
-            <div class="col m6 valign" ><span>Total: </span></div>
+            <div class="col m6 valign" ><span>TOTAL</span></div>
             <div class="col m6 valign" >
-                      <p class="range-field">
-            <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" value={{competence.score}} />
-          </p>          
+              <p class="range-field">
+                <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" value={{competence.score}} />
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+  <!-- Competence Detail -->
+  <div class="row">    
+
+      <span>    Competence detail show</span>
+    <span>    {{currentCompetence.name}}</span>
+    <span>    {{currentCompetence.description}}</span>
+
+      <ul class="collection">
+    <li class="collection-item avatar">
+      <img src="images/yuna.jpg" alt="" class="circle">
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle">folder</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle green">insert_chart</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+    <li class="collection-item avatar">
+      <i class="material-icons circle red">play_arrow</i>
+      <span class="title">Title</span>
+      <p>First Line <br>
+         Second Line
+      </p>
+      <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+    </li>
+  </ul>
+         
   </div>
 </div>
 <script src="js/pageLoaded.js"></script>

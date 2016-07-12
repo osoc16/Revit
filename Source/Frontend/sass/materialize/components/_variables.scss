@@ -33,13 +33,18 @@
 /* 1. Colors
    ========================================================================== */
 
-$primary-color: #059EA4 !default;
+/*$primary-color: #059EA4 !default;*/
+$primary-color: color("light-blue","base") !default;
 $primary-color-light: lighten($primary-color, 15%) !default;
 $primary-color-dark: darken($primary-color, 15%) !default;
 
-$secondary-color: #D74C9C !default;
+/*$secondary-color: #D74C9C !default;*/
+$secondary-color: color("orange","base") !default;
+
 $success-color: color("green", "base") !default;
 $error-color: color("red", "base") !default;
+
+$warning-color: #F26522 !default;
 $link-color: color("light-blue", "darken-1") !default;
 
 
