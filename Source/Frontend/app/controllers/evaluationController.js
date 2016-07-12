@@ -9,11 +9,23 @@
 
         $scope.test = "test";
 
+        $scope.competenceEditMode = false;
 
-        $scope.competenceDetailMode=false;
+            $scope.custom = true;
+        $scope.toggleCustom = function() {
+            $scope.custom = $scope.custom === false ? true: false;
+        };
+
+
+        $scope.toggleEditMode = function() {
+            $scope.competenceEditMode = $scope.competenceEditMode === false ? true: false;
+        };
+
+
 
         $scope.editCompetence = function(competence) {
 
+        	$scope.toggleEditMode();
             $scope.currentCompetence = competence;
 
         };

@@ -6216,3 +6216,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .competence-card.warning {
   background: #F26522; }
+
+.back-to-overview {
+  float: right;
+  cursor: pointer; }
+
+.back-to-overview:hover {
+  color: #ff9800; }

@@ -17,3 +17,11 @@
 	background:$warning-color;
 }
 
+.back-to-overview{
+	float:right;
+	cursor:pointer;
+}
+
+.back-to-overview:hover{
+	color:$secondary-color;
+}
