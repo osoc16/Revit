@@ -6,10 +6,13 @@
         <!-- css  -->
         <link rel="stylesheet" href="css/materialize/materialize.css" />
         <link rel="stylesheet" href="css/global.css" />
+                <link rel="stylesheet" href="css/evaluation.css" />
+  <!-- fonts  -->
+                  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
         <!--  Main Navigation -->
-        <nav class="light-blue darken-1" role="navigation">
+        <nav class="main-menu-bar" role="navigation">
             <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><div id="logo-icon"></div>Revit</a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="#">Logout</a></li>
@@ -24,8 +27,23 @@
     <div class="container" ng-view></div>
 </body>
 <!--  Scripts-->
+
+
+<!--  STYLE SCRIPTS -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="js/nouislider.min.js"></script>
+<script src="js/materialize.min.js"></script>
+
+
+<!--  ANGULAR-->
 <script src="node_modules/angular/angular.min.js"></script>
 <script src="node_modules/angular-route/angular-route.min.js"></script>
 <script src="app/app.js"></script>
+<!--  Controllers -->
 <script src="app/controllers/mainController.js"></script>
+<script src="app/controllers/evaluationController.js"></script>
+<!--  Services -->
+<script src="app/services/githubService.js"></script>
+<script src="app/services/revitService.js"></script>
+
 </html>

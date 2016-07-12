@@ -1,0 +1,19 @@
+<div class="evaluation-page-content">
+  <h4> Candidate Evaluation: {{ form.candidate.name }}</h4>
+  <div class="row">
+    <div ng-repeat="competence in form.competences" class="col s12 m4">
+      <div class="card blue darken-1">
+        <div class="card-content white-text">
+          <span class="card-title">{{ competence.name }}</span>
+          <p> {{competence.description}}</p>
+          <p class="range-field">
+            <input type="range" id="test5" min="0" max="6" value={{competence.score}} />
+          </p>
+        </div>
+        <div class="card-action">
+          <a href="#">Evaluate</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

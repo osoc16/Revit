@@ -1,3 +1,9 @@
+@import "materialize/materialize";
+
+.main-menu-bar{
+    background:$primary-color;
+}
+
 #logo-icon {
     display: inline-block;
     height: 3rem;
