@@ -24,6 +24,12 @@
                 name: "Test eval form",
 
                 description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi odio, amet doloremque animi id ex autem inventore delectus consectetur ipsam, asperiores fugiat nam magnam fugit. Commodi, pariatur odio voluptas eum.",
+                scoreMax:6,
+                scoreMin:0,
+
+                total:6,
+
+
                 candidate: {
                     name: "John Doe",
                     candidateId: 1
@@ -31,7 +37,13 @@
                 competences: [{
                     name: "Competence 1",
                     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, explicabo fuga quibusdam ex, blanditiis ea magni minima tempora at totam sit. Repellendus similique iusto cum officiis quibusdam facilis quaerat, enim?",
-                    score: 5
+                    score: 5,
+                    dimensions:[
+                    {
+                        name:"Diomension 1 "
+
+
+                    }]
 
                 }, {
                     name: "Competence 2",
@@ -45,6 +57,19 @@
                 }],
 
                 candidates: [
+
+                    {
+                        name: "Sarah Van de Velde",
+                        candidateId: 2
+                    }, {
+                        name: "Peter Janssens",
+                        candidateId: 3
+                    },
+
+                    {
+                        name: "Jan Pieters",
+                        candidateId: 4
+                    }
 
                 ]
             };

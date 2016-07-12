@@ -1,7 +1,25 @@
 <div class="main-page-content">
-    {{ countdown }}
-    <form name="searchUser" ng-submit="search(username)">
-        <input type="search" required="" ng-model="username" />
-        <input type="submit" value="Search" />
-    </form>
+  {{ countdown }}
+  <form name="searchUser" ng-submit="search(username)">
+    <input type="search" required="" ng-model="username" />
+    <input type="submit" value="Search" />
+  </form>
+  <form action="#">
+    <div class="input-field s12 m6">
+      <select multiple>
+        <optgroup label="team 1">
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </optgroup>
+        <optgroup label="team 2">
+          <option value="3">Option 3</option>
+          <option value="4">Option 4</option>
+        </optgroup>
+      </select>
+      <label>Optgroups</label>
+    </div>
+  </form>
+  
 </div>
+
+<script src="js/pageLoaded.js"></script>

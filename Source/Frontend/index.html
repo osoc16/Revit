@@ -3,22 +3,23 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
-        <!-- css  -->
+        <!-- = CSS  -->
         <link rel="stylesheet" href="css/materialize/materialize.css" />
         <link rel="stylesheet" href="css/global.css" />
-                <link rel="stylesheet" href="css/evaluation.css" />
-  <!-- fonts  -->
-                  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" href="css/evaluation.css" />
+        <!-- = FONTS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
         <!--  Main Navigation -->
         <nav class="main-menu-bar" role="navigation">
             <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><div id="logo-icon"></div>Revit</a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="#">Logout</a></li>
+                <li><a href="#">  <i class="material-icons">power_settings_new</i></a></li>
+                
             </ul>
             <ul id="nav-mobile" class="side-nav">
-                <li><a href="#">Logout</a></li>
+                <li><a href="#">  <i class="material-icons">power_settings_new</i></a></li>
             </ul>
             <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
         </div>
@@ -26,24 +27,20 @@
     <!-- Content -->
     <div class="container" ng-view></div>
 </body>
-<!--  Scripts-->
-
-
-<!--  STYLE SCRIPTS -->
+<!--  = SCRIPTS -->
+<!--  == style scripts -->
 <script src="node_modules/jquery/dist/jquery.min.js"></script>
 <script src="js/nouislider.min.js"></script>
 <script src="js/materialize.min.js"></script>
-
-
-<!--  ANGULAR-->
+<script src="js/global.js"></script>
+<!--  == angular -->
 <script src="node_modules/angular/angular.min.js"></script>
 <script src="node_modules/angular-route/angular-route.min.js"></script>
 <script src="app/app.js"></script>
-<!--  Controllers -->
+<!--  === Controllers -->
 <script src="app/controllers/mainController.js"></script>
 <script src="app/controllers/evaluationController.js"></script>
-<!--  Services -->
+<!--  === Services -->
 <script src="app/services/githubService.js"></script>
 <script src="app/services/revitService.js"></script>
-
 </html>
