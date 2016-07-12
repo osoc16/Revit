@@ -16,7 +16,7 @@
     <div ng-repeat="competence in form.competences" class="col s12 m6 l4">
       <div class="card competence-card {{competence.status}}">
         <div class="card-content white-text">
-          <a ng-click="editCompetence(competence)" class="btn-floating right btn-small waves-effect waves-light"><i class="material-icons">edit</i></a>
+          <a ng-click="editCompetence(competence)" class="btn-floating right btn-small waves-effect waves-light  tooltipped" data-position="top" data-delay="50" data-tooltip="Evaluate competence"><i class="material-icons">edit</i></a>
           <span class="card-title">{{ competence.name }}</span>
           <p> {{competence.description}}</p>
           <p class="range-field">
@@ -52,4 +52,11 @@
     <div ng-include="'app/partials/evaluationCompetence.html'"></div>     
   </div>
 </div>
-<script src="js/pageLoaded.js"></script>
+<script src="js/materializeInitialize.js"></script>
+
+<script>
+  $(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});   
+});
+
+</script>
