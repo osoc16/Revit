@@ -7,23 +7,25 @@
     </div>
   </div>
   <!-- Dimensions overview -->
-    <ul class="collection" >
-      <li class="collection-item" ng-repeat="dimension in currentCompetence.dimensions" >
-        
-        <h5 class="medium">{{dimension.name}}</h5>
-        <div >
-          <div class="row">
-            <div class="col l6 m6 s12"><p>{{dimension.description}}</p></div>
-            <div class="col l6 m6 s12">
-              <p class="range-field">
-                <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="dimension.score"  />
-              </p>
-            </div>
+  <ul class="collection" >
+    <li class="collection-item" ng-repeat="dimension in currentCompetence.dimensions" >
+      
+      <h5 class="medium">{{dimension.name}}</h5>
+      <div >
+        <div class="row">
+          <div class="col l6 m6 s12"><p>{{dimension.description}}</p></div>
+          <div class="col l6 m6 s12">
+            <p class="range-field">
+              <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="dimension.score"  />
+            </p>
+            <p >
+              <input class="my-ion-slider" type="range" data-min-score="{{form.scoreMin}}" data-max-score="{{form.scoreMax}}" ng-model="dimension.score"/>
+            </p>
           </div>
         </div>
-      </li>
-    </ul>
-
+      </div>
+    </li>
+  </ul>
   <!-- Competence Total -->
   <div class="row">
     <div class="col s12 m12">
@@ -35,6 +37,9 @@
               <p class="range-field">
                 <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="currentCompetence.score"/>
               </p>
+              <p >
+                <input class="my-ion-slider" type="range" data-min-score="{{form.scoreMin}}" data-proxy-val="{{ng-bind:competence.score}}" data-max-score="{{form.scoreMax}}" ng-model="currentCompetence.score"/>
+              </p>
             </div>
           </div>
         </div>
@@ -42,10 +47,9 @@
     </div>
   </div>
 </div>
+<script src="js/initSliders.js"></script>
 <script>
 $(document).ready(function(){
-
-  $('.tooltipped').tooltip({delay: 50});
-
+$('.tooltipped').tooltip({delay: 50});
 });
 </script>

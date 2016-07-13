@@ -77,6 +77,7 @@
                 }, {
                     name: "Competence 2",
                        competenceId:2,
+                       score:3,
                     description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a.",
                     status: "warning",
                     statusMessage: "No comment written",  dimensions: [{
