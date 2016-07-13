@@ -1,24 +1,36 @@
-.competence-card {
-    background: $primary-color;
-}
+.evaluation-page-content {
+    .candidate-selection {
+        position: relative;
+        top: 0;
+    }
 
-.competence-card.neutral {
-    background: $neutral-color;
-}
+    .page-title {
+        display: inline-block;
+        margin-top: 2rem;
+    }
 
-.competence-card.success {
-    background: $success-color;
-}
+    .competence-card {
+        background: $primary-color;
+    }
 
-.competence-card.warning {
-    background: $warning-color;
-}
+    .competence-card.neutral {
+        background: $neutral-color;
+    }
 
-.back-to-overview {
-    float: right;
-    cursor: pointer;
-}
+    .competence-card.success {
+        background: $success-color;
+    }
 
-.back-to-overview:hover {
-    color: $secondary-color;
+    .competence-card.warning {
+        background: $warning-color;
+    }
+
+    .back-to-overview {
+        float: right;
+        cursor: pointer;
+    }
+
+    .back-to-overview:hover {
+        color: $secondary-color;
+    }
 }

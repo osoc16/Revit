@@ -6222,21 +6222,29 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   position: relative;
   background-repeat: no-repeat; }
 
-.competence-card {
+.evaluation-page-content .candidate-selection {
+  position: relative;
+  top: 0; }
+
+.evaluation-page-content .page-title {
+  display: inline-block;
+  margin-top: 2rem; }
+
+.evaluation-page-content .competence-card {
   background: #03a9f4; }
 
-.competence-card.neutral {
+.evaluation-page-content .competence-card.neutral {
   background: #03a9f4; }
 
-.competence-card.success {
+.evaluation-page-content .competence-card.success {
   background: #4CAF50; }
 
-.competence-card.warning {
+.evaluation-page-content .competence-card.warning {
   background: #F26522; }
 
-.back-to-overview {
+.evaluation-page-content .back-to-overview {
   float: right;
   cursor: pointer; }
 
-.back-to-overview:hover {
+.evaluation-page-content .back-to-overview:hover {
   color: #ff9800; }
