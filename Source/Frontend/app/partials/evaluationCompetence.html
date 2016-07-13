@@ -18,7 +18,7 @@
             <div class="col l6 m6 s12"><p>{{dimension.description}}</p></div>
             <div class="col l6 m6 s12">
               <p class="range-field">
-                <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" value={{competence.score}} />
+                <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="dimension.score"  />
               </p>
             </div>
           </div>
@@ -35,7 +35,7 @@
             <div class="col m6 valign" ><span>TOTAL</span></div>
             <div class="col m6 valign" >
               <p class="range-field">
-                <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" value={{currentCompetence.score}} />
+                <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="currentCompetence.score"/>
               </p>
             </div>
           </div>

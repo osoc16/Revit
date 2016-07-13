@@ -1650,12 +1650,6 @@
  */
 /* 1. Colors
    ========================================================================== */
-/*
-$primary-color: #059EA4 !default;
-*/
-/*
-$secondary-color: #D74C9C !default;
-*/
 /* 2. Badges
    ========================================================================== */
 /* 3. Buttons
@@ -6227,3 +6221,22 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-right: 0.5rem;
   position: relative;
   background-repeat: no-repeat; }
+
+.competence-card {
+  background: #03a9f4; }
+
+.competence-card.neutral {
+  background: #03a9f4; }
+
+.competence-card.success {
+  background: #4CAF50; }
+
+.competence-card.warning {
+  background: #F26522; }
+
+.back-to-overview {
+  float: right;
+  cursor: pointer; }
+
+.back-to-overview:hover {
+  color: #ff9800; }

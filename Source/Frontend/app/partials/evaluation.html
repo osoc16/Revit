@@ -20,7 +20,7 @@
           <span class="card-title">{{ competence.name }}</span>
           <p> {{competence.description}}</p>
           <p class="range-field">
-            <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" value={{competence.score}} />
+            <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}"  ng-model="competence.score"/>
           </p>
         </div>
         <div class="card-action ">
@@ -38,7 +38,7 @@
             <div class="col m6 valign" ><span>TOTAL</span></div>
             <div class="col m6 valign" >
               <p class="range-field">
-                <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" value={{competence.score}} />
+                <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="form.score" />
               </p>
             </div>
           </div>

@@ -13,11 +13,6 @@
         	  	templateUrl: "app/partials/evaluation.html",
                 controller: "EvaluationController"
             })
-            .when("/evaluation/competence/:competenceId",
-            {
-                templateUrl: "app/partials/competence.html",
-                controller: "EvaluationController"
-            })
             .otherwise({redirectTo:"/main"});
     });
     

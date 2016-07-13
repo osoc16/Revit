@@ -2,6 +2,9 @@
 
     var revitService = function($http) {
 
+        /* Variables */
+        var apiBaseUrl="";
+
         /*
       var getUser = function(username){
             return $http.get("https://api.github.com/users/" + username)
@@ -17,6 +20,8 @@
                         });
       };*/
 
+
+        /*Functions*/
         var getForm = function(formId, juryId, candidateId) {
 
             return {
@@ -155,6 +160,8 @@
         }
 
 
+
+        //Service API return
         return {
             getForm: getForm,
         };
