@@ -31,7 +31,7 @@
           <span class="card-title">{{ competence.name }}</span>
           <p> {{competence.description}}</p>
           <p class="range-field">
-            <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}"  ng-model="competence.score"/>
+            <input type="range" min="{{form.scoreMin}}" max="{{form.scoreMax}}"  ng-model="competence.score"/>
           </p>
         </div>
         <div class="card-action ">
@@ -48,9 +48,9 @@
           <div class="valign-wrapper">
             <div class="col m6 valign" ><span>TOTAL</span></div>
             <div class="col m6 valign" >
-              <p class="range-field">
-                <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="form.score" />
-              </p>
+            <p class="range-field">
+            <input type="range" min="{{form.scoreMin}}" max="{{form.scoreMax}}"  ng-model="form.score"/>
+          </p>
             </div>
           </div>
         </div>
@@ -63,8 +63,61 @@
   </div>
 </div>
 <script src="js/materializeInitialize.js"></script>
+
+<!--
 <script>
 $(document).ready(function(){
-$('.tooltipped').tooltip({delay: 50});
+
+
+  $(".no-ui-slider-mod").each(function(){
+
+    var jsElement= $(this)[0];
+
+    var maxVal= $(this).attr("data-slider-max");
+
+    var minVal=$(this).attr("data-slider-min");
+
+    console.log("min"+ minVal + "max "+ maxVal);
+
+    noUiSlider.create(jsElement, {
+      start: 0, // Handle start position
+      step: 10, // Slider moves in increments of '10'
+      range: { // Slider can select '0' to '100'
+        'min': parseInt(minVal),
+        'max': parseInt(maxVal)
+      },
+      pips: { // Show a scale with the slider
+        mode: 'steps',
+        density: 20
+      }
+    });
+
+  });
+  
+  $('.tooltipped').tooltip({delay: 50});
+
+
+  var range = document.getElementById('range');
+
+noUiSlider.create(range, {
+  start: [ 20, 80 ], // Handle start position
+  step: 10, // Slider moves in increments of '10'
+  margin: 20, // Handles must be more than '20' apart
+  connect: true, // Display a colored bar between the handles
+  direction: 'rtl', // Put '0' at the bottom of the slider
+  orientation: 'vertical', // Orient the slider vertically
+  behaviour: 'tap-drag', // Move handle on tap, bar is draggable
+  range: { // Slider can select '0' to '100'
+    'min': 0,
+    'max': 100
+  },
+  pips: { // Show a scale with the slider
+    mode: 'steps',
+    density: 2
+  }
+});
+
 });
 </script>
+
+-->

@@ -18,8 +18,16 @@
       </select>
       <label>Optgroups</label>
     </div>
-  </form>
+
+    
+  </form>  <div data-role="main" class="ui-content">
+    <form method="post" action="demoform.asp">
+      <label for="points">Points:</label>
+      <input type="range" name="points" id="points" value="50" min="0" max="100" data-highlight="true">
+      <input type="submit" data-inline="true" value="Submit">
+    </form>
+  </div>
   
 </div>
 
-<script src="js/pageLoaded.js"></script>
+<div id="range"></div>
