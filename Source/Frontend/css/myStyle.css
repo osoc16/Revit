@@ -6234,7 +6234,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   background: #03a9f4; }
 
 .evaluation-page-content .competence-card.neutral {
-  background: #03a9f4; }
+  background: #888888; }
 
 .evaluation-page-content .competence-card.success {
   background: #4CAF50; }
