@@ -1,0 +1,81 @@
+﻿@model IEnumerable<RevitApi.Models.Dimension>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name_FR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name_NL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name_EN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name_DE)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description_FR)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description_NL)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description_EN)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.description_DE)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name_FR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name_NL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name_EN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name_DE)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description_FR)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description_NL)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description_EN)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.description_DE)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>

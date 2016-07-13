@@ -1,0 +1,1179 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SelorBusiness_SOCModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Procedure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsPublished" Type="bit" Nullable="false" />
+          <Property Name="UsesExemptions" Type="bit" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="TransactionalVersion" Type="bigint" Nullable="false" />
+          <Property Name="CertificateId" Type="int" />
+          <Property Name="LanguageProcedureTypeId" Type="int" />
+          <Property Name="TestLanguageCode" Type="varchar" MaxLength="2" />
+          <Property Name="DiplomaLanguageCode" Type="varchar" MaxLength="2" />
+          <Property Name="ArticleId" Type="int" />
+          <Property Name="LevelCode" Type="varchar" MaxLength="8" />
+          <Property Name="DomainCode" Type="varchar" MaxLength="8" />
+          <Property Name="KnowledgeLevelCode" Type="varchar" MaxLength="8" />
+          <Property Name="SelectionApproachId" Type="int" />
+          <Property Name="IsTemplate" Type="bit" Nullable="false" />
+          <Property Name="SubTypeId" Type="int" Nullable="false" />
+          <Property Name="AccessionLevel" Type="char" MaxLength="4" />
+          <Property Name="GeneratesAccessionCert" Type="bit" />
+          <Property Name="GlobalId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ScreeningRequestId" Type="int" />
+          <Property Name="SendInviteMail" Type="bit" Nullable="false" />
+          <Property Name="JobStatuteId" Type="int" />
+        </EntityType>
+        <EntityType Name="ProcedureEnrollment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ProcedureId" Type="int" Nullable="false" />
+          <Property Name="CandidateId" Type="int" Nullable="false" />
+          <Property Name="CustomerId" Type="int" />
+          <Property Name="EnrollmentStartDate" Type="datetime" Nullable="false" />
+          <Property Name="EnrollmentEndDate" Type="datetime" />
+          <Property Name="EnrollmentStatusId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="TransactionalVersion" Type="bigint" Nullable="false" />
+          <Property Name="HasDisabilities" Type="bit" Nullable="false" />
+          <Property Name="OfficialReportId" Type="int" />
+          <Property Name="ClosingReasonId" Type="int" />
+          <Property Name="HasInvitationMail" Type="bit" Nullable="false" />
+          <Property Name="GlobalId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProcedureEnrollmentStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name_fr" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name_nl" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name_de" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name_en" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Target">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name_nl" Type="nvarchar" MaxLength="200" />
+          <Property Name="Name_fr" Type="nvarchar" MaxLength="200" />
+          <Property Name="Name_de" Type="nvarchar" MaxLength="200" />
+          <Property Name="Name_en" Type="nvarchar" MaxLength="200" />
+          <Property Name="DefaultCaesuraMinValue" Type="float" />
+          <Property Name="DefaultCaesuraMaxValue" Type="float" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="TransactionalVersion" Type="bigint" Nullable="false" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="IsAutoValidatingResults" Type="bit" Nullable="false" />
+          <Property Name="Description_nl" Type="nvarchar(max)" />
+          <Property Name="Description_fr" Type="nvarchar(max)" />
+          <Property Name="Description_de" Type="nvarchar(max)" />
+          <Property Name="Description_en" Type="nvarchar(max)" />
+          <Property Name="ModuleType" Type="nvarchar" MaxLength="50" />
+          <Property Name="ModuleLevel" Type="nvarchar" MaxLength="50" />
+          <Property Name="AllowMultipleTestSessionEnrollments" Type="bit" Nullable="false" />
+          <Property Name="Archived" Type="bit" Nullable="false" />
+          <Property Name="GlobalId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="IsValidationTarget" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TargetCriteria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TargetId" Type="int" Nullable="false" />
+          <Property Name="CertificateId" Type="int" />
+          <Property Name="CaesuraMaxValue" Type="float" />
+          <Property Name="CaesuraMinValue" Type="float" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="TransactionalVersion" Type="bigint" Nullable="false" />
+          <Property Name="SelectionApproachId" Type="int" />
+          <Property Name="CommunicationTypeId" Type="int" Nullable="false" />
+          <Property Name="CaesuraMinValueChanged" Type="bit" Nullable="false" />
+          <Property Name="CaesuraMaxValueChanged" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TargetType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name_nl" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name_fr" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name_de" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Name_en" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TestCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name_nl" Type="nvarchar" MaxLength="200" />
+          <Property Name="Name_fr" Type="nvarchar" MaxLength="200" />
+          <Property Name="Name_de" Type="nvarchar" MaxLength="200" />
+          <Property Name="Name_en" Type="nvarchar" MaxLength="200" />
+          <Property Name="Description_nl" Type="nvarchar(max)" />
+          <Property Name="Description_fr" Type="nvarchar(max)" />
+          <Property Name="Description_de" Type="nvarchar(max)" />
+          <Property Name="Description_en" Type="nvarchar(max)" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="MaximumDurationHours" Type="float" />
+          <Property Name="TestPlatformId" Type="int" />
+          <Property Name="TestMethodCode" Type="nchar" MaxLength="2" />
+          <Property Name="ParticipationLimitationFrequenceValue" Type="float" />
+          <Property Name="ParticipationLimitationFrequenceUnitTypeCode" Type="nvarchar" MaxLength="2" />
+          <Property Name="ParticipationLimitationTypeCode" Type="nvarchar" MaxLength="2" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="TransactionalVersion" Type="bigint" Nullable="false" />
+          <Property Name="ResultEntryTestId" Type="int" />
+          <Property Name="SaltoId" Type="int" />
+          <Property Name="Archived" Type="bit" Nullable="false" />
+          <Property Name="LanguageCode" Type="nchar" MaxLength="2" />
+          <Property Name="TestGroupId" Type="int" />
+        </EntityType>
+        <EntityType Name="Test_Target">
+          <Key>
+            <PropertyRef Name="TestId" />
+            <PropertyRef Name="TargetId" />
+          </Key>
+          <Property Name="TestId" Type="int" Nullable="false" />
+          <Property Name="TargetId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestSessionEnrollment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AbsenceMotivation" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Appointment" Type="datetime" Nullable="false" />
+          <Property Name="SubscribedSince" Type="datetime" Nullable="false" />
+          <Property Name="EnrollmentStatusId" Type="int" />
+          <Property Name="EventId" Type="int" Nullable="false" />
+          <Property Name="ProcedureEnrollmentId" Type="int" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="TransactionalVersion" Type="bigint" Nullable="false" />
+          <Property Name="TestId" Type="int" Nullable="false" />
+          <Property Name="ADM_ex_code" Type="varchar" MaxLength="8" />
+          <Property Name="NotifyCandidate" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="TestSessionEnrollmentStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name_fr" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name_nl" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name_de" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name_en" Type="nvarchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="Gender" Type="nchar" MaxLength="1" />
+          <Property Name="Nationality" Type="nchar" MaxLength="2" />
+          <Property Name="NationalNr" Type="nvarchar" MaxLength="50" />
+          <Property Name="DateOfBirth" Type="datetime" />
+          <Property Name="DriversLicence" Type="nvarchar" MaxLength="50" />
+          <Property Name="HasDisabilities" Type="bit" Nullable="false" />
+          <Property Name="RequiresFollowup" Type="bit" Nullable="false" />
+          <Property Name="PreferredLanguageCode" Type="nchar" MaxLength="2" />
+          <Property Name="CreatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedBy" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="UpdatedOn" Type="datetime" Nullable="false" />
+          <Property Name="TransactionalVersion" Type="bigint" Nullable="false" />
+          <Property Name="ERecruitingUsername" Type="nvarchar" MaxLength="256" />
+          <Property Name="GlobalId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="256" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="256" />
+          <Property Name="AddressLine3" Type="nvarchar" MaxLength="256" />
+          <Property Name="ZipCode" Type="nvarchar" MaxLength="50" />
+          <Property Name="Town" Type="nvarchar" MaxLength="50" />
+          <Property Name="CountryCode" Type="nchar" MaxLength="2" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="200" />
+          <Property Name="PhoneNumberIsMobile" Type="bit" Nullable="false" />
+          <Property Name="AltPhoneNumber" Type="nvarchar" MaxLength="200" />
+          <Property Name="AltPhoneNumberIsMobile" Type="bit" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="200" />
+          <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="NativeLanguageCode" Type="nchar" MaxLength="2" />
+          <Property Name="GenderNeutral" Type="nchar" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="TargetResult">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NationalNr" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SelectionCode" Type="nvarchar" MaxLength="8" Nullable="false" />
+          <Property Name="TestCode" Type="nvarchar" MaxLength="100" />
+          <Property Name="TargetCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="IsActual" Type="bit" Nullable="false" />
+          <Property Name="Score" Type="float" Nullable="false" />
+          <Property Name="SessionStartedOn" Type="datetime" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="Feedback" Type="nvarchar(max)" />
+          <Property Name="IsPassed" Type="bit" />
+          <Property Name="ProcessedOn" Type="datetime" />
+          <Property Name="IsExempting" Type="bit" Nullable="false" />
+          <Property Name="IsBuffering" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProcedureEnrollment_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="ProcedureEnrollment" Type="Self.ProcedureEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcedureEnrollment">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedureEnrollment_ProceduereEnrollmentStatus">
+          <End Role="ProcedureEnrollmentStatus" Type="Self.ProcedureEnrollmentStatus" Multiplicity="1" />
+          <End Role="ProcedureEnrollment" Type="Self.ProcedureEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcedureEnrollmentStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcedureEnrollment">
+              <PropertyRef Name="EnrollmentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedureEnrollment_Procedure">
+          <End Role="Procedure" Type="Self.Procedure" Multiplicity="1" />
+          <End Role="ProcedureEnrollment" Type="Self.ProcedureEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcedureEnrollment">
+              <PropertyRef Name="ProcedureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Target_Target">
+          <End Role="Target" Type="Self.Target" Multiplicity="0..1" />
+          <End Role="Target1" Type="Self.Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Target1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Target_TargetType">
+          <End Role="TargetType" Type="Self.TargetType" Multiplicity="1" />
+          <End Role="Target" Type="Self.Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TargetType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Target">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TargetCriteria_Target">
+          <End Role="Target" Type="Self.Target" Multiplicity="1" />
+          <End Role="TargetCriteria" Type="Self.TargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TargetCriteria">
+              <PropertyRef Name="TargetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Target_Target">
+          <End Role="Target" Type="Self.Target" Multiplicity="1" />
+          <End Role="Test_Target" Type="Self.Test_Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Test_Target">
+              <PropertyRef Name="TargetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Test_Target_Test">
+          <End Role="Test" Type="Self.Test" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Test_Target" Type="Self.Test_Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Test_Target">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestSessionEnrollment_ProcedureEnrollment">
+          <End Role="ProcedureEnrollment" Type="Self.ProcedureEnrollment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TestSessionEnrollment" Type="Self.TestSessionEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcedureEnrollment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestSessionEnrollment">
+              <PropertyRef Name="ProcedureEnrollmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestSessionEnrollment_Test">
+          <End Role="Test" Type="Self.Test" Multiplicity="1" />
+          <End Role="TestSessionEnrollment" Type="Self.TestSessionEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestSessionEnrollment">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestSessionEnrollment_TestSessionEnrollmentStatus">
+          <End Role="TestSessionEnrollmentStatus" Type="Self.TestSessionEnrollmentStatus" Multiplicity="0..1" />
+          <End Role="TestSessionEnrollment" Type="Self.TestSessionEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestSessionEnrollmentStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestSessionEnrollment">
+              <PropertyRef Name="EnrollmentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SelorBusiness_SOCModelStoreContainer">
+          <EntitySet Name="Procedure" EntityType="Self.Procedure" Schema="assessments" store:Type="Tables" />
+          <EntitySet Name="ProcedureEnrollment" EntityType="Self.ProcedureEnrollment" Schema="assessments" store:Type="Tables" />
+          <EntitySet Name="ProcedureEnrollmentStatus" EntityType="Self.ProcedureEnrollmentStatus" Schema="assessments" store:Type="Tables" />
+          <EntitySet Name="Target" EntityType="Self.Target" Schema="assessments" store:Type="Tables" />
+          <EntitySet Name="TargetCriteria" EntityType="Self.TargetCriteria" Schema="assessments" store:Type="Tables" />
+          <EntitySet Name="TargetType" EntityType="Self.TargetType" Schema="assessments" store:Type="Tables" />
+          <EntitySet Name="Test" EntityType="Self.Test" Schema="assessments" store:Type="Tables" />
+          <EntitySet Name="Test_Target" EntityType="Self.Test_Target" Schema="assessments" store:Type="Tables" />
+          <EntitySet Name="TestSessionEnrollment" EntityType="Self.TestSessionEnrollment" Schema="assessments" store:Type="Tables" />
+          <EntitySet Name="TestSessionEnrollmentStatus" EntityType="Self.TestSessionEnrollmentStatus" Schema="assessments" store:Type="Tables" />
+          <EntitySet Name="Person" EntityType="Self.Person" Schema="contacts" store:Type="Tables" />
+          <EntitySet Name="TargetResult" EntityType="Self.TargetResult" Schema="r" store:Type="Tables" />
+          <AssociationSet Name="FK_ProcedureEnrollment_Person" Association="Self.FK_ProcedureEnrollment_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="ProcedureEnrollment" EntitySet="ProcedureEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedureEnrollment_ProceduereEnrollmentStatus" Association="Self.FK_ProcedureEnrollment_ProceduereEnrollmentStatus">
+            <End Role="ProcedureEnrollmentStatus" EntitySet="ProcedureEnrollmentStatus" />
+            <End Role="ProcedureEnrollment" EntitySet="ProcedureEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedureEnrollment_Procedure" Association="Self.FK_ProcedureEnrollment_Procedure">
+            <End Role="Procedure" EntitySet="Procedure" />
+            <End Role="ProcedureEnrollment" EntitySet="ProcedureEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Target_Target" Association="Self.FK_Target_Target">
+            <End Role="Target" EntitySet="Target" />
+            <End Role="Target1" EntitySet="Target" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Target_TargetType" Association="Self.FK_Target_TargetType">
+            <End Role="TargetType" EntitySet="TargetType" />
+            <End Role="Target" EntitySet="Target" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TargetCriteria_Target" Association="Self.FK_TargetCriteria_Target">
+            <End Role="Target" EntitySet="Target" />
+            <End Role="TargetCriteria" EntitySet="TargetCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Target_Target" Association="Self.FK_Test_Target_Target">
+            <End Role="Target" EntitySet="Target" />
+            <End Role="Test_Target" EntitySet="Test_Target" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Test_Target_Test" Association="Self.FK_Test_Target_Test">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="Test_Target" EntitySet="Test_Target" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestSessionEnrollment_ProcedureEnrollment" Association="Self.FK_TestSessionEnrollment_ProcedureEnrollment">
+            <End Role="ProcedureEnrollment" EntitySet="ProcedureEnrollment" />
+            <End Role="TestSessionEnrollment" EntitySet="TestSessionEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestSessionEnrollment_Test" Association="Self.FK_TestSessionEnrollment_Test">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="TestSessionEnrollment" EntitySet="TestSessionEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestSessionEnrollment_TestSessionEnrollmentStatus" Association="Self.FK_TestSessionEnrollment_TestSessionEnrollmentStatus">
+            <End Role="TestSessionEnrollmentStatus" EntitySet="TestSessionEnrollmentStatus" />
+            <End Role="TestSessionEnrollment" EntitySet="TestSessionEnrollment" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SelorBusiness_SOCModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Procedure">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsPublished" Type="Boolean" Nullable="false" />
+          <Property Name="UsesExemptions" Type="Boolean" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionalVersion" Type="Int64" Nullable="false" />
+          <Property Name="CertificateId" Type="Int32" />
+          <Property Name="LanguageProcedureTypeId" Type="Int32" />
+          <Property Name="TestLanguageCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="DiplomaLanguageCode" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="ArticleId" Type="Int32" />
+          <Property Name="LevelCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="DomainCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="KnowledgeLevelCode" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="SelectionApproachId" Type="Int32" />
+          <Property Name="IsTemplate" Type="Boolean" Nullable="false" />
+          <Property Name="SubTypeId" Type="Int32" Nullable="false" />
+          <Property Name="AccessionLevel" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+          <Property Name="GeneratesAccessionCert" Type="Boolean" />
+          <Property Name="GlobalId" Type="Guid" Nullable="false" />
+          <Property Name="ScreeningRequestId" Type="Int32" />
+          <Property Name="SendInviteMail" Type="Boolean" Nullable="false" />
+          <Property Name="JobStatuteId" Type="Int32" />
+          <NavigationProperty Name="ProcedureEnrollment" Relationship="Self.FK_ProcedureEnrollment_Procedure" FromRole="Procedure" ToRole="ProcedureEnrollment" />
+        </EntityType>
+        <EntityType Name="ProcedureEnrollment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProcedureId" Type="Int32" Nullable="false" />
+          <Property Name="CandidateId" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" />
+          <Property Name="EnrollmentStartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EnrollmentEndDate" Type="DateTime" Precision="3" />
+          <Property Name="EnrollmentStatusId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionalVersion" Type="Int64" Nullable="false" />
+          <Property Name="HasDisabilities" Type="Boolean" Nullable="false" />
+          <Property Name="OfficialReportId" Type="Int32" />
+          <Property Name="ClosingReasonId" Type="Int32" />
+          <Property Name="HasInvitationMail" Type="Boolean" Nullable="false" />
+          <Property Name="GlobalId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="Procedure" Relationship="Self.FK_ProcedureEnrollment_Procedure" FromRole="ProcedureEnrollment" ToRole="Procedure" />
+          <NavigationProperty Name="Person" Relationship="Self.FK_ProcedureEnrollment_Person" FromRole="ProcedureEnrollment" ToRole="Person" />
+          <NavigationProperty Name="ProcedureEnrollmentStatus" Relationship="Self.FK_ProcedureEnrollment_ProceduereEnrollmentStatus" FromRole="ProcedureEnrollment" ToRole="ProcedureEnrollmentStatus" />
+          <NavigationProperty Name="TestSessionEnrollment" Relationship="Self.FK_TestSessionEnrollment_ProcedureEnrollment" FromRole="ProcedureEnrollment" ToRole="TestSessionEnrollment" />
+        </EntityType>
+        <EntityType Name="ProcedureEnrollmentStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name_fr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_nl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_de" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_en" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ProcedureEnrollment" Relationship="Self.FK_ProcedureEnrollment_ProceduereEnrollmentStatus" FromRole="ProcedureEnrollmentStatus" ToRole="ProcedureEnrollment" />
+        </EntityType>
+        <EntityType Name="Target">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name_nl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name_fr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name_de" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name_en" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="DefaultCaesuraMinValue" Type="Double" />
+          <Property Name="DefaultCaesuraMaxValue" Type="Double" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionalVersion" Type="Int64" Nullable="false" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="IsAutoValidatingResults" Type="Boolean" Nullable="false" />
+          <Property Name="Description_nl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description_fr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description_de" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description_en" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModuleType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ModuleLevel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AllowMultipleTestSessionEnrollments" Type="Boolean" Nullable="false" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
+          <Property Name="GlobalId" Type="Guid" Nullable="false" />
+          <Property Name="IsValidationTarget" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Target1" Relationship="Self.FK_Target_Target" FromRole="Target" ToRole="Target1" />
+          <NavigationProperty Name="Target2" Relationship="Self.FK_Target_Target" FromRole="Target1" ToRole="Target" />
+          <NavigationProperty Name="TargetType" Relationship="Self.FK_Target_TargetType" FromRole="Target" ToRole="TargetType" />
+          <NavigationProperty Name="TargetCriteria" Relationship="Self.FK_TargetCriteria_Target" FromRole="Target" ToRole="TargetCriteria" />
+          <NavigationProperty Name="Test" Relationship="Self.Test_Target" FromRole="Target" ToRole="Test" />
+        </EntityType>
+        <EntityType Name="TargetCriteria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TargetId" Type="Int32" Nullable="false" />
+          <Property Name="CertificateId" Type="Int32" />
+          <Property Name="CaesuraMaxValue" Type="Double" />
+          <Property Name="CaesuraMinValue" Type="Double" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionalVersion" Type="Int64" Nullable="false" />
+          <Property Name="SelectionApproachId" Type="Int32" />
+          <Property Name="CommunicationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="CaesuraMinValueChanged" Type="Boolean" Nullable="false" />
+          <Property Name="CaesuraMaxValueChanged" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Target" Relationship="Self.FK_TargetCriteria_Target" FromRole="TargetCriteria" ToRole="Target" />
+        </EntityType>
+        <EntityType Name="TargetType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name_nl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_fr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_de" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_en" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Target" Relationship="Self.FK_Target_TargetType" FromRole="TargetType" ToRole="Target" />
+        </EntityType>
+        <EntityType Name="Test">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TestCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name_nl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name_fr" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name_de" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Name_en" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Description_nl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description_fr" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description_de" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description_en" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="MaximumDurationHours" Type="Double" />
+          <Property Name="TestPlatformId" Type="Int32" />
+          <Property Name="TestMethodCode" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="ParticipationLimitationFrequenceValue" Type="Double" />
+          <Property Name="ParticipationLimitationFrequenceUnitTypeCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="ParticipationLimitationTypeCode" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionalVersion" Type="Int64" Nullable="false" />
+          <Property Name="ResultEntryTestId" Type="Int32" />
+          <Property Name="SaltoId" Type="Int32" />
+          <Property Name="Archived" Type="Boolean" Nullable="false" />
+          <Property Name="LanguageCode" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="TestGroupId" Type="Int32" />
+          <NavigationProperty Name="TestSessionEnrollment" Relationship="Self.FK_TestSessionEnrollment_Test" FromRole="Test" ToRole="TestSessionEnrollment" />
+          <NavigationProperty Name="Target" Relationship="Self.Test_Target" FromRole="Test" ToRole="Target" />
+        </EntityType>
+        <EntityType Name="TestSessionEnrollment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AbsenceMotivation" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Appointment" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SubscribedSince" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EnrollmentStatusId" Type="Int32" />
+          <Property Name="EventId" Type="Int32" Nullable="false" />
+          <Property Name="ProcedureEnrollmentId" Type="Int32" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionalVersion" Type="Int64" Nullable="false" />
+          <Property Name="TestId" Type="Int32" Nullable="false" />
+          <Property Name="ADM_ex_code" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="NotifyCandidate" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ProcedureEnrollment" Relationship="Self.FK_TestSessionEnrollment_ProcedureEnrollment" FromRole="TestSessionEnrollment" ToRole="ProcedureEnrollment" />
+          <NavigationProperty Name="Test" Relationship="Self.FK_TestSessionEnrollment_Test" FromRole="TestSessionEnrollment" ToRole="Test" />
+          <NavigationProperty Name="TestSessionEnrollmentStatus" Relationship="Self.FK_TestSessionEnrollment_TestSessionEnrollmentStatus" FromRole="TestSessionEnrollment" ToRole="TestSessionEnrollmentStatus" />
+        </EntityType>
+        <EntityType Name="TestSessionEnrollmentStatus">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name_fr" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_nl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_de" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name_en" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TestSessionEnrollment" Relationship="Self.FK_TestSessionEnrollment_TestSessionEnrollmentStatus" FromRole="TestSessionEnrollmentStatus" ToRole="TestSessionEnrollment" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gender" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <Property Name="Nationality" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="NationalNr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DateOfBirth" Type="DateTime" Precision="3" />
+          <Property Name="DriversLicence" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="HasDisabilities" Type="Boolean" Nullable="false" />
+          <Property Name="RequiresFollowup" Type="Boolean" Nullable="false" />
+          <Property Name="PreferredLanguageCode" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="CreatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="UpdatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="TransactionalVersion" Type="Int64" Nullable="false" />
+          <Property Name="ERecruitingUsername" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="GlobalId" Type="Guid" Nullable="false" />
+          <Property Name="AddressLine1" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine3" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="ZipCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Town" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CountryCode" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberIsMobile" Type="Boolean" Nullable="false" />
+          <Property Name="AltPhoneNumber" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AltPhoneNumberIsMobile" Type="Boolean" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NativeLanguageCode" Type="String" MaxLength="2" FixedLength="true" Unicode="true" />
+          <Property Name="GenderNeutral" Type="String" MaxLength="1" FixedLength="true" Unicode="true" />
+          <NavigationProperty Name="ProcedureEnrollment" Relationship="Self.FK_ProcedureEnrollment_Person" FromRole="Person" ToRole="ProcedureEnrollment" />
+        </EntityType>
+        <EntityType Name="TargetResult">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NationalNr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SelectionCode" Type="String" MaxLength="8" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TestCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TargetCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="IsActual" Type="Boolean" Nullable="false" />
+          <Property Name="Score" Type="Double" Nullable="false" />
+          <Property Name="SessionStartedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Feedback" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsPassed" Type="Boolean" />
+          <Property Name="ProcessedOn" Type="DateTime" Precision="3" />
+          <Property Name="IsExempting" Type="Boolean" Nullable="false" />
+          <Property Name="IsBuffering" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProcedureEnrollment_Procedure">
+          <End Role="Procedure" Type="Self.Procedure" Multiplicity="1" />
+          <End Role="ProcedureEnrollment" Type="Self.ProcedureEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Procedure">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcedureEnrollment">
+              <PropertyRef Name="ProcedureId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedureEnrollment_Person">
+          <End Role="Person" Type="Self.Person" Multiplicity="1" />
+          <End Role="ProcedureEnrollment" Type="Self.ProcedureEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcedureEnrollment">
+              <PropertyRef Name="CandidateId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProcedureEnrollment_ProceduereEnrollmentStatus">
+          <End Role="ProcedureEnrollmentStatus" Type="Self.ProcedureEnrollmentStatus" Multiplicity="1" />
+          <End Role="ProcedureEnrollment" Type="Self.ProcedureEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcedureEnrollmentStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProcedureEnrollment">
+              <PropertyRef Name="EnrollmentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestSessionEnrollment_ProcedureEnrollment">
+          <End Role="ProcedureEnrollment" Type="Self.ProcedureEnrollment" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="TestSessionEnrollment" Type="Self.TestSessionEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProcedureEnrollment">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestSessionEnrollment">
+              <PropertyRef Name="ProcedureEnrollmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Target_Target">
+          <End Role="Target" Type="Self.Target" Multiplicity="0..1" />
+          <End Role="Target1" Type="Self.Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Target1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Target_TargetType">
+          <End Role="TargetType" Type="Self.TargetType" Multiplicity="1" />
+          <End Role="Target" Type="Self.Target" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TargetType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Target">
+              <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TargetCriteria_Target">
+          <End Role="Target" Type="Self.Target" Multiplicity="1" />
+          <End Role="TargetCriteria" Type="Self.TargetCriteria" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Target">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TargetCriteria">
+              <PropertyRef Name="TargetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestSessionEnrollment_Test">
+          <End Role="Test" Type="Self.Test" Multiplicity="1" />
+          <End Role="TestSessionEnrollment" Type="Self.TestSessionEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Test">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestSessionEnrollment">
+              <PropertyRef Name="TestId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TestSessionEnrollment_TestSessionEnrollmentStatus">
+          <End Role="TestSessionEnrollmentStatus" Type="Self.TestSessionEnrollmentStatus" Multiplicity="0..1" />
+          <End Role="TestSessionEnrollment" Type="Self.TestSessionEnrollment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TestSessionEnrollmentStatus">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TestSessionEnrollment">
+              <PropertyRef Name="EnrollmentStatusId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Test_Target">
+          <End Role="Target" Type="Self.Target" Multiplicity="*" />
+          <End Role="Test" Type="Self.Test" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="SelorBusiness_SOCEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Procedure" EntityType="Self.Procedure" />
+          <EntitySet Name="ProcedureEnrollment" EntityType="Self.ProcedureEnrollment" />
+          <EntitySet Name="ProcedureEnrollmentStatus" EntityType="Self.ProcedureEnrollmentStatus" />
+          <EntitySet Name="Target" EntityType="Self.Target" />
+          <EntitySet Name="TargetCriteria" EntityType="Self.TargetCriteria" />
+          <EntitySet Name="TargetType" EntityType="Self.TargetType" />
+          <EntitySet Name="Test" EntityType="Self.Test" />
+          <EntitySet Name="TestSessionEnrollment" EntityType="Self.TestSessionEnrollment" />
+          <EntitySet Name="TestSessionEnrollmentStatus" EntityType="Self.TestSessionEnrollmentStatus" />
+          <EntitySet Name="Person" EntityType="Self.Person" />
+          <EntitySet Name="TargetResult" EntityType="Self.TargetResult" />
+          <AssociationSet Name="FK_ProcedureEnrollment_Procedure" Association="Self.FK_ProcedureEnrollment_Procedure">
+            <End Role="Procedure" EntitySet="Procedure" />
+            <End Role="ProcedureEnrollment" EntitySet="ProcedureEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedureEnrollment_Person" Association="Self.FK_ProcedureEnrollment_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="ProcedureEnrollment" EntitySet="ProcedureEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProcedureEnrollment_ProceduereEnrollmentStatus" Association="Self.FK_ProcedureEnrollment_ProceduereEnrollmentStatus">
+            <End Role="ProcedureEnrollmentStatus" EntitySet="ProcedureEnrollmentStatus" />
+            <End Role="ProcedureEnrollment" EntitySet="ProcedureEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestSessionEnrollment_ProcedureEnrollment" Association="Self.FK_TestSessionEnrollment_ProcedureEnrollment">
+            <End Role="ProcedureEnrollment" EntitySet="ProcedureEnrollment" />
+            <End Role="TestSessionEnrollment" EntitySet="TestSessionEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Target_Target" Association="Self.FK_Target_Target">
+            <End Role="Target" EntitySet="Target" />
+            <End Role="Target1" EntitySet="Target" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Target_TargetType" Association="Self.FK_Target_TargetType">
+            <End Role="TargetType" EntitySet="TargetType" />
+            <End Role="Target" EntitySet="Target" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TargetCriteria_Target" Association="Self.FK_TargetCriteria_Target">
+            <End Role="Target" EntitySet="Target" />
+            <End Role="TargetCriteria" EntitySet="TargetCriteria" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestSessionEnrollment_Test" Association="Self.FK_TestSessionEnrollment_Test">
+            <End Role="Test" EntitySet="Test" />
+            <End Role="TestSessionEnrollment" EntitySet="TestSessionEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TestSessionEnrollment_TestSessionEnrollmentStatus" Association="Self.FK_TestSessionEnrollment_TestSessionEnrollmentStatus">
+            <End Role="TestSessionEnrollmentStatus" EntitySet="TestSessionEnrollmentStatus" />
+            <End Role="TestSessionEnrollment" EntitySet="TestSessionEnrollment" />
+          </AssociationSet>
+          <AssociationSet Name="Test_Target" Association="Self.Test_Target">
+            <End Role="Target" EntitySet="Target" />
+            <End Role="Test" EntitySet="Test" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SelorBusiness_SOCModelStoreContainer" CdmEntityContainer="SelorBusiness_SOCEntities">
+          <EntitySetMapping Name="Procedure">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.Procedure">
+              <MappingFragment StoreEntitySet="Procedure">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IsPublished" ColumnName="IsPublished" />
+                <ScalarProperty Name="UsesExemptions" ColumnName="UsesExemptions" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="TransactionalVersion" ColumnName="TransactionalVersion" />
+                <ScalarProperty Name="CertificateId" ColumnName="CertificateId" />
+                <ScalarProperty Name="LanguageProcedureTypeId" ColumnName="LanguageProcedureTypeId" />
+                <ScalarProperty Name="TestLanguageCode" ColumnName="TestLanguageCode" />
+                <ScalarProperty Name="DiplomaLanguageCode" ColumnName="DiplomaLanguageCode" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="LevelCode" ColumnName="LevelCode" />
+                <ScalarProperty Name="DomainCode" ColumnName="DomainCode" />
+                <ScalarProperty Name="KnowledgeLevelCode" ColumnName="KnowledgeLevelCode" />
+                <ScalarProperty Name="SelectionApproachId" ColumnName="SelectionApproachId" />
+                <ScalarProperty Name="IsTemplate" ColumnName="IsTemplate" />
+                <ScalarProperty Name="SubTypeId" ColumnName="SubTypeId" />
+                <ScalarProperty Name="AccessionLevel" ColumnName="AccessionLevel" />
+                <ScalarProperty Name="GeneratesAccessionCert" ColumnName="GeneratesAccessionCert" />
+                <ScalarProperty Name="GlobalId" ColumnName="GlobalId" />
+                <ScalarProperty Name="ScreeningRequestId" ColumnName="ScreeningRequestId" />
+                <ScalarProperty Name="SendInviteMail" ColumnName="SendInviteMail" />
+                <ScalarProperty Name="JobStatuteId" ColumnName="JobStatuteId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcedureEnrollment">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.ProcedureEnrollment">
+              <MappingFragment StoreEntitySet="ProcedureEnrollment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProcedureId" ColumnName="ProcedureId" />
+                <ScalarProperty Name="CandidateId" ColumnName="CandidateId" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="EnrollmentStartDate" ColumnName="EnrollmentStartDate" />
+                <ScalarProperty Name="EnrollmentEndDate" ColumnName="EnrollmentEndDate" />
+                <ScalarProperty Name="EnrollmentStatusId" ColumnName="EnrollmentStatusId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="TransactionalVersion" ColumnName="TransactionalVersion" />
+                <ScalarProperty Name="HasDisabilities" ColumnName="HasDisabilities" />
+                <ScalarProperty Name="OfficialReportId" ColumnName="OfficialReportId" />
+                <ScalarProperty Name="ClosingReasonId" ColumnName="ClosingReasonId" />
+                <ScalarProperty Name="HasInvitationMail" ColumnName="HasInvitationMail" />
+                <ScalarProperty Name="GlobalId" ColumnName="GlobalId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProcedureEnrollmentStatus">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.ProcedureEnrollmentStatus">
+              <MappingFragment StoreEntitySet="ProcedureEnrollmentStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_fr" ColumnName="Name_fr" />
+                <ScalarProperty Name="Name_nl" ColumnName="Name_nl" />
+                <ScalarProperty Name="Name_de" ColumnName="Name_de" />
+                <ScalarProperty Name="Name_en" ColumnName="Name_en" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Target">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.Target">
+              <MappingFragment StoreEntitySet="Target">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name_nl" ColumnName="Name_nl" />
+                <ScalarProperty Name="Name_fr" ColumnName="Name_fr" />
+                <ScalarProperty Name="Name_de" ColumnName="Name_de" />
+                <ScalarProperty Name="Name_en" ColumnName="Name_en" />
+                <ScalarProperty Name="DefaultCaesuraMinValue" ColumnName="DefaultCaesuraMinValue" />
+                <ScalarProperty Name="DefaultCaesuraMaxValue" ColumnName="DefaultCaesuraMaxValue" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="TransactionalVersion" ColumnName="TransactionalVersion" />
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="IsAutoValidatingResults" ColumnName="IsAutoValidatingResults" />
+                <ScalarProperty Name="Description_nl" ColumnName="Description_nl" />
+                <ScalarProperty Name="Description_fr" ColumnName="Description_fr" />
+                <ScalarProperty Name="Description_de" ColumnName="Description_de" />
+                <ScalarProperty Name="Description_en" ColumnName="Description_en" />
+                <ScalarProperty Name="ModuleType" ColumnName="ModuleType" />
+                <ScalarProperty Name="ModuleLevel" ColumnName="ModuleLevel" />
+                <ScalarProperty Name="AllowMultipleTestSessionEnrollments" ColumnName="AllowMultipleTestSessionEnrollments" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="GlobalId" ColumnName="GlobalId" />
+                <ScalarProperty Name="IsValidationTarget" ColumnName="IsValidationTarget" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TargetCriteria">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.TargetCriteria">
+              <MappingFragment StoreEntitySet="TargetCriteria">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TargetId" ColumnName="TargetId" />
+                <ScalarProperty Name="CertificateId" ColumnName="CertificateId" />
+                <ScalarProperty Name="CaesuraMaxValue" ColumnName="CaesuraMaxValue" />
+                <ScalarProperty Name="CaesuraMinValue" ColumnName="CaesuraMinValue" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="TransactionalVersion" ColumnName="TransactionalVersion" />
+                <ScalarProperty Name="SelectionApproachId" ColumnName="SelectionApproachId" />
+                <ScalarProperty Name="CommunicationTypeId" ColumnName="CommunicationTypeId" />
+                <ScalarProperty Name="CaesuraMinValueChanged" ColumnName="CaesuraMinValueChanged" />
+                <ScalarProperty Name="CaesuraMaxValueChanged" ColumnName="CaesuraMaxValueChanged" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TargetType">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.TargetType">
+              <MappingFragment StoreEntitySet="TargetType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_nl" ColumnName="Name_nl" />
+                <ScalarProperty Name="Name_fr" ColumnName="Name_fr" />
+                <ScalarProperty Name="Name_de" ColumnName="Name_de" />
+                <ScalarProperty Name="Name_en" ColumnName="Name_en" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Test">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.Test">
+              <MappingFragment StoreEntitySet="Test">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="TestCode" ColumnName="TestCode" />
+                <ScalarProperty Name="Name_nl" ColumnName="Name_nl" />
+                <ScalarProperty Name="Name_fr" ColumnName="Name_fr" />
+                <ScalarProperty Name="Name_de" ColumnName="Name_de" />
+                <ScalarProperty Name="Name_en" ColumnName="Name_en" />
+                <ScalarProperty Name="Description_nl" ColumnName="Description_nl" />
+                <ScalarProperty Name="Description_fr" ColumnName="Description_fr" />
+                <ScalarProperty Name="Description_de" ColumnName="Description_de" />
+                <ScalarProperty Name="Description_en" ColumnName="Description_en" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="MaximumDurationHours" ColumnName="MaximumDurationHours" />
+                <ScalarProperty Name="TestPlatformId" ColumnName="TestPlatformId" />
+                <ScalarProperty Name="TestMethodCode" ColumnName="TestMethodCode" />
+                <ScalarProperty Name="ParticipationLimitationFrequenceValue" ColumnName="ParticipationLimitationFrequenceValue" />
+                <ScalarProperty Name="ParticipationLimitationFrequenceUnitTypeCode" ColumnName="ParticipationLimitationFrequenceUnitTypeCode" />
+                <ScalarProperty Name="ParticipationLimitationTypeCode" ColumnName="ParticipationLimitationTypeCode" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="TransactionalVersion" ColumnName="TransactionalVersion" />
+                <ScalarProperty Name="ResultEntryTestId" ColumnName="ResultEntryTestId" />
+                <ScalarProperty Name="SaltoId" ColumnName="SaltoId" />
+                <ScalarProperty Name="Archived" ColumnName="Archived" />
+                <ScalarProperty Name="LanguageCode" ColumnName="LanguageCode" />
+                <ScalarProperty Name="TestGroupId" ColumnName="TestGroupId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestSessionEnrollment">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.TestSessionEnrollment">
+              <MappingFragment StoreEntitySet="TestSessionEnrollment">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AbsenceMotivation" ColumnName="AbsenceMotivation" />
+                <ScalarProperty Name="Appointment" ColumnName="Appointment" />
+                <ScalarProperty Name="SubscribedSince" ColumnName="SubscribedSince" />
+                <ScalarProperty Name="EnrollmentStatusId" ColumnName="EnrollmentStatusId" />
+                <ScalarProperty Name="EventId" ColumnName="EventId" />
+                <ScalarProperty Name="ProcedureEnrollmentId" ColumnName="ProcedureEnrollmentId" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="TransactionalVersion" ColumnName="TransactionalVersion" />
+                <ScalarProperty Name="TestId" ColumnName="TestId" />
+                <ScalarProperty Name="ADM_ex_code" ColumnName="ADM_ex_code" />
+                <ScalarProperty Name="NotifyCandidate" ColumnName="NotifyCandidate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TestSessionEnrollmentStatus">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.TestSessionEnrollmentStatus">
+              <MappingFragment StoreEntitySet="TestSessionEnrollmentStatus">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name_fr" ColumnName="Name_fr" />
+                <ScalarProperty Name="Name_nl" ColumnName="Name_nl" />
+                <ScalarProperty Name="Name_de" ColumnName="Name_de" />
+                <ScalarProperty Name="Name_en" ColumnName="Name_en" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Nationality" ColumnName="Nationality" />
+                <ScalarProperty Name="NationalNr" ColumnName="NationalNr" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="DriversLicence" ColumnName="DriversLicence" />
+                <ScalarProperty Name="HasDisabilities" ColumnName="HasDisabilities" />
+                <ScalarProperty Name="RequiresFollowup" ColumnName="RequiresFollowup" />
+                <ScalarProperty Name="PreferredLanguageCode" ColumnName="PreferredLanguageCode" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="UpdatedOn" ColumnName="UpdatedOn" />
+                <ScalarProperty Name="TransactionalVersion" ColumnName="TransactionalVersion" />
+                <ScalarProperty Name="ERecruitingUsername" ColumnName="ERecruitingUsername" />
+                <ScalarProperty Name="GlobalId" ColumnName="GlobalId" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
+                <ScalarProperty Name="ZipCode" ColumnName="ZipCode" />
+                <ScalarProperty Name="Town" ColumnName="Town" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberIsMobile" ColumnName="PhoneNumberIsMobile" />
+                <ScalarProperty Name="AltPhoneNumber" ColumnName="AltPhoneNumber" />
+                <ScalarProperty Name="AltPhoneNumberIsMobile" ColumnName="AltPhoneNumberIsMobile" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="NativeLanguageCode" ColumnName="NativeLanguageCode" />
+                <ScalarProperty Name="GenderNeutral" ColumnName="GenderNeutral" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TargetResult">
+            <EntityTypeMapping TypeName="SelorBusiness_SOCModel.TargetResult">
+              <MappingFragment StoreEntitySet="TargetResult">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NationalNr" ColumnName="NationalNr" />
+                <ScalarProperty Name="SelectionCode" ColumnName="SelectionCode" />
+                <ScalarProperty Name="TestCode" ColumnName="TestCode" />
+                <ScalarProperty Name="TargetCode" ColumnName="TargetCode" />
+                <ScalarProperty Name="IsActual" ColumnName="IsActual" />
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="SessionStartedOn" ColumnName="SessionStartedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Feedback" ColumnName="Feedback" />
+                <ScalarProperty Name="IsPassed" ColumnName="IsPassed" />
+                <ScalarProperty Name="ProcessedOn" ColumnName="ProcessedOn" />
+                <ScalarProperty Name="IsExempting" ColumnName="IsExempting" />
+                <ScalarProperty Name="IsBuffering" ColumnName="IsBuffering" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Test_Target" TypeName="SelorBusiness_SOCModel.Test_Target" StoreEntitySet="Test_Target">
+            <EndProperty Name="Target">
+              <ScalarProperty Name="Id" ColumnName="TargetId" />
+            </EndProperty>
+            <EndProperty Name="Test">
+              <ScalarProperty Name="Id" ColumnName="TestId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
