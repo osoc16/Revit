@@ -55,7 +55,9 @@
 
 
         .status-message{
-                   &.neutral {
+
+
+        &.neutral {
                   color: $neutral-color;
             }
 
@@ -66,6 +68,7 @@
         &.warning {
                   color: $warning-color;
             }
+
         }
 
     }
