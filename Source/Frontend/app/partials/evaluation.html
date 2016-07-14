@@ -24,7 +24,7 @@
   <div  class="row hide-when-edit">
     <div ng-repeat="competence in form.competences" class="col s12 m6 l4">
       <div class="card competence-card {{competence.status}}">
-        <div class="card-content white-text">
+        <div class="card-content">
           <a ng-click="editCompetence(competence.competenceId)" class="btn-floating right btn-small waves-effect waves-light  tooltipped" data-position="top" data-delay="50" data-tooltip="Evaluate competence"><i class="material-icons">edit</i></a>
           <span class="card-title">{{ competence.name }}</span>
           <p> {{competence.description}}</p>
@@ -33,12 +33,13 @@
             <input type="range" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="competence.score"/>
           </p>
           -->
+    <p  class="competence-slider">
 
-             <rzslider rz-slider-model="competence.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
-         
+             <rzslider rz-slider-model="competence.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true, disabled:true}"></rzslider>
+             </p>
         </div>
         <div class="card-action ">
-          <span class="white-text">{{competence.statusMessage}}</span>
+          <span class=" status-message {{competence.status}}">{{competence.statusMessage}}</span>
         </div>
       </div>
     </div>
@@ -47,8 +48,8 @@
   <div class="row hide-when-edit">
     <div class="col s12 m12">
       <div class="card competence-card">
-        <div class="card-content white-text">
-          <div class="valign-wrapper">
+        <div class="card-content">
+          <div class="valign-wrapper ">
             <div class="col m6 valign" ><span>TOTAL</span></div>
             <div class="col m6 valign" >
               <!--

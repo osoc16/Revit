@@ -10,27 +10,74 @@
     }
 
     .competence-card {
-        background: $primary-color;
+        border-top: 0.3rem solid;
+
+        border-color: $primary-color;
+
+        .card-title{
+            font-weight:400;
+        }
+
+        .competence-slider{
+           padding-top:2rem;
+        }
+
+
+        &.neutral {
+                  border-color: $neutral-color;
+            }
+
+        &.success {
+                  border-color: $success-color;
+            }
+
+        &.warning {
+                  border-color: $warning-color;
+            }
+
+
+        &.fill{
+
+    
+    background-color: $primary-color;
+            
+  &.neutral{
+ background-color: $neutral-color;
+            }
+
+            &.success{
+ background-color: $success-color;
+            }
+            &.warning{
+                 background-color: $warning-color;
+            }
+        }
+
+
+        .status-message{
+                   &.neutral {
+                  color: $neutral-color;
+            }
+
+        &.success {
+                  color: $success-color;
+            }
+
+        &.warning {
+                  color: $warning-color;
+            }
+        }
+
     }
 
-    .competence-card.neutral {
-        background: $neutral-color;
-    }
-
-    .competence-card.success {
-        background: $success-color;
-    }
-
-    .competence-card.warning {
-        background: $warning-color;
-    }
 
     .back-to-overview {
         float: right;
         cursor: pointer;
+
+        &:hover{
+              color: $secondary-color; 
+        }
     }
 
-    .back-to-overview:hover {
-        color: $secondary-color;
-    }
 }
