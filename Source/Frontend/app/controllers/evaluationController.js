@@ -47,8 +47,6 @@
 
             revitService.saveForm($scope.form);
         }
-
-
     };
 
     app.controller("EvaluationController", EvaluationController);

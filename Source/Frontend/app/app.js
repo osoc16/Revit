@@ -13,6 +13,11 @@
         	  	templateUrl: "app/partials/evaluation.html",
                 controller: "EvaluationController"
             })
+            .when("/form",
+            {
+                templateUrl: "app/partials/form.html",
+                controller: "FormController"
+            })
             .otherwise({redirectTo:"/main"});
     });
     
