@@ -8,35 +8,44 @@
 
         $scope.competenceEditMode = false;
 
+        $scope.currentCompetenceIndex=null;
+
+    
+
         $scope.toggleEditMode = function() {
 
-            //Edit mode was on
-            if ($scope.competenceEditMode === true) {
+            //Invert edit mode
+            $scope.competenceEditMode = $scope.competenceEditMode === false ? true : false;
 
-                //Ressign competence to scope.form
+            display();
+
+        };
+
+        var display= function(){
+
+        if($scope.competenceEditMode){
+                $(".show-when-edit").show();
+                $(".hide-when-edit").hide();
+            }else{
+                $(".show-when-edit").hide();
+                $(".hide-when-edit").show();
+            }
+
+
+        }
+
+        $scope.editCompetence = function(competenceId) {
 
                 for (var i in $scope.form.competences) {
 
-                    if ($scope.form.competences[i].competenceId == $scope.currentCompetence.competenceId) {
-                        $scope.form.competences[i] = $scope.currentCompetence;
-                        /*
-                              $log.info( $scope.form.competences[i]);
-                        $log.info("test");*/
+                    if ($scope.form.competences[i].competenceId == competenceId ) {
+                              $scope.currentCompetenceIndex=i;
+
                         break; //Stop this loop, we found it!
                     }
                 }
 
-
-            }
-
-            //Invert edit mode
-            $scope.competenceEditMode = $scope.competenceEditMode === false ? true : false;
-        };
-
-        $scope.editCompetence = function(competence) {
-
             $scope.toggleEditMode();
-            $scope.currentCompetence = competence;
 
         };
 

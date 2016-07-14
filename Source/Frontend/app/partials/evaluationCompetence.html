@@ -1,26 +1,20 @@
 <!-- Page title -->
 <div class="col s12 m12">
-  <div class="card competence-card {{currentCompetence.status}}">
+  <div class="card competence-card {{form.competences[currentCompetenceIndex].status}}">
     <div class="card-content white-text">
-      <span>{{currentCompetence.name}}</span>
+      <span>{{form.competences[currentCompetenceIndex].name}}</span>
       <i  ng-click="toggleEditMode()"class="material-icons back-to-overview  tooltipped" data-position="top" data-delay="50" data-tooltip="Back to competence overview">view_module</i>
     </div>
   </div>
   <!-- Dimensions overview -->
   <ul class="collection" >
-    <li class="collection-item" ng-repeat="dimension in currentCompetence.dimensions" >
-      
+    <li class="collection-item" ng-repeat="dimension in form.competences[currentCompetenceIndex].dimensions" > 
       <h5 class="medium">{{dimension.name}}</h5>
       <div >
         <div class="row">
           <div class="col l6 m6 s12"><p>{{dimension.description}}</p></div>
           <div class="col l6 m6 s12">
-            <p class="range-field">
-              <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="dimension.score"  />
-            </p>
-
-              <rzslider rz-slider-model="dimension.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax}"></rzslider>
-
+            <rzslider rz-slider-model="dimension.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
           </div>
         </div>
       </div>
@@ -29,18 +23,12 @@
   <!-- Competence Total -->
   <div class="row">
     <div class="col s12 m12">
-      <div class="card competence-card {{currentCompetence.status}}">
+      <div class="card competence-card {{form.competences[currentCompetenceIndex].status}}">
         <div class="card-content white-text">
           <div class="valign-wrapper">
             <div class="col m6 valign" ><span>TOTAL</span></div>
             <div class="col m6 valign" >
-
-              <p class="range-field">
-              <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="currentCompetence.score"  />
-            </p>
-            
-                  <rzslider rz-slider-model="currentCompetence.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax}"></rzslider>
-
+              <rzslider rz-slider-model="form.competences[currentCompetenceIndex].score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
             </div>
           </div>
         </div>

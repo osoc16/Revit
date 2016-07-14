@@ -21,11 +21,11 @@
     <div class="divider"></div>
   </div>
   <!-- Competence Overview -->
-  <div  class="row">
+  <div  class="row hide-when-edit">
     <div ng-repeat="competence in form.competences" class="col s12 m6 l4">
       <div class="card competence-card {{competence.status}}">
         <div class="card-content white-text">
-          <a ng-click="editCompetence(competence)" class="btn-floating right btn-small waves-effect waves-light  tooltipped" data-position="top" data-delay="50" data-tooltip="Evaluate competence"><i class="material-icons">edit</i></a>
+          <a ng-click="editCompetence(competence.competenceId)" class="btn-floating right btn-small waves-effect waves-light  tooltipped" data-position="top" data-delay="50" data-tooltip="Evaluate competence"><i class="material-icons">edit</i></a>
           <span class="card-title">{{ competence.name }}</span>
           <p> {{competence.description}}</p>
           <!--
@@ -34,7 +34,7 @@
           </p>
           -->
 
-             <rzslider rz-slider-model="competence.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax}"></rzslider>
+             <rzslider rz-slider-model="competence.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
          
         </div>
         <div class="card-action ">
@@ -44,7 +44,7 @@
     </div>
   </div>
   <!-- Form Total -->
-  <div ng-hide="competenceEditMode" class="row">
+  <div class="row hide-when-edit">
     <div class="col s12 m12">
       <div class="card competence-card">
         <div class="card-content white-text">
@@ -56,7 +56,7 @@
                 <input class="my-ion-slider" type="range" data-min-score="{{form.scoreMin}}" data-max-score="{{form.scoreMax}}" ng-model="form.score"/>
               </p>
               -->
-              <rzslider rz-slider-model="form.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax}"></rzslider>
+              <rzslider rz-slider-model="form.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
             </div>
           </div>
         </div>
@@ -64,7 +64,7 @@
     </div>
   </div>
   <!-- Competence Detail -->
-  <div class="row">
+  <div class="row show-when-edit" style="display:none;">
     <div ng-include="'app/partials/evaluationCompetence.html'"></div>
   </div>
 </div>
