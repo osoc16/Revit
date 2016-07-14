@@ -1,4 +1,7 @@
 .evaluation-page-content {
+
+   
+
     .candidate-selection {
         position: relative;
         top: 0;
@@ -11,87 +14,75 @@
 
     .competence-card {
         border-top: 0.3rem solid;
-
         border-color: $primary-color;
 
-        .card-title{
-            font-weight:400;
+        .card-title {
+            font-weight: 400;
         }
 
-        .competence-slider{
-           padding-top:2rem;
+        .competence-slider {
+            padding-top: 2rem;
         }
-
 
         &.neutral {
-                  border-color: $neutral-color;
-            }
+            border-color: $neutral-color;
+        }
 
         &.success {
-                  border-color: $success-color;
-            }
+            border-color: $success-color;
+        }
 
         &.warning {
-                  border-color: $warning-color;
+            border-color: $warning-color;
+        }
+
+        &.fill {
+            background-color: $primary-color;
+
+            &.neutral {
+                background-color: $neutral-color;
             }
 
-
-        &.fill{
-
-    
-    background-color: $primary-color;
-            
-  &.neutral{
- background-color: $neutral-color;
+            &.success {
+                background-color: $success-color;
             }
 
-            &.success{
- background-color: $success-color;
-            }
-            &.warning{
-                 background-color: $warning-color;
+            &.warning {
+                background-color: $warning-color;
             }
         }
 
-
-        .status-message{
-
-
-        &.neutral {
-                  color: $neutral-color;
+        .status-message {
+            &.neutral {
+                color: $neutral-color;
             }
 
-        &.success {
-                  color: $success-color;
+            &.success {
+                color: $success-color;
             }
 
-        &.warning {
-                  color: $warning-color;
+            &.warning {
+                color: $warning-color;
             }
-
         }
-
     }
-
 
     .back-to-overview {
         float: right;
         cursor: pointer;
 
-        &:hover{
-              color: $secondary-color; 
+        &:hover {
+            color: $secondary-color;
         }
     }
 
+    .dimension-item {
+        position: relative;
 
-    .dimension-item{
-        position:relative;
-          .disable-dimension-checkbox{
-        position: absolute;
-        top:1rem;
-        right:1rem;
+        .disable-dimension-checkbox {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
     }
-    }
-  
-
 }
