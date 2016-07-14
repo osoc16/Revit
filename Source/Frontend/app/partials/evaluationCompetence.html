@@ -18,9 +18,9 @@
             <p class="range-field">
               <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="dimension.score"  />
             </p>
-            <p >
-              <input class="my-ion-slider" type="range" data-min-score="{{form.scoreMin}}" data-max-score="{{form.scoreMax}}" ng-model="dimension.score"/>
-            </p>
+
+              <rzslider rz-slider-model="dimension.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax}"></rzslider>
+
           </div>
         </div>
       </div>
@@ -34,12 +34,13 @@
           <div class="valign-wrapper">
             <div class="col m6 valign" ><span>TOTAL</span></div>
             <div class="col m6 valign" >
+
               <p class="range-field">
-                <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="currentCompetence.score"/>
-              </p>
-              <p >
-                <input class="my-ion-slider" type="range" data-min-score="{{form.scoreMin}}" data-max-score="{{form.scoreMax}}" ng-model="currentCompetence.score"/>
-              </p>
+              <input type="range" id="test5" min="{{form.scoreMin}}" max="{{form.scoreMax}}" ng-model="currentCompetence.score"  />
+            </p>
+            
+                  <rzslider rz-slider-model="currentCompetence.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax}"></rzslider>
+
             </div>
           </div>
         </div>
@@ -47,7 +48,6 @@
     </div>
   </div>
 </div>
-<script src="js/initSliders.js"></script>
 <script>
 $(document).ready(function(){
 $('.tooltipped').tooltip({delay: 50});

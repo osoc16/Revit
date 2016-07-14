@@ -21,8 +21,12 @@
 
 
 <div>
-    <ion-range-slider class="my-ion-slider" min="18" max="60" from="model.age.min" to="model.age.max"></ion-range-slider>
+    <rzslider
+         rz-slider-model="slider.value"
+         rz-slider-options="slider.options"></rzslider>
 </div>
+
+<span ng-bind="slider.value"></span>
 
 <span ng-bind="model.age.min"></span>
     
@@ -37,5 +41,3 @@
 </div>
 
 <div id="range"></div>
-
-<script src="js/initSliders.js"></script>
