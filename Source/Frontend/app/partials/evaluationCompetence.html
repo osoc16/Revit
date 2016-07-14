@@ -8,21 +8,23 @@
   </div>
   <!-- Dimensions overview -->
   <ul class="collection" >
-    <li class="collection-item" ng-repeat="dimension in form.competences[currentCompetenceIndex].dimensions" >
+    <li class="collection-item dimension-item" ng-repeat="dimension in form.competences[currentCompetenceIndex].dimensions" >
       <h5 class="medium">{{dimension.name}}</h5>
       <div >
         <div class="row">
   
           <div class="col l6 m6 s12">
 
-         <span >
-              <input type="checkbox" class="filled-in" id="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}" ng-model="dimension.notObserved">
-            <label for="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}">Not Observed</label>
-          </span>
           <p>{{dimension.description}}
           </p>
           </div>
           <div class="col l6 m6 s12">
+
+
+         <span class="disable-dimension-checkbox">
+              <input type="checkbox" class="filled-in" id="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}" ng-model="dimension.notObserved">
+            <label for="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}">Disabled</label>
+          </span>
             <rzslider rz-slider-model="dimension.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true, disabled:dimension.notObserved}"></rzslider>
           </div>
         </div>

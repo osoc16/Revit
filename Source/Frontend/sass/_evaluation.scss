@@ -83,4 +83,15 @@
         }
     }
 
+
+    .dimension-item{
+        position:relative;
+          .disable-dimension-checkbox{
+        position: absolute;
+        top:1rem;
+        right:1rem;
+    }
+    }
+  
+
 }

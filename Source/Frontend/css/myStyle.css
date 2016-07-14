@@ -6263,3 +6263,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   cursor: pointer; }
   .evaluation-page-content .back-to-overview:hover {
     color: #ff9800; }
+
+.evaluation-page-content .dimension-item {
+  position: relative; }
+  .evaluation-page-content .dimension-item .disable-dimension-checkbox {
+    position: absolute;
+    top: 1rem;
+    right: 1rem; }
