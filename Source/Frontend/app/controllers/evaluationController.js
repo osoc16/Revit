@@ -19,9 +19,9 @@
 
                     if ($scope.form.competences[i].competenceId == $scope.currentCompetence.competenceId) {
                         $scope.form.competences[i] = $scope.currentCompetence;
-
+                        /*
                               $log.info( $scope.form.competences[i]);
-                        $log.info("test");
+                        $log.info("test");*/
                         break; //Stop this loop, we found it!
                     }
                 }
@@ -40,7 +40,7 @@
 
         };
 
-        $scope.saveForm=function(){
+        $scope.saveForm = function() {
 
             alert("test");
         }

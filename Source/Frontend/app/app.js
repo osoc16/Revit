@@ -1,6 +1,6 @@
 (function(){
     
-    var app = angular.module("RevitApp", ["ngRoute"]);
+    var app = angular.module("RevitApp", ["ngRoute","ion.rangeslider"]);
     
     app.config(function($routeProvider){
         $routeProvider

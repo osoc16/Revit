@@ -19,6 +19,12 @@
       <label>Optgroups</label>
     </div>
 
+
+<div>
+    <ion-range-slider class="my-ion-slider" min="18" max="60" from="model.age.min" to="model.age.max"></ion-range-slider>
+</div>
+
+<span ng-bind="model.age.min"></span>
     
   </form>  <div data-role="main" class="ui-content">
     <form method="post" action="demoform.asp">
@@ -31,3 +37,5 @@
 </div>
 
 <div id="range"></div>
+
+<script src="js/initSliders.js"></script>

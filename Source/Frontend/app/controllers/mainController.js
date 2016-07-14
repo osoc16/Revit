@@ -4,6 +4,13 @@
 
     var MainController = function($scope, $interval, $location) {
 
+           $scope.model = {
+        age: {
+            min: 18,
+            max: 99
+        }
+    }
+
         var decrementCountdown = function(){
             $scope.countdown -= 1;
             if($scope.countdown < 1){
