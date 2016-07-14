@@ -52,26 +52,34 @@
                         comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex officiis a",
                         dimensions: [{
                             name: "Dimension 1.1 ",
-                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
-                            score: 1
 
+                            dimensionId:1,
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
+                            score: 1,
+                            notObserved:false
 
                         }, {
                             name: "Dimension 1.2 ",
+                                  dimensionId:2,
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
-                            score: 2
+                            score: 2,
+                            notObserved:true
 
 
                         }, {
                             name: "Dimension 1.3 ",
+                                  dimensionId:3,
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
-                            score: 3
+                            score: 3,
+                             notObserved:false
 
 
                         }, {
                             name: "Dimension 1.4 ",
+                                  dimensionId:4,
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
-                            score: 4
+                            score: 4,
+                             notObserved:false
 
 
                         }]
@@ -86,25 +94,29 @@
                         dimensions: [{
                             name: "Dimension 1.1 ",
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
-                            score: 3
+                            score: 3,
+                             notObserved:false
 
 
                         }, {
                             name: "Dimension 1.2 ",
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
-                            score: 3
+                            score: 3,
+                             notObserved:false
 
 
                         }, {
                             name: "Dimension 1.3 ",
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
-                            score: 3
+                            score: 3,
+                             notObserved:false
 
 
                         }, {
                             name: "Dimension 1.4 ",
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
-                            score: 3
+                            score: 3,
+                             notObserved:false
 
 
                         }]
@@ -159,11 +171,18 @@
 
         }
 
+        var saveForm=function(form){
+
+        };
+
+
+
 
 
         //Service API return
         return {
             getForm: getForm,
+            saveForm:saveForm
         };
 
     };

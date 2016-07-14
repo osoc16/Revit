@@ -8,30 +8,35 @@
   </div>
   <!-- Dimensions overview -->
   <ul class="collection" >
-    <li class="collection-item" ng-repeat="dimension in form.competences[currentCompetenceIndex].dimensions" > 
+    <li class="collection-item" ng-repeat="dimension in form.competences[currentCompetenceIndex].dimensions" >
       <h5 class="medium">{{dimension.name}}</h5>
       <div >
         <div class="row">
-          <div class="col l6 m6 s12"><p>{{dimension.description}}</p></div>
+  
           <div class="col l6 m6 s12">
-            <rzslider rz-slider-model="dimension.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
+
+         <span >
+              <input type="checkbox" class="filled-in" id="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}" ng-model="dimension.notObserved">
+            <label for="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}">Not Observed</label>
+          </span>
+          <p>{{dimension.description}}
+          </p>
+          </div>
+          <div class="col l6 m6 s12">
+            <rzslider rz-slider-model="dimension.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true, disabled:dimension.notObserved}"></rzslider>
           </div>
         </div>
       </div>
     </li>
-
-    <li>
- 
-    <form class="col s12">
-      <div class="row">
-        <div class="input-field col s12">
-          <textarea id="competence-comment" ng-model="competence.comment" class="materialize-textarea"></textarea>
-          <label for="competence-comment">Comment</label>
+    <li>     
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <textarea id="competence-comment" ng-model="competence.comment" class="materialize-textarea"></textarea>
+            <label for="competence-comment">Comment</label>
+          </div>
         </div>
-      </div>
-    </form>
-
-
+      </form>
     </li>
   </ul>
   <!-- Competence Total -->
@@ -42,10 +47,9 @@
           <div class="valign-wrapper">
             <div class="col m6 valign" ><span>TOTAL</span></div>
             <div class="col m6 valign" >
-            <p>
-
-              <rzslider rz-slider-model="form.competences[currentCompetenceIndex].score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
-                   </p>
+              <p>
+                <rzslider rz-slider-model="form.competences[currentCompetenceIndex].score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
+              </p>
             </div>
           </div>
         </div>
