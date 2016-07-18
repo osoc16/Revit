@@ -6222,6 +6222,16 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   position: relative;
   background-repeat: no-repeat; }
 
+.evaluation-page-content .slider-resetter {
+  float: right;
+  margin: 0 auto;
+  cursor: pointer;
+  color: #F26522;
+  padding: 0.2rem; }
+
+.evaluation-page-content .slider-container {
+  position: relative; }
+
 .evaluation-page-content .candidate-selection {
   position: relative;
   top: 0; }
@@ -6257,6 +6267,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     color: #4CAF50; }
   .evaluation-page-content .competence-card .status-message.warning {
     color: #F26522; }
+
+.evaluation-page-content .total-card {
+  padding-top: 2rem;
+  padding-bottom: 2rem; }
 
 .evaluation-page-content .back-to-overview {
   float: right;

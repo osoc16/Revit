@@ -12,25 +12,29 @@
       <h5 class="medium">{{dimension.name}}</h5>
       <div >
         <div class="row">
-  
+          
           <div class="col l6 m6 s12">
-
-          <p>{{dimension.description}}
-          </p>
+            <p>{{dimension.description}}
+            </p>
           </div>
           <div class="col l6 m6 s12">
+            <span class="disable-dimension-checkbox">
 
-
-         <span class="disable-dimension-checkbox">
+            <!-- 
               <input type="checkbox" class="filled-in" id="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}" ng-model="dimension.notObserved">
-            <label for="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}">Disabled</label>
-          </span>
-            <rzslider rz-slider-model="dimension.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax, showTicks: true, disabled:dimension.notObserved}"></rzslider>
+              <label  for="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}">Disabled</label>
+              -->
+            </span>
+            <div class="slider-container">
+              <input ng-hide="true" class="slider-backup-input" type="text" ng-model="dimension.score"></input>            
+            <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>       
+              <rzslider rz-slider-model="dimension.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax, showTicks: true, disabled:dimension.notObserved}"></rzslider>
+            </div>
           </div>
         </div>
       </div>
     </li>
-    <li>     
+    <li>
       <form class="col s12">
         <div class="row">
           <div class="input-field col s12">
@@ -44,14 +48,21 @@
   <!-- Competence Total -->
   <div class="row">
     <div class="col s12 m12">
-      <div class="card competence-card  {{form.competences[currentCompetenceIndex].status}}">
+      <div class="card competence-card total-card {{form.competences[currentCompetenceIndex].status}}">
         <div class="card-content ">
           <div class="valign-wrapper">
             <div class="col m6 valign" ><span>TOTAL</span></div>
             <div class="col m6 valign" >
-              <p>
-                <rzslider rz-slider-model="form.competences[currentCompetenceIndex].score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
-              </p>
+
+
+            <div class="slider-container">
+              <input ng-hide="true" class="slider-backup-input" type="text" ng-model="form.competences[currentCompetenceIndex].score"></input>            
+                 <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>         
+           <rzslider rz-slider-model="form.competences[currentCompetenceIndex].score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
+            </div>
+
+
+ 
             </div>
           </div>
         </div>
