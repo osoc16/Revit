@@ -19,16 +19,15 @@
           </div>
           <div class="col l6 m6 s12">
             <span class="disable-dimension-checkbox">
-
-            <!-- 
+              <!--
               <input type="checkbox" class="filled-in" id="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}" ng-model="dimension.notObserved">
               <label  for="comptence-index-{{ currentCompetenceIndex }}-dimension-{{ dimension.dimensionId }}">Disabled</label>
               -->
             </span>
             <div class="slider-container">
-              <input ng-hide="true" class="slider-backup-input" type="text" ng-model="dimension.score"></input>            
-            <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>       
-              <rzslider rz-slider-model="dimension.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax, showTicks: true, disabled:dimension.notObserved}"></rzslider>
+              <input ng-hide="true"  class="slider-backup-input" type="text" ng-model="dimension.score"></input>
+              <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>
+              <rzslider  rz-slider-model="dimension.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax, showTicks: true, disabled:dimension.notObserved,onChange:dimensionEvaluated}"></rzslider>
             </div>
           </div>
         </div>
@@ -53,16 +52,11 @@
           <div class="valign-wrapper">
             <div class="col m6 valign" ><span>TOTAL</span></div>
             <div class="col m6 valign" >
-
-
-            <div class="slider-container">
-              <input ng-hide="true" class="slider-backup-input" type="text" ng-model="form.competences[currentCompetenceIndex].score"></input>            
-                 <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>         
-           <rzslider rz-slider-model="form.competences[currentCompetenceIndex].score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
-            </div>
-
-
- 
+              <div class="slider-container">
+                <input ng-hide="true" class="slider-backup-input" type="text" ng-model="form.competences[currentCompetenceIndex].score"></input>
+                <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>
+                <rzslider rz-slider-model="form.competences[currentCompetenceIndex].score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true ,onChange:competenceEvaluated}"></rzslider>
+              </div>
             </div>
           </div>
         </div>

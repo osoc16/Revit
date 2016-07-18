@@ -1,19 +1,30 @@
-(function(){
-    
-    var selorRuleService = function($http){
-      
-      var getEvaluationCategory=function(form){
+(function() {
+
+    var selorRuleService = function($http) {
+
+        var getCompetenceScoreSuggestion = function(dimensions) {
 
             return 1;
 
-      }
-        
-      return {
-          getEvaluationCategory: getEvaluationCategory
-      };
-        
+        };
+
+
+        var getFormScoreSuggestion = function(competences) {
+
+
+            return 1;
+        }
+
+
+        return {
+            getCompetenceScoreSuggestion: getCompetenceScoreSuggestion,
+            getFormScoreSuggestion: getFormScoreSuggestion
+        };
+
     };
+
+
     var module = angular.module("RevitApp");
     module.factory("selorRuleService", selorRuleService);
-    
+
 }());

@@ -47,6 +47,22 @@
 
             revitService.saveForm($scope.form);
         }
+
+        $scope.competenceEvaluated=function(){
+
+            $scope.form.score=selorRuleService.getFormScoreSuggestion($scope.form.competences);
+
+            $log.info("comp eval");
+
+        }
+
+
+        $scope.dimensionEvaluated=function(){
+
+            $scope.form.competences[$scope.currentCompetenceIndex].score=selorRuleService.getCompetenceScoreSuggestion($scope.form.competences[$scope.currentCompetenceIndex].dimensions);
+
+        }
+
     };
 
     app.controller("EvaluationController", EvaluationController);
