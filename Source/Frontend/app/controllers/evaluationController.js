@@ -66,6 +66,32 @@
             $scope.form.scoreMinLimit = suggestion.minScore;
             $scope.form.scoreMaxLimit = suggestion.maxScore;
 
+
+            /* VALIDATION */
+            var currentCompetence = $scope.form.competences[$scope.currentCompetenceIndex];
+
+            if (isNaN(currentCompetence.score)) {
+
+                currentCompetence.status = "neutral";
+                currentCompetence.statusMessage = "Not evaluated";
+
+                return;
+
+            }
+
+
+
+            if (!currentCompetence.comment) {
+
+                currentCompetence.status = "warning";
+                currentCompetence.statusMessage = "No comment written";
+                return;
+            }
+
+
+            currentCompetence.status = "success";
+            currentCompetence.statusMessage = "Evaluated";
+
             $log.info("comp eval");
 
         }
@@ -128,7 +154,7 @@
 
 
         //Return tick color for competence total
-       $scope.tickColorCompetence = function(value) {
+        $scope.tickColorCompetence = function(value) {
 
             var min;
             var max;

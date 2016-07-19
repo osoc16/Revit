@@ -5,7 +5,7 @@
     var MainController = function($scope, $interval, $location, selorRuleService) {
 
         var tests = [
-         [6, 5,4,null],
+             [6, 5,4,null],
 
             [6, 6, 5, 5, 3, 3, 2, null],
             [6, 6, 5, 1, 1, 1, null, null]

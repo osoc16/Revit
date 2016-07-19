@@ -23,29 +23,6 @@ var bindResetSlider=function(){
 	});
 
 
-
-
-
-
-
-
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 })();
