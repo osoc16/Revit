@@ -2,28 +2,14 @@
 
     var app = angular.module("RevitApp");
 
-    var MainController = function($scope, $interval, $location) {
+    var MainController = function($scope, $interval, $location, selorRuleService) {
+
+        var array= [6,6,5,1,1,1,null,null];
+
+       $scope.suggestion= selorRuleService.getScoreSuggestion(array);
 
 
 
-$scope.slider = {
-  value: 150,
-  options: {
-    floor: 0,
-    ceil: 450
-  }
-};
-        var decrementCountdown = function(){
-            $scope.countdown -= 1;
-            if($scope.countdown < 1){
-                $scope.search($scope.username);
-            }
-        };
-
-        var countdownInterval = null;
-        var startCountdown = function(){
-            countdownInterval = $interval(decrementCountdown, 1000, $scope.countdown);
-        };
     
     };
 
