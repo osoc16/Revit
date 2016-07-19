@@ -38,7 +38,7 @@
 	<div ng-show="competenceEditMode">
 		<div class="divider"></div>
 		<div class=" row">
-			
+	
 			<a ng-click="toggleCompetenceEditMode()" class="btn-floating btn-large right waves-effect waves-light add-competence"><i class="material-icons">view_module</i></a>
 			<h4 class="page-title">Edit Competence</h4>
 			<div class="input-field col s6">
@@ -49,6 +49,7 @@
 				<textarea ng-model="form.competences[currentCompetenceIndex].description"  id="textarea-competence-description" class="materialize-textarea"></textarea>
 				<label for="textarea-competence-description">Description</label>
 			</div>
+
 		</div>
 		
 		<h5>Dimensions</h5>
@@ -73,7 +74,7 @@
 				</div>
 			</div>
 		</div>
-		<a ng-click="addDimension()" class="waves-effect waves-light btn"><i class="material-icons left">add</i>Add Dimension</a>
+		<a ng-click="addDimension()" class=" add-dimension-button waves-effect waves-light btn"><i class="material-icons left">add</i>Add Dimension</a>
 	</div>
 
 
