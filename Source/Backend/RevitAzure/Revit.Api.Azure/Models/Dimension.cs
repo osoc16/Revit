@@ -7,7 +7,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Web;
 
-namespace RevitApi.Models
+namespace Revit.Api.Azure.Models
 {
 
 
@@ -16,15 +16,15 @@ namespace RevitApi.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        [Required]
+      
         public string code { get; set; }
-        [Required]
+
         public string name_FR { get; set; }
-        [Required]
+    
         public string name_NL { get; set; }
-        [Required]
+    
         public string name_EN { get; set; }
-        [Required]
+        
         public string name_DE { get; set; }
 
         public string description_FR { get; set; }
@@ -32,9 +32,10 @@ namespace RevitApi.Models
         public string description_EN { get; set; }
         public string description_DE { get; set; }
 
-       // [JsonIgnore]
-        //[IgnoreDataMember]
+
         public virtual ICollection< Competence> Competences { get; set; }
+
+        public virtual ICollection<Score> Scores { get; set; }
 
     }
 }

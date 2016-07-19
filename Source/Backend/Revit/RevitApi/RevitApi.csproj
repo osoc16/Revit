@@ -77,6 +77,10 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.SqlServer.Types, Version=11.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.11.0.2\lib\net20\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -234,7 +238,13 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CandidatesController.cs" />
+    <Compile Include="Controllers\CompetencesController.cs" />
+    <Compile Include="Controllers\DimensionsController.cs" />
+    <Compile Include="Controllers\FormsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JuriesController.cs" />
+    <Compile Include="Controllers\ScreeningsController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -243,19 +253,70 @@
     <Compile Include="Migrations\201607120744443_InitialCreate.Designer.cs">
       <DependentUpon>201607120744443_InitialCreate.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201607131238261_addedcompetences.cs" />
+    <Compile Include="Migrations\201607131238261_addedcompetences.Designer.cs">
+      <DependentUpon>201607131238261_addedcompetences.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607131240547_manytomanycompdim.cs" />
+    <Compile Include="Migrations\201607131240547_manytomanycompdim.Designer.cs">
+      <DependentUpon>201607131240547_manytomanycompdim.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607131304555_addedcompetences1.cs" />
+    <Compile Include="Migrations\201607131304555_addedcompetences1.Designer.cs">
+      <DependentUpon>201607131304555_addedcompetences1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607131306558_nullableintsonform.cs" />
+    <Compile Include="Migrations\201607131306558_nullableintsonform.Designer.cs">
+      <DependentUpon>201607131306558_nullableintsonform.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607131309233_nullableintsonform1.cs" />
+    <Compile Include="Migrations\201607131309233_nullableintsonform1.Designer.cs">
+      <DependentUpon>201607131309233_nullableintsonform1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607131348228_addingtables.cs" />
+    <Compile Include="Migrations\201607131348228_addingtables.Designer.cs">
+      <DependentUpon>201607131348228_addingtables.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201607140845210_migration14-07-01.cs" />
+    <Compile Include="Migrations\201607140845210_migration14-07-01.Designer.cs">
+      <DependentUpon>201607140845210_migration14-07-01.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountBindingModels.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Candidate.cs" />
+    <Compile Include="Models\Competence.cs" />
     <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\Dimension.cs" />
-    <Compile Include="Models\DimensionsController.cs" />
+    <Compile Include="Models\Form.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Jury.cs" />
+    <Compile Include="Models\Repositories\DimRepository.cs" />
+    <Compile Include="Models\Repositories\Repository.cs" />
+    <Compile Include="Models\Screening.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\msvcr100.dll">
+      <Link>SqlServerTypes\x64\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x64\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x64\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\msvcr100.dll">
+      <Link>SqlServerTypes\x86\msvcr100.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="..\packages\Microsoft.SqlServer.Types.11.0.2\nativeBinaries\x86\SqlServerSpatial110.dll">
+      <Link>SqlServerTypes\x86\SqlServerSpatial110.dll</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Areas\HelpPage\HelpPage.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -299,6 +360,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="SqlServerTypes\readme.htm" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -333,6 +395,27 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201607120744443_InitialCreate.resx">
       <DependentUpon>201607120744443_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607131238261_addedcompetences.resx">
+      <DependentUpon>201607131238261_addedcompetences.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607131240547_manytomanycompdim.resx">
+      <DependentUpon>201607131240547_manytomanycompdim.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607131304555_addedcompetences1.resx">
+      <DependentUpon>201607131304555_addedcompetences1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607131306558_nullableintsonform.resx">
+      <DependentUpon>201607131306558_nullableintsonform.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607131309233_nullableintsonform1.resx">
+      <DependentUpon>201607131309233_nullableintsonform1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607131348228_addingtables.resx">
+      <DependentUpon>201607131348228_addingtables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201607140845210_migration14-07-01.resx">
+      <DependentUpon>201607140845210_migration14-07-01.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
