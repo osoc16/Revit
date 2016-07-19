@@ -1,18 +1,17 @@
 <div class="form-page-content">
 	<!-- Page Content Title -->
-
 	<div ng-hide="competenceEditMode">
-	<div class="row" >
-		<div class="col m12 l6 s12">
-			<h4 class="page-title valign">Form Creation</h4>
+		<div class="row" >
+			<div class="col m12 l6 s12">
+				<h4 class="page-title valign">Form Creation</h4>
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="input-field col s6">
-			<input ng-model="form.name" id="form-name-input" type="text" class="validate">
-			<label class="active" for="form-name-input">Form Name</label>
+		<div class="row">
+			<div class="input-field col s6">
+				<input ng-model="form.name" id="form-name-input" type="text" class="validate" required>
+				<label class="active" for="form-name-input">Form Name</label>
+			</div>
 		</div>
-	</div>
 	</div>
 	<div ng-hide="competenceEditMode">
 		<div class="divider"></div>
@@ -38,7 +37,7 @@
 	<div ng-show="competenceEditMode">
 		<div class="divider"></div>
 		<div class=" row">
-	
+			
 			<a ng-click="toggleCompetenceEditMode()" class="btn-floating btn-large right waves-effect waves-light add-competence"><i class="material-icons">view_module</i></a>
 			<h4 class="page-title">Edit Competence</h4>
 			<div class="input-field col s6">
@@ -49,14 +48,12 @@
 				<textarea ng-model="form.competences[currentCompetenceIndex].description"  id="textarea-competence-description" class="materialize-textarea"></textarea>
 				<label for="textarea-competence-description">Description</label>
 			</div>
-
 		</div>
 		
 		<h5>Dimensions</h5>
 		<div class="row">
 			<div class="col l6 m6 s12" ng-repeat="dimension in form.competences[currentCompetenceIndex].dimensions" >
 				<div  class="card dimension-card" >
-
 					<a ng-click="deleteDimension($index)" class="btn-floating btn-small delete-dimension-button right waves-effect waves-light"><i class="material-icons">delete</i></a>
 					<div class="card-content">
 						<div class="row">
@@ -76,23 +73,22 @@
 		</div>
 		<a ng-click="addDimension()" class=" add-dimension-button waves-effect waves-light btn"><i class="material-icons left">add</i>Add Dimension</a>
 	</div>
-
-
 	<div ng-hide="competenceEditMode">
-	<div class="divider"></div>
-	<div class="row" >
-		<div class="col m12 l6 s12">
-			<h4 class="page-title valign">Candidates</h4>
-			<div class="row">
-				<div ng-repeat="candidate in form.candidates" >
+		<div class="divider"></div>
+		<div class="row" >
+			<div class="col m12 l6 s12">
+				<h4 class="page-title valign">Candidates</h4>
+				
+				<div ng-repeat="candidate in form.candidates"class="chip">
 					{{ candidate.name }}
+					<i class="material-icons">close</i>
 				</div>
+								
+			</div>
+			<div class="col m12 l6 s12">
+				<h4 class="page-title valign">Judges</h4>
 			</div>
 		</div>
-		<div class="col m12 l6 s12">
-			<h4 class="page-title valign">Judges</h4>
-		</div>
-	</div>
 	</div>
 </div>
 <script>
