@@ -183,99 +183,141 @@ namespace Revit.Api.Azure.Controllers
         [ResponseType(typeof(Form))]
         public IHttpActionResult Post(DtoForm formNew)
         {
-            Form formToSend = new Form();
+            Form formDb = new Form();
             if (!ModelState.IsValid)
             {
 
                 return BadRequest(ModelState);
             }
 
-            formToSend.Name = formNew.name;
+            formDb.Name = formNew.name;
 
-            formToSend.description_EN = formNew.description_EN;
-            formToSend.description_FR = formNew.description_FR;
-            formToSend.description_NL = formNew.description_NL;
-            formToSend.description_DE = formNew.description_DE;
+            formDb.description_EN = formNew.description_EN;
+            formDb.description_FR = formNew.description_FR;
+            formDb.description_NL = formNew.description_NL;
+            formDb.description_DE = formNew.description_DE;
 
+            //competence region
+            #region competences
             foreach (var comp in formNew.competences)
             {
-                Competence compToAdd = new Competence();
-                compToAdd.Dimensions = new List<Dimension>();
-                compToAdd.ID = comp.competenceID;
-                compToAdd.status = comp.status;
-                compToAdd.code = comp.code;
+                Competence compDb = db.Competences.Find(comp.competenceID);
 
-                compToAdd.name_EN = comp.name_EN;
-                compToAdd.name_FR = comp.name_FR;
-                compToAdd.name_NL = comp.name_NL;
-                compToAdd.name_DE = comp.name_DE;
+                if (compDb == null)
+                {
+                    compDb = new Competence();
 
-                compToAdd.description_EN = comp.description_EN;
-                compToAdd.description_FR = comp.description_FR;
-                compToAdd.description_NL = comp.description_NL;
-                compToAdd.description_DE = comp.description_DE;
+                    compDb.status = comp.status;
+                    compDb.code = comp.code;
 
-                compToAdd.statusMessage_EN = comp.statusMessage_EN;
-                compToAdd.statusMessage_FR = comp.statusMessage_FR;
-                compToAdd.statusMessage_DE = comp.statusMessage_DE;
-                compToAdd.statusMessage_NL = comp.statusMessage_NL;
+                    compDb.name_EN = comp.name_EN;
+                    compDb.name_FR = comp.name_FR;
+                    compDb.name_NL = comp.name_NL;
+                    compDb.name_DE = comp.name_DE;
 
+                    compDb.description_EN = comp.description_EN;
+                    compDb.description_FR = comp.description_FR;
+                    compDb.description_NL = comp.description_NL;
+                    compDb.description_DE = comp.description_DE;
+
+                    compDb.statusMessage_EN = comp.statusMessage_EN;
+                    compDb.statusMessage_FR = comp.statusMessage_FR;
+                    compDb.statusMessage_DE = comp.statusMessage_DE;
+                    compDb.statusMessage_NL = comp.statusMessage_NL;
+
+                }
+
+                if (compDb.Dimensions == null)
+                {
+                    compDb.Dimensions = new List<Dimension>();
+                }
+
+
+
+
+                //dimension region
+                #region dimension
                 foreach (var dim in comp.dimensions)
                 {
-                    Dimension dimToAdd = new Dimension();
-                    dimToAdd.ID = dim.dimensionID;
-                    dimToAdd.name_EN = dim.name_EN;
-                    dimToAdd.name_FR = dim.name_FR;
-                    dimToAdd.name_NL = dim.name_NL;
-                    dimToAdd.name_DE = dim.name_DE;
-                    dimToAdd.code = dim.code;
+                    Dimension dimDb = db.Dimensions.Find(dim.dimensionID);
 
-                    compToAdd.Dimensions.Add(dimToAdd);
+                    if (compDb == null)
+                    {
+                        dimDb = new Dimension();
+                        dimDb.name_EN = dim.name_EN;
+                        dimDb.name_FR = dim.name_FR;
+                        dimDb.name_NL = dim.name_NL;
+                        dimDb.name_DE = dim.name_DE;
+                        dimDb.code = dim.code;
+                        compDb.Dimensions.Add(dimDb);
+
+                    }
+                    else if (compDb.Dimensions.Contains(dimDb) == false)
+                    {
+                        compDb.Dimensions.Add(dimDb);
+                    }
                 }
-                if (formToSend.Competences == null)
-                    formToSend.Competences = new List<Competence>();
-                formToSend.Competences.Add(compToAdd);
+                #endregion
+
+                if (formDb.Competences == null)
+                    formDb.Competences = new List<Competence>();
+                formDb.Competences.Add(compDb);
+            #endregion
 
             }
+            //candidate region
+            #region candidates
             if (formNew.candidateList == null)
                 formNew.candidateList = new List<DtoCandidate>();
             foreach (var candi in formNew.candidateList)
             {
-                Candidate candToAdd = new Candidate();
-                candToAdd.ID = candi.candidateID;
-                candToAdd.lastname = candi.lastname;
-                candToAdd.firstname = candi.firstname;
-                if (candi.juries ==null)
-                    candi.juries = new List<DtoJury>();
-
-                foreach (var jur in candi.juries)
+                Candidate canDb = db.Candidates.Find(candi.candidateID);
+                
+                if (canDb == null)
                 {
-                    juryCandidateForm JCF = new juryCandidateForm();
-                    JCF.candidate_ID = candi.candidateID;
-                    JCF.form_ID = formToSend.ID;
-                    JCF.jury_ID = jur.juryId;
-                    db.JuryCandidateForms.Add(JCF);
+                    canDb = new Candidate();
+                    canDb.lastname = candi.lastname;
+                    canDb.firstname = candi.firstname;
                 }
 
-                if (formToSend.Candidates == null)
-                    formToSend.Candidates = new List<Candidate>();
-                formToSend.Candidates.Add(candToAdd);
+                
+                if (candi.juries != null)
+                    foreach (var jur in candi.juries)
+                    {
+                        juryCandidateForm JCF = new juryCandidateForm();
+                        JCF.candidate_ID = candi.candidateID;
+                        JCF.form_ID = formDb.ID;
+                        JCF.jury_ID = jur.juryId;
+                        db.JuryCandidateForms.Add(JCF);
+                    }
+
+                if (formDb.Candidates == null)
+                    formDb.Candidates = new List<Candidate>();
+                formDb.Candidates.Add(canDb);
             }
-            if (formNew.juryList == null)
-                formNew.juryList = new List<DtoJury>();
+            #endregion
+
+            //jury region
+            #region jury
+            if (formNew.juryList != null)
             foreach (var jury in formNew.juryList)
             {
-                Jury juryToAdd = new Jury();
-                juryToAdd.ID = jury.juryId;
-                juryToAdd.lastname = jury.lastname;
-                juryToAdd.firstname= jury.firstname;
-                formToSend.Juries.Add(juryToAdd);
-            }
+                    Jury juryDb = db.Juries.Find(jury.juryId);
 
-            db.Forms.Add(formToSend);
+                    if (juryDb == null)
+                    {
+                        juryDb = new Jury();
+                        juryDb.lastname = jury.lastname;
+                        juryDb.firstname = jury.firstname;
+                        formDb.Juries.Add(juryDb);
+                    }
+            }
+            #endregion
+
+            db.Forms.Add(formDb);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = formToSend.ID }, formToSend);
+            return CreatedAtRoute("DefaultApi", new { id = formDb.ID }, formDb);
         }
 
 
