@@ -55,7 +55,7 @@
               <div class="slider-container">
                 <input ng-hide="true" class="slider-backup-input" type="text" ng-model="form.competences[currentCompetenceIndex].score"></input>
                 <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>
-                <rzslider rz-slider-model="form.competences[currentCompetenceIndex].score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true ,onChange:competenceEvaluated}"></rzslider>
+                <rzslider rz-slider-model="form.competences[currentCompetenceIndex].score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  minLimit:form.competences[currentCompetenceIndex].scoreMinLimit, maxLimit:form.competences[currentCompetenceIndex].scoreMaxLimit, showTicks: true ,onChange:competenceEvaluated, getTickColor:tickColorCompetence }"></rzslider>
               </div>
             </div>
           </div>

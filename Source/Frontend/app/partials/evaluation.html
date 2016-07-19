@@ -55,7 +55,7 @@
               <div class="slider-container">
                 <input ng-hide="true" class="slider-backup-input" type="text" ng-model="form.score"></input>
              <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>  
-                <rzslider rz-slider-model="form.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
+                <rzslider rz-slider-model="form.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  minLimit:form.scoreMinLimit, maxLimit:form.scoreMaxLimit,showTicks: true,getTickColor:tickColorForm}"></rzslider>
               </div>
               
             </div>

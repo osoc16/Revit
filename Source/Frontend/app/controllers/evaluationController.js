@@ -60,7 +60,11 @@
 
 
             var suggestion = selorRuleService.getFormScoreSuggestion($scope.form.competences);
+
             $scope.form.score = suggestion.score;
+
+            $scope.form.scoreMinLimit = suggestion.minScore;
+            $scope.form.scoreMaxLimit = suggestion.maxScore;
 
             $log.info("comp eval");
 
@@ -72,7 +76,70 @@
             var suggestion = selorRuleService.getCompetenceScoreSuggestion($scope.form.competences[$scope.currentCompetenceIndex].dimensions);
 
             $scope.form.competences[$scope.currentCompetenceIndex].score = suggestion.score;
+            $scope.form.competences[$scope.currentCompetenceIndex].scoreMinLimit = suggestion.minScore;
+            $scope.form.competences[$scope.currentCompetenceIndex].scoreMaxLimit = suggestion.maxScore;
 
+            $scope.competenceEvaluated();
+        }
+
+        //Get slider tick color
+        var tickColor = function(value, min, max) {
+
+            try {
+
+
+                var defaultColor = "#ccc";
+                var forbiddenColor = "red"
+
+                if (isNaN(min) || isNaN(max)) {
+                    return defaultColor;
+                } else {
+
+                    if (value < min)
+                        return forbiddenColor;
+                    if (value > max)
+                        return forbiddenColor;
+                    return defaultColor;
+
+                }
+
+
+            } catch (Ex) {
+
+
+                return defaultColor;
+            }
+        }
+
+        //Return tick color for form total
+        $scope.tickColorForm = function(value) {
+
+            var min;
+            var max;
+
+            try {
+                min = $scope.form.scoreMinLimit;
+                max = $scope.form.scoreMaxLimit;
+
+            } catch (ex) {}
+
+            return tickColor(value, min, max);
+        }
+
+
+        //Return tick color for competence total
+       $scope.tickColorCompetence = function(value) {
+
+            var min;
+            var max;
+
+            try {
+                min = $scope.form.competences[$scope.currentCompetenceIndex].scoreMinLimit;
+                max = $scope.form.competences[$scope.currentCompetenceIndex].scoreMaxLimit;
+            } catch (ex) {}
+
+
+            return tickColor(value, min, max);
         }
 
     };
