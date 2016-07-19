@@ -11,24 +11,34 @@
 
         var getFormScoreSuggestion = function(competences) {
 
-
             return 1;
         }
 
         var getScoreSuggestion = function(scores) {
-
+                 $log.info("========================");
             $log.info("scores:");
+
             $log.info(scores);
 
+            var scoreNotRounded = calculateAverage([calculateMinMax(scores).min,calculateMinMax(scores).max]);
+             $log.info("scoreNotRounded: "+ scoreNotRounded);
+
+             var rankMin=  getScoreMinSuggestion(scores);
+             var rankMax= getScoreMaxSuggestion(scores);
+             $log.info("========================");
+
             return {
-                score: Math.floor(calculateAverage([calculateMinMax(scores).min,calculateMinMax(scores).max])),
-                minScore: getScoreMinSuggestion(scores),
-                maxScore: getScoreMaxSuggestion(scores)
+                score: Math.floor((rankMax+rankMin)/2),
+                minScore:rankMin,
+                maxScore: rankMax
             };
 
         };
 
+       //Get score min suggestion
         var getScoreMinSuggestion = function(scores) {
+
+                   $log.info("------------------");
 
             $log.info("ScoreMin Processing");
 
@@ -82,11 +92,16 @@
 
             $log.info("ScoreMin Done");
 
+                   $log.info("------------------");
+
             return minRounded;
 
         };
 
+        //Get score max suggestion
         var getScoreMaxSuggestion = function(scores) {
+
+             $log.info("------------------");
 
             $log.info("ScoreMax Processing");
 
@@ -134,6 +149,7 @@
             $log.info("maxRounded" + maxRounded);
 
             $log.info("ScoreMax Done");
+                   $log.info("------------------");
 
             return maxRounded;
         };
@@ -163,15 +179,13 @@
             maxVal= minmax.max;
 
             return maxVal - minVal;
-
         }
 
+        //Get min and max value from array
         var calculateMinMax=function(array){
-
 
             var minVal = array[0];
             var maxVal = array[0];
-
 
             for (var i = 0; i < array.length; i++) {
                 if (array[i] > maxVal) {
@@ -185,8 +199,6 @@
             }
 
             return {min:minVal,max:maxVal};
-
-
         }
 
         return {
