@@ -7,23 +7,16 @@ using System.Web;
 
 namespace Revit.Api.Azure.Models
 {
-    public class Candidate
+    public class juryCandidateForm
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-
-      
-        public string nationalNumber { get; set; }
-
-    
-        public string firstname { get; set; }
-
-       
-        public string lastname { get; set; }
-
-        public virtual ICollection<Screening> Screenings { get; set; }
-
-        public virtual ICollection<Form> Forms { get; set; }
+        [Required]
+        public int form_ID { get; set; }
+        [Required]
+        public int jury_ID { get; set; }
+        [Required]
+        public int candidate_ID { get; set; }
     }
 }

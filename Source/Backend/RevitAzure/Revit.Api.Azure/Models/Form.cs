@@ -16,12 +16,10 @@ namespace Revit.Api.Azure.Models
 
         public string Name { get; set; }
 
-        //public int? Score { get; set; }
-
-        public int? scoreMax { get; set; }
-
-
-        //public int? finalScore { get; set; }
+        public string description_FR { get; set; }
+        public string description_NL { get; set; }
+        public string description_EN { get; set; }
+        public string description_DE { get; set; }
 
         public int? finalScoreMax { get; set; }
 
@@ -32,5 +30,8 @@ namespace Revit.Api.Azure.Models
         public virtual ICollection<Candidate> Candidates { get; set; }
 
         public virtual ICollection<Score> Scores { get; set; }
+        
+        public virtual ICollection<Jury> Juries { get; set; }
+        
     }
 }

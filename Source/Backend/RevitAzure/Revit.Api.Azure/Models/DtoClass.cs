@@ -33,10 +33,6 @@ namespace Revit.Api.Azure.Models
         public int formID { get; set; }
 
         public string name { get; set; }
-        public string name_FR { get; set; }
-        public string name_EN { get; set; }
-        public string name_NL { get; set; }
-        public string name_DE { get; set; }
 
         public string description { get; set; }
         public string description_FR { get; set; }
@@ -54,14 +50,26 @@ namespace Revit.Api.Azure.Models
         public DtoCandidate candidate { get; set; }
         public ICollection< DtoCompetences> competences { get; set; }
         public ICollection<DtoCandidate> candidateList { get; set; }
+        public ICollection<DtoJury> juryList { get; set; }
     }
 
+    public class DtoJury
+    {
+        public int juryId { get; set; }
 
+        public string name { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+    }
     public class DtoCandidate
     {
         public int candidateID { get; set; }
 
         public string name { get; set; }
+        public string firstname { get; set; }
+        public string lastname { get; set; }
+        public string nationalNumber { get; set; }
+        public ICollection<DtoJury> juries { get; set; }
     }
 
     public class DtoCompetences

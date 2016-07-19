@@ -20,7 +20,7 @@ namespace Revit.Api.Azure.Controllers
 
         [Route("juries/{juryId}/forms/{formId}/candidates/{candidatId}")]
         [ResponseType(typeof(DtoForm))]
-        // GET: api
+        // GET: api/juries/{juryId}/forms/{formId}/candidates/{candidatId}
         public object Get(int juryId, int formId, int candidatId, string language = "en")
         {
             Form form = db.Forms.Find(formId);
@@ -37,7 +37,7 @@ namespace Revit.Api.Azure.Controllers
             //return Ok(form);
             DtoCandidate cand = new DtoCandidate();
             cand.candidateID = candidate.ID;
-            cand.name= candidate.LastName + " " + candidate.FirstName;
+            cand.name= candidate.lastname + " " + candidate.firstname;
             DtoForm result = new DtoForm();
             result.competences = new List<DtoCompetences>();
             result.candidateList = new List<DtoCandidate>();
@@ -172,12 +172,112 @@ namespace Revit.Api.Azure.Controllers
             {
                 DtoCandidate candToAdd = new DtoCandidate();
                 candToAdd.candidateID = candi.ID;
-                candToAdd.name = candi.LastName + " " + candi.FirstName;
+                candToAdd.name = candi.lastname + " " + candi.firstname;
                 result.candidateList.Add(candToAdd);
             }
 
             return Ok(result);
         }
+
+        //POST: 
+        [ResponseType(typeof(Form))]
+        public IHttpActionResult Post(DtoForm formNew)
+        {
+            Form formToSend = new Form();
+            if (!ModelState.IsValid)
+            {
+
+                return BadRequest(ModelState);
+            }
+
+            formToSend.Name = formNew.name;
+
+            formToSend.description_EN = formNew.description_EN;
+            formToSend.description_FR = formNew.description_FR;
+            formToSend.description_NL = formNew.description_NL;
+            formToSend.description_DE = formNew.description_DE;
+
+            foreach (var comp in formNew.competences)
+            {
+                Competence compToAdd = new Competence();
+                compToAdd.Dimensions = new List<Dimension>();
+                compToAdd.ID = comp.competenceID;
+                compToAdd.status = comp.status;
+                compToAdd.code = comp.code;
+
+                compToAdd.name_EN = comp.name_EN;
+                compToAdd.name_FR = comp.name_FR;
+                compToAdd.name_NL = comp.name_NL;
+                compToAdd.name_DE = comp.name_DE;
+
+                compToAdd.description_EN = comp.description_EN;
+                compToAdd.description_FR = comp.description_FR;
+                compToAdd.description_NL = comp.description_NL;
+                compToAdd.description_DE = comp.description_DE;
+
+                compToAdd.statusMessage_EN = comp.statusMessage_EN;
+                compToAdd.statusMessage_FR = comp.statusMessage_FR;
+                compToAdd.statusMessage_DE = comp.statusMessage_DE;
+                compToAdd.statusMessage_NL = comp.statusMessage_NL;
+
+                foreach (var dim in comp.dimensions)
+                {
+                    Dimension dimToAdd = new Dimension();
+                    dimToAdd.ID = dim.dimensionID;
+                    dimToAdd.name_EN = dim.name_EN;
+                    dimToAdd.name_FR = dim.name_FR;
+                    dimToAdd.name_NL = dim.name_NL;
+                    dimToAdd.name_DE = dim.name_DE;
+                    dimToAdd.code = dim.code;
+
+                    compToAdd.Dimensions.Add(dimToAdd);
+                }
+                if (formToSend.Competences == null)
+                    formToSend.Competences = new List<Competence>();
+                formToSend.Competences.Add(compToAdd);
+
+            }
+            if (formNew.candidateList == null)
+                formNew.candidateList = new List<DtoCandidate>();
+            foreach (var candi in formNew.candidateList)
+            {
+                Candidate candToAdd = new Candidate();
+                candToAdd.ID = candi.candidateID;
+                candToAdd.lastname = candi.lastname;
+                candToAdd.firstname = candi.firstname;
+                if (candi.juries ==null)
+                    candi.juries = new List<DtoJury>();
+
+                foreach (var jur in candi.juries)
+                {
+                    juryCandidateForm JCF = new juryCandidateForm();
+                    JCF.candidate_ID = candi.candidateID;
+                    JCF.form_ID = formToSend.ID;
+                    JCF.jury_ID = jur.juryId;
+                    db.JuryCandidateForms.Add(JCF);
+                }
+
+                if (formToSend.Candidates == null)
+                    formToSend.Candidates = new List<Candidate>();
+                formToSend.Candidates.Add(candToAdd);
+            }
+            if (formNew.juryList == null)
+                formNew.juryList = new List<DtoJury>();
+            foreach (var jury in formNew.juryList)
+            {
+                Jury juryToAdd = new Jury();
+                juryToAdd.ID = jury.juryId;
+                juryToAdd.lastname = jury.lastname;
+                juryToAdd.firstname= jury.firstname;
+                formToSend.Juries.Add(juryToAdd);
+            }
+
+            db.Forms.Add(formToSend);
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = formToSend.ID }, formToSend);
+        }
+
 
 
 
@@ -236,20 +336,20 @@ namespace Revit.Api.Azure.Controllers
         }
 
         // POST: api/Forms
-        [ResponseType(typeof(Form))]
-        public IHttpActionResult PostForm(Form form)
-        {
-            if (!ModelState.IsValid)
-            {
+        //[ResponseType(typeof(Form))]
+        //public IHttpActionResult PostForm(Form form)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
 
-                return BadRequest(ModelState);
-            }
+        //        return BadRequest(ModelState);
+        //    }
 
-            db.Forms.Add(form);
-            db.SaveChanges();
+        //    db.Forms.Add(form);
+        //    db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = form.ID }, form);
-        }
+        //    return CreatedAtRoute("DefaultApi", new { id = form.ID }, form);
+        //}
 
         // DELETE: api/Forms/5
         [ResponseType(typeof(Form))]

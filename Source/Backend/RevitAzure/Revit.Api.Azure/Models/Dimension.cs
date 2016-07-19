@@ -20,11 +20,8 @@ namespace Revit.Api.Azure.Models
         public string code { get; set; }
 
         public string name_FR { get; set; }
-    
-        public string name_NL { get; set; }
-    
-        public string name_EN { get; set; }
-        
+        public string name_NL { get; set; }    
+        public string name_EN { get; set; }        
         public string name_DE { get; set; }
 
         public string description_FR { get; set; }

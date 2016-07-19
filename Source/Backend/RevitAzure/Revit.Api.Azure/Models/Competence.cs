@@ -13,21 +13,21 @@ namespace Revit.Api.Azure.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [JsonProperty(PropertyName="JuryId")]
+        //[JsonProperty(PropertyName="JuryId")]
         public int ID { get; set; }
 
         public string code { get; set; }
 
-        
-        public string name_FR { get; set; }
-       
+        //weight of the competence
+        public int weight { get; set; }
+
+        //name of the competence
+        public string name_FR { get; set; }       
         public string name_NL { get; set; }
-       
         public string name_EN { get; set; }
-       
         public string name_DE { get; set; }
 
-
+        //description of the competence
         public string description_FR { get; set; }
         public string description_NL { get; set; }
         public string description_EN { get; set; }

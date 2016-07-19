@@ -16,12 +16,13 @@ namespace Revit.Api.Azure.Models
         public int ID { get; set; }
 
         [Required]
-        public string FirstName { get; set; }
+        public string firstname { get; set; }
 
         [Required]
-        public string LastName { get; set; }
+        public string lastname { get; set; }
 
-        public virtual  ICollection<Screening> Screening { get; set; }
+        public virtual ICollection<Screening> Screening { get; set; }
+        public virtual ICollection<Form> Forms { get; set; }
 
 
 

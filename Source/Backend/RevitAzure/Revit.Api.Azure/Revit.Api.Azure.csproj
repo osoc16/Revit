@@ -187,13 +187,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201607172154037_InitialCreate.cs" />
-    <Compile Include="Migrations\201607172154037_InitialCreate.Designer.cs">
-      <DependentUpon>201607172154037_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201607172204049_DB-V0.1.cs" />
-    <Compile Include="Migrations\201607172204049_DB-V0.1.Designer.cs">
-      <DependentUpon>201607172204049_DB-V0.1.cs</DependentUpon>
+    <Compile Include="Migrations\201607191217018_Initial.cs" />
+    <Compile Include="Migrations\201607191217018_Initial.Designer.cs">
+      <DependentUpon>201607191217018_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Candidate.cs" />
@@ -203,6 +199,7 @@
     <Compile Include="Models\DtoClass.cs" />
     <Compile Include="Models\Form.cs" />
     <Compile Include="Models\Jury.cs" />
+    <Compile Include="Models\juryCandidateForm.cs" />
     <Compile Include="Models\Repositories\DimRepository.cs" />
     <Compile Include="Models\Repositories\Repository.cs" />
     <Compile Include="Models\Score.cs" />
@@ -222,11 +219,8 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201607172154037_InitialCreate.resx">
-      <DependentUpon>201607172154037_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201607172204049_DB-V0.1.resx">
-      <DependentUpon>201607172204049_DB-V0.1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201607191217018_Initial.resx">
+      <DependentUpon>201607191217018_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

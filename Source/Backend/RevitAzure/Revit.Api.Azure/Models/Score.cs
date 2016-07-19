@@ -12,8 +12,13 @@ namespace Revit.Api.Azure.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int id { get; set; }
+
+        //result based on score
         public int? result { get; set; }
+
+        //final result modified by the jury
         public int? finalResult { get; set; }
+
         public int? formId { get; set; }
         public int? dimensionId { get; set; }
         public int? competenceId { get; set; }
