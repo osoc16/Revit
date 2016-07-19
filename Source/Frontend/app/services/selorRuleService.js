@@ -2,43 +2,65 @@
 
     var selorRuleService = function($http, $log) {
 
+        //Get score suggestion for competence based on dimensions
         var getCompetenceScoreSuggestion = function(dimensions) {
 
-            return 1;
+            var dimensionScores = [];
+
+            for (var i = 0, len = dimensions.length; i < len; i++) {
+                if (isNaN(dimensions[i].score)) {
+                    dimensionScores.push(null);
+                } else {
+                    dimensionScores.push(dimensions[i].score);
+                }
+            }
+
+            return getScoreSuggestion(dimensionScores);
 
         };
 
-
+        //Get score suggestion for form based on competences
         var getFormScoreSuggestion = function(competences) {
 
-            return 1;
+            var competenceScores = [];
+
+            for (var i = 0, len = competences.length; i < len; i++) {
+                if (isNaN(competences[i].score)) {
+                    competenceScores.push(null);
+                } else {
+                    competenceScores.push(competences[i].score);
+                }
+            }
+
+            return getScoreSuggestion(competenceScores);
         }
 
+        //Get score suggestion for array of scores
         var getScoreSuggestion = function(scores) {
-                 $log.info("========================");
+            $log.info("========================");
             $log.info("scores:");
 
             $log.info(scores);
 
-            var scoreNotRounded = calculateAverage([calculateMinMax(scores).min,calculateMinMax(scores).max]);
-             $log.info("scoreNotRounded: "+ scoreNotRounded);
+            var scoreNotRounded = calculateAverage([calculateMinMax(scores).min, calculateMinMax(scores).max]);
+            $log.info("scoreNotRounded: " + scoreNotRounded);
 
-             var rankMin=  getScoreMinSuggestion(scores);
-             var rankMax= getScoreMaxSuggestion(scores);
-             $log.info("========================");
+            var rankMin = getScoreMinSuggestion(scores);
+            var rankMax = getScoreMaxSuggestion(scores);
+            $log.info("========================");
 
             return {
-                score: Math.floor((rankMax+rankMin)/2),
-                minScore:rankMin,
+                score: Math.floor((rankMax + rankMin) / 2),
+                minScore: rankMin,
                 maxScore: rankMax
             };
 
         };
 
-       //Get score min suggestion
+        //Get score min suggestion
         var getScoreMinSuggestion = function(scores) {
 
-                   $log.info("------------------");
+            $log.info("------------------");
 
             $log.info("ScoreMin Processing");
 
@@ -51,8 +73,7 @@
             //Replace NAs with '1'
             for (var i = 0; i < scores.length; i++) {
 
-                if (scores[i] == null) {
-
+                if (scores[i] == null|| isNaN(scores[i])){
                     scoresNA1[i] = 1;
                     NbNA++;
                 } else {
@@ -92,7 +113,7 @@
 
             $log.info("ScoreMin Done");
 
-                   $log.info("------------------");
+            $log.info("------------------");
 
             return minRounded;
 
@@ -101,7 +122,7 @@
         //Get score max suggestion
         var getScoreMaxSuggestion = function(scores) {
 
-             $log.info("------------------");
+            $log.info("------------------");
 
             $log.info("ScoreMax Processing");
 
@@ -118,7 +139,7 @@
             //Fill scores w/o NA
             for (var i = 0; i < scores.length; i++) {
 
-                if (scores[i] == null) {
+                if (scores[i] == null|| isNaN(scores[i])) {
                     NbNA++;
                 } else {
                     scoresWithoutNA.push(scores[i]);
@@ -149,7 +170,7 @@
             $log.info("maxRounded" + maxRounded);
 
             $log.info("ScoreMax Done");
-                   $log.info("------------------");
+            $log.info("------------------");
 
             return maxRounded;
         };
@@ -172,17 +193,17 @@
         //Calculate difference between min and max value in array
         var calculateEtendue = function(array) {
 
-            var minmax=calculateMinMax(array);
+            var minmax = calculateMinMax(array);
 
-            minVal=minmax.min;
+            minVal = minmax.min;
 
-            maxVal= minmax.max;
+            maxVal = minmax.max;
 
             return maxVal - minVal;
         }
 
         //Get min and max value from array
-        var calculateMinMax=function(array){
+        var calculateMinMax = function(array) {
 
             var minVal = array[0];
             var maxVal = array[0];
@@ -198,7 +219,10 @@
 
             }
 
-            return {min:minVal,max:maxVal};
+            return {
+                min: minVal,
+                max: maxVal
+            };
         }
 
         return {

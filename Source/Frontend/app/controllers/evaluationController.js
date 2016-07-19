@@ -50,7 +50,9 @@
 
         $scope.competenceEvaluated=function(){
 
-            $scope.form.score=selorRuleService.getFormScoreSuggestion($scope.form.competences);
+
+            var suggestion= selorRuleService.getFormScoreSuggestion($scope.form.competences)
+            $scope.form.score=suggestion.score;
 
             $log.info("comp eval");
 
@@ -59,7 +61,9 @@
 
         $scope.dimensionEvaluated=function(){
 
-            $scope.form.competences[$scope.currentCompetenceIndex].score=selorRuleService.getCompetenceScoreSuggestion($scope.form.competences[$scope.currentCompetenceIndex].dimensions);
+            var suggestion=selorRuleService.getCompetenceScoreSuggestion($scope.form.competences[$scope.currentCompetenceIndex].dimensions);
+
+            $scope.form.competences[$scope.currentCompetenceIndex].score=suggestion.score;
 
         }
 
