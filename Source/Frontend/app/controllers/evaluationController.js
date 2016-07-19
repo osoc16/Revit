@@ -2,7 +2,7 @@
 
     var app = angular.module("RevitApp");
 
-    var EvaluationController = function($scope, $location, revitService,selorRuleService, $log) {
+    var EvaluationController = function($scope, $location, revitService, selorRuleService, $log) {
 
         //Get form from service
         $scope.form = revitService.getForm();
@@ -23,11 +23,19 @@
 
         $scope.toggleEditMode = function() {
 
+
             //Invert edit mode
             $scope.competenceEditMode = $scope.competenceEditMode === false ? true : false;
             display();
 
-             $scope.$broadcast('rzSliderForceRender');
+
+            if ($scope.competenceEditMode == false) {
+                var suggestion = selorRuleService.getFormScoreSuggestion($scope.form.competences);
+                $scope.form.score = suggestion.score;
+            }
+
+
+            $scope.$broadcast('rzSliderForceRender');
         };
 
         var display = function() {
@@ -48,22 +56,22 @@
             revitService.saveForm($scope.form);
         }
 
-        $scope.competenceEvaluated=function(){
+        $scope.competenceEvaluated = function() {
 
 
-            var suggestion= selorRuleService.getFormScoreSuggestion($scope.form.competences)
-            $scope.form.score=suggestion.score;
+            var suggestion = selorRuleService.getFormScoreSuggestion($scope.form.competences);
+            $scope.form.score = suggestion.score;
 
             $log.info("comp eval");
 
         }
 
 
-        $scope.dimensionEvaluated=function(){
+        $scope.dimensionEvaluated = function() {
 
-            var suggestion=selorRuleService.getCompetenceScoreSuggestion($scope.form.competences[$scope.currentCompetenceIndex].dimensions);
+            var suggestion = selorRuleService.getCompetenceScoreSuggestion($scope.form.competences[$scope.currentCompetenceIndex].dimensions);
 
-            $scope.form.competences[$scope.currentCompetenceIndex].score=suggestion.score;
+            $scope.form.competences[$scope.currentCompetenceIndex].score = suggestion.score;
 
         }
 

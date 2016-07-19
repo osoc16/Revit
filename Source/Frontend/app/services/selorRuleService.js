@@ -73,7 +73,7 @@
             //Replace NAs with '1'
             for (var i = 0; i < scores.length; i++) {
 
-                if (scores[i] == null|| isNaN(scores[i])){
+                if (isNaN(scores[i])){
                     scoresNA1[i] = 1;
                     NbNA++;
                 } else {
@@ -139,7 +139,7 @@
             //Fill scores w/o NA
             for (var i = 0; i < scores.length; i++) {
 
-                if (scores[i] == null|| isNaN(scores[i])) {
+                if (isNaN(scores[i])) {
                     NbNA++;
                 } else {
                     scoresWithoutNA.push(scores[i]);
