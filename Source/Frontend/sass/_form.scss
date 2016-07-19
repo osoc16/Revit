@@ -1,0 +1,43 @@
+.form-page-content {
+
+
+
+    .competence-card,.dimension-card{
+        border-top: 0.3rem solid;
+        border-color: $primary-color;
+
+        .card-title {
+            font-weight: 400;
+        }
+
+        .delete-competence-btn{
+
+			margin-right:0.5rem;
+
+        }
+
+    }
+
+
+	.add-competence{
+
+		background:$primary-color;
+	}
+
+
+	.delete-dimension-button{
+        background-color:$error-color;
+		margin-right:0.5rem;
+		margin-top:0.5rem;
+	}
+
+
+
+
+
+
+
+
+
+
+}

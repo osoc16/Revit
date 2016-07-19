@@ -22,7 +22,142 @@
 
 
 
+
+
         /*Functions*/
+
+        var getGeneralForm = function(formId) {
+
+            return {
+                name: "Test eval form",
+
+                description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi odio, amet doloremque animi id ex autem inventore delectus consectetur ipsam, asperiores fugiat nam magnam fugit. Commodi, pariatur odio voluptas eum.",
+                scoreMax: 6,
+                scoreMin: 0,
+
+                total: 6,
+                score: 0,
+
+                finalScore: 50,
+                finalScoreMax: 100,
+                finalScoreMin: 0,
+
+                competences: [{
+                        name: "Competence 1",
+                        competenceId: 1,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, explicabo fuga quibusdam ex, blanditiis ea magni minima tempora at totam sit. Repellendus similique iusto cum officiis quibusdam facilis quaerat, enim?",
+                        status: "success",
+                        statusMessage: "Completed",
+                        comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex officiis a",
+                        dimensions: [{
+                            name: "Dimension 1.1 ",
+
+                            dimensionId: 1,
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
+
+                        }, {
+                            name: "Dimension 1.2 ",
+                            dimensionId: 2,
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint."
+
+
+                        }]
+
+                    }, {
+                        name: "Competence 2",
+                        competenceId: 2,
+                        score: 3,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a.",
+                        status: "warning",
+                        statusMessage: "No comment written",
+                        dimensions: [{
+                            name: "Dimension 1.1 ",
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
+
+
+                        }, {
+                            name: "Dimension 1.2 ",
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
+
+
+                        }, {
+                            name: "Dimension 1.3 ",
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
+
+
+
+                        }, {
+                            name: "Dimension 1.4 ",
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
+
+
+
+                        }]
+
+                    }
+
+                    , {
+                        name: "Competence 3",
+                        competenceId: 3,
+
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
+
+                    }, {
+                        name: "Competence 4",
+                        competenceId: 4,
+
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
+                    }, {
+                        name: "Competence 5",
+                        competenceId: 5,
+
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
+                    }, {
+                        name: "Competence 6",
+                        competenceId: 6,
+                        description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
+                    }
+                ],
+
+                candidates: [
+
+                    {
+                        name: "Sarah Van de Velde",
+                        candidateId: 2
+                    }, {
+                        name: "Peter Janssens",
+                        candidateId: 3
+                    },
+
+                    {
+                        name: "Jan Pieters",
+                        candidateId: 4
+                    }
+
+                ],
+                juries: [
+
+                    {
+                        name: "Jennifer Van de Velde",
+                        candidateId: 2
+                    }, {
+                        name: "Peter Janssens",
+                        candidateId: 3
+                    },
+
+                    {
+                        name: "Tom Pieters",
+                        candidateId: 4
+                    }
+
+                ],
+
+            };
+
+        }
+
+
+
         var getForm = function(formId, juryId, candidateId) {
 
             return {
@@ -172,18 +307,14 @@
 
         }
 
-        var saveForm = function(form) {
-
-        };
-
-
 
 
 
         //Service API return
         return {
-            getForm: getForm,
-            saveForm: saveForm
+
+            getGeneralForm: getGeneralForm,
+            getForm: getForm
         };
 
     };

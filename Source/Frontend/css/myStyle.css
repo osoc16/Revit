@@ -6284,3 +6284,19 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     position: absolute;
     top: 1rem;
     right: 1rem; }
+
+.form-page-content .competence-card, .form-page-content .dimension-card {
+  border-top: 0.3rem solid;
+  border-color: #03a9f4; }
+  .form-page-content .competence-card .card-title, .form-page-content .dimension-card .card-title {
+    font-weight: 400; }
+  .form-page-content .competence-card .delete-competence-btn, .form-page-content .dimension-card .delete-competence-btn {
+    margin-right: 0.5rem; }
+
+.form-page-content .add-competence {
+  background: #03a9f4; }
+
+.form-page-content .delete-dimension-button {
+  background-color: #F44336;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem; }
