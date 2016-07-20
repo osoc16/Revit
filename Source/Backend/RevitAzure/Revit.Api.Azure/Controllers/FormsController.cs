@@ -196,6 +196,8 @@ namespace Revit.Api.Azure.Controllers
             formDb.description_FR = formNew.description_FR;
             formDb.description_NL = formNew.description_NL;
             formDb.description_DE = formNew.description_DE;
+            formDb.finalScoreMax = formNew.finalScoreMax;
+            formDb.finalScoreMin = formNew.finalScoreMin;
 
             //competence region
             #region competences
@@ -265,6 +267,30 @@ namespace Revit.Api.Azure.Controllers
             #endregion
 
             }
+
+            //jury region
+            #region jury
+            if (formNew.juryList != null)
+                foreach (var jury in formNew.juryList)
+                {
+                    Jury juryDb = db.Juries.Find(jury.juryId);
+                    if (formDb.Juries == null)
+                    {
+                        formDb.Juries = new List<Jury>();
+                    }
+                    if (juryDb == null)
+                    {
+                        juryDb = new Jury();
+                        juryDb.lastname = jury.lastname;
+                        juryDb.firstname = jury.firstname;
+
+                        formDb.Juries.Add(juryDb);
+                    }
+                    if (formDb.Juries.Contains(juryDb) == false)
+                        formDb.Juries.Add(juryDb);
+                }
+            #endregion
+
             //candidate region
             #region candidates
             if (formNew.candidateList == null)
@@ -278,6 +304,11 @@ namespace Revit.Api.Azure.Controllers
                     canDb = new Candidate();
                     canDb.lastname = candi.lastname;
                     canDb.firstname = candi.firstname;
+
+                    db.Candidates.Add(canDb);
+                    db.SaveChanges();
+                    canDb = db.Candidates.Where(c=> c.lastname==canDb.lastname).Where(c => c.firstname == canDb.firstname).Last();
+                    
                 }
 
                 
@@ -295,26 +326,28 @@ namespace Revit.Api.Azure.Controllers
                     formDb.Candidates = new List<Candidate>();
                 formDb.Candidates.Add(canDb);
             }
-            #endregion
 
-            //jury region
-            #region jury
-            if (formNew.juryList != null)
-            foreach (var jury in formNew.juryList)
+            db.Forms.Add(formDb);
+            db.SaveChanges();
+            formDb = db.Forms.Where(f=> f.Name==formDb.Name).Last();
+
+            foreach (var candi in formNew.candidateList)
             {
-                    Jury juryDb = db.Juries.Find(jury.juryId);
+                Candidate canDb = db.Candidates.Find(candi.candidateID);
 
-                    if (juryDb == null)
+                if (candi.juries != null)
+                    foreach (var jur in candi.juries)
                     {
-                        juryDb = new Jury();
-                        juryDb.lastname = jury.lastname;
-                        juryDb.firstname = jury.firstname;
-                        formDb.Juries.Add(juryDb);
+                        juryCandidateForm JCF = new juryCandidateForm();
+                        JCF.candidate_ID = candi.candidateID;
+                        JCF.form_ID = formDb.ID;
+                        JCF.jury_ID = jur.juryId;
+                        db.JuryCandidateForms.Add(JCF);
                     }
+
             }
             #endregion
 
-            db.Forms.Add(formDb);
             db.SaveChanges();
 
             return CreatedAtRoute("DefaultApi", new { id = formDb.ID }, formDb);

@@ -23,6 +23,29 @@ namespace Revit.Api.Azure.Controllers
         }
 
         // GET: api/Juries/5
+        [ResponseType(typeof(DtoJury[]))]
+        public IHttpActionResult GetJury(string search)
+        {
+            ICollection<Jury> juries = db.Juries.Where(j => j.firstname.Contains(search)|| j.lastname .Contains(search)).ToList() ;
+            ICollection<DtoJury> juriesToSend = new List<DtoJury>();
+            if (juries == null)
+            {
+                return NotFound();
+            }
+            foreach (var jury in juries)
+            {
+                DtoJury tempJury = new DtoJury();
+                tempJury.juryId = jury.ID;
+                tempJury.name = jury.lastname + " " + jury.firstname;
+                tempJury.firstname = jury.firstname;
+                tempJury.lastname = jury.lastname;
+                juriesToSend.Add(tempJury);
+            }
+            return Ok(juriesToSend);
+        }
+
+
+        // GET: api/Juries/5
         [ResponseType(typeof(Jury))]
         public IHttpActionResult GetJury(int id)
         {
