@@ -122,15 +122,17 @@
                 candidates: [
 
                     {
-                        name: "Sarah Van de Velde",
+                        firstName: "Sarah",
+                        lastName:"Van de Velde",
                         candidateId: 2
                     }, {
-                        name: "Peter Janssens",
+                        firstName: "Peter Janssens",
                         candidateId: 3
                     },
 
                     {
-                        name: "Jan Pieters",
+                        firstName: "Jan",
+                        lastName:"Van de Velde",
                         candidateId: 4
                     }
 
@@ -138,16 +140,21 @@
                 juries: [
 
                     {
-                        name: "Jennifer Van de Velde",
-                        candidateId: 2
+                        firstName: "Jennifer",
+
+                        lastName:"De Groote",
+                        juryId: 2
                     }, {
-                        name: "Peter Janssens",
-                        candidateId: 3
+                        firstName: "Peter",
+
+                        lastName:"Janssens",
+                        juryId: 3
                     },
 
                     {
-                        name: "Tom Pieters",
-                        candidateId: 4
+                        firstName: "Tom",
+                        lastName:"Pieters",
+                        juryId: 4
                     }
 
                 ],

@@ -37,10 +37,32 @@
 
         //Get score suggestion for array of scores
         var getScoreSuggestion = function(scores) {
+
             $log.info("========================");
             $log.info("scores:");
-
             $log.info(scores);
+
+
+            var allNA = true;
+            //Fill scores w/o NA
+            for (var i = 0; i < scores.length; i++) {
+
+                if (!isNaN(scores[i])) {
+                    allNA = false;
+                    break;
+                }
+
+            }
+            //If all NA , return NA
+            if (allNA) {
+                $log.info("All Score NA");
+                return {
+                    score: null,
+                    minScore: null,
+                    maxScore: null
+                };
+
+            }
 
             var scoreNotRounded = calculateAverage([calculateMinMax(scores).min, calculateMinMax(scores).max]);
             $log.info("scoreNotRounded: " + scoreNotRounded);
@@ -60,6 +82,13 @@
         //Get score min suggestion
         var getScoreMinSuggestion = function(scores) {
 
+
+
+
+
+
+
+
             $log.info("------------------");
 
             $log.info("ScoreMin Processing");
@@ -73,7 +102,7 @@
             //Replace NAs with '1'
             for (var i = 0; i < scores.length; i++) {
 
-                if (isNaN(scores[i])){
+                if (isNaN(scores[i])) {
                     scoresNA1[i] = 1;
                     NbNA++;
                 } else {

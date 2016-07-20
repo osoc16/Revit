@@ -1,5 +1,14 @@
 <div class="form-page-content">
-	<!-- Page Content Title -->
+	<div class="row">
+		<div class="col s12">
+			<ul class="tabs">
+				<li class="tab col s6 m3"><a class="active" href="#test1">Form</a></li>
+				<li class="tab col s6 m3"><a  href="#test2">Competences</a></li>
+				<li class="tab col s6 m3 "><a href="#test3">Jury &amp; Candidates</a></li>
+				<li class="tab col s6 m3"><a href="#test4">Assignments</a></li>
+			</ul>
+		</div>
+		<div id="test1" class="col s12">	<!-- Form Creation Start -->
 	<div ng-hide="competenceEditMode">
 		<div class="row" >
 			<div class="col m12 l6 s12">
@@ -13,6 +22,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- Form Creation End --></div>
+		<div id="test2" class="col s12">	<!-- Form Competences Overview Start -->
 	<div ng-hide="competenceEditMode">
 		<div class="divider"></div>
 		<div class="row" >
@@ -34,6 +45,8 @@
 			</div>
 		</div>
 	</div>
+	<!-- Form Competences Overview End -->
+	<!-- Form Competence Edit Start -->
 	<div ng-show="competenceEditMode">
 		<div class="divider"></div>
 		<div class=" row">
@@ -73,23 +86,74 @@
 		</div>
 		<a ng-click="addDimension()" class=" add-dimension-button waves-effect waves-light btn"><i class="material-icons left">add</i>Add Dimension</a>
 	</div>
+	<!-- Form Competence Edit End --></div>
+		<div id="test3" class="col s12">
+
 	<div ng-hide="competenceEditMode">
 		<div class="divider"></div>
 		<div class="row" >
 			<div class="col m12 l6 s12">
 				<h4 class="page-title valign">Candidates</h4>
 				
-				<div ng-repeat="candidate in form.candidates"class="chip">
-					{{ candidate.name }}
-					<i class="material-icons">close</i>
-				</div>
-								
+				<ul class="collection">
+					
+					<li class="collection-item" ng-repeat="candidate in form.candidates  | orderBy:'firstName'">
+						{{ candidate.firstName }} {{ candidate.lastName }}
+						<i ng-click="deleteCandidate($index)" class="material-icons right">close</i>
+					</li>
+					<li class="collection-item">
+						<div class="input-field col s5">
+							<input ng-model="newCandidate.firstName" placeholder="Firstname" id="new-candidate-firstname" type="text" class="validate new-candidate-input">
+							
+						</div>
+						<div class="input-field col s5">
+							<input ng-model="newCandidate.lastName" placeholder="Lastname" id="new-candidate-lastname" type="text" class="validate new-candidate-input">
+							
+						</div>
+						<div ng-click="addCandidate(newCandidate.firstName, newCandidate.lastName)" class="valign-center" ><i class="material-icons right"> add</i></div>
+						
+					</li>
+				</ul>
+				
 			</div>
 			<div class="col m12 l6 s12">
 				<h4 class="page-title valign">Judges</h4>
+				<ul class="collection">
+					
+					<li class="collection-item" ng-repeat="jury in form.juries | orderBy:'firstName'">
+						{{ jury.firstName }} {{ jury.lastName }}
+						<i ng-click="deleteJury($index)" class="material-icons right">close</i>
+					</li>
+					<li class="collection-item">
+						<div class="input-field col s5">
+							<input ng-model="newJury.firstName" placeholder="Firstname" id="new-jury-firstname" type="text" class="validate new-jury-input">
+							
+						</div>
+						<div class="input-field col s5">
+							<input ng-model="newJury.lastName" placeholder="Lastname" id="new-jury-lastname" type="text" class="validate new-jury-input">
+							
+						</div>
+						
+						
+						<div class="add-jury" ng-click="addJury(newJury.firstName, newJury.lastName)"  ><i class="material-icons right"> add</i></div>
+						
+					</li>
+				</ul>
 			</div>
 		</div>
 	</div>
+	</div>
+		<div id="test4" class="col s12">
+	<div ng-hide="competenceEditMode">
+		<div class="divider"></div>
+		<div class="row">
+			<h4 class="page-title">Candidate Assignment</h4>
+		</div>
+	</div></div>
+	</div>
+	
+	<!-- Page Content Title -->
+
 </div>
 <script>
 	
@@ -98,5 +162,8 @@ $(document).ready(function() {
 });
 $(document).ready(function(){
 $('.tooltipped').tooltip({delay: 50});
+});
+$(document).ready(function(){
+$('ul.tabs').tabs();
 });
 </script>

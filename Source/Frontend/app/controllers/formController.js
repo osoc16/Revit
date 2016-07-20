@@ -28,12 +28,47 @@
             $(document).ready(function() {
                 Materialize.updateTextFields();
             });
-
-
-
-
-
         }
+
+
+        $scope.deleteJury = function(juryIndex) {
+            $scope.form.juries.splice(juryIndex, 1);
+        }
+
+        $scope.deleteCandidate = function(candidateIndex) {
+            $scope.form.candidates.splice(candidateIndex, 1);
+        }
+
+
+        $scope.addCandidate = function(firstName, lastName) {
+
+            if (!firstName || !lastName) {
+                return;
+            }
+
+            $scope.form.candidates.push({
+                firstName: firstName,
+                lastName: lastName
+            });
+
+            $(".new-candidate-input").val("");
+        }
+
+
+        $scope.addJury = function(firstName, lastName) {
+
+            if (!firstName || !lastName) {
+                return;
+            }
+
+            $scope.form.juries.push({
+                firstName: firstName,
+                lastName: lastName
+            });
+
+            $(".new-jury-input").val("");
+        }
+
 
 
         $scope.addCompetence = function() {
@@ -48,28 +83,28 @@
             $scope.form.competences.push(newCompetence);
 
 
-            $scope.editCompetence($scope.form.competences.length-1);
+            $scope.editCompetence($scope.form.competences.length - 1);
 
 
-            $scope.competenceEditMode=true;
+            $scope.competenceEditMode = true;
 
         }
 
 
-        $scope.addDimension=function(){
+        $scope.addDimension = function() {
 
-        		var newDimension= {
-        				name:"New Dimension",
-        				description:""
-        		};
+            var newDimension = {
+                name: "New Dimension",
+                description: ""
+            };
 
-        		$scope.form.competences[$scope.currentCompetenceIndex].dimensions.push(newDimension);
+            $scope.form.competences[$scope.currentCompetenceIndex].dimensions.push(newDimension);
         }
 
-        $scope.deleteDimension=function(dimensionIndex){
+        $scope.deleteDimension = function(dimensionIndex) {
 
 
-        	$scope.form.competences[$scope.currentCompetenceIndex].dimensions.splice(dimensionIndex,1);
+            $scope.form.competences[$scope.currentCompetenceIndex].dimensions.splice(dimensionIndex, 1);
 
         }
     }
