@@ -35,14 +35,15 @@ namespace Revit.Api.Azure.Controllers
             }
 
             //return Ok(form);
-            DtoCandidate cand = new DtoCandidate();
-            cand.candidateID = candidate.ID;
-            cand.name= candidate.lastname + " " + candidate.firstname;
+
             DtoForm result = new DtoForm();
+
+            result.candidate = candidate.ToDto();
             result.competencesList = new List<DtoCompetence>();
             result.candidateList = new List<DtoCandidate>();
             result.formID = form.ID;
             result.name =form.name;
+
             if (form.Scores.Count>0)
             {
                 result.score = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId).result;
@@ -62,9 +63,10 @@ namespace Revit.Api.Azure.Controllers
             {
                 result.total = null;
             }
-            result.candidate = cand;
+
             foreach (var compet in form.Competences)
             {
+
                 DtoCompetence compToAdd = new DtoCompetence();
                 compToAdd.dimensions = new List<DtoDimension>();
                 compToAdd.competenceID = compet.ID;
@@ -116,54 +118,18 @@ namespace Revit.Api.Azure.Controllers
                 foreach (var dim in compet.Dimensions)
                 {
                     DtoDimension dimToAdd = new DtoDimension();
-                    dimToAdd.dimensionID = dim.ID;
+                    dimToAdd = dim.ToDto();
+
                     if (dim.Scores.Count>0)
                     {
                         dimToAdd.score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID).result;
                     }
-                            if(dimToAdd.score==null)
-                                dimToAdd.notObserved = true;
+                        if(dimToAdd.score==null)
+                            dimToAdd.notObserved = true;
 
-                            switch (language)
-                            {
-                                case "en":
-                                    {
-                                        dimToAdd.name = dim.name_EN;
-                                        dimToAdd.description = dim.description_EN;
-
-                                        break;
-                                    }
-                                case "fr":
-                                    {
-                                        dimToAdd.name = dim.name_FR;
-                                        dimToAdd.description = dim.description_FR;
-
-                                        break;
-                                    }
-                                case "nl":
-                                    {
-                                        dimToAdd.name = dim.name_NL;
-                                        dimToAdd.description = dim.description_NL;
-
-                                        break;
-                                    }
-                                case "de":
-                                    {
-                                        dimToAdd.name = dim.name_DE;
-                                        dimToAdd.description = dim.description_DE;
-
-                                        break;
-                                    }
-                                default:
-                                    {
-                                        dimToAdd.name = dim.name_EN;
-                                        dimToAdd.description = dim.description_EN;
-
-                                        break;
-                                    }
-                            }
-                            compToAdd.dimensions.Add(dimToAdd);
-                        }
+                        
+                        compToAdd.dimensions.Add(dimToAdd);
+                }
 
                 
                 result.competencesList.Add(compToAdd);
@@ -189,15 +155,7 @@ namespace Revit.Api.Azure.Controllers
 
                 return BadRequest(ModelState);
             }
-
-            formDb.name = formNew.name;
-
-            formDb.description_EN = formNew.description_EN;
-            formDb.description_FR = formNew.description_FR;
-            formDb.description_NL = formNew.description_NL;
-            formDb.description_DE = formNew.description_DE;
-            formDb.finalScoreMax = formNew.finalScoreMax;
-            formDb.finalScoreMin = formNew.finalScoreMin;
+            formDb = formNew.ToEntity(false);
 
             //competence region
             #region competences
@@ -205,37 +163,15 @@ namespace Revit.Api.Azure.Controllers
             {
                 Competence compDb = db.Competences.Find(comp.competenceID);
 
+
                 if (compDb == null)
                 {
                     compDb = new Competence();
 
-                    compDb.status = comp.status;
-                    compDb.code = comp.code;
-
-                    compDb.name_EN = comp.name_EN;
-                    compDb.name_FR = comp.name_FR;
-                    compDb.name_NL = comp.name_NL;
-                    compDb.name_DE = comp.name_DE;
-
-                    compDb.description_EN = comp.description_EN;
-                    compDb.description_FR = comp.description_FR;
-                    compDb.description_NL = comp.description_NL;
-                    compDb.description_DE = comp.description_DE;
-
-                    compDb.statusMessage_EN = comp.statusMessage_EN;
-                    compDb.statusMessage_FR = comp.statusMessage_FR;
-                    compDb.statusMessage_DE = comp.statusMessage_DE;
-                    compDb.statusMessage_NL = comp.statusMessage_NL;
+                    compDb = comp.ToEntity(false);
 
                 }
-
-                if (compDb.Dimensions == null)
-                {
-                    compDb.Dimensions = new List<Dimension>();
-                }
-
-
-
+                
 
                 //dimension region
                 #region dimension
@@ -243,16 +179,11 @@ namespace Revit.Api.Azure.Controllers
                 {
                     Dimension dimDb = db.Dimensions.Find(dim.dimensionID);
 
-                    if (compDb == null)
+                    if (dimDb == null)
                     {
                         dimDb = new Dimension();
-                        dimDb.name_EN = dim.name_EN;
-                        dimDb.name_FR = dim.name_FR;
-                        dimDb.name_NL = dim.name_NL;
-                        dimDb.name_DE = dim.name_DE;
-                        dimDb.code = dim.code;
+                        dimDb = dim.ToEntity(); ;
                         compDb.Dimensions.Add(dimDb);
-
                     }
                     else if (compDb.Dimensions.Contains(dimDb) == false)
                     {
@@ -261,12 +192,11 @@ namespace Revit.Api.Azure.Controllers
                 }
                 #endregion
 
-                if (formDb.Competences == null)
-                    formDb.Competences = new List<Competence>();
                 formDb.Competences.Add(compDb);
-            #endregion
 
             }
+
+            #endregion
 
             //jury region
             #region jury
@@ -274,19 +204,15 @@ namespace Revit.Api.Azure.Controllers
                 foreach (var jury in formNew.juryList)
                 {
                     Jury juryDb = db.Juries.Find(jury.juryId);
-                    if (formDb.Juries == null)
-                    {
-                        formDb.Juries = new List<Jury>();
-                    }
+
                     if (juryDb == null)
                     {
                         juryDb = new Jury();
-                        juryDb.lastname = jury.lastname;
-                        juryDb.firstname = jury.firstname;
+                        juryDb= jury.ToEntity();
 
                         formDb.Juries.Add(juryDb);
                     }
-                    if (formDb.Juries.Contains(juryDb) == false)
+                    else if (formDb.Juries.Contains(juryDb) == false)
                         formDb.Juries.Add(juryDb);
                 }
             #endregion
@@ -302,15 +228,11 @@ namespace Revit.Api.Azure.Controllers
                 if (canDb == null)
                 {
                     canDb = new Candidate();
-                    canDb.lastname = candi.lastname;
-                    canDb.firstname = candi.firstname;
-
+                    canDb = candi.ToEntity();
                     db.Candidates.Add(canDb);
                     db.SaveChanges();
-                    canDb = db.Candidates.Where(c=> c.lastname==canDb.lastname).Where(c => c.firstname == canDb.firstname).Last();
-                    
+                    canDb = db.Candidates.Where(c=> c.lastname==canDb.lastname).Where(c => c.firstname == canDb.firstname).Last();                   
                 }
-
                 
                 if (candi.juries != null)
                     foreach (var jur in candi.juries)
@@ -352,6 +274,158 @@ namespace Revit.Api.Azure.Controllers
 
             return CreatedAtRoute("DefaultApi", new { id = formDb.ID }, formDb);
         }
+
+        //PUT: 
+        [ResponseType(typeof(Form))]
+        public IHttpActionResult Put(DtoForm formNew)
+        {
+            Form formDb = db.Forms.Find(formNew.formID);
+
+            if (formDb == null)        
+            {
+                formDb = new Form();
+
+                if (!ModelState.IsValid)
+                {
+
+                    return BadRequest(ModelState);
+                }
+            }
+            else
+            {
+                db.Entry(formDb).State = EntityState.Modified;
+            }
+            formDb = formNew.ToEntity(false);
+
+            //competence region
+            #region competences
+            foreach (var comp in formNew.competencesList)
+            {
+                Competence compDb = db.Competences.Find(comp.competenceID);
+
+
+                if (compDb == null)
+                {
+                    compDb = new Competence();
+
+                    compDb = comp.ToEntity(false);
+
+                }
+
+
+                //dimension region
+                #region dimension
+                foreach (var dim in comp.dimensions)
+                {
+                    Dimension dimDb = db.Dimensions.Find(dim.dimensionID);
+
+                    if (dimDb == null)
+                    {
+                        dimDb = new Dimension();
+                        dimDb = dim.ToEntity(); ;
+                        compDb.Dimensions.Add(dimDb);
+                    }
+                    else if (compDb.Dimensions.Contains(dimDb) == false)
+                    {
+                        compDb.Dimensions.Add(dimDb);
+                    }
+                }
+                #endregion
+
+                formDb.Competences.Add(compDb);
+
+            }
+
+            #endregion
+
+            //jury region
+            #region jury
+            if (formNew.juryList != null)
+                foreach (var jury in formNew.juryList)
+                {
+                    Jury juryDb = db.Juries.Find(jury.juryId);
+
+                    if (juryDb == null)
+                    {
+                        juryDb = new Jury();
+                        juryDb = jury.ToEntity();
+
+                        formDb.Juries.Add(juryDb);
+                    }
+                    else if (formDb.Juries.Contains(juryDb) == false)
+                        formDb.Juries.Add(juryDb);
+                }
+            #endregion
+
+            //candidate region
+            #region candidates
+            if (formNew.candidateList == null)
+                formNew.candidateList = new List<DtoCandidate>();
+            foreach (var candi in formNew.candidateList)
+            {
+                Candidate canDb = db.Candidates.Find(candi.candidateID);
+
+                if (canDb == null)
+                {
+                    canDb = new Candidate();
+                    canDb = candi.ToEntity();
+                    db.Candidates.Add(canDb);
+                    db.SaveChanges();
+                    canDb = db.Candidates.Where(c => c.lastname == canDb.lastname).Where(c => c.firstname == canDb.firstname).Last();
+                }
+
+                if (candi.juries != null)
+                    foreach (var jur in candi.juries)
+                    {
+                        juryCandidateForm JCF = new juryCandidateForm();
+                        JCF.candidate_ID = candi.candidateID;
+                        JCF.form_ID = formDb.ID;
+                        JCF.jury_ID = jur.juryId;
+                        db.JuryCandidateForms.Add(JCF);
+                    }
+
+                if (formDb.Candidates == null)
+                    formDb.Candidates = new List<Candidate>();
+                formDb.Candidates.Add(canDb);
+            }
+
+            db.Forms.Add(formDb);
+            db.SaveChanges();
+            formDb = db.Forms.Where(f => f.name == formDb.name).Last();
+
+            foreach (var candi in formNew.candidateList)
+            {
+                Candidate canDb = db.Candidates.Find(candi.candidateID);
+
+                if (candi.juries != null)
+                    foreach (var jur in candi.juries)
+                    {
+                        juryCandidateForm JCF = new juryCandidateForm();
+                        JCF.candidate_ID = candi.candidateID;
+                        JCF.form_ID = formDb.ID;
+                        JCF.jury_ID = jur.juryId;
+                        db.JuryCandidateForms.Add(JCF);
+                    }
+
+            }
+            #endregion
+
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = formDb.ID }, formDb);
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

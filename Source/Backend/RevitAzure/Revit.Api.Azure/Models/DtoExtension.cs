@@ -41,6 +41,11 @@ namespace Revit.Api.Azure.Models
             result.name_NL = source.name_NL;
             result.name_EN = source.name_EN;
 
+            foreach (var item in source.Scores)
+            {
+                result.scoresList.Add(item.ToDto());
+
+            }
             result.dimensionID = source.ID;
 
             switch (language)
@@ -84,7 +89,7 @@ namespace Revit.Api.Azure.Models
 
 
         #region Competence
-        public static Competence ToEntity(this DtoCompetence source)
+        public static Competence ToEntity(this DtoCompetence source, bool chain = true)
         {
             Competence result = new Competence();
 
@@ -105,11 +110,21 @@ namespace Revit.Api.Azure.Models
             result.code = source.code;
             result.comment = source.comment;
 
-
+            if (result.Dimensions == null)
+            {
+                result.Dimensions = new List<Dimension>();
+            }
+            if (chain == true)
+            {
+                foreach (var dim in source.dimensions)
+                {
+                    result.Dimensions.Add(dim.ToEntity());
+                }
+            }
             return result;
         }
 
-        public static DtoCompetence ToDto(this Competence source, String language = "EN")
+        public static DtoCompetence ToDto(this Competence source, String language = "EN", bool chain = true)
         {
 
             DtoCompetence result = new DtoCompetence();
@@ -168,10 +183,11 @@ namespace Revit.Api.Azure.Models
             {
                 result.dimensions = new List<DtoDimension>();
             }
-            foreach (var dim in source.Dimensions)
-            {
-                result.dimensions.Add(dim.ToDto());
-            }
+            if (chain == true)
+                foreach (var dim in source.Dimensions)
+                {
+                    result.dimensions.Add(dim.ToDto());
+                }
 
             return result;
         }
@@ -236,7 +252,7 @@ namespace Revit.Api.Azure.Models
 
 
         #region Form
-        public static Form ToEntity(this DtoForm source)
+        public static Form ToEntity(this DtoForm source, bool chain = true)
         {
             Form result = new Form();
 
@@ -258,42 +274,47 @@ namespace Revit.Api.Azure.Models
             {
                 result.Candidates = new List<Candidate>();
             }
-            if (source.candidateList != null)
-                foreach (var item in source.candidateList)
-                {
-
-                    result.Candidates.Add(item.ToEntity());
-                }
-
             if (result.Competences == null)
             {
                 result.Competences = new List<Competence>();
             }
-            if (source.competencesList != null)
-                foreach (var item in source.competencesList)
-                {
+            if (result.Juries == null)
+            {
+                result.Juries = new List<Jury>();
+            }
+            if (chain == true)
+            {
+                if (source.candidateList != null)
+                    foreach (var item in source.candidateList)
+                    {
+                        result.Candidates.Add(item.ToEntity());
+                    }
 
-                    result.Competences.Add(item.ToEntity());
-                }
+            
+                if (source.competencesList != null)
+                    foreach (var item in source.competencesList)
+                    {
+
+                        result.Competences.Add(item.ToEntity());
+                    }
+
+            
+                if (source.juryList != null)
+                    foreach (var item in source.juryList)
+                    {
+                        result.Juries.Add(item.ToEntity());
+                    }
+            }
+            
 
             result.finalScoreMax = source.finalScoreMax;
             result.finalScoreMin = source.finalScoreMin;
             result.MaxCandidates = source.maxCandidates;
 
-            if (result.Juries == null)
-            {
-                result.Juries = new List<Jury>();
-            }
-            if (source.juryList != null)
-                foreach (var item in source.juryList)
-                {
-                    result.Juries.Add(item.ToEntity());
-                }
-
             return result;
         }
 
-        public static DtoForm ToDto(this Form source, String language = "EN")
+        public static DtoForm ToDto(this Form source, bool chain = true, String language = "EN")
         {
             DtoForm result = new DtoForm();
 
@@ -343,42 +364,42 @@ namespace Revit.Api.Azure.Models
                     }
             }
 
-            if (result.candidateList==null)
-            {
-                result.candidateList = new List<DtoCandidate>();
-            }
-            if (source.Candidates != null)
-                foreach (var item in source.Candidates)
-                {
-
-                    result.candidateList.Add(item.ToDto());
-                }
-            
-            if (result.competencesList == null)
-            {
-                result.competencesList = new List<DtoCompetence>();
-            }
-            if (source.Competences != null)
-                foreach (var item in source.Competences)
-                {
-
-                    result.competencesList.Add(item.ToDto());
-                }
-
-            result.finalScoreMax = source.finalScoreMax;
-            result.finalScoreMin = source.finalScoreMin;
-            result.maxCandidates = source.MaxCandidates;
-
             if (result.juryList == null)
             {
                 result.juryList = new List<DtoJury>();
             }
+            if (result.candidateList==null)
+            {
+                result.candidateList = new List<DtoCandidate>();
+            }
+            if (result.competencesList == null)
+            {
+                result.competencesList = new List<DtoCompetence>();
+            }
+
+            if ( chain == true)
+            {
+                if (source.Candidates != null)
+                foreach (var item in source.Candidates)
+                {
+                    result.candidateList.Add(item.ToDto());
+                }
+            if (source.Competences != null)
+                foreach (var item in source.Competences)
+                {
+                    result.competencesList.Add(item.ToDto());
+                }
             if (source.Juries != null)
                 foreach (var item in source.Juries)
                 {
                     result.juryList.Add(item.ToDto());
                 }
-            
+            }
+
+            result.finalScoreMax = source.finalScoreMax;
+            result.finalScoreMin = source.finalScoreMin;
+            result.maxCandidates = source.MaxCandidates;
+
             return result;
         }
 
@@ -482,6 +503,41 @@ namespace Revit.Api.Azure.Models
 
 
 
+        #region Score
+        public static Score ToEntity(this DtoScore source)
+        {
+            Score result = new Score();
+            result.id = source.scoreId;
+            result.formId = source.formId;
+            result.juryId = source.juryId;
+            result.dimensionId = source.dimensionId;
+            result.competenceId = source.competenceId;
+            result.candidateId = source.candidateId;
+            result.finalResult = source.finalResult;
+            result.result = source.result;
+
+
+            return result;
+        }
+
+        public static DtoScore ToDto(this Score source)
+        {
+            DtoScore result = new DtoScore();
+            result.scoreId = source.id;
+            result.formId = source.formId;
+            result.juryId = source.juryId;
+            result.dimensionId = source.dimensionId;
+            result.competenceId = source.competenceId;
+            result.candidateId = source.candidateId;
+            result.finalResult = source.finalResult;
+            result.result = source.result;
+
+
+
+
+            return result;
+        }
+        #endregion
 
     }
 }
