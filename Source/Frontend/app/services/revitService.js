@@ -1,10 +1,14 @@
 (function() {
 
-    var revitService = function($http) {
+    var revitService = function($http, $log) {
+
+        var mockMode = false;
 
         /* Variables */
-        var apiBaseUrl = "";
+        var apiBaseUrl = "http://revitapiazure20160717113757.azurewebsites.net/api/";
 
+
+        http: //revitapiazure20160717113757.azurewebsites.net/api/form/juries/1/forms/2/candidates/1
         /*
       var getUser = function(username){
             return $http.get("https://api.github.com/users/" + username)
@@ -21,31 +25,88 @@
       };*/
 
 
-        var getScreenings= function(searchTerm){
+        //API Functions
+        //
+        //
+        //
+
+        var getEvaluationForm = function(formId, juryId, candidateId) {
+
+            $log.info("=========API CALL===========")
+            var callUrl = apiBaseUrl + "evaluations/juries/" + juryId + "/forms/" + formId + "/candidates/" + candidateId;
+            $log.info("Url: " + callUrl);
+
+            return $http.get(callUrl)
+                .then(function(response) {
+                    return response.data;
+                });
+
+        }
+
+        var saveEvaluationForm = function(formId, juryId, candidateId, form) {
+
+            $log.info("=========API CALL===========")
+            var callUrl = apiBaseUrl + "evaluations/juries/" + juryId + "/forms/" + formId + "/candidates/" + candidateId;
+            $log.info("Url: " + callUrl);
 
 
-            return [{
-
-                    screeningId:1,
-                    name:"Screening 1",
-                    
-
-
-
-            }
+            return $http.put(callUrl, form
+                .then(function(response) {
+                    return response.data;
+                }));
+        }
 
 
-            ];
+        var getGeneralForm = function(formId) {
+
+            $log.info("=========API CALL===========")
+            var callUrl = apiBaseUrl + "forms/" + formId;
+            $log.info("Url: " + callUrl);
+
+            return $http.get(callUrl)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        var getScreenings = function(searchTerm) {
+
+            $log.info("=========API CALL===========")
+            var callUrl = apiBaseUrl + "screenings/?search=" + searchTerm;
+            $log.info("Url: " + callUrl);
+
+            return $http.get(callUrl)
+                .then(function(response) {
+                    return response.data;
+                });
 
 
         }
 
 
-        /*Functions*/
 
-        var getGeneralForm = function(formId) {
+        //Mock API Functions
+        //
+        //
+        //
+        var getScreeningsMock = function(searchTerm) {
 
-            return {
+
+            return [{
+
+                    screeningId: 1,
+                    name: "Screening 1",
+
+
+
+
+                }
+
+
+            ];
+        }
+        var getGeneralFormMock = function(formId) {
+            var mockObject = {
                 name: "Test eval form",
 
                 description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi odio, amet doloremque animi id ex autem inventore delectus consectetur ipsam, asperiores fugiat nam magnam fugit. Commodi, pariatur odio voluptas eum.",
@@ -140,20 +201,20 @@
 
                     {
                         firstName: "Sarah",
-                        lastName:"Van de Velde",
+                        lastName: "Van de Velde",
                         candidateId: 2,
-                        juries:[]
+                        juries: []
                     }, {
                         firstName: "Peter Janssens",
                         candidateId: 3,
-                        juries:[]
+                        juries: []
                     },
 
                     {
                         firstName: "Jan",
-                        lastName:"Van de Velde",
+                        lastName: "Van de Velde",
                         candidateId: 4,
-                        juries:[]
+                        juries: []
                     }
 
                 ],
@@ -162,18 +223,18 @@
                     {
                         firstName: "Jennifer",
 
-                        lastName:"De Groote",
+                        lastName: "De Groote",
                         juryId: 2
                     }, {
                         firstName: "Peter",
 
-                        lastName:"Janssens",
+                        lastName: "Janssens",
                         juryId: 3
                     },
 
                     {
                         firstName: "Tom",
-                        lastName:"Pieters",
+                        lastName: "Pieters",
                         juryId: 4
                     }
 
@@ -181,13 +242,17 @@
 
             };
 
-        }
-
-
-
-        var getForm = function(formId, juryId, candidateId) {
-
             return {
+                then: function(callback) {
+                    return callback(mockObject);
+                }
+            }
+
+            return
+        }
+        var getEvaluationFormMock = function(formId, juryId, candidateId) {
+
+            var mockObject = {
                 name: "Test eval form",
 
                 description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi odio, amet doloremque animi id ex autem inventore delectus consectetur ipsam, asperiores fugiat nam magnam fugit. Commodi, pariatur odio voluptas eum.",
@@ -330,19 +395,42 @@
                     }
 
                 ]
-            };
+            }
 
+            return {
+                then: function(callback) {
+                    return callback(mockObject);
+                }
+
+            }
         }
 
 
+        if (mockMode) {
+
+            //Service API return
+            return {
+
+                getGeneralForm: getGeneralFormMock,
+                getEvaluationForm: getEvaluationFormMock,
+                getScreenings: getScreeningsMock
+            };
 
 
-        //Service API return
-        return {
+        } else {
 
-            getGeneralForm: getGeneralForm,
-            getForm: getForm
-        };
+            //Service API return
+            return {
+
+                getGeneralForm: getGeneralForm,
+                getEvaluationForm: getEvaluationForm,
+                getScreenings: getScreenings
+
+            };
+
+
+        }
+
 
     };
 

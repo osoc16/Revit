@@ -13,8 +13,8 @@
     <div class="col l6 s12 m12">
       <div class="input-field">
         <select>
-          <option selected>{{form.candidate.name}}</option>
-          <option ng-repeat="otherCandidate in form.candidates" value="{{otherCandidate.candidateId}}">{{ otherCandidate.name }}</option>
+         <!-- <option selected>{{form.candidate.name}}</option> -->
+          <option  ng-repeat="otherCandidate in form.candidates" ng-selected="otherCandidate.candidateId==form.candidate.candidateId"  value="{{otherCandidate.candidateId}}">{{ otherCandidate.name }}</option>
         </select>
       </div>
     </div>
