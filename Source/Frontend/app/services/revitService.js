@@ -2,28 +2,8 @@
 
     var revitService = function($http, $log) {
 
-        var mockMode = false;
-
         /* Variables */
         var apiBaseUrl = "http://revitapiazure20160717113757.azurewebsites.net/api/";
-
-
-        http: //revitapiazure20160717113757.azurewebsites.net/api/form/juries/1/forms/2/candidates/1
-        /*
-      var getUser = function(username){
-            return $http.get("https://api.github.com/users/" + username)
-                        .then(function(response){
-                           return response.data; 
-                        });
-      };
-      
-      var getRepos = function(user){
-            return $http.get(user.repos_url)  
-                        .then(function(response){
-                            return response.data;
-                        });
-      };*/
-
 
         //API Functions
         //
@@ -43,17 +23,16 @@
 
         }
 
-        var saveEvaluationForm = function(formId, juryId, candidateId, form) {
+        var saveEvaluationForm = function(formId, juryId, candidateId, data) {
 
             $log.info("=========API CALL===========")
             var callUrl = apiBaseUrl + "evaluations/juries/" + juryId + "/forms/" + formId + "/candidates/" + candidateId;
             $log.info("Url: " + callUrl);
 
 
-            return $http.put(callUrl, form
-                .then(function(response) {
-                    return response.data;
-                }));
+            return $http.put(callUrl, data).then(function(response) {
+                return response.data;
+            });
         }
 
 
@@ -69,8 +48,21 @@
                 });
         }
 
-        var getScreenings = function(searchTerm) {
 
+        var saveGeneralForm = function(formId, data) {
+
+
+            $log.info("=========API CALL===========")
+            var callUrl = apiBaseUrl + "forms/" + formId;
+            $log.info("Url: " + callUrl);
+
+            return $http.put(callUrl, data)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        var getScreenings = function(searchTerm) {
             $log.info("=========API CALL===========")
             var callUrl = apiBaseUrl + "screenings/?search=" + searchTerm;
             $log.info("Url: " + callUrl);
@@ -79,30 +71,18 @@
                 .then(function(response) {
                     return response.data;
                 });
-
-
         }
-
-
 
         //Mock API Functions
         //
         //
         //
         var getScreeningsMock = function(searchTerm) {
-
-
             return [{
 
                     screeningId: 1,
                     name: "Screening 1",
-
-
-
-
                 }
-
-
             ];
         }
         var getGeneralFormMock = function(formId) {
@@ -238,7 +218,6 @@
                     }
 
                 ],
-
             };
 
             return {
@@ -249,8 +228,8 @@
 
             return
         }
-        var getEvaluationFormMock = function(formId, juryId, candidateId) {
 
+        var getEvaluationFormMock = function(formId, juryId, candidateId) {
             var mockObject = {
                 name: "Test eval form",
 
@@ -355,26 +334,26 @@
                         competenceId: 3,
                         status: "neutral",
 
-                dimensions: [{
+                        dimensions: [{
                             name: "Dimension 1.1 ",
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
-                            score:null
+                            score: null
 
                         }, {
                             name: "Dimension 1.2 ",
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
-    score:null
+                            score: null
                         }, {
                             name: "Dimension 1.3 ",
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
 
-    score:null
+                            score: null
 
                         }, {
                             name: "Dimension 1.4 ",
                             description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
 
-    score:null
+                            score: null
 
                         }],
 
@@ -424,19 +403,42 @@
                 then: function(callback) {
                     return callback(mockObject);
                 }
+            }
+        }
+
+        var saveEvaluationFormMock = function(formId, juryId, candidateId, data) {
+
+            return {
+                then: function(callback) {
+                    return callback(null);
+                }
 
             }
         }
 
+        var saveGeneralFormMock = function(formId, data) {
+
+            return {
+                then: function(callback) {
+                    return callback(null);
+                }
+
+            }
+        }
+
+        var mockMode = false;
+
 
         if (mockMode) {
 
-            //Service API return
+            //MockService API return
             return {
 
                 getGeneralForm: getGeneralFormMock,
                 getEvaluationForm: getEvaluationFormMock,
-                getScreenings: getScreeningsMock
+                getScreenings: getScreeningsMock,
+                saveEvaluationForm: saveEvaluationFormMock,
+                saveGeneralForm: saveGeneralFormMock
             };
 
 
@@ -447,7 +449,9 @@
 
                 getGeneralForm: getGeneralForm,
                 getEvaluationForm: getEvaluationForm,
-                getScreenings: getScreenings
+                getScreenings: getScreenings,
+                saveEvaluationForm: saveEvaluationForm,
+                saveGeneralForm: saveGeneralForm
 
             };
 

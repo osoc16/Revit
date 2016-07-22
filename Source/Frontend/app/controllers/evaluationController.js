@@ -5,6 +5,7 @@
     var EvaluationController = function($scope, $routeParams, $location, revitService, github, selorRuleService, $log) {
 
 
+        var selectedCandidate=null;
 
         $scope.setCompetenceStatus = function(toUpdateCompetence) {
             if (isNaN(toUpdateCompetence.score)) {
@@ -72,10 +73,18 @@
 
         $scope.saveEvaluationForm = function() {
 
-            revitService.saveEvaluationForm($routeParams.formId, $routeParams.juryId, $routeParams.candidateId, $scope.form).then(onGetEvaluationForm, onApiCallError);
+            revitService.saveEvaluationForm($routeParams.formId, $routeParams.juryId, $routeParams.candidateId, $scope.form).then(onSaveEvaluationForm, onApiCallError);
 
         }
 
+
+
+        $scope.goToCandidateEvaluationPage=function(){
+
+
+                alert(selectedCandidate);
+
+        }
 
         //User interaction functions
         $scope.editCompetence = function(competenceId) {

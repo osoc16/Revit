@@ -9,6 +9,16 @@
         var onGetGeneralForm=function(data){
             $scope.form = data;
             $log.info(data);
+
+                    $(document).ready(function() {
+                $('select').material_select();
+            });
+        }
+
+        var onSaveGeneralForm=function(data){
+
+            $log.info("Form successfully saved");
+
         }
 
         var onApiCallError=function(reason){
@@ -21,6 +31,12 @@
 
         $scope.currentCompetenceIndex = null;
 
+
+        $scope.saveGeneralForm= function(){
+
+
+            revitService.saveGeneralForm($routeParams.formId)
+        }
 
 
         $scope.toggleCompetenceEditMode = function() {
