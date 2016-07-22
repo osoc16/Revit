@@ -4,15 +4,46 @@
 
     var EvaluationController = function($scope, $routeParams, $location, revitService, github, selorRuleService, $log) {
 
+
+
+        $scope.setCompetenceStatus = function(toUpdateCompetence) {
+            if (isNaN(toUpdateCompetence.score)) {
+
+                toUpdateCompetence.status = "neutral";
+                toUpdateCompetence.statusMessage = "Not evaluated";
+
+                return;
+
+            }
+
+            if(toUpdateCompetence.score=="null"){
+                toUpdateCompetence.score=null;
+            }
+
+            if (!toUpdateCompetence.comment) {
+
+                toUpdateCompetence.status = "warning";
+                toUpdateCompetence.statusMessage = "No comment written";
+                return;
+            }
+
+
+            toUpdateCompetence.status = "success";
+            toUpdateCompetence.statusMessage = "Evaluated";
+
+
+        }
+
         //API callback Functions
         var onGetEvaluationForm = function(data) {
 
+             $log.info("Evaulation form fethced:");
             $log.info(data);
             $scope.form = data;
 
             //Set status for each competence
             for (var i in $scope.form.competences) {
-                setCompetenceStatus($scope.form.competences[i]);
+                $scope.setCompetenceStatus($scope.form.competences[i]);
             }
 
 
@@ -93,31 +124,7 @@
             revitService.saveForm($scope.form);
         }
 
-        var setCompetenceStatus = function(toUpdateCompetence) {
-            if (isNaN(toUpdateCompetence.score)) {
 
-                toUpdateCompetence.status = "neutral";
-                toUpdateCompetence.statusMessage = "Not evaluated";
-
-                return;
-
-            }
-
-
-
-            if (!toUpdateCompetence.comment) {
-
-                toUpdateCompetence.status = "warning";
-                toUpdateCompetence.statusMessage = "No comment written";
-                return;
-            }
-
-
-            toUpdateCompetence.status = "success";
-            toUpdateCompetence.statusMessage = "Evaluated";
-
-
-        }
 
         $scope.competenceEvaluated = function() {
 
@@ -131,11 +138,15 @@
 
 
             /* VALIDATION */
+
+            
             var currentCompetence = $scope.form.competences[$scope.currentCompetenceIndex];
 
-            setCompetenceStatus(currentCompetence);
+            $scope.setCompetenceStatus(currentCompetence);
 
             $log.info("comp eval");
+
+
 
         }
 
