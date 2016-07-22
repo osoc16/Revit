@@ -4,7 +4,7 @@
 
     var EvaluationController = function($scope, $routeParams, $location, revitService, github, selorRuleService, $log) {
 
-        //Data Fetch Functions
+        //API callback Functions
         var onGetEvaluationForm = function(data) {
 
             $log.info(data);
@@ -22,6 +22,12 @@
 
         }
 
+        var onSaveEvaluationForm = function(data) {
+
+            $log.info("Form has been saved successfully");
+
+        }
+
         var onApiCallError = function(reason) {
             $scope.error = reason;
         }
@@ -31,6 +37,13 @@
 
         $scope.competenceEditMode = false;
         $scope.currentCompetenceIndex = null;
+
+
+        $scope.saveEvaluationForm = function() {
+
+            revitService.saveEvaluationForm($routeParams.formId, $routeParams.juryId, $routeParams.candidateId, $scope.form).then(onGetEvaluationForm, onApiCallError);
+
+        }
 
 
         //User interaction functions
