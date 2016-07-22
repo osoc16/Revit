@@ -6321,3 +6321,6 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .form-page-content .add-dimension-button {
   margin-bottom: 1rem;
   float: right; }
+
+.form-page-content .candidate-jury-chip {
+  margin-right: 1rem; }

@@ -114,7 +114,8 @@
 
         $scope.assignJury = function(juryIndex) {
 
-   
+            $('select').material_select();
+            
             var selectedJury = $scope.form.juries[juryIndex];
 
             var checkedCandidates = $(".assign-jury-checkbox:checked");
@@ -129,37 +130,58 @@
 
             for (var candidateCounter in checkedCandidatesIndices) {
 
-                    var candidate = $scope.form.candidates[checkedCandidatesIndices[candidateCounter]];
+                var candidate = $scope.form.candidates[checkedCandidatesIndices[candidateCounter]];
 
-                    var alreadyContainsJury = false;
+                var alreadyContainsJury = false;
 
-                    for (var candidateJuryCounter in candidate.juries) {
+                for (var candidateJuryCounter in candidate.juries) {
 
-                        if (selectedJury.juryId == candidate.juries[candidateJuryCounter].juryId) {
+                    if (selectedJury.juryId == candidate.juries[candidateJuryCounter].juryId) {
 
-                            $log.info("selectedJuryId"+selectedJury.juryId);
+                        $log.info("selectedJuryId" + selectedJury.juryId);
 
-                             $log.info("loopjury"+candidate.juries[candidateJuryCounter].juryId);
+                        $log.info("loopjury" + candidate.juries[candidateJuryCounter].juryId);
 
-                            alreadyContainsJury = true;
+                        alreadyContainsJury = true;
 
-                            $log.info("jury already added");
-                            break;
-                        }
-
+                        $log.info("jury already added");
+                        break;
                     }
 
-                    if (!alreadyContainsJury) {
+                }
 
-                        $log.info(candidate.firstName + " got jury " + selectedJury.firstName + " assigned");
-                        candidate.juries.push(selectedJury);
-                    }
+                if (!alreadyContainsJury) {
 
-            
+                    $log.info(candidate.firstName + " got jury " + selectedJury.firstName + " assigned");
+                    candidate.juries.push(selectedJury);
+                }
+
+
             }
 
             $log.info(checkedCandidates);
 
+        }
+
+
+
+        $scope.removeJuryFromCandidate=function(candidateIndex,toRemoveJuryId){
+
+            var candidate=$scope.form.candidates[candidateIndex];
+
+            for (var candidateJuryIndex in candidate.juries) {
+
+                var jury= candidate.juries[candidateJuryIndex];
+
+                if(jury.juryId==toRemoveJuryId){
+
+                    candidate.juries.splice(candidateIndex,1);
+
+                    $log.info(jury.firstName + " removed as jury for "+ candidate.firstName);
+
+                }
+
+            }
         }
     }
 
