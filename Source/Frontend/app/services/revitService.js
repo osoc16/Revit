@@ -21,7 +21,24 @@
       };*/
 
 
+        var getScreenings= function(searchTerm){
 
+
+            return [{
+
+                    screeningId:1,
+                    name:"Screening 1",
+                    
+
+
+
+            }
+
+
+            ];
+
+
+        }
 
 
         /*Functions*/
