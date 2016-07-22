@@ -12,9 +12,9 @@
     </div>
     <div class="col l6 s12 m12">
       <div class="input-field">
-        <select ng-model="selectedCandidate" ng-change="goToCandidateEvaluationPage()">
-          <!-- <option selected>{{form.candidate.name}}</option> -->
-          <option ng-repeat="otherCandidate in form.candidates" ng-selected="otherCandidate.candidateId==form.candidate.candidateId"  value="{{otherCandidate.candidateId}}">{{ otherCandidate.firstName }} {{ otherCandidate.lastName }}</option>
+        <select class="candidate-selection-dropdown">
+         <!-- <option selected>{{form.candidate.name}}</option> -->
+          <option  ng-repeat="otherCandidate in form.candidates" ng-selected="otherCandidate.candidateId==form.candidate.candidateId"  value="{{otherCandidate.candidateId}}">{{ otherCandidate.firstName }} {{ otherCandidate.lastName }}</option>
         </select>
       </div>
     </div>
@@ -54,7 +54,7 @@
             <div class="col m6 s12 valign" >
               <div class="slider-container">
                 <input ng-hide="true" class="slider-backup-input" type="text" ng-model="form.score"></input>
-                <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>
+             <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>  
                 <rzslider rz-slider-model="form.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  minLimit:form.scoreMinLimit, maxLimit:form.scoreMaxLimit,showTicks: true,getTickColor:tickColorForm}"></rzslider>
               </div>
               
@@ -68,7 +68,7 @@
               
               <div class="slider-container">
                 <input ng-hide="true" class="slider-backup-input" type="text" ng-model="form.finalScore"></input>
-                <div class="slider-resetter center-align"><i class="material-icons" >replay</i>  </div>
+              <div class="slider-resetter center-align"><i class="material-icons" >replay</i>  </div>  
                 <rzslider rz-slider-model="form.finalScore" rz-slider-options="{floor: form.finalScoreMin, ceil: form.finalScoreMax,  showTicks: false}"></rzslider>
               </div>
             </div>

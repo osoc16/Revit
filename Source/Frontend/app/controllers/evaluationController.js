@@ -5,7 +5,7 @@
     var EvaluationController = function($scope, $routeParams, $location, revitService, github, selorRuleService, $log) {
 
 
-        var selectedCandidate=null;
+        var selectedCandidate = null;
 
         $scope.setCompetenceStatus = function(toUpdateCompetence) {
             if (isNaN(toUpdateCompetence.score)) {
@@ -17,8 +17,8 @@
 
             }
 
-            if(toUpdateCompetence.score=="null"){
-                toUpdateCompetence.score=null;
+            if (toUpdateCompetence.score == "null") {
+                toUpdateCompetence.score = null;
             }
 
             if (!toUpdateCompetence.comment) {
@@ -38,7 +38,7 @@
         //API callback Functions
         var onGetEvaluationForm = function(data) {
 
-             $log.info("Evaulation form fethced:");
+            $log.info("Evaulation form fethced:");
             $log.info(data);
             $scope.form = data;
 
@@ -77,12 +77,14 @@
 
         }
 
+        $scope.goToCandidateEvaluationPage = function() {
 
 
-        $scope.goToCandidateEvaluationPage=function(){
+            var cId = $(".candidate-selection-dropdown option:selected").val();
 
+            alert(cId);
 
-                alert(selectedCandidate);
+            $location.path("/evaluation/juries/" + $routeParams.juryId + "/forms/" + $routeParams.formId + "/candidates/" + cId);
 
         }
 
@@ -148,7 +150,7 @@
 
             /* VALIDATION */
 
-            
+
             var currentCompetence = $scope.form.competences[$scope.currentCompetenceIndex];
 
             $scope.setCompetenceStatus(currentCompetence);
