@@ -18,6 +18,10 @@
                 templateUrl: "app/partials/form.html",
                 controller: "FormController"
             })
+            .when("/screening",{
+                     templateUrl: "app/partials/screening.html",
+                controller: "ScreeningController"
+            })
             .otherwise({redirectTo:"/main"});
     });
     
