@@ -48,7 +48,8 @@
 
             $scope.form.candidates.push({
                 firstName: firstName,
-                lastName: lastName
+                lastName: lastName,
+                juries:[]
             });
 
             $(".new-candidate-input").val("");

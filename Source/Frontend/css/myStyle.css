@@ -6293,10 +6293,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     right: 1rem; }
 
 .form-page-content input, .form-page-content textarea {
-  background: #efefef;
+  border: #eee solid;
   text-indent: 0.5rem;
   margin-top: 0.2rem;
-  border: none; }
+  border-width: 0.1rem; }
 
 .form-page-content .competence-card, .form-page-content .dimension-card {
   border-top: 0.3rem solid;
