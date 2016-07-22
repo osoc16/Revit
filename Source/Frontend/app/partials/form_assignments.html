@@ -27,11 +27,17 @@
 					</td>
 					<td>{{ candidate.firstName }} {{ candidate.lastname }}</td>
 					<td>
-						<div>
+						<div class="jury-container">
 							<div ng-repeat="jury in candidate.juries" class="chip candidate-jury-chip">
-								{{ jury.firstName }} {{ jury.lastName }} {{ jury.juryId }}
+								{{ jury.firstName }} {{ jury.lastName }}
 								<i ng-click="removeJuryFromCandidate($index,jury.juryId)" class="material-icons">close</i>
 							</div>							
+						</div>
+
+						<div class="notice-container">
+							
+
+
 						</div>
 					</td>
 				</tr>
