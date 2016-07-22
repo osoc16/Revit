@@ -23,7 +23,7 @@ namespace Revit.Api.Azure.Models
             result.name_NL = source.name_NL;
             result.name_EN = source.name_EN;
 
-            result.ID = source.dimensionID;
+            result.ID = source.dimensionId;
             return result;
         }
 
@@ -50,7 +50,7 @@ namespace Revit.Api.Azure.Models
                 result.scoresList.Add(item.ToDto());
 
             }
-            result.dimensionID = source.ID;
+            result.dimensionId = source.ID;
 
             switch (language)
             {
@@ -97,7 +97,7 @@ namespace Revit.Api.Azure.Models
         {
             Competence result = new Competence();
 
-            result.ID = source.competenceID;
+            result.ID = source.competenceId;
 
             result.name_DE = source.name_DE;
             result.name_FR = source.name_FR;
@@ -137,7 +137,7 @@ namespace Revit.Api.Azure.Models
         {
 
             DtoCompetence result = new DtoCompetence();
-            result.competenceID = source.ID;
+            result.competenceId = source.ID;
 
             result.name_DE = source.name_DE;
             result.name_FR = source.name_FR;
@@ -220,8 +220,8 @@ namespace Revit.Api.Azure.Models
         {
             Jury result = new Jury();
             result.ID = source.juryId;
-            result.lastname = source.lastname;
-            result.firstname = source.firstname;
+            result.lastname = source.lastName;
+            result.firstname = source.firstName;
 
 
             return result;
@@ -231,8 +231,8 @@ namespace Revit.Api.Azure.Models
         {
             DtoJury result = new DtoJury();
             result.juryId = source.ID;
-            result.lastname = source.lastname;
-            result.firstname = source.firstname;
+            result.lastName = source.lastname;
+            result.firstName = source.firstname;
 
 
 
@@ -246,9 +246,9 @@ namespace Revit.Api.Azure.Models
         public static Candidate ToEntity(this DtoCandidate source)
         {
             Candidate result = new Candidate();
-            result.ID = source.candidateID;
-            result.firstname = source.firstname;
-            result.lastname = source.lastname;
+            result.ID = source.candidateId;
+            result.firstname = source.firstName;
+            result.lastname = source.lastName;
             result.nationalNumber = source.nationalNumber;
 
 
@@ -258,11 +258,11 @@ namespace Revit.Api.Azure.Models
         public static DtoCandidate ToDto(this Candidate source)
         {
             DtoCandidate result = new DtoCandidate();
-            result.candidateID = source.ID;
-            result.firstname = source.firstname;
-            result.lastname = source.lastname;
+            result.candidateId = source.ID;
+            result.firstName = source.firstname;
+            result.lastName = source.lastname;
             result.nationalNumber = source.nationalNumber;
-            result.name = result.lastname + " " + result.firstname;
+            result.name = result.lastName + " " + result.firstName;
 
 
             return result;
@@ -276,7 +276,7 @@ namespace Revit.Api.Azure.Models
         {
             Form result = new Form();
 
-            result.ID = source.formID;
+            result.ID = source.formId;
             result.code = source.code;
             result.description_DE = source.description_DE;
             result.description_EN = source.description_EN;
@@ -339,7 +339,7 @@ namespace Revit.Api.Azure.Models
         {
             DtoForm result = new DtoForm();
 
-            result.formID = source.ID;
+            result.formId = source.ID;
             result.code = source.code;
             result.description_DE = source.description_DE;
             result.description_EN = source.description_EN;
@@ -443,7 +443,7 @@ namespace Revit.Api.Azure.Models
             result.name_NL = source.name_NL;
             result.name_EN = source.name_EN;
 
-            result.ID = source.ID;
+            result.ID = source.screeningId;
 
             foreach (var judge in source.jugesList)
             {
@@ -472,7 +472,7 @@ namespace Revit.Api.Azure.Models
             result.name_NL = source.name_NL;
             result.name_EN = source.name_EN;
 
-            result.ID = source.ID;
+            result.screeningId = source.ID;
 
             switch (language)
             {

@@ -13,12 +13,12 @@ using Revit.Api.Azure.Models;
 namespace Revit.Api.Azure.Controllers
 {
 
-    [RoutePrefix("api/form")]
+    [RoutePrefix("api")]
     public class FormsController : ApiController
     {
         private DataContext db = new DataContext();
 
-        [Route("juries/{juryId}/forms/{formId}/candidates/{candidatId}")]
+        [Route("evaluations/juries/{juryId}/forms/{formId}/candidates/{candidatId}")]
         [ResponseType(typeof(DtoForm))]
         // GET: api/juries/{juryId}/forms/{formId}/candidates/{candidatId}
         public object Get(int juryId, int formId, int candidatId, string language = "en")
@@ -43,18 +43,37 @@ namespace Revit.Api.Azure.Controllers
             result.candidate = candidate.ToDto();
             if (form.Scores.Count>0)
             {
-                result.score = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId).result;
+                if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null)!=0)
+                {
+                    result.score = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).result;
+                }
+
             }
             else
             {
                 result.score = null;
             }
 
+            if (form.Scores.Count > 0)
+            {
+                if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null) != 0)
+                {
+                    result.finalScore = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).finalResult;
+
+                }
+            }
+            else
+            {
+                result.score = null;
+            }
             result.scoreMax =form.finalScoreMax;
             result.scoreMin =form.finalScoreMin;
             if (form.Scores.Count > 0)
             {
-                result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId).finalResult;
+                if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId) != 0)
+                {
+                    result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId).finalResult;
+                }
             }
             else
             {
@@ -66,11 +85,14 @@ namespace Revit.Api.Azure.Controllers
                 result.competencesList.Add(compet.ToDto());
                 foreach (var dim in compet.Dimensions)
                 {
-                    result.competencesList.Last().dimensions.Add(dim.ToDto());
+                    //    result.competencesList.Last().dimensions.Add(dim.ToDto());
 
-                    if (dim.Scores.Count>0)
+                    if (dim.Scores.Count > 0)
                     {
-                        result.competencesList.Last().dimensions.Last().score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID).result;
+                        if (dim.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID) != 0)
+                        {
+                            result.competencesList.Last().dimensions.Last().score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID).result;
+                        }
                     }
                     else
                     {
@@ -90,6 +112,7 @@ namespace Revit.Api.Azure.Controllers
 
 
         //POST: 
+        [Route("forms")]
         [ResponseType(typeof(Form))]
         public IHttpActionResult Post(DtoForm formNew)
         {
@@ -105,7 +128,7 @@ namespace Revit.Api.Azure.Controllers
             #region competences
             foreach (var comp in formNew.competencesList)
             {
-                Competence compDb = db.Competences.Find(comp.competenceID);
+                Competence compDb = db.Competences.Find(comp.competenceId);
 
 
                 if (compDb == null)
@@ -121,7 +144,7 @@ namespace Revit.Api.Azure.Controllers
                 #region dimension
                 foreach (var dim in comp.dimensions)
                 {
-                    Dimension dimDb = db.Dimensions.Find(dim.dimensionID);
+                    Dimension dimDb = db.Dimensions.Find(dim.dimensionId);
 
                     if (dimDb == null)
                     {
@@ -167,7 +190,7 @@ namespace Revit.Api.Azure.Controllers
                 formNew.candidateList = new List<DtoCandidate>();
             foreach (var candi in formNew.candidateList)
             {
-                Candidate canDb = db.Candidates.Find(candi.candidateID);
+                Candidate canDb = db.Candidates.Find(candi.candidateId);
                 
                 if (canDb == null)
                 {
@@ -182,7 +205,7 @@ namespace Revit.Api.Azure.Controllers
                     foreach (var jur in candi.juries)
                     {
                         juryCandidateForm JCF = new juryCandidateForm();
-                        JCF.candidate_ID = candi.candidateID;
+                        JCF.candidate_ID = candi.candidateId;
                         JCF.form_ID = formDb.ID;
                         JCF.jury_ID = jur.juryId;
                         db.JuryCandidateForms.Add(JCF);
@@ -199,13 +222,13 @@ namespace Revit.Api.Azure.Controllers
 
             foreach (var candi in formNew.candidateList)
             {
-                Candidate canDb = db.Candidates.Find(candi.candidateID);
+                Candidate canDb = db.Candidates.Find(candi.candidateId);
 
                 if (candi.juries != null)
                     foreach (var jur in candi.juries)
                     {
                         juryCandidateForm JCF = new juryCandidateForm();
-                        JCF.candidate_ID = candi.candidateID;
+                        JCF.candidate_ID = candi.candidateId;
                         JCF.form_ID = formDb.ID;
                         JCF.jury_ID = jur.juryId;
                         db.JuryCandidateForms.Add(JCF);
@@ -220,11 +243,16 @@ namespace Revit.Api.Azure.Controllers
         }
 
         //PUT: 
+        [Route("forms/{id}")]
         [ResponseType(typeof(Form))]
-        public IHttpActionResult Put(DtoForm formNew)
+        public IHttpActionResult Put(int id, DtoForm formNew)
         {
-            Form formDb = db.Forms.Find(formNew.formID);
+            Form formDb = db.Forms.Find(formNew.formId);
             formDb = formNew.ToEntity();
+            if (id != formNew.formId)
+            {
+                return BadRequest();
+            }
             if (formDb == null)        
             {
                 
@@ -265,7 +293,16 @@ namespace Revit.Api.Azure.Controllers
 
 
 
+        public IHttpActionResult GetForm(int id)
+        {
+            Form form = db.Forms.Find(id);
+            if (form == null)
+            {
+                return NotFound();
+            }
 
+            return Ok(form.ToDto());
+        }
 
 
 
@@ -284,18 +321,18 @@ namespace Revit.Api.Azure.Controllers
             return db.Forms;
         }
 
-        // GET: api/Forms/5
-        [ResponseType(typeof(Form))]
-        public IHttpActionResult GetForm(int id)
-        {
-            Form form = db.Forms.Find(id);
-            if (form == null)
-            {
-                return NotFound();
-            }
+        //// GET: api/Forms/5
+        //[ResponseType(typeof(Form))]
+        //public IHttpActionResult GetForm(int id)
+        //{
+        //    Form form = db.Forms.Find(id);
+        //    if (form == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return Ok(form);
-        }
+        //    return Ok(form);
+        //}
 
         //// PUT: api/Forms/5
         //[ResponseType(typeof(void))]
@@ -306,50 +343,50 @@ namespace Revit.Api.Azure.Controllers
         //        return BadRequest(ModelState);
         //    }
 
-        //    if (id != form.ID)
-        //    {
-        //        return BadRequest();
-        //    }
+    //        if (id != form.ID)
+    //        {
+    //            return BadRequest();
+    //}
 
-        //    db.Entry(form).State = EntityState.Modified;
+    //    db.Entry(form).State = EntityState.Modified;
 
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!FormExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+    //    try
+    //    {
+    //        db.SaveChanges();
+    //    }
+    //    catch (DbUpdateConcurrencyException)
+    //    {
+    //        if (!FormExists(id))
+    //        {
+    //            return NotFound();
+    //        }
+    //        else
+    //        {
+    //            throw;
+    //        }
+    //    }
 
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
+    //    return StatusCode(HttpStatusCode.NoContent);
+    //}
 
-        // POST: api/Forms
-        //[ResponseType(typeof(Form))]
-        //public IHttpActionResult PostForm(Form form)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
+    // POST: api/Forms
+    //[ResponseType(typeof(Form))]
+    //public IHttpActionResult PostForm(Form form)
+    //{
+    //    if (!ModelState.IsValid)
+    //    {
 
-        //        return BadRequest(ModelState);
-        //    }
+    //        return BadRequest(ModelState);
+    //    }
 
-        //    db.Forms.Add(form);
-        //    db.SaveChanges();
+    //    db.Forms.Add(form);
+    //    db.SaveChanges();
 
-        //    return CreatedAtRoute("DefaultApi", new { id = form.ID }, form);
-        //}
+    //    return CreatedAtRoute("DefaultApi", new { id = form.ID }, form);
+    //}
 
-        // DELETE: api/Forms/5
-        [ResponseType(typeof(Form))]
+    // DELETE: api/Forms/5
+    [ResponseType(typeof(Form))]
         public IHttpActionResult DeleteForm(int id)
         {
             Form form = db.Forms.Find(id);

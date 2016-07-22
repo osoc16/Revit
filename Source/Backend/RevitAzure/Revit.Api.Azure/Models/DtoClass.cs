@@ -9,7 +9,7 @@ namespace Revit.Api.Azure.Models
 {
     public class DtoDimension
     {
-        public int dimensionID { get; set; }
+        public int dimensionId { get; set; }
 
         public string code { get; set; }
 
@@ -52,7 +52,7 @@ namespace Revit.Api.Azure.Models
     {
         public int? maxCandidates { get; set; }
 
-        public int formID { get; set; }
+        public int formId { get; set; }
 
         public string name { get; set; }
         public string code { get; set; }
@@ -75,6 +75,7 @@ namespace Revit.Api.Azure.Models
         public ICollection< DtoCompetence> competencesList { get; set; }
         [JsonProperty(PropertyName = "candidates")]
         public ICollection<DtoCandidate> candidateList { get; set; }
+        [JsonProperty(PropertyName = "juries")]
         public ICollection<DtoJury> juryList { get; set; }
         public string name_DE { get; set; }
         public string name_FR { get; set; }
@@ -87,24 +88,24 @@ namespace Revit.Api.Azure.Models
         public int juryId { get; set; }
 
         public string name { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
     }
 
     public class DtoCandidate
     {
-        public int candidateID { get; set; }
+        public int candidateId { get; set; }
 
         public string name { get; set; }
-        public string firstname { get; set; }
-        public string lastname { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
         public string nationalNumber { get; set; }
         public ICollection<DtoJury> juries { get; set; }
     }
 
     public class DtoCompetence
     {
-        public int competenceID { get; set; }
+        public int competenceId { get; set; }
         public string name { get; set; }
         public string name_FR { get; set; }
         public string name_EN { get; set; }
@@ -131,7 +132,7 @@ namespace Revit.Api.Azure.Models
 
     public class DtoScreening
     {
-        public int ID { get; set; }
+        public int screeningId { get; set; }
 
         public string code { get; set; }
 

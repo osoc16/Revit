@@ -37,8 +37,8 @@ namespace Revit.Api.Azure.Controllers
                 DtoJury tempJury = new DtoJury();
                 tempJury.juryId = jury.ID;
                 tempJury.name = jury.lastname + " " + jury.firstname;
-                tempJury.firstname = jury.firstname;
-                tempJury.lastname = jury.lastname;
+                tempJury.firstName = jury.firstname;
+                tempJury.lastName = jury.lastname;
                 juriesToSend.Add(tempJury);
             }
             return Ok(juriesToSend);
