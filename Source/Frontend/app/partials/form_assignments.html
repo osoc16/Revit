@@ -1,6 +1,46 @@
 <div>
-	<div class="divider"></div>
-	<div class="row">
-		<h4 class="page-title">Candidate Assignment</h4>
+
+	<h4 class="page-title">Assign jury members to candidates</h4>
+	<div class="row">	
+		<div class="input-field col s6">
+			<select  ng-model="test">
+				<option ng-repeat="jury in form.juries" value="{{ $index }}">{{ jury.firstName }} {{ jury.lastName }}</option>
+			</select>
+			<label>Juries {{ selectedJuryIndex }}</label>
+			<div ng-click="assignJury(test)" class="btn right button-assign">Assign</div>
+		</div>
+	</div>
+	<div class="row">		
+		<table class="bordered highlight">
+			<thead>
+				<tr>
+					<th class="checkbox-column" data-field="id"></th>
+					<th data-field="name">Candidate</th>
+					<th data-field="price">Juries</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="candidate in form.candidates">
+					<td>
+						<input id="checkbox-assign-jury-{{ $index }}" class="assign-jury-checkbox filled-in" data-candidate-index="{{ $index }}" type="checkbox"/>
+						<label for="checkbox-assign-jury-{{ $index }}"></label>
+					</td>
+					<td>{{ candidate.firstName }} {{ candidate.lastname }}</td>
+					<td>
+						<div>
+							<div ng-repeat="jury in candidate.juries" class="chip">
+								{{ jury.firstName }} {{ jury.lastName }} {{ jury.juryId }}
+								<i class="material-icons">close</i>
+							</div>							
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
 	</div>
 </div>
+<script type="text/javascript">
+	$(document).ready(function(){
+		$('select').material_select();
+	});
+</script>

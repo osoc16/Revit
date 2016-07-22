@@ -6300,8 +6300,18 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   .form-page-content .competence-card .delete-competence-btn, .form-page-content .dimension-card .delete-competence-btn {
     margin-right: 0.5rem; }
 
+.form-page-content .button-assign {
+  float: right; }
+
+.form-page-content .checkbox-column {
+  width: 2rem;
+  padding: 1rem; }
+
 .form-page-content .add-competence {
   background: #03a9f4; }
+
+.form-page-content .add-jury {
+  color: #F44336; }
 
 .form-page-content .delete-dimension-button {
   background-color: #F44336;

@@ -2,20 +2,20 @@
 	<div class="row">
 		<div class="col s12">
 			<ul class="tabs">
-				<li class="tab col s6 m3"><a  href="#test2" class="active"  >Form</a></li>
-				<li class="tab col s6 m3 "><a href="#test3">Jury &amp; Candidates</a></li>
-				<li class="tab col s6 m3"><a href="#test4">Assignments</a></li>
+				<li class="tab col s6 m3"><a  href="#form-properties-tab"  >Form</a></li>
+				<li class="tab col s6 m3 "><a href="#candidates-juries-tab">Jury &amp; Candidates</a></li>
+				<li class="tab col s6 m3"><a href="#assignments-tab" class="active" >Assignments</a></li>
 			</ul>
 		</div>
-		<div id="test2" class="col s12">
+			<div class="divider"></div>
+		<div id="form-properties-tab" class="col s12">
 			<div ng-include="'app/partials/form_properties.html'"></div>
 		</div>
-		<div id="test3" class="col s12">
+		<div id="candidates-juries-tab" class="col s12">
 			<div ng-include="'app/partials/form_candidates_juries.html'"></div>
 		</div>
-		<div id="test4" class="col s12">
+		<div id="assignments-tab" class="col s12">
 			<div ng-include="'app/partials/form_assignments.html'"></div>
-
 	</div>
 	<script>
 		
@@ -28,5 +28,7 @@
 	$(document).ready(function(){
 	$('ul.tabs').tabs();
 	});
+
+
 	
 	</script>

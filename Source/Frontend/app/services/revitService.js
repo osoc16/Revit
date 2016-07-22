@@ -124,16 +124,19 @@
                     {
                         firstName: "Sarah",
                         lastName:"Van de Velde",
-                        candidateId: 2
+                        candidateId: 2,
+                        juries:[]
                     }, {
                         firstName: "Peter Janssens",
-                        candidateId: 3
+                        candidateId: 3,
+                        juries:[]
                     },
 
                     {
                         firstName: "Jan",
                         lastName:"Van de Velde",
-                        candidateId: 4
+                        candidateId: 4,
+                        juries:[]
                     }
 
                 ],

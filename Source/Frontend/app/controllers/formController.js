@@ -107,6 +107,60 @@
             $scope.form.competences[$scope.currentCompetenceIndex].dimensions.splice(dimensionIndex, 1);
 
         }
+
+
+
+
+
+        $scope.assignJury = function(juryIndex) {
+
+   
+            var selectedJury = $scope.form.juries[juryIndex];
+
+            var checkedCandidates = $(".assign-jury-checkbox:checked");
+
+            var checkedCandidatesIndices = [];
+
+            checkedCandidates.each(function() {
+                checkedCandidatesIndices.push($(this).attr("data-candidate-index"));
+            });
+
+
+
+            for (var candidateCounter in checkedCandidatesIndices) {
+
+                    var candidate = $scope.form.candidates[checkedCandidatesIndices[candidateCounter]];
+
+                    var alreadyContainsJury = false;
+
+                    for (var candidateJuryCounter in candidate.juries) {
+
+                        if (selectedJury.juryId == candidate.juries[candidateJuryCounter].juryId) {
+
+                            $log.info("selectedJuryId"+selectedJury.juryId);
+
+                             $log.info("loopjury"+candidate.juries[candidateJuryCounter].juryId);
+
+                            alreadyContainsJury = true;
+
+                            $log.info("jury already added");
+                            break;
+                        }
+
+                    }
+
+                    if (!alreadyContainsJury) {
+
+                        $log.info(candidate.firstName + " got jury " + selectedJury.firstName + " assigned");
+                        candidate.juries.push(selectedJury);
+                    }
+
+            
+            }
+
+            $log.info(checkedCandidates);
+
+        }
     }
 
 
