@@ -32,18 +32,21 @@
 				<li class="collection-item" ng-repeat="jury in form.juries | orderBy:'firstName'">
 					{{ jury.firstName }} {{ jury.lastName }}
 					<i ng-click="deleteJury($index)" class="material-icons right">close</i>
-				</li>
+				</li><!-- 
 				<li class="collection-item">
 					<div class="input-field col s5">
 						<input ng-model="newJury.firstName" placeholder="Firstname" id="new-jury-firstname" type="text" class="validate new-jury-input">
 						
 					</div>
+
+
 					<div class="input-field col s5">
 						<input ng-model="newJury.lastName" placeholder="Lastname" id="new-jury-lastname" type="text" class="validate new-jury-input">
 						
 					</div>					
 					<div class="add-jury" ng-click="addJury(newJury.firstName, newJury.lastName)"  ><i class="material-icons right"> add</i></div>				
 				</li>
+				-->
 			</ul>
 		</div>
 	</div>

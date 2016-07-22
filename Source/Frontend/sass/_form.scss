@@ -1,5 +1,10 @@
 .form-page-content {
-
+    input,textarea{
+        background:#efefef;
+        text-indent:0.5rem;
+        margin-top:0.2rem;
+        border:none;
+    }
 
 
     .competence-card,.dimension-card{
@@ -19,7 +24,7 @@
     }
 
     .button-assign{
-        float:right;
+       margin-top:1rem;
     }
 
 
@@ -49,6 +54,15 @@
        float:right;
     }
 
+.assignment-table {
+
+    th{
+        background:$primary-color;
+        color:#fff;
+
+    }
+ 
+}
 
     .candidate-jury-chip{
 

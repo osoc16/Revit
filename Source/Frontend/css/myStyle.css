@@ -6292,6 +6292,12 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     top: 1rem;
     right: 1rem; }
 
+.form-page-content input, .form-page-content textarea {
+  background: #efefef;
+  text-indent: 0.5rem;
+  margin-top: 0.2rem;
+  border: none; }
+
 .form-page-content .competence-card, .form-page-content .dimension-card {
   border-top: 0.3rem solid;
   border-color: #03a9f4; }
@@ -6301,7 +6307,7 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     margin-right: 0.5rem; }
 
 .form-page-content .button-assign {
-  float: right; }
+  margin-top: 1rem; }
 
 .form-page-content .checkbox-column {
   width: 2rem;
@@ -6321,6 +6327,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .form-page-content .add-dimension-button {
   margin-bottom: 1rem;
   float: right; }
+
+.form-page-content .assignment-table th {
+  background: #03a9f4;
+  color: #fff; }
 
 .form-page-content .candidate-jury-chip {
   margin-right: 1rem; }

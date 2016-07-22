@@ -111,7 +111,7 @@
 
         var assignJuryToCandidate = function(juryIndex, candidateIndex) {
 
-                        var selectedJury = $scope.form.juries[juryIndex];
+            var selectedJury = $scope.form.juries[juryIndex];
 
             var candidate = $scope.form.candidates[candidateIndex];
             var alreadyContainsJury = false;
@@ -147,26 +147,23 @@
 
             $('select').material_select();
 
-
-
             var checkedCandidates = $(".assign-jury-checkbox:checked");
 
             var checkedCandidatesIndices = [];
+
+            if(checkedCandidates.length==0|| isNaN(juryIndex)){                  
+                return;
+            }
 
             checkedCandidates.each(function() {
                 checkedCandidatesIndices.push($(this).attr("data-candidate-index"));
             });
 
-
-
             for (var candidateCounter in checkedCandidatesIndices) {
-
 
                 assignJuryToCandidate(juryIndex, checkedCandidatesIndices[candidateCounter]);
 
             }
-
-            $log.info(checkedCandidates);
 
         }
 
