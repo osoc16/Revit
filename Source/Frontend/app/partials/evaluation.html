@@ -49,18 +49,29 @@
       <div class="card competence-card">
         <div class="card-content">
           <div class="row valign-wrapper">
-          
-              <div class="col m6 s12  valign" ><span>{{ 'Weighted Score' | uppercase }}</span></div>
-              <div class="col m6 s12 valign" >
-                <rzslider rz-slider-model="form.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  showTicks: true}"></rzslider>
+            
+            <div class="col m6 s12  valign" ><span>{{ 'Weighted Score' | uppercase }}</span></div>
+            <div class="col m6 s12 valign" >
+              <div class="slider-container">
+                <input ng-hide="true" class="slider-backup-input" type="text" ng-model="form.score"></input>
+             <div class="slider-resetter"><i class="material-icons" >replay</i>  </div>  
+                <rzslider rz-slider-model="form.score" rz-slider-options="{floor: form.scoreMin, ceil: form.scoreMax,  minLimit:form.scoreMinLimit, maxLimit:form.scoreMaxLimit,showTicks: true,getTickColor:tickColorForm}"></rzslider>
               </div>
-   
+              
+            </div>
+            
           </div>
-          <div class="row valign-wrapper">             
-              <div class="col m6 s12 valign" ><span>{{ 'Final Score' | uppercase }}</span></div>
-              <div class="col m6 s12 valign" >
+          <div class="row valign-wrapper">
+            <div class="col m6 s12 valign" ><span>{{ 'Final Score' | uppercase }}</span></div>
+            <div class="col m6 s12 valign" >
+              
+              
+              <div class="slider-container">
+                <input ng-hide="true" class="slider-backup-input" type="text" ng-model="form.finalScore"></input>
+              <div class="slider-resetter center-align"><i class="material-icons" >replay</i>  </div>  
                 <rzslider rz-slider-model="form.finalScore" rz-slider-options="{floor: form.finalScoreMin, ceil: form.finalScoreMax,  showTicks: false}"></rzslider>
               </div>
+            </div>
           </div>
         </div>
       </div>
@@ -68,7 +79,7 @@
   </div>
   <!-- Competence Detail -->
   <div class="row show-when-edit" style="display:none;">
-    <div ng-include="'app/partials/evaluationCompetence.html'"></div>
+    <div ng-include="'app/partials/evaluation_competence.html'"></div>
   </div>
 </div>
 <script src="js/materializeInitialize.js"></script>

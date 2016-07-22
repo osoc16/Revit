@@ -1,6 +1,19 @@
 .evaluation-page-content {
 
+
+    .slider-resetter{
+        float:right;
+        margin:0 auto;
+        cursor:pointer;
+        color:$warning-color; 
+        padding:0.2rem;
+
    
+    }
+
+    .slider-container{
+        position:relative;
+    }
 
     .candidate-selection {
         position: relative;
@@ -67,6 +80,11 @@
         }
     }
 
+
+    .total-card{
+        padding-top:2rem;
+        padding-bottom:2rem;
+    }
     .back-to-overview {
         float: right;
         cursor: pointer;

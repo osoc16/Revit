@@ -1650,6 +1650,13 @@
  */
 /* 1. Colors
    ========================================================================== */
+/*
+//Selor color 1
+$primary-color: #059EA4 !default;
+//Selor color 2
+$secondary-color: #D74C9C !default;
+
+*/
 /* 2. Badges
    ========================================================================== */
 /* 3. Buttons
@@ -6222,6 +6229,16 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   position: relative;
   background-repeat: no-repeat; }
 
+.evaluation-page-content .slider-resetter {
+  float: right;
+  margin: 0 auto;
+  cursor: pointer;
+  color: #F26522;
+  padding: 0.2rem; }
+
+.evaluation-page-content .slider-container {
+  position: relative; }
+
 .evaluation-page-content .candidate-selection {
   position: relative;
   top: 0; }
@@ -6258,6 +6275,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   .evaluation-page-content .competence-card .status-message.warning {
     color: #F26522; }
 
+.evaluation-page-content .total-card {
+  padding-top: 2rem;
+  padding-bottom: 2rem; }
+
 .evaluation-page-content .back-to-overview {
   float: right;
   cursor: pointer; }
@@ -6270,3 +6291,46 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     position: absolute;
     top: 1rem;
     right: 1rem; }
+
+.form-page-content input, .form-page-content textarea {
+  border: #eee solid;
+  text-indent: 0.5rem;
+  margin-top: 0.2rem;
+  border-width: 0.1rem; }
+
+.form-page-content .competence-card, .form-page-content .dimension-card {
+  border-top: 0.3rem solid;
+  border-color: #03a9f4; }
+  .form-page-content .competence-card .card-title, .form-page-content .dimension-card .card-title {
+    font-weight: 400; }
+  .form-page-content .competence-card .delete-competence-btn, .form-page-content .dimension-card .delete-competence-btn {
+    margin-right: 0.5rem; }
+
+.form-page-content .button-assign {
+  margin-top: 1rem; }
+
+.form-page-content .checkbox-column {
+  width: 2rem;
+  padding: 1rem; }
+
+.form-page-content .add-competence {
+  background: #03a9f4; }
+
+.form-page-content .add-jury {
+  color: #F44336; }
+
+.form-page-content .delete-dimension-button {
+  background-color: #F44336;
+  margin-right: 0.5rem;
+  margin-top: 0.5rem; }
+
+.form-page-content .add-dimension-button {
+  margin-bottom: 1rem;
+  float: right; }
+
+.form-page-content .assignment-table th {
+  background: #03a9f4;
+  color: #fff; }
+
+.form-page-content .candidate-jury-chip {
+  margin-right: 1rem; }
