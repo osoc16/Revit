@@ -22,8 +22,8 @@ namespace Revit.Api.Azure.Controllers
             return db.Juries;
         }
 
-        // GET: api/Juries/5
-        [ResponseType(typeof(DtoJury[]))]
+        // GET: api/Juries/?search= ***
+        [ResponseType(typeof(DtoJury))]
         public IHttpActionResult GetJury(string search)
         {
             ICollection<Jury> juries = db.Juries.Where(j => j.firstname.Contains(search)|| j.lastname .Contains(search)).ToList() ;

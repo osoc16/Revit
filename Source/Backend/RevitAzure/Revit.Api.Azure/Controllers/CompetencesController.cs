@@ -22,6 +22,32 @@ namespace Revit.Api.Azure.Controllers
             return db.Competences;
         }
 
+        // GET: api/Competences/?search= ***
+        [ResponseType(typeof(DtoCompetence))]
+        public IHttpActionResult GetCompetence(string search)
+        {
+            ICollection<Competence> competences = db.Competences.Where(c => c.name_DE.Contains(search) || 
+                                                                            c.name_FR.Contains(search) || 
+                                                                            c.name_NL.Contains(search) || 
+                                                                            c.name_EN.Contains(search) ||
+                                                                            c.description_DE.Contains(search) ||
+                                                                            c.description_FR.Contains(search) ||
+                                                                            c.description_EN.Contains(search) ||
+                                                                            c.description_NL.Contains(search)).ToList();
+            ICollection<DtoCompetence> competencesToSend = new List<DtoCompetence>();
+            if (competences == null)
+            {
+                return NotFound();
+            }
+            foreach (var comp in competences)
+            {
+                competencesToSend.Add(comp.ToDto());
+            }
+            return Ok(competencesToSend);
+        }
+
+
+
         // GET: api/Competences/5
         [ResponseType(typeof(Competence))]
         public IHttpActionResult GetCompetence(int id)

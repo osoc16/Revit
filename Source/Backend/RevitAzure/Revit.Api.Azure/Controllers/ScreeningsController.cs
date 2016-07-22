@@ -16,6 +16,35 @@ namespace Revit.Api.Azure.Controllers
     {
         private DataContext db = new DataContext();
 
+        // GET: api/Screenings/?search= ***
+        [ResponseType(typeof(DtoScreening))]
+        public IHttpActionResult GetScreening(string search)
+        {
+            ICollection<Screening> screen = db.Screenings.Where(c => c.code.Contains(search) ||
+                                                                            c.name_DE.Contains(search) ||
+                                                                            c.name_FR.Contains(search) ||
+                                                                            c.name_NL.Contains(search) ||
+                                                                            c.name_EN.Contains(search) ||
+                                                                            c.description_DE.Contains(search) ||
+                                                                            c.description_FR.Contains(search) ||
+                                                                            c.description_EN.Contains(search) ||
+                                                                            c.description_NL.Contains(search)).ToList();
+            ICollection<DtoScreening> screenToSend = new List<DtoScreening>();
+            if (screen == null)
+            {
+                return NotFound();
+            }
+            foreach (var source in screen)
+            {
+                screenToSend.Add(source.ToDto());
+            }
+            return Ok(screenToSend);
+        }
+
+
+
+
+
         // GET: api/Screenings
         public IQueryable<Screening> GetScreenings()
         {

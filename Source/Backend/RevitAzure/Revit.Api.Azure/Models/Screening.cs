@@ -15,8 +15,21 @@ namespace Revit.Api.Azure.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
 
+        public string code { get; set; }
+        
+        public string name_FR { get; set; }
+        public string name_NL { get; set; }
+        public string name_EN { get; set; }
+        public string name_DE { get; set; }
+
+        public string description_FR { get; set; }
+        public string description_NL { get; set; }
+        public string description_EN { get; set; }
+        public string description_DE { get; set; }
+
 
         public virtual Form Form { get; set; }
+
 
         public virtual ICollection<Jury> Judges { get; set; }
 

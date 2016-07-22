@@ -197,6 +197,7 @@
     <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\Dimension.cs" />
     <Compile Include="Models\DtoClass.cs" />
+    <Compile Include="Models\DtoExtension.cs" />
     <Compile Include="Models\Form.cs" />
     <Compile Include="Models\Jury.cs" />
     <Compile Include="Models\juryCandidateForm.cs" />

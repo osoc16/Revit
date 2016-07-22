@@ -21,55 +21,24 @@ namespace Revit.Api.Azure.Controllers
         [Route("{id}")]
         [ResponseType(typeof(Dimension))]
         // GET: api
-        public object Get(int id, string language="en")
+        public object Get(int id, string language = "en")
         {
 
 
             Dimension dimension = db.Dimensions.Find(id);
             DtoDimension dim = new DtoDimension();
+
+
             if (dimension == null)
             {
                 return NotFound();
             }
-            dim.dimensionID = dimension.ID;
-            switch (language)
-            {
-                case "en":
-                    {
-                        dim.name = dimension.name_EN;
-                        dim.description = dimension.description_EN;
-                        break;
-                    }
-                case "fr":
-                    {
-                        dim.name = dimension.name_FR;
-                        dim.description = dimension.description_FR;
-                        break;
-                    }
-                case "nl":
-                    {
-                        dim.name = dimension.name_NL;
-                        dim.description = dimension.description_NL;
-                        break;
-                    }
-                case "de":
-                    {
-                        dim.name = dimension.name_DE;
-                        dim.description = dimension.description_DE;
-                        break;
-                    }
-                default:
-                    {
-                        dim.name = dimension.name_EN;
-                        dim.description = dimension.description_EN;
-                        break;
-                    }
-              }
-            
+            dim = dimension.ToDto(language);
 
             return Ok(dim);
         }
-
+            
+        
 
 
 

@@ -39,10 +39,10 @@ namespace Revit.Api.Azure.Controllers
             cand.candidateID = candidate.ID;
             cand.name= candidate.lastname + " " + candidate.firstname;
             DtoForm result = new DtoForm();
-            result.competences = new List<DtoCompetences>();
+            result.competencesList = new List<DtoCompetence>();
             result.candidateList = new List<DtoCandidate>();
             result.formID = form.ID;
-            result.name =form.Name;
+            result.name =form.name;
             if (form.Scores.Count>0)
             {
                 result.score = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId).result;
@@ -65,7 +65,7 @@ namespace Revit.Api.Azure.Controllers
             result.candidate = cand;
             foreach (var compet in form.Competences)
             {
-                DtoCompetences compToAdd = new DtoCompetences();
+                DtoCompetence compToAdd = new DtoCompetence();
                 compToAdd.dimensions = new List<DtoDimension>();
                 compToAdd.competenceID = compet.ID;
                 compToAdd.status = compet.status;
@@ -166,18 +166,18 @@ namespace Revit.Api.Azure.Controllers
                         }
 
                 
-                result.competences.Add(compToAdd);
+                result.competencesList.Add(compToAdd);
             }
             foreach (var candi in form.Candidates)
             {
-                DtoCandidate candToAdd = new DtoCandidate();
-                candToAdd.candidateID = candi.ID;
-                candToAdd.name = candi.lastname + " " + candi.firstname;
-                result.candidateList.Add(candToAdd);
+                
+                result.candidateList.Add(candi.ToDto());
             }
 
             return Ok(result);
         }
+
+
 
         //POST: 
         [ResponseType(typeof(Form))]
@@ -190,7 +190,7 @@ namespace Revit.Api.Azure.Controllers
                 return BadRequest(ModelState);
             }
 
-            formDb.Name = formNew.name;
+            formDb.name = formNew.name;
 
             formDb.description_EN = formNew.description_EN;
             formDb.description_FR = formNew.description_FR;
@@ -201,7 +201,7 @@ namespace Revit.Api.Azure.Controllers
 
             //competence region
             #region competences
-            foreach (var comp in formNew.competences)
+            foreach (var comp in formNew.competencesList)
             {
                 Competence compDb = db.Competences.Find(comp.competenceID);
 
@@ -329,7 +329,7 @@ namespace Revit.Api.Azure.Controllers
 
             db.Forms.Add(formDb);
             db.SaveChanges();
-            formDb = db.Forms.Where(f=> f.Name==formDb.Name).Last();
+            formDb = db.Forms.Where(f=> f.name==formDb.name).Last();
 
             foreach (var candi in formNew.candidateList)
             {
