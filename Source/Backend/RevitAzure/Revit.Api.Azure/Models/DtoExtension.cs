@@ -41,6 +41,10 @@ namespace Revit.Api.Azure.Models
             result.name_NL = source.name_NL;
             result.name_EN = source.name_EN;
 
+            if (result.scoresList ==null)
+            {
+                result.scoresList = new List<DtoScore>();
+            }
             foreach (var item in source.Scores)
             {
                 result.scoresList.Add(item.ToDto());
@@ -105,6 +109,11 @@ namespace Revit.Api.Azure.Models
             result.description_NL = source.description_NL;
             result.description_EN = source.description_EN;
 
+            result.statusMessage_DE = source.statusMessage_DE;
+            result.statusMessage_FR = source.statusMessage_FR;
+            result.statusMessage_NL = source.statusMessage_NL;
+            result.statusMessage_EN = source.statusMessage_EN;
+
             result.status = source.status;
             result.weight = source.weight;
             result.code = source.code;
@@ -140,6 +149,11 @@ namespace Revit.Api.Azure.Models
             result.description_NL = source.description_NL;
             result.description_EN = source.description_EN;
 
+            result.statusMessage_DE = source.statusMessage_DE;
+            result.statusMessage_FR = source.statusMessage_FR;
+            result.statusMessage_NL = source.statusMessage_NL;
+            result.statusMessage_EN = source.statusMessage_EN;
+
             result.status = source.status;
             result.weight = source.weight;
             result.code = source.code;
@@ -151,30 +165,36 @@ namespace Revit.Api.Azure.Models
                     {
                         result.name = source.name_EN;
                         result.description = source.description_EN;
+
+                        result.statusMessage = source.statusMessage_EN;
                         break;
                     }
                 case "fr":
                     {
                         result.name = source.name_FR;
                         result.description = source.description_FR;
+                        result.statusMessage = source.statusMessage_FR;
                         break;
                     }
                 case "nl":
                     {
                         result.name = source.name_NL;
                         result.description = source.description_NL;
+                        result.statusMessage = source.statusMessage_NL;
                         break;
                     }
                 case "de":
                     {
                         result.name = source.name_DE;
                         result.description = source.description_DE;
+                        result.statusMessage = source.statusMessage_DE;
                         break;
                     }
                 default:
                     {
                         result.name = source.name_EN;
                         result.description = source.description_EN;
+                        result.statusMessage = source.statusMessage_EN;
                         break;
                     }
             }
@@ -263,6 +283,7 @@ namespace Revit.Api.Azure.Models
             result.description_FR = source.description_FR;
             result.description_NL = source.description_NL;
 
+            result.name = source.name;
             result.name_DE = source.name_DE;
             result.name_FR = source.name_FR;
             result.name_NL = source.name_NL;
@@ -325,6 +346,7 @@ namespace Revit.Api.Azure.Models
             result.description_FR = source.description_FR;
             result.description_NL = source.description_NL;
 
+            result.name = source.name;
             result.name_DE = source.name_DE;
             result.name_FR = source.name_FR;
             result.name_NL = source.name_NL;

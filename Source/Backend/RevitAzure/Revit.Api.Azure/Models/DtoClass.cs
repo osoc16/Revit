@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Runtime.Serialization;
+using Newtonsoft.Json;
 
 namespace Revit.Api.Azure.Models
 {
@@ -27,6 +29,7 @@ namespace Revit.Api.Azure.Models
 
         public int? score { get; set; }
 
+        [JsonProperty(PropertyName = "scores")]
         public ICollection<DtoScore> scoresList { get; set; }
     }
 
@@ -68,7 +71,9 @@ namespace Revit.Api.Azure.Models
         public int? finalScoreMax { get; set; }
         public int? finalScoreMin { get; set; }
         public DtoCandidate candidate { get; set; }
+        [JsonProperty(PropertyName = "competences")]
         public ICollection< DtoCompetence> competencesList { get; set; }
+        [JsonProperty(PropertyName = "candidates")]
         public ICollection<DtoCandidate> candidateList { get; set; }
         public ICollection<DtoJury> juryList { get; set; }
         public string name_DE { get; set; }
@@ -142,8 +147,10 @@ namespace Revit.Api.Azure.Models
         public string description_EN { get; set; }
         public string description_DE { get; set; }
 
+        [JsonProperty(PropertyName = "juges")]
         public ICollection<DtoJury> jugesList { get; set; }
 
+        [JsonProperty(PropertyName = "candidates")]
         public ICollection<DtoCandidate> candidateList { get; set; }
     }
 }

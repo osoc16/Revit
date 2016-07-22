@@ -34,16 +34,13 @@ namespace Revit.Api.Azure.Controllers
                 return NotFound();
             }
 
-            //return Ok(form);
+
 
             DtoForm result = new DtoForm();
 
-            result.candidate = candidate.ToDto();
-            result.competencesList = new List<DtoCompetence>();
-            result.candidateList = new List<DtoCandidate>();
-            result.formID = form.ID;
-            result.name =form.name;
+            result = form.ToDto(false);
 
+            result.candidate = candidate.ToDto();
             if (form.Scores.Count>0)
             {
                 result.score = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId).result;
@@ -66,73 +63,20 @@ namespace Revit.Api.Azure.Controllers
 
             foreach (var compet in form.Competences)
             {
-
-                DtoCompetence compToAdd = new DtoCompetence();
-                compToAdd.dimensions = new List<DtoDimension>();
-                compToAdd.competenceID = compet.ID;
-                compToAdd.status = compet.status;
-                compToAdd.code = compet.code;
-
-                switch (language)
-                {
-                    case "en":
-                        {
-                            compToAdd.name = compet.name_EN;
-                            compToAdd.statusMessage = compet.statusMessage_EN;
-                            compToAdd.description = compet.description_EN;
-                            break;
-                        }
-                    case "fr":
-                        {
-                            compToAdd.name = compet.name_FR;
-                            compToAdd.statusMessage = compet.statusMessage_FR;
-                            compToAdd.description = compet.description_FR;
-
-                            break;
-                        }
-                    case "nl":
-                        {
-                            compToAdd.name = compet.name_NL;
-                            compToAdd.statusMessage = compet.statusMessage_NL;
-                            compToAdd.description = compet.description_NL;
-
-                            break;
-                        }
-                    case "de":
-                        {
-                            compToAdd.name = compet.name_DE;
-                            compToAdd.statusMessage = compet.statusMessage_DE;
-                            compToAdd.description = compet.description_DE;
-
-                            break;
-                        }
-                    default:
-                        {
-                            compToAdd.name = compet.name_EN;
-                            compToAdd.statusMessage = compet.statusMessage_EN;
-                            compToAdd.description = compet.description_EN;
-
-                            break;
-                        }
-                }
+                result.competencesList.Add(compet.ToDto());
                 foreach (var dim in compet.Dimensions)
                 {
-                    DtoDimension dimToAdd = new DtoDimension();
-                    dimToAdd = dim.ToDto();
+                    result.competencesList.Last().dimensions.Add(dim.ToDto());
 
                     if (dim.Scores.Count>0)
                     {
-                        dimToAdd.score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID).result;
+                        result.competencesList.Last().dimensions.Last().score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID).result;
                     }
-                        if(dimToAdd.score==null)
-                            dimToAdd.notObserved = true;
-
-                        
-                        compToAdd.dimensions.Add(dimToAdd);
+                    else
+                    {
+                        result.competencesList.Last().dimensions.Last().notObserved = true;
+                    }
                 }
-
-                
-                result.competencesList.Add(compToAdd);
             }
             foreach (var candi in form.Candidates)
             {
@@ -280,139 +224,43 @@ namespace Revit.Api.Azure.Controllers
         public IHttpActionResult Put(DtoForm formNew)
         {
             Form formDb = db.Forms.Find(formNew.formID);
-
+            formDb = formNew.ToEntity();
             if (formDb == null)        
             {
-                formDb = new Form();
-
-                if (!ModelState.IsValid)
-                {
-
-                    return BadRequest(ModelState);
-                }
+                
+                return Post(formNew);
             }
             else
             {
-                db.Entry(formDb).State = EntityState.Modified;
-            }
-            formDb = formNew.ToEntity(false);
 
-            //competence region
-            #region competences
-            foreach (var comp in formNew.competencesList)
-            {
-                Competence compDb = db.Competences.Find(comp.competenceID);
-
-
-                if (compDb == null)
+                if (!ModelState.IsValid)
                 {
-                    compDb = new Competence();
-
-                    compDb = comp.ToEntity(false);
-
+                    return BadRequest(ModelState);
                 }
 
-
-                //dimension region
-                #region dimension
-                foreach (var dim in comp.dimensions)
+                try
                 {
-                    Dimension dimDb = db.Dimensions.Find(dim.dimensionID);
 
-                    if (dimDb == null)
-                    {
-                        dimDb = new Dimension();
-                        dimDb = dim.ToEntity(); ;
-                        compDb.Dimensions.Add(dimDb);
-                    }
-                    else if (compDb.Dimensions.Contains(dimDb) == false)
-                    {
-                        compDb.Dimensions.Add(dimDb);
-                    }
+                    db.Entry(formDb).State = EntityState.Modified;
                 }
-                #endregion
-
-                formDb.Competences.Add(compDb);
-
-            }
-
-            #endregion
-
-            //jury region
-            #region jury
-            if (formNew.juryList != null)
-                foreach (var jury in formNew.juryList)
+                catch (Exception e)
                 {
-                    Jury juryDb = db.Juries.Find(jury.juryId);
-
-                    if (juryDb == null)
-                    {
-                        juryDb = new Jury();
-                        juryDb = jury.ToEntity();
-
-                        formDb.Juries.Add(juryDb);
-                    }
-                    else if (formDb.Juries.Contains(juryDb) == false)
-                        formDb.Juries.Add(juryDb);
+                    return StatusCode(HttpStatusCode.NotModified);
                 }
-            #endregion
+              
 
-            //candidate region
-            #region candidates
-            if (formNew.candidateList == null)
-                formNew.candidateList = new List<DtoCandidate>();
-            foreach (var candi in formNew.candidateList)
-            {
-                Candidate canDb = db.Candidates.Find(candi.candidateID);
-
-                if (canDb == null)
+                try
                 {
-                    canDb = new Candidate();
-                    canDb = candi.ToEntity();
-                    db.Candidates.Add(canDb);
                     db.SaveChanges();
-                    canDb = db.Candidates.Where(c => c.lastname == canDb.lastname).Where(c => c.firstname == canDb.firstname).Last();
+                }
+                catch (DbUpdateConcurrencyException)
+                {               
+                    return StatusCode(HttpStatusCode.NotModified);
                 }
 
-                if (candi.juries != null)
-                    foreach (var jur in candi.juries)
-                    {
-                        juryCandidateForm JCF = new juryCandidateForm();
-                        JCF.candidate_ID = candi.candidateID;
-                        JCF.form_ID = formDb.ID;
-                        JCF.jury_ID = jur.juryId;
-                        db.JuryCandidateForms.Add(JCF);
-                    }
-
-                if (formDb.Candidates == null)
-                    formDb.Candidates = new List<Candidate>();
-                formDb.Candidates.Add(canDb);
+                return StatusCode(HttpStatusCode.NoContent);
             }
 
-            db.Forms.Add(formDb);
-            db.SaveChanges();
-            formDb = db.Forms.Where(f => f.name == formDb.name).Last();
-
-            foreach (var candi in formNew.candidateList)
-            {
-                Candidate canDb = db.Candidates.Find(candi.candidateID);
-
-                if (candi.juries != null)
-                    foreach (var jur in candi.juries)
-                    {
-                        juryCandidateForm JCF = new juryCandidateForm();
-                        JCF.candidate_ID = candi.candidateID;
-                        JCF.form_ID = formDb.ID;
-                        JCF.jury_ID = jur.juryId;
-                        db.JuryCandidateForms.Add(JCF);
-                    }
-
-            }
-            #endregion
-
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = formDb.ID }, formDb);
         }
 
 
@@ -449,40 +297,40 @@ namespace Revit.Api.Azure.Controllers
             return Ok(form);
         }
 
-        // PUT: api/Forms/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutForm(int id, Form form)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+        //// PUT: api/Forms/5
+        //[ResponseType(typeof(void))]
+        //public IHttpActionResult PutForm(int id, Form form)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest(ModelState);
+        //    }
 
-            if (id != form.ID)
-            {
-                return BadRequest();
-            }
+        //    if (id != form.ID)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            db.Entry(form).State = EntityState.Modified;
+        //    db.Entry(form).State = EntityState.Modified;
 
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FormExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!FormExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-            return StatusCode(HttpStatusCode.NoContent);
-        }
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
         // POST: api/Forms
         //[ResponseType(typeof(Form))]
