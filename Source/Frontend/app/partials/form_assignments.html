@@ -14,13 +14,13 @@
 				<tr ng-repeat="candidate in form.candidates" ng-init="candidateIndex = $index">
 					<td>
 						<input id="checkbox-assign-jury-{{ $index }}" class="assign-jury-checkbox filled-in" data-candidate-index="{{ $index }}" type="checkbox"/>
-						<label for="checkbox-assign-jury-{{ $index }}"></label>
+						<label class="assignment-checkbox-faker" for="checkbox-assign-jury-{{ $index }}"></label>
 					</td>
-					<td>{{ candidate.firstName }} {{ candidate.lastname }} [ {{candidate.candidateId }} ]</td>
+					<td>{{ candidate.firstName }} {{ candidate.lastname }} </td>
 					<td>
 						<div class="jury-container">
 							<div ng-repeat="jury in candidate.juries"  ng-init="juryIndex = $index" class="chip candidate-jury-chip">
-								{{ jury.firstName }} {{ jury.lastName }} [ {{jury.juryId }} ]
+								{{ jury.firstName }} {{ jury.lastName }} 
 								<i ng-click="removeJuryFromCandidate(candidateIndex,juryIndex)" >teataet</i>
 							</div>
 						</div>
