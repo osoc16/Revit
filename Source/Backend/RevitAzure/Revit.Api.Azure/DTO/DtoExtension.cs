@@ -1,9 +1,11 @@
-﻿using System;
+﻿using Revit.Api.Azure.DTO;
+using Revit.Api.Azure.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Revit.Api.Azure.Models
+namespace Revit.Api.Azure.DTO
 {
     public static class DtoExtension
     {
@@ -437,6 +439,7 @@ namespace Revit.Api.Azure.Models
             result.name_FR = source.name_FR;
             result.name_NL = source.name_NL;
             result.name_EN = source.name_EN;
+           // result.Form = source.form;
 
             result.ID = source.screeningId;
 
@@ -466,6 +469,7 @@ namespace Revit.Api.Azure.Models
             result.name_FR = source.name_FR;
             result.name_NL = source.name_NL;
             result.name_EN = source.name_EN;
+            //result.form = source.Form;
 
             result.screeningId = source.ID;
 

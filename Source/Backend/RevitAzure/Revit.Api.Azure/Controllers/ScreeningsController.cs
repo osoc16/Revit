@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Revit.Api.Azure.Models;
+using Revit.Api.Azure.DTO;
 
 namespace Revit.Api.Azure.Controllers
 {
@@ -20,15 +21,24 @@ namespace Revit.Api.Azure.Controllers
         [ResponseType(typeof(DtoScreening))]
         public IHttpActionResult GetScreening(string search)
         {
-            ICollection<Screening> screen = db.Screenings.Where(c => c.code.Contains(search) ||
-                                                                            c.name_DE.Contains(search) ||
-                                                                            c.name_FR.Contains(search) ||
-                                                                            c.name_NL.Contains(search) ||
-                                                                            c.name_EN.Contains(search) ||
-                                                                            c.description_DE.Contains(search) ||
-                                                                            c.description_FR.Contains(search) ||
-                                                                            c.description_EN.Contains(search) ||
-                                                                            c.description_NL.Contains(search)).ToList();
+            ICollection<Screening> screen;
+            if (search ==null)
+            {
+                screen = db.Screenings.ToList();
+            }
+            else
+            {
+                screen = db.Screenings.Where(c => c.code.Contains(search) ||
+                                                     c.name_DE.Contains(search) ||
+                                                     c.name_FR.Contains(search) ||
+                                                     c.name_NL.Contains(search) ||
+                                                     c.name_EN.Contains(search) ||
+                                                     c.description_DE.Contains(search) ||
+                                                     c.description_FR.Contains(search) ||
+                                                     c.description_EN.Contains(search) ||
+                                                     c.description_NL.Contains(search)).ToList();
+            }
+
             ICollection<DtoScreening> screenToSend = new List<DtoScreening>();
             if (screen == null)
             {

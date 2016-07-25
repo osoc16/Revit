@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using Revit.Api.Azure.Models;
+using Revit.Api.Azure.DTO;
 
 namespace Revit.Api.Azure.Controllers
 {

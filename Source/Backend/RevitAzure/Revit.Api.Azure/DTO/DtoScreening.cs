@@ -1,38 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using Newtonsoft.Json;
+using Revit.Api.Azure.Models;
 
-namespace Revit.Api.Azure.Models
+namespace Revit.Api.Azure.DTO
 {
-    public class Screening
+    public class DtoScreening
     {
-
-
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public int screeningId { get; set; }
 
         public string code { get; set; }
-        
+
+        public string name { get; set; }
         public string name_FR { get; set; }
         public string name_NL { get; set; }
         public string name_EN { get; set; }
         public string name_DE { get; set; }
 
+        public string description { get; set; }
         public string description_FR { get; set; }
         public string description_NL { get; set; }
         public string description_EN { get; set; }
         public string description_DE { get; set; }
+        public Form form { get; set; }
 
-        public virtual Form Form { get; set; }
 
+        [JsonProperty(PropertyName = "juries")]
+        public ICollection<DtoJury> jugesList { get; set; }
 
-        public virtual ICollection<Jury> Judges { get; set; }
-
-        
-        public virtual ICollection<Candidate> Candidates { get; set; }
+        [JsonProperty(PropertyName = "candidates")]
+        public ICollection<DtoCandidate> candidateList { get; set; }
     }
 }

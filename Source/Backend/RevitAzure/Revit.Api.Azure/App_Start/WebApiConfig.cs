@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace Revit.Api.Azure
 {
@@ -10,6 +11,12 @@ namespace Revit.Api.Azure
         public static void Register(HttpConfiguration config)
         {
             // Configuration et services Web API
+
+
+            var cors = new EnableCorsAttribute("*", "*", "*");
+
+            config.EnableCors(cors);
+
 
             // Itinéraires Web API
             config.MapHttpAttributeRoutes();

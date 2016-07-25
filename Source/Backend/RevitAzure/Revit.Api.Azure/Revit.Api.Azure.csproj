@@ -91,6 +91,10 @@
       <HintPath>..\packages\System.IdentityModel.Tokens.Jwt.4.0.0\lib\net45\System.IdentityModel.Tokens.Jwt.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.3\lib\net45\System.Web.Cors.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -102,6 +106,10 @@
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.Cors, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Cors.5.2.3\lib\net45\System.Web.Http.Cors.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -184,6 +192,13 @@
     <Compile Include="Controllers\ScreeningsController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
+    <Compile Include="DTO\DtoCandidate.cs" />
+    <Compile Include="DTO\DtoCompetence.cs" />
+    <Compile Include="DTO\DtoDimension.cs" />
+    <Compile Include="DTO\DtoForm.cs" />
+    <Compile Include="DTO\DtoJury.cs" />
+    <Compile Include="DTO\DtoScore.cs" />
+    <Compile Include="DTO\DtoScreening.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -196,8 +211,7 @@
     <Compile Include="Models\Competence.cs" />
     <Compile Include="Models\DataContext.cs" />
     <Compile Include="Models\Dimension.cs" />
-    <Compile Include="Models\DtoClass.cs" />
-    <Compile Include="Models\DtoExtension.cs" />
+    <Compile Include="DTO\DtoExtension.cs" />
     <Compile Include="Models\Form.cs" />
     <Compile Include="Models\Jury.cs" />
     <Compile Include="Models\juryCandidateForm.cs" />
