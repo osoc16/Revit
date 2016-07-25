@@ -6343,13 +6343,9 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-right: 1rem; }
 
 .screening-page-content .results-container li.screening-result {
-  border-bottom: 0.1rem solid;
-  border-color: #ccc;
   padding: 0;
-  padding-bottom: 1rem; }
-  .screening-page-content .results-container li.screening-result:first-child {
-    border-top: 0.1rem solid;
-    border-color: #ccc; }
+  padding-bottom: 1rem;
+  margin-bottom: 1rem; }
   .screening-page-content .results-container li.screening-result .result-sub-title {
     font-size: 1.2rem; }
 
@@ -6371,5 +6367,21 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .screening-page-content #search-box {
   text-indent: 0.5rem; }
 
-.screening-page-content .screening-item .screening-title {
-  color: #03a9f4; }
+.screening-page-content .n-collapsible-content {
+  display: none; }
+
+.screening-page-content .screening-item {
+  padding: 1rem;
+  padding-bottom: 0;
+  margin-bottom: 0; }
+  .screening-page-content .screening-item .screening-title {
+    color: #03a9f4; }
+
+.screening-page-content .form-juries-container, .screening-page-content .form-candidates-container {
+  padding: 0; }
+  .screening-page-content .form-juries-container li, .screening-page-content .form-candidates-container li {
+    margin-bottom: 0.5rem; }
+    .screening-page-content .form-juries-container li div, .screening-page-content .form-candidates-container li div {
+      padding: 0.5rem;
+      background: #efefef;
+      width: 75%; }

@@ -13,28 +13,33 @@
 			{{ screenings.length }} results found
 		</div>
 	</div>
-	<div >
-		<ul class="row results-container">
-			<li class="col s12 m12 screening-result" ng-repeat="screening in screenings
+	<div class=" results-container" >
+
+	<div class="row">
+		
+
+		<ul >
+			<li class="col s12 m12 screening-result card" ng-repeat="screening in screenings
 				">
-				<div class="screening-item">
+				<div class="screening-item  n-collapsible-wrapper row">
 					<div class="content col l12" >
 						<h5 class="screening-title" >{{ screening.name }}
+						<i class="material-icons n-collapsible-toggler right">more_vert</i>
 						</h5>
 						<p class="">{{ screening.description}}</p>
 					</div>
-					<div class="extra-content">
+					<div class="extra-content n-collapsible-content col l12">
 						
 						<div class="form-juries-container col l6">
 							<h5 class="result-sub-title">Juries</h5>
 							<ul>
-								<li ng-repeat="jury in screening.form.juries">{{jury.firstName}} {{jury.lastName}}</li>
+								<li ng-repeat="jury in screening.form.juries"> <div>{{jury.firstName}} {{jury.lastName}}</div></li>
 							</ul>
 						</div>
 						<div class="form-candidates-container col l6">
 							<h5 class="result-sub-title" >Candidates</h5>
 							<ul>
-								<li ng-repeat="candidate in screening.form.candidates">{{candidate.firstName}} {{candidate.lastName}}</li>
+								<li ng-repeat="candidate in screening.form.candidates"><div>{{candidate.firstName}} {{candidate.lastName}}</div></li>
 							</ul>
 						</div>
 						
@@ -42,6 +47,7 @@
 				</div>
 			</li>
 		</ul>
+			</div>
 	</div>
 </div>
 <script>
