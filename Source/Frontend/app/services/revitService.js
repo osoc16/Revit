@@ -1,12 +1,5 @@
 (function() {
 
-
-
-
-
-
-
-
     var revitService = function($http, $log) {
 
         /* Variables */
@@ -16,7 +9,6 @@
         //
         //
         //
-
         var getEvaluationForm = function(formId, juryId, candidateId) {
 
             $log.info("=========API CALL===========")
@@ -27,7 +19,6 @@
                 .then(function(response) {
                     return response.data;
                 });
-
         }
 
         var saveEvaluationForm = function(formId, juryId, candidateId, data) {
@@ -41,7 +32,6 @@
             });
         }
 
-
         var getGeneralForm = function(formId) {
 
             $log.info("=========API CALL===========")
@@ -54,9 +44,7 @@
                 });
         }
 
-
         var saveGeneralForm = function(formId, data) {
-
 
             $log.info("=========API CALL===========")
             var callUrl = apiBaseUrl + "forms/" + formId;
@@ -69,7 +57,6 @@
                     return response.data;
                 });
         }
-
 
         var getScreenings = function(searchTerm) {
             $log.info("=========API CALL===========")
@@ -97,6 +84,7 @@
 
             }
         }
+
         var getGeneralFormMock = function(formId) {
             var mockObject = mockRepository.generalForm;
 
@@ -111,6 +99,7 @@
 
         var getEvaluationFormMock = function(formId, juryId, candidateId) {
             var mockObject = mockRepository.evaluationForm;
+
             return {
                 then: function(callback) {
                     return callback(mockObject);
@@ -119,7 +108,6 @@
         }
 
         var saveEvaluationFormMock = function(formId, juryId, candidateId, data) {
-
             return {
                 then: function(callback) {
                     return callback(null);
@@ -139,7 +127,6 @@
         }
 
         var mockMode = true;
-
 
         if (mockMode) {
 
