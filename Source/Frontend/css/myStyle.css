@@ -6342,10 +6342,21 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .form-page-content .candidate-jury-chip {
   margin-right: 1rem; }
 
+.screening-page-content .results-container li.screening-result {
+  border-bottom: 0.1rem solid;
+  border-color: #ccc;
+  padding: 0;
+  padding-bottom: 1rem; }
+  .screening-page-content .results-container li.screening-result:first-child {
+    border-top: 0.1rem solid;
+    border-color: #ccc; }
+  .screening-page-content .results-container li.screening-result .result-sub-title {
+    font-size: 1.2rem; }
+
 .screening-page-content .search-btn {
   margin-top: 0rem;
   margin-top: 1rem;
-  height: 47px;
+  height: 45px;
   padding: 0;
   padding-top: 0.5rem;
   box-sizing: border-box; }
@@ -6354,8 +6365,8 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-top: 2rem; }
 
 .screening-page-content input {
-  border: 0.1rem solid;
-  border-color: #ccc; }
+  border: none;
+  background-color: #efefef; }
 
 .screening-page-content #search-box {
   text-indent: 0.5rem; }

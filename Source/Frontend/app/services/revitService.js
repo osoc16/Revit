@@ -80,12 +80,514 @@
         //
         //
         var getScreeningsMock = function(searchTerm) {
-            return [{
 
-                    screeningId: 1,
-                    name: "Screening 1",
+            var mockObject = [{
+                "screeningId": 1,
+                "code": "c1",
+                "name": "scr_1en",
+                "name_FR": "scr_1fr",
+                "name_NL": "scr_1nl",
+                "name_EN": "scr_1en",
+                "name_DE": "scr_1de",
+                "description": "desc1en",
+                "description_FR": "desc1fr",
+                "description_NL": "desc1nl",
+                "description_EN": "desc1en",
+                "description_DE": "desc1de",
+                "form": {
+                    "maxCandidates": 3,
+                    "formId": 1,
+                    "name": "form 1",
+                    "code": "code1",
+                    "description": "decription en 1",
+                    "description_FR": "decription fr 1",
+                    "description_NL": "decription nl 1",
+                    "description_EN": "decription en 1",
+                    "description_DE": "decription de 1",
+                    "scoreMin": null,
+                    "scoreMax": null,
+                    "total": null,
+                    "score": null,
+                    "finalScore": null,
+                    "finalScoreMax": 6,
+                    "finalScoreMin": 1,
+                    "candidate": null,
+                    "competences": [{
+                        "competenceId": 1,
+                        "name": "Competence en 1",
+                        "name_FR": "Competence fr 1",
+                        "name_EN": "Competence en 1",
+                        "name_NL": "Competence nl 1",
+                        "name_DE": "Competence de 1",
+                        "code": "comp1",
+                        "description": "desciption en 1",
+                        "description_FR": "desciption fr 1",
+                        "description_NL": "desciption nl 1",
+                        "description_EN": "desciption en 1",
+                        "description_DE": "desciption de 1",
+                        "score": null,
+                        "status": "",
+                        "statusMessage": "",
+                        "statusMessage_FR": "",
+                        "statusMessage_NL": "",
+                        "statusMessage_EN": "",
+                        "statusMessage_DE": "",
+                        "dimensions": [{
+                            "dimensionId": 1,
+                            "code": "dim1",
+                            "name": "name en 1",
+                            "name_FR": "name fr 1",
+                            "name_EN": "name en 1",
+                            "name_NL": "name nl 1",
+                            "name_DE": "name de 1",
+                            "description": "desciption en 1",
+                            "description_FR": "desciption fr 1",
+                            "description_NL": "desciption nl 1",
+                            "description_EN": "desciption en 1",
+                            "description_DE": "desciption de 1",
+                            "notObserved": false,
+                            "score": null,
+                            "scores": [{
+                                "scoreId": 2,
+                                "result": 5,
+                                "finalResult": 5,
+                                "formId": 2,
+                                "dimensionId": 1,
+                                "competenceId": 1,
+                                "candidateId": 1,
+                                "juryId": null
+                            }]
+                        }, {
+                            "dimensionId": 2,
+                            "code": "dim2",
+                            "name": "name en 2",
+                            "name_FR": "name fr 2",
+                            "name_EN": "name en 2",
+                            "name_NL": "name nl 2",
+                            "name_DE": "name de 2",
+                            "description": "desciption en 2",
+                            "description_FR": "desciption fr 2",
+                            "description_NL": "desciption nl 2",
+                            "description_EN": "desciption en 2",
+                            "description_DE": "desciption de 2",
+                            "notObserved": false,
+                            "score": null,
+                            "scores": []
+                        }, {
+                            "dimensionId": 3,
+                            "code": "dim3",
+                            "name": "name en 3",
+                            "name_FR": "name fr 3",
+                            "name_EN": "name en 3",
+                            "name_NL": "name nl 3",
+                            "name_DE": "name de 3",
+                            "description": "desciption en 3",
+                            "description_FR": "desciption fr 3",
+                            "description_NL": "desciption nl 3",
+                            "description_EN": "desciption en 3",
+                            "description_DE": "desciption de 3",
+                            "notObserved": false,
+                            "score": null,
+                            "scores": []
+                        }],
+                        "weight": 1,
+                        "comment": "comment 1"
+                    }, {
+                        "competenceId": 3,
+                        "name": "Competence en 3",
+                        "name_FR": "Competence fr 3",
+                        "name_EN": "Competence en 3",
+                        "name_NL": "Competence nl 3",
+                        "name_DE": "Competence de 3",
+                        "code": "comp3",
+                        "description": "desciption en 3",
+                        "description_FR": "desciption fr 3",
+                        "description_NL": "desciption nl 3",
+                        "description_EN": "desciption en 3",
+                        "description_DE": "desciption de 3",
+                        "score": null,
+                        "status": "",
+                        "statusMessage": "",
+                        "statusMessage_FR": "",
+                        "statusMessage_NL": "",
+                        "statusMessage_EN": "",
+                        "statusMessage_DE": "",
+                        "dimensions": [{
+                            "dimensionId": 1,
+                            "code": "dim1",
+                            "name": "name en 1",
+                            "name_FR": "name fr 1",
+                            "name_EN": "name en 1",
+                            "name_NL": "name nl 1",
+                            "name_DE": "name de 1",
+                            "description": "desciption en 1",
+                            "description_FR": "desciption fr 1",
+                            "description_NL": "desciption nl 1",
+                            "description_EN": "desciption en 1",
+                            "description_DE": "desciption de 1",
+                            "notObserved": false,
+                            "score": null,
+                            "scores": [{
+                                "scoreId": 2,
+                                "result": 5,
+                                "finalResult": 5,
+                                "formId": 2,
+                                "dimensionId": 1,
+                                "competenceId": 1,
+                                "candidateId": 1,
+                                "juryId": null
+                            }]
+                        }, {
+                            "dimensionId": 4,
+                            "code": "dim4",
+                            "name": "name en 4",
+                            "name_FR": "name fr 4",
+                            "name_EN": "name en 4",
+                            "name_NL": "name nl 4",
+                            "name_DE": "name de 4",
+                            "description": "desciption en 4",
+                            "description_FR": "desciption fr 4",
+                            "description_NL": "desciption nl 4",
+                            "description_EN": "desciption en 4",
+                            "description_DE": "desciption de 4",
+                            "notObserved": false,
+                            "score": null,
+                            "scores": []
+                        }],
+                        "weight": 1,
+                        "comment": "comment 3"
+                    }, {
+                        "competenceId": 4,
+                        "name": "Competence en 4",
+                        "name_FR": "Competence fr 4",
+                        "name_EN": "Competence en 4",
+                        "name_NL": "Competence nl 4",
+                        "name_DE": "Competence de 4",
+                        "code": "comp4",
+                        "description": "desciption en 4",
+                        "description_FR": "desciption fr 4",
+                        "description_NL": "desciption nl 4",
+                        "description_EN": "desciption en 4",
+                        "description_DE": "desciption de 4",
+                        "score": null,
+                        "status": "",
+                        "statusMessage": "",
+                        "statusMessage_FR": "",
+                        "statusMessage_NL": "",
+                        "statusMessage_EN": "",
+                        "statusMessage_DE": "",
+                        "dimensions": [],
+                        "weight": 1,
+                        "comment": "comment 4"
+                    }],
+                    "candidates": [{
+                        "candidateId": 1,
+                        "name": "ln1 fn1",
+                        "firstName": "fn1",
+                        "lastName": "ln1",
+                        "nationalNumber": "nN1",
+                        "juries": [{
+                            "juryId": 1,
+                            "name": null,
+                            "firstName": "JF1",
+                            "lastName": "JL1"
+                        }, {
+                            "juryId": 4,
+                            "name": null,
+                            "firstName": "JF3",
+                            "lastName": "JL3"
+                        }, {
+                            "juryId": 5,
+                            "name": null,
+                            "firstName": "JF4",
+                            "lastName": "JL4"
+                        }]
+                    }, {
+                        "candidateId": 2,
+                        "name": "ln2 fn2",
+                        "firstName": "fn2",
+                        "lastName": "ln2",
+                        "nationalNumber": "nN2",
+                        "juries": null
+                    }],
+                    "juries": [{
+                        "juryId": 1,
+                        "name": null,
+                        "firstName": "JF1",
+                        "lastName": "JL1"
+                    }, {
+                        "juryId": 4,
+                        "name": null,
+                        "firstName": "JF3",
+                        "lastName": "JL3"
+                    }, {
+                        "juryId": 5,
+                        "name": null,
+                        "firstName": "JF4",
+                        "lastName": "JL4"
+                    }],
+                    "name_DE": "nde1",
+                    "name_FR": "nf1",
+                    "name_NL": "nnl1",
+                    "name_EN": "nen1"
+                },
+                "juries": [{
+                    "juryId": 1,
+                    "name": null,
+                    "firstName": "JF1",
+                    "lastName": "JL1"
+                }, {
+                    "juryId": 3,
+                    "name": null,
+                    "firstName": "JF2",
+                    "lastName": "JL2"
+                }],
+                "candidates": [{
+                    "candidateId": 1,
+                    "name": "ln1 fn1",
+                    "firstName": "fn1",
+                    "lastName": "ln1",
+                    "nationalNumber": "nN1",
+                    "juries": null
+                }, {
+                    "candidateId": 2,
+                    "name": "ln2 fn2",
+                    "firstName": "fn2",
+                    "lastName": "ln2",
+                    "nationalNumber": "nN2",
+                    "juries": null
+                }]
+            }, {
+                "screeningId": 2,
+                "code": "c2",
+                "name": "scr_2en",
+                "name_FR": "scr_2fr",
+                "name_NL": "scr_2nl",
+                "name_EN": "scr_2en",
+                "name_DE": "scr_2de",
+                "description": "desc2en",
+                "description_FR": "desc2fr",
+                "description_NL": "desc2nl",
+                "description_EN": "desc2en",
+                "description_DE": "desc2de",
+                "form": {
+                    "maxCandidates": 3,
+                    "formId": 2,
+                    "name": "etjetjetj",
+                    "code": "code2",
+                    "description": "decription en 2",
+                    "description_FR": "decription fr 2",
+                    "description_NL": "decription nl 2",
+                    "description_EN": "decription en 2",
+                    "description_DE": "decription de 2",
+                    "scoreMin": null,
+                    "scoreMax": null,
+                    "total": null,
+                    "score": null,
+                    "finalScore": null,
+                    "finalScoreMax": 6,
+                    "finalScoreMin": 1,
+                    "candidate": null,
+                    "competences": [{
+                        "competenceId": 1,
+                        "name": "Competence en 1",
+                        "name_FR": "Competence fr 1",
+                        "name_EN": "Competence en 1",
+                        "name_NL": "Competence nl 1",
+                        "name_DE": "Competence de 1",
+                        "code": "comp1",
+                        "description": "desciption en 1",
+                        "description_FR": "desciption fr 1",
+                        "description_NL": "desciption nl 1",
+                        "description_EN": "desciption en 1",
+                        "description_DE": "desciption de 1",
+                        "score": null,
+                        "status": "",
+                        "statusMessage": "",
+                        "statusMessage_FR": "",
+                        "statusMessage_NL": "",
+                        "statusMessage_EN": "",
+                        "statusMessage_DE": "",
+                        "dimensions": [{
+                            "dimensionId": 1,
+                            "code": "dim1",
+                            "name": "name en 1",
+                            "name_FR": "name fr 1",
+                            "name_EN": "name en 1",
+                            "name_NL": "name nl 1",
+                            "name_DE": "name de 1",
+                            "description": "desciption en 1",
+                            "description_FR": "desciption fr 1",
+                            "description_NL": "desciption nl 1",
+                            "description_EN": "desciption en 1",
+                            "description_DE": "desciption de 1",
+                            "notObserved": false,
+                            "score": null,
+                            "scores": [{
+                                "scoreId": 2,
+                                "result": 5,
+                                "finalResult": 5,
+                                "formId": 2,
+                                "dimensionId": 1,
+                                "competenceId": 1,
+                                "candidateId": 1,
+                                "juryId": null
+                            }]
+                        }, {
+                            "dimensionId": 2,
+                            "code": "dim2",
+                            "name": "name en 2",
+                            "name_FR": "name fr 2",
+                            "name_EN": "name en 2",
+                            "name_NL": "name nl 2",
+                            "name_DE": "name de 2",
+                            "description": "desciption en 2",
+                            "description_FR": "desciption fr 2",
+                            "description_NL": "desciption nl 2",
+                            "description_EN": "desciption en 2",
+                            "description_DE": "desciption de 2",
+                            "notObserved": false,
+                            "score": null,
+                            "scores": []
+                        }, {
+                            "dimensionId": 3,
+                            "code": "dim3",
+                            "name": "name en 3",
+                            "name_FR": "name fr 3",
+                            "name_EN": "name en 3",
+                            "name_NL": "name nl 3",
+                            "name_DE": "name de 3",
+                            "description": "desciption en 3",
+                            "description_FR": "desciption fr 3",
+                            "description_NL": "desciption nl 3",
+                            "description_EN": "desciption en 3",
+                            "description_DE": "desciption de 3",
+                            "notObserved": false,
+                            "score": null,
+                            "scores": []
+                        }],
+                        "weight": 1,
+                        "comment": "comment 1"
+                    }, {
+                        "competenceId": 5,
+                        "name": "Competence en 5",
+                        "name_FR": "Competence fr 5",
+                        "name_EN": "Competence en 5",
+                        "name_NL": "Competence nl 5",
+                        "name_DE": "Competence de 5",
+                        "code": "comp5",
+                        "description": "desciption en 5",
+                        "description_FR": "desciption fr 5",
+                        "description_NL": "desciption nl 5",
+                        "description_EN": "desciption en 5",
+                        "description_DE": "desciption de 5",
+                        "score": null,
+                        "status": "",
+                        "statusMessage": "",
+                        "statusMessage_FR": "",
+                        "statusMessage_NL": "",
+                        "statusMessage_EN": "",
+                        "statusMessage_DE": "",
+                        "dimensions": [],
+                        "weight": 1,
+                        "comment": "comment 5"
+                    }],
+                    "candidates": [{
+                        "candidateId": 1,
+                        "name": "ln1 fn1",
+                        "firstName": "fn1",
+                        "lastName": "ln1",
+                        "nationalNumber": "nN1",
+                        "juries": null
+                    }, {
+                        "candidateId": 4,
+                        "name": "ln4 fn4",
+                        "firstName": "fn4",
+                        "lastName": "ln4",
+                        "nationalNumber": "nN4",
+                        "juries": null
+                    }],
+                    "juries": [{
+                        "juryId": 3,
+                        "name": null,
+                        "firstName": "JF2",
+                        "lastName": "JL2"
+                    }],
+                    "name_DE": "nde2",
+                    "name_FR": "nfr2",
+                    "name_NL": "nnl2",
+                    "name_EN": "nen2"
+                },
+                "juries": [{
+                    "juryId": 1,
+                    "name": null,
+                    "firstName": "JF1",
+                    "lastName": "JL1"
+                }],
+                "candidates": [{
+                    "candidateId": 1,
+                    "name": "ln1 fn1",
+                    "firstName": "fn1",
+                    "lastName": "ln1",
+                    "nationalNumber": "nN1",
+                    "juries": null
+                }, {
+                    "candidateId": 3,
+                    "name": "ln3 fn3",
+                    "firstName": "fn3",
+                    "lastName": "ln3",
+                    "nationalNumber": "nN3",
+                    "juries": null
+                }]
+            }, {
+                "screeningId": 3,
+                "code": "c2",
+                "name": "scr_3en",
+                "name_FR": "scr_3fr",
+                "name_NL": "scr_3nl",
+                "name_EN": "scr_3en",
+                "name_DE": "scr_3de",
+                "description": "desc3en",
+                "description_FR": "desc3fr",
+                "description_NL": "desc3nl",
+                "description_EN": "desc3en",
+                "description_DE": "desc3de",
+                "form": {
+                    "maxCandidates": 3,
+                    "formId": 3,
+                    "name": "form 3",
+                    "code": "code3",
+                    "description": "decription en 3",
+                    "description_FR": "decription fr 3",
+                    "description_NL": "decription nl 3",
+                    "description_EN": "decription en 3",
+                    "description_DE": "decription de 3",
+                    "scoreMin": null,
+                    "scoreMax": null,
+                    "total": null,
+                    "score": null,
+                    "finalScore": null,
+                    "finalScoreMax": 6,
+                    "finalScoreMin": 1,
+                    "candidate": null,
+                    "competences": [],
+                    "candidates": [],
+                    "juries": [],
+                    "name_DE": "nde3",
+                    "name_FR": "nfr3",
+                    "name_NL": "nnl3",
+                    "name_EN": "nen3"
+                },
+                "juries": [],
+                "candidates": []
+            }];
+
+            return {
+                then: function(callback) {
+                    return callback(mockObject);
                 }
-            ];
+
+            }
         }
         var getGeneralFormMock = function(formId) {
             var mockObject = {
@@ -459,8 +961,6 @@
 
 
         }
-
-
     };
 
     var module = angular.module("RevitApp");

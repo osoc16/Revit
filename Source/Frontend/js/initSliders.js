@@ -1,7 +1,5 @@
 (function() {
     $(document).ready(function() {
-
-
     	$(".my-ion-slider").each(function(){
 		    $(this).ionRangeSlider({
             /*

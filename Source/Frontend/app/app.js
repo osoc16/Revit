@@ -28,7 +28,7 @@
                 templateUrl: "app/partials/form.html",
                 controller: "FormController"
             })
-            .when("/test/screening",{
+            .when("/screening",{
                      templateUrl: "app/partials/screening.html",
                 controller: "ScreeningController"
             })

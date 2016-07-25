@@ -2,7 +2,9 @@
 
     var app = angular.module("RevitApp");
 
-    var ScreeningController = function($scope, revitService, $log) {
+    var ScreeningController = function($scope, revitService,authenticationService, $log) {
+
+        $scope.currentUserId= authenticationService.currentUserId;
 
         $scope.test = "blabla";
 
