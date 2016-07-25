@@ -6298,6 +6298,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-top: 0.2rem;
   border-width: 0.1rem; }
 
+.form-page-content textarea {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem; }
+
 .form-page-content .competence-card, .form-page-content .dimension-card {
   border-top: 0.3rem solid;
   border-color: #03a9f4; }
@@ -6334,3 +6338,24 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 
 .form-page-content .candidate-jury-chip {
   margin-right: 1rem; }
+
+.screening-page-content .search-btn {
+  margin-top: 0rem;
+  margin-top: 1rem;
+  height: 47px;
+  padding: 0;
+  padding-top: 0.5rem;
+  box-sizing: border-box; }
+
+.screening-page-content .search-container {
+  margin-top: 2rem; }
+
+.screening-page-content input {
+  border: 0.1rem solid;
+  border-color: #ccc; }
+
+.screening-page-content #search-box {
+  text-indent: 0.5rem; }
+
+.screening-page-content .screening-item .screening-title {
+  color: #03a9f4; }

@@ -2,14 +2,93 @@
 
     var app = angular.module("RevitApp");
 
-    var EvaluationController = function($scope, $location, revitService, selorRuleService, $log) {
+    var EvaluationController = function($scope, $routeParams, $location, revitService, github, selorRuleService, $log) {
 
-        //Get form from service
-        $scope.form = revitService.getForm();
+
+        var selectedCandidate = null;
+
+        $scope.setCompetenceStatus = function(toUpdateCompetence) {
+            if (isNaN(toUpdateCompetence.score)) {
+
+                toUpdateCompetence.status = "neutral";
+                toUpdateCompetence.statusMessage = "Not evaluated";
+
+                return;
+
+            }
+
+            if (toUpdateCompetence.score == "null") {
+                toUpdateCompetence.score = null;
+            }
+
+            if (!toUpdateCompetence.comment) {
+
+                toUpdateCompetence.status = "warning";
+                toUpdateCompetence.statusMessage = "No comment written";
+                return;
+            }
+
+
+            toUpdateCompetence.status = "success";
+            toUpdateCompetence.statusMessage = "Evaluated";
+
+
+        }
+
+        //API callback Functions
+        var onGetEvaluationForm = function(data) {
+
+            $log.info("Evaulation form fethced:");
+            $log.info(data);
+            $scope.form = data;
+
+            //Set status for each competence
+            for (var i in $scope.form.competences) {
+                $scope.setCompetenceStatus($scope.form.competences[i]);
+            }
+
+
+            $(document).ready(function() {
+                $('select').material_select();
+            });
+
+        }
+
+        var onSaveEvaluationForm = function(data) {
+
+            $log.info("Form has been saved successfully");
+
+        }
+
+        var onApiCallError = function(reason) {
+            $scope.error = reason;
+        }
+
+        revitService.getEvaluationForm($routeParams.formId, $routeParams.juryId, $routeParams.candidateId).then(onGetEvaluationForm, onApiCallError);
+
 
         $scope.competenceEditMode = false;
         $scope.currentCompetenceIndex = null;
 
+
+        $scope.saveEvaluationForm = function() {
+
+            revitService.saveEvaluationForm($routeParams.formId, $routeParams.juryId, $routeParams.candidateId, $scope.form).then(onSaveEvaluationForm, onApiCallError);
+
+        }
+
+        $scope.goToCandidateEvaluationPage = function() {
+
+
+            var cId = $(".candidate-selection-dropdown option:selected").val();
+
+            alert(cId);
+
+            $location.path("/evaluation/juries/" + $routeParams.juryId + "/forms/" + $routeParams.formId + "/candidates/" + cId);
+
+        }
+
+        //User interaction functions
         $scope.editCompetence = function(competenceId) {
             for (var i in $scope.form.competences) {
 
@@ -56,6 +135,8 @@
             revitService.saveForm($scope.form);
         }
 
+
+
         $scope.competenceEvaluated = function() {
 
 
@@ -68,31 +149,15 @@
 
 
             /* VALIDATION */
+
+
             var currentCompetence = $scope.form.competences[$scope.currentCompetenceIndex];
 
-            if (isNaN(currentCompetence.score)) {
-
-                currentCompetence.status = "neutral";
-                currentCompetence.statusMessage = "Not evaluated";
-
-                return;
-
-            }
-
-
-
-            if (!currentCompetence.comment) {
-
-                currentCompetence.status = "warning";
-                currentCompetence.statusMessage = "No comment written";
-                return;
-            }
-
-
-            currentCompetence.status = "success";
-            currentCompetence.statusMessage = "Evaluated";
+            $scope.setCompetenceStatus(currentCompetence);
 
             $log.info("comp eval");
+
+
 
         }
 

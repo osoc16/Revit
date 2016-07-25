@@ -8,17 +8,27 @@
                 templateUrl: "app/partials/main.html",
                 controller: "MainController"
             })
-            .when("/evaluation",
+            .when("/evaluation/juries/:juryId/forms/:formId/candidates/:candidateId",
             {
-        	  	templateUrl: "app/partials/evaluation.html",
+                templateUrl: "app/partials/evaluation.html",
                 controller: "EvaluationController"
             })
-            .when("/form",
+            .when("/admin/forms/:formId",
             {
                 templateUrl: "app/partials/form.html",
                 controller: "FormController"
             })
-            .when("/screening",{
+            .when("/test/evaluation",
+            {
+        	  	templateUrl: "app/partials/evaluation.html",
+                controller: "EvaluationController"
+            })
+            .when("/test/form",
+            {
+                templateUrl: "app/partials/form.html",
+                controller: "FormController"
+            })
+            .when("/test/screening",{
                      templateUrl: "app/partials/screening.html",
                 controller: "ScreeningController"
             })

@@ -1,51 +1,92 @@
 (function() {
 
-    var revitService = function($http) {
+    var revitService = function($http, $log) {
 
         /* Variables */
-        var apiBaseUrl = "";
+        var apiBaseUrl = "http://revitapiazure20160717113757.azurewebsites.net/api/";
 
-        /*
-      var getUser = function(username){
-            return $http.get("https://api.github.com/users/" + username)
-                        .then(function(response){
-                           return response.data; 
-                        });
-      };
-      
-      var getRepos = function(user){
-            return $http.get(user.repos_url)  
-                        .then(function(response){
-                            return response.data;
-                        });
-      };*/
+        //API Functions
+        //
+        //
+        //
 
+        var getEvaluationForm = function(formId, juryId, candidateId) {
 
-        var getScreenings= function(searchTerm){
+            $log.info("=========API CALL===========")
+            var callUrl = apiBaseUrl + "evaluations/juries/" + juryId + "/forms/" + formId + "/candidates/" + candidateId;
+            $log.info("Url: " + callUrl);
 
-
-            return [{
-
-                    screeningId:1,
-                    name:"Screening 1",
-                    
-
-
-
-            }
-
-
-            ];
-
+            return $http.get(callUrl)
+                .then(function(response) {
+                    return response.data;
+                });
 
         }
 
+        var saveEvaluationForm = function(formId, juryId, candidateId, data) {
 
-        /*Functions*/
+            $log.info("=========API CALL===========")
+            var callUrl = apiBaseUrl + "evaluations/juries/" + juryId + "/forms/" + formId + "/candidates/" + candidateId;
+            $log.info("Url: " + callUrl);
+
+
+            return $http.put(callUrl, data).then(function(response) {
+                return response.data;
+            });
+        }
+
 
         var getGeneralForm = function(formId) {
 
-            return {
+            $log.info("=========API CALL===========")
+            var callUrl = apiBaseUrl + "forms/" + formId;
+            $log.info("Url: " + callUrl);
+
+            return $http.get(callUrl)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+
+        var saveGeneralForm = function(formId, data) {
+
+
+            $log.info("=========API CALL===========")
+            var callUrl = apiBaseUrl + "forms/" + formId;
+            $log.info("Url: " + callUrl);
+
+            return $http.put(callUrl, data)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        var getScreenings = function(searchTerm) {
+            $log.info("=========API CALL===========")
+            var callUrl = apiBaseUrl + "screenings/?search=" + searchTerm;
+            $log.info("Url: " + callUrl);
+
+            return $http.get(callUrl)
+                .then(function(response) {
+                    return response.data;
+                });
+        }
+
+        //Mock API Functions
+        //
+        //
+        //
+        var getScreeningsMock = function(searchTerm) {
+            return [{
+
+                    screeningId: 1,
+                    name: "Screening 1",
+                }
+            ];
+        }
+        var getGeneralFormMock = function(formId) {
+            var mockObject = {
                 name: "Test eval form",
 
                 description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi odio, amet doloremque animi id ex autem inventore delectus consectetur ipsam, asperiores fugiat nam magnam fugit. Commodi, pariatur odio voluptas eum.",
@@ -116,7 +157,6 @@
                     , {
                         name: "Competence 3",
                         competenceId: 3,
-
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
 
                     }, {
@@ -140,20 +180,20 @@
 
                     {
                         firstName: "Sarah",
-                        lastName:"Van de Velde",
+                        lastName: "Van de Velde",
                         candidateId: 2,
-                        juries:[]
+                        juries: []
                     }, {
                         firstName: "Peter Janssens",
                         candidateId: 3,
-                        juries:[]
+                        juries: []
                     },
 
                     {
                         firstName: "Jan",
-                        lastName:"Van de Velde",
+                        lastName: "Van de Velde",
                         candidateId: 4,
-                        juries:[]
+                        juries: []
                     }
 
                 ],
@@ -162,32 +202,35 @@
                     {
                         firstName: "Jennifer",
 
-                        lastName:"De Groote",
+                        lastName: "De Groote",
                         juryId: 2
                     }, {
                         firstName: "Peter",
 
-                        lastName:"Janssens",
+                        lastName: "Janssens",
                         juryId: 3
                     },
 
                     {
                         firstName: "Tom",
-                        lastName:"Pieters",
+                        lastName: "Pieters",
                         juryId: 4
                     }
 
                 ],
-
             };
 
+            return {
+                then: function(callback) {
+                    return callback(mockObject);
+                }
+            }
+
+            return
         }
 
-
-
-        var getForm = function(formId, juryId, candidateId) {
-
-            return {
+        var getEvaluationFormMock = function(formId, juryId, candidateId) {
+            var mockObject = {
                 name: "Test eval form",
 
                 description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi odio, amet doloremque animi id ex autem inventore delectus consectetur ipsam, asperiores fugiat nam magnam fugit. Commodi, pariatur odio voluptas eum.",
@@ -290,6 +333,30 @@
                         name: "Competence 3",
                         competenceId: 3,
                         status: "neutral",
+
+                        dimensions: [{
+                            name: "Dimension 1.1 ",
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
+                            score: null
+
+                        }, {
+                            name: "Dimension 1.2 ",
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
+                            score: null
+                        }, {
+                            name: "Dimension 1.3 ",
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
+
+                            score: null
+
+                        }, {
+                            name: "Dimension 1.4 ",
+                            description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur distinctio eum expedita facere, dolorem id impedit dolore deleniti laborum aspernatur cumque maiores voluptatibus esse ipsum vero, alias qui at sint.",
+
+                            score: null
+
+                        }],
+
                         statusMessage: "Not evaluated yet",
                         description: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptates accusantium deserunt veniam. Repudiandae expedita error facilis tempora maiores voluptate accusamus incidunt nemo necessitatibus. Nihil modi nulla officia corporis perferendis a."
 
@@ -330,19 +397,67 @@
                     }
 
                 ]
+            }
+
+            return {
+                then: function(callback) {
+                    return callback(mockObject);
+                }
+            }
+        }
+
+        var saveEvaluationFormMock = function(formId, juryId, candidateId, data) {
+
+            return {
+                then: function(callback) {
+                    return callback(null);
+                }
+
+            }
+        }
+
+        var saveGeneralFormMock = function(formId, data) {
+
+            return {
+                then: function(callback) {
+                    return callback(null);
+                }
+
+            }
+        }
+
+        var mockMode = false;
+
+
+        if (mockMode) {
+
+            //MockService API return
+            return {
+
+                getGeneralForm: getGeneralFormMock,
+                getEvaluationForm: getEvaluationFormMock,
+                getScreenings: getScreeningsMock,
+                saveEvaluationForm: saveEvaluationFormMock,
+                saveGeneralForm: saveGeneralFormMock
             };
+
+
+        } else {
+
+            //Service API return
+            return {
+
+                getGeneralForm: getGeneralForm,
+                getEvaluationForm: getEvaluationForm,
+                getScreenings: getScreenings,
+                saveEvaluationForm: saveEvaluationForm,
+                saveGeneralForm: saveGeneralForm
+
+            };
+
 
         }
 
-
-
-
-        //Service API return
-        return {
-
-            getGeneralForm: getGeneralForm,
-            getForm: getForm
-        };
 
     };
 

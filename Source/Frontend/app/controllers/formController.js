@@ -2,14 +2,41 @@
 
     var app = angular.module("RevitApp");
 
-    var FormController = function($scope, $location, revitService, $log) {
+    var FormController = function($scope,$routeParams, $location, revitService, $log) {
 
-        $scope.form = revitService.getGeneralForm();
+
+        //Data fetch functions
+        var onGetGeneralForm=function(data){
+            $scope.form = data;
+            $log.info(data);
+
+                    $(document).ready(function() {
+                $('select').material_select();
+            });
+        }
+
+        var onSaveGeneralForm=function(data){
+
+            $log.info("Form successfully saved");
+
+        }
+
+        var onApiCallError=function(reason){
+            $scope.error=reason;
+        }
+
+        revitService.getGeneralForm($routeParams.formId).then(onGetGeneralForm,onApiCallError);
 
         $scope.competenceEditMode = false;
 
         $scope.currentCompetenceIndex = null;
 
+
+        $scope.saveGeneralForm= function(){
+
+
+            revitService.saveGeneralForm($routeParams.formId)
+        }
 
 
         $scope.toggleCompetenceEditMode = function() {
@@ -136,6 +163,11 @@
             if (!alreadyContainsJury) {
 
                 $log.info(candidate.firstName + " got jury " + selectedJury.firstName + " assigned");
+
+                if(!candidate.juries){
+                    candidate.juries=[];
+                }
+
                 candidate.juries.push(selectedJury);
             }
 
