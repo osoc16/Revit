@@ -1,0 +1,81 @@
+<!-- Form Creation Start -->
+<div ng-hide="competenceEditMode" >
+	<div class="row" >
+		<div class="divider"></div>
+	
+		<div class="col m12 l6 s12">
+
+		</div>
+	</div>
+	<div class="row">
+		<div class="input-field col s6">
+			<input ng-model="form.name" id="form-name-input" type="text" class="validate" required>
+			<label class="active" for="form-name-input">Name</label>
+		</div>
+	</div>
+</div>
+<!-- Form Creation End -->
+<!-- Form Competences Overview Start -->
+<div ng-hide="competenceEditMode">
+	<div class="divider"></div>
+	<div class="row" >
+		<div class="col m12 l12 s12">
+			<h4 class="page-title valign">Competences </h4>
+			<div class="row">
+				<div ng-repeat="competence in form.competences" class="col s12 m6 l4">
+					<div class="card competence-card {{competence.status}}">
+						<div class="card-content">
+							<a ng-click="editCompetence($index);toggleCompetenceEditMode()" class="btn-floating right btn-small waves-effect waves-light  tooltipped" data-position="top" data-delay="50" data-tooltip="Edit competence"><i class="material-icons">edit</i></a>
+							<a ng-click="deleteCompetence($index)" class="btn-floating delete-competence-btn red right btn-small waves-effect waves-light  tooltipped" data-position="top" data-delay="50" data-tooltip="Delete Competence"><i class="material-icons">delete</i></a>
+							<span class="card-title">{{ competence.name }}</span>
+							<p> {{competence.description}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<a ng-click="addCompetence()" class="btn-floating btn-large right waves-effect waves-light add-competence"><i class="material-icons">add</i></a>
+		</div>
+	</div>
+</div>
+<!-- Form Competences Overview End -->
+<!-- Form Competence Edit Start -->
+<div ng-show="competenceEditMode">
+	<div class="divider"></div>
+	<div class=" row">
+		
+		<a ng-click="toggleCompetenceEditMode()" class="btn-floating btn-large right waves-effect waves-light add-competence"><i class="material-icons">view_module</i></a>
+		<h4 class="page-title">Edit Competence</h4>
+		<div class="input-field col s6">
+			<input ng-model="form.competences[currentCompetenceIndex].name" class="validate">
+			<label class="active" for="first_name2">Competence Name</label>
+		</div>
+		<div class="input-field col s12">
+			<textarea ng-model="form.competences[currentCompetenceIndex].description"  id="textarea-competence-description" class="materialize-textarea"></textarea>
+			<label for="textarea-competence-description">Description</label>
+		</div>
+	</div>
+	
+	<h5>Dimensions</h5>
+	<div class="row">
+		<div class="col l6 m6 s12" ng-repeat="dimension in form.competences[currentCompetenceIndex].dimensions" >
+			<div  class="card dimension-card" >
+				<a ng-click="deleteDimension($index)" class="btn-floating btn-small delete-dimension-button right waves-effect waves-light"><i class="material-icons">delete</i></a>
+				<div class="card-content">
+					<div class="row">
+						<div class="input-field col s12">
+							<input ng-model="dimension.name" id="competence-{{ currentCompetenceIndex }}-dimension-{{ $index }}-name"class="validate">
+							<label class="active" for="competence-{{ currentCompetenceIndex }}-dimension-{{ $index }}-name">Name</label>
+						</div>
+						<div class="input-field col s12">
+							<textarea ng-model="dimension.description"   id="competence-{{ currentCompetenceIndex }}-dimension-{{ $index }}-description" class="materialize-textarea"></textarea>
+							<label for="competence-{{ currentCompetenceIndex }}-dimension-{{ $index }}-description">Description</label>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	<a ng-click="addDimension()" class=" add-dimension-button waves-effect waves-light btn"><i class="material-icons left">add</i>Add Dimension</a>
+</div>
+<!-- Form Competence Edit End -->

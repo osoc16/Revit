@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html ng-app="RevitApp">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+        <!-- = CSS  -->
+        <link rel="stylesheet" href="css/materialize/materialize.css" />
+        <link rel="stylesheet" type="text/css" href="node_modules/angularjs-slider/dist/rzslider.css"/>
+        <link rel="stylesheet" href="css/myStyle.css" />
+        <!-- = FONTS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+        <!--  Main Navigation -->
+        <nav class="main-menu-bar" role="navigation">
+            <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo"><div id="logo-icon"></div>Revit</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="#">  <i class="material-icons">power_settings_new</i></a></li>
+            </ul>
+            <ul id="nav-mobile" class="side-nav">
+                <li><a href="#">  <i class="material-icons">power_settings_new</i></a></li>
+            </ul>
+            <a href="#" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">menu</i></a>
+        </div>
+    </nav>
+    <!-- Content -->
+    <div class="container" ng-view></div>
+</body>
+<!--  = SCRIPTS -->
+<!--  == style scripts -->
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="js/materialize.min.js"></script>
+<script src="js/global.js"></script>
+<script src="js/evaluationPage.js"></script>
+<script src="js/formPage.js"></script>
+<script src="js/initSliders.js"></script>
+<!--  == angular -->
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/angular-route/angular-route.min.js"></script>
+<script src="node_modules/angularjs-slider/dist/rzslider.min.js"></script>
+<script src="app/app.js"></script>
+<!--  === Controllers -->
+<script src="app/controllers/mainController.js"></script>
+<script src="app/controllers/evaluationController.js"></script>
+<script src="app/controllers/formController.js"></script>
+<script src="app/controllers/screeningController.js"></script>
+<!--  === Services -->
+<script src="app/services/githubService.js"></script>
+<script src="app/services/revitService.js"></script>
+<script src="app/services/selorRuleService.js"></script>
+</html>

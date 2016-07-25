@@ -1,0 +1,39 @@
+<div class="form-page-content">
+	<div class="fixed-action-btn top horizontal" style="bottom: 45px; right: 24px;">
+		<a class="btn-floating btn-large" ng-click="saveGeneralForm()">
+			<i class="large material-icons">save</i>
+		</a>
+	</div>
+	<div class="row">
+		<div class="col s12">
+			<ul class="tabs">
+				<li class="tab col s6 m3"><a   href="#form-properties-tab" class="active" >Form</a></li>
+				<li class="tab col s6 m3 "><a href="#candidates-juries-tab">Jury &amp; Candidates</a></li>
+				<li class="tab col s6 m3"><a href="#assignments-tab"  >Assignments</a></li>
+			</ul>
+		</div>
+		<div class="divider"></div>
+		<div id="form-properties-tab" class="col s12">
+			<div ng-include="'app/partials/form_properties.html'"></div>
+		</div>
+		<div id="candidates-juries-tab" class="col s12">
+			<div ng-include="'app/partials/form_candidates_juries.html'"></div>
+		</div>
+		<div id="assignments-tab" class="col s12">
+			<div ng-include="'app/partials/form_assignments.html'"></div>
+		</div>
+	</div>
+</div>
+<script>
+	
+$(document).ready(function() {
+	Materialize.updateTextFields();
+});
+$(document).ready(function(){
+$('.tooltipped').tooltip({delay: 50});
+});
+$(document).ready(function(){
+$('ul.tabs').tabs();
+});
+
+</script>

@@ -1,0 +1,85 @@
+.form-page-content {
+    input,textarea{
+        border::#eee solid;
+
+        text-indent:0.5rem;
+        margin-top:0.2rem;
+        border-width:0.1rem;
+    }
+
+    textarea{
+        padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+    }
+
+
+    .competence-card,.dimension-card{
+        border-top: 0.3rem solid;
+        border-color: $primary-color;
+
+        .card-title {
+            font-weight: 400;
+        }
+
+        .delete-competence-btn{
+
+			margin-right:0.5rem;
+
+        }
+
+    }
+
+    .button-assign{
+       margin-top:1rem;
+    }
+
+
+.checkbox-column{
+    width:2rem;
+    padding:1rem;
+}
+
+	.add-competence{
+
+		background:$primary-color;
+	}
+
+    .add-jury{
+        color:$error-color;
+    }
+
+
+	.delete-dimension-button{
+        background-color:$error-color;
+		margin-right:0.5rem;
+		margin-top:0.5rem;
+	}
+
+    .add-dimension-button{
+        margin-bottom:1rem;
+       float:right;
+    }
+
+.assignment-table {
+
+    th{
+        background:$primary-color;
+        color:#fff;
+
+    }
+ 
+}
+
+    .candidate-jury-chip{
+
+        margin-right:1rem;
+    }
+
+
+
+
+
+
+
+
+}

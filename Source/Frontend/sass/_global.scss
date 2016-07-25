@@ -1,0 +1,21 @@
+.main-menu-bar {
+    background: $primary-color;
+}
+
+.page-title {
+    color: $primary-color;
+}
+
+#logo-icon {
+    display: inline-block;
+    height: 3rem;
+    width: 3rem;
+    vertical-align: middle;
+    background: url(../img/icons/logo-min.png);
+    background-position: 0 0;
+    background-size: 3rem 3rem;
+    padding-left: 3rem;
+    margin-right: 0.5rem;
+    position: relative;
+    background-repeat: no-repeat;
+}
