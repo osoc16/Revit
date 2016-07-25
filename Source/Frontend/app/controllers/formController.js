@@ -34,7 +34,7 @@
 
         $scope.saveGeneralForm= function(){
 
-
+            alert("test");
             revitService.saveGeneralForm($routeParams.formId,$scope.form);
         }
 
@@ -202,9 +202,17 @@
 
 
 
-        $scope.removeJuryFromCandidate = function(candidateIndex, toRemoveJuryId) {
+        $scope.removeJuryFromCandidate = function(candidateIndex, juryIndex) {
 
             var candidate = $scope.form.candidates[candidateIndex];
+
+            alert("cId"+candidateIndex);
+               alert("jId"+juryIndex);
+
+
+            $scope.form.candidates[candidateIndex].juries.splice(juryIndex,1);
+
+            /*
 
             for (var candidateJuryIndex in candidate.juries) {
 
@@ -216,9 +224,14 @@
 
                     $log.info(jury.firstName + " removed as jury for " + candidate.firstName);
 
+                    break;
+
                 }
 
-            }
+            }*/
+
+
+
         }
     }
 

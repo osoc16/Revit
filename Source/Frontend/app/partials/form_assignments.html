@@ -16,12 +16,12 @@
 						<input id="checkbox-assign-jury-{{ $index }}" class="assign-jury-checkbox filled-in" data-candidate-index="{{ $index }}" type="checkbox"/>
 						<label for="checkbox-assign-jury-{{ $index }}"></label>
 					</td>
-					<td>{{ candidate.firstName }} {{ candidate.lastname }}</td>
+					<td>{{ candidate.firstName }} {{ candidate.lastname }} [ {{candidate.candidateId }} ]</td>
 					<td>
 						<div class="jury-container">
 							<div ng-repeat="jury in candidate.juries" class="chip candidate-jury-chip">
-								{{ jury.firstName }} {{ jury.lastName }}
-								<i ng-click="removeJuryFromCandidate($index,jury.juryId)" class="material-icons">close</i>
+								{{ jury.firstName }} {{ jury.lastName }} [ {{jury.juryId }} ]
+								<i ng-click="removeJuryFromCandidate($parent.$index,$index)" >teataet</i>
 							</div>
 						</div>
 						<div ng-if="candidate.juries.length==0">
@@ -32,6 +32,22 @@
 				</tr>
 			</tbody>
 		</table>
+
+
+<!-- Candidate Jury Assignment Test
+		<ul>
+			<li ng-repeat="candidate in form.candidates">=={{ candidate.firstName }} {{ candidate.lastname }}
+				<ul>
+					
+					<li ng-repeat="jury in candidate.juries">
+							====={{ jury.firstName }} {{ jury.lastName }}
+					</li>
+				</ul>
+			</li>
+		</ul>
+-->
+
+
 	</div>
 	<div class="row">
 		<div class="input-field col s6">

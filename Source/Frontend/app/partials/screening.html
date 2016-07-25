@@ -15,16 +15,13 @@
 	</div>
 	<div class=" results-container" >
 
-	<div class="row">
-		
-
 		<ul >
 			<li class="col s12 m12 screening-result card" ng-repeat="screening in screenings
 				">
 				<div class="screening-item  n-collapsible-wrapper row">
 					<div class="content col l12" >
 						<h5 class="screening-title" >{{ screening.name }}
-						<i class="material-icons n-collapsible-toggler right">more_vert</i>
+						<i ng-if="screening.juries.length!=0|| screening.candidates.length!=0" class="material-icons n-collapsible-toggler right">more_vert</i>
 						</h5>
 						<p class="">{{ screening.description}}</p>
 					</div>
@@ -47,7 +44,7 @@
 				</div>
 			</li>
 		</ul>
-			</div>
+		
 	</div>
 </div>
 <script>

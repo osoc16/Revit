@@ -4,7 +4,7 @@
 
     var ScreeningController = function($scope, revitService,authenticationService, $log) {
 
-        $scope.currentUserId= authenticationService.currentUserId;
+        $scope.currentUserId= authenticationService.getCurrentUserId();
 
         $scope.test = "blabla";
 

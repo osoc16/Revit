@@ -84,12 +84,12 @@
             var mockObject = [{
                 "screeningId": 1,
                 "code": "c1",
-                "name": "scr_1en",
+                "name": "Screening 1",
                 "name_FR": "scr_1fr",
                 "name_NL": "scr_1nl",
                 "name_EN": "scr_1en",
                 "name_DE": "scr_1de",
-                "description": "desc1en",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Odit est ab facere quo nobis alias fugiat, beatae, sint quidem culpa sapiente debitis delectus aspernatur accusantium. Iusto delectus porro autem deleniti.",
                 "description_FR": "desc1fr",
                 "description_NL": "desc1nl",
                 "description_EN": "desc1en",
@@ -360,12 +360,12 @@
             }, {
                 "screeningId": 2,
                 "code": "c2",
-                "name": "scr_2en",
+                "name": "Screening 2",
                 "name_FR": "scr_2fr",
                 "name_NL": "scr_2nl",
                 "name_EN": "scr_2en",
                 "name_DE": "scr_2de",
-                "description": "desc2en",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. A, dolores doloribus, laboriosam dolorem dolor excepturi vero ipsum nostrum non? Beatae vero, molestias sed. Voluptatum, quidem mollitia incidunt iste error voluptate.",
                 "description_FR": "desc2fr",
                 "description_NL": "desc2nl",
                 "description_EN": "desc2en",
@@ -375,7 +375,7 @@
                     "formId": 2,
                     "name": "etjetjetj",
                     "code": "code2",
-                    "description": "decription en 2",
+                    "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit ipsa, quisquam quod asperiores. At vel consectetur praesentium recusandae dolore quidem quasi sed libero, fuga ea sapiente quod, asperiores, doloribus eos!",
                     "description_FR": "decription fr 2",
                     "description_NL": "decription nl 2",
                     "description_EN": "decription en 2",
@@ -542,12 +542,12 @@
             }, {
                 "screeningId": 3,
                 "code": "c2",
-                "name": "scr_3en",
+                "name": "Screening 3 ",
                 "name_FR": "scr_3fr",
                 "name_NL": "scr_3nl",
                 "name_EN": "scr_3en",
                 "name_DE": "scr_3de",
-                "description": "desc3en",
+                "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident ratione saepe rerum quisquam enim nostrum, temporibus tenetur, consequuntur soluta, mollitia nihil voluptate placeat optio voluptatibus fugiat. Libero, repudiandae vitae autem?",
                 "description_FR": "desc3fr",
                 "description_NL": "desc3nl",
                 "description_EN": "desc3en",
@@ -930,7 +930,7 @@
             }
         }
 
-        var mockMode = false;
+        var mockMode = true;
 
 
         if (mockMode) {
