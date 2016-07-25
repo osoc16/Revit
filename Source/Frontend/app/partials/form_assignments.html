@@ -11,17 +11,17 @@
 				</tr>
 			</thead>
 			<tbody>
-				<tr ng-repeat="candidate in form.candidates">
+				<tr ng-repeat="candidate in form.candidates" ng-init="candidateIndex = $index">
 					<td>
 						<input id="checkbox-assign-jury-{{ $index }}" class="assign-jury-checkbox filled-in" data-candidate-index="{{ $index }}" type="checkbox"/>
-						<label for="checkbox-assign-jury-{{ $index }}"></label>
+						<label class="assignment-checkbox-faker" for="checkbox-assign-jury-{{ $index }}"></label>
 					</td>
-					<td>{{ candidate.firstName }} {{ candidate.lastname }}</td>
+					<td>{{ candidate.firstName }} {{ candidate.lastname }} </td>
 					<td>
 						<div class="jury-container">
-							<div ng-repeat="jury in candidate.juries" class="chip candidate-jury-chip">
-								{{ jury.firstName }} {{ jury.lastName }}
-								<i ng-click="removeJuryFromCandidate($index,jury.juryId)" class="material-icons">close</i>
+							<div ng-repeat="jury in candidate.juries"  ng-init="juryIndex = $index" class="chip candidate-jury-chip">
+								{{ jury.firstName }} {{ jury.lastName }} 
+								<i ng-click="removeJuryFromCandidate(candidateIndex,juryIndex)" >teataet</i>
 							</div>
 						</div>
 						<div ng-if="candidate.juries.length==0">
@@ -32,6 +32,22 @@
 				</tr>
 			</tbody>
 		</table>
+
+
+<!-- Candidate Jury Assignment 
+		<ul>
+			<li ng-repeat="candidate in form.candidates">=={{ candidate.firstName }} {{ candidate.lastname }}
+				<ul>
+					
+					<li ng-repeat="jury in candidate.juries">
+							====={{ jury.firstName }} {{ jury.lastName }}
+					</li>
+				</ul>
+			</li>
+		</ul>
+-->
+
+
 	</div>
 	<div class="row">
 		<div class="input-field col s6">

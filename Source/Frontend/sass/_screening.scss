@@ -1,35 +1,75 @@
 .screening-page-content {
+    .results-container {
+        li.screening-result {
+            padding: 0;
+            padding-bottom: 1rem;
+   
+            margin-bottom: 1rem;
 
+            .result-sub-title {
+                font-size: 1.2rem;
+            }
+        }
+    }
 
-	.search-btn{
-		margin-top:0rem;
-		margin-top: 1rem;
-		height:47px;
-		padding:0;
-			padding-top:0.5rem;
-		box-sizing:border-box;
+    .search-btn {
+        margin-top: 0rem;
+        margin-top: 1rem;
+        height: 45px;
+        padding: 0;
+        padding-top: 0.5rem;
+        box-sizing: border-box;
+    }
 
+    .search-container {
+        margin-top: 2rem;
+    }
+
+    input {
+        border: none;
+        background-color: #efefef;
+    }
+
+    #search-box {
+        text-indent: 0.5rem;
+    }
+
+	.n-collapsible-content{
+		display:none;
 	}
-	.search-container{
-		margin-top: 2rem;
-	}
+    .screening-item {
+        padding: 1rem;
+        padding-bottom: 0;
+        margin-bottom: 0;
 
-	input{
-		border:0.1rem solid;
-		border-color:#ccc;
-	}
+        .screening-title {
+            color: $primary-color;
+        }
+    }
 
-	#search-box{
-		text-indent: 0.5rem;
-	}
+    .form-juries-container, .form-candidates-container {
+        padding: 0;
 
-	.screening-item{
-		.screening-title{
-			color:$primary-color;
-		}
-	}
-	
+        li {
+            margin-bottom: 0.5rem;
 
+            div {
+                padding: 0.5rem;
+                background: #efefef;
+        
+            }
+        }
+    }
 
+     .form-juries-container {
 
-	}
+        li{
+            div{
+                border-right:0.5rem solid;
+                box-sizing: border-box;
+                border-color: #fff;
+
+            }
+        }
+     }
+}

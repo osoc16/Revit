@@ -18,9 +18,13 @@
                 templateUrl: "app/partials/form.html",
                 controller: "FormController"
             })
+            .when("/screening",{
+                     templateUrl: "app/partials/screening.html",
+                controller: "ScreeningController"
+            })
             .when("/test/evaluation",
             {
-        	  	templateUrl: "app/partials/evaluation.html",
+                templateUrl: "app/partials/evaluation.html",
                 controller: "EvaluationController"
             })
             .when("/test/form",
@@ -28,11 +32,7 @@
                 templateUrl: "app/partials/form.html",
                 controller: "FormController"
             })
-            .when("/test/screening",{
-                     templateUrl: "app/partials/screening.html",
-                controller: "ScreeningController"
-            })
-            .otherwise({redirectTo:"/main"});
+            .otherwise({redirectTo:"/screening"});
     });
     
 }());

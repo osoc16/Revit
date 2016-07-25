@@ -128,7 +128,7 @@
 
             alert("test");
 
-            revitService.saveForm($scope.form);
+            revitService.saveForm($scope.form.formId,$scope.form);
         }
 
 

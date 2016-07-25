@@ -4,23 +4,61 @@
 	</h2>
 	<div class="row search-container">
 		<div class="input-field col l9 s12">
-			<input id="search-box" ng-model="searchTerm"  >
-		</div>		
-		<div class="btn l3 col s12 search-btn" ng-click="search()">Search</div>
+			<input placeholder="Search term ..." id="search-box" ng-model="searchTerm"  >
+		</div>
+		<div class="btn  col l3 s12 search-btn" ng-click="search()">Search</div>
 	</div>
-	<div class="row results-container">
-		<ul>		
-			<li ng-repeat="screening in screenings
+	<div ng-if="screenings.length!=null" class="row">
+		<div class="col s12">
+			{{ screenings.length }} results found
+		</div>
+	</div>
+	<div class=" results-container" >
+		<ul >
+			<li class="col s12 m12 screening-result card" ng-repeat="screening in screenings
 				">
-				<div class="col s12 m12">
-					<div class="card-panel screening-item">
+				<div class="screening-item  n-collapsible-wrapper row">
+					<div class="content col l12" >
 						<h5 class="screening-title" >{{ screening.name }}
+						<i ng-if="screening.juries.length!=0|| screening.candidates.length!=0" class="material-icons n-collapsible-toggler right">more_vert</i>
 						</h5>
 						<p class="">{{ screening.description}}</p>
 					</div>
-				</div>			
+					<div class="extra-content n-collapsible-content col l12">
+						
+						<div class="form-juries-container col s12 l6">
+							<h5 class="result-sub-title">Juries</h5>
+							<ul>
+								<li ng-repeat="jury in screening.form.juries">
+									<div>
+										{{jury.firstName}} {{jury.lastName}}
+									</div>
+								</li>
+							</ul>
+						</div>
+						<div class="form-candidates-container col s12 l6">
+							<h5 class="result-sub-title" >Candidates</h5>
+							<ul>
+								<li ng-repeat="candidate in screening.form.candidates">
+									<div>
+										{{ candidate.firstName }} {{candidate.lastName }}
+
+										<span class="evaluate-btn" >
+											<a href="#/evaluation/juries/{{currentUserId}}/forms/{{screening.form.formId}}/candidates/{{candidate.candidateId}}">
+											<i class="material-icons right" ng-if="(candidate.juries | filter:{ juryId:currentUserId }).length>0">edit</i>
+											</a>
+										</span>
+
+									</div>
+								</li>
+							</ul>
+						</div>
+						
+					</div>
+				</div>
 			</li>
 		</ul>
+		
 	</div>
 </div>
 <script>
@@ -28,5 +66,4 @@
 $(document).ready(function() {
 	Materialize.updateTextFields();
 });
-
 </script>

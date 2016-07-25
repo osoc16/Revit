@@ -6342,10 +6342,17 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 .form-page-content .candidate-jury-chip {
   margin-right: 1rem; }
 
+.screening-page-content .results-container li.screening-result {
+  padding: 0;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem; }
+  .screening-page-content .results-container li.screening-result .result-sub-title {
+    font-size: 1.2rem; }
+
 .screening-page-content .search-btn {
   margin-top: 0rem;
   margin-top: 1rem;
-  height: 47px;
+  height: 45px;
   padding: 0;
   padding-top: 0.5rem;
   box-sizing: border-box; }
@@ -6354,11 +6361,31 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   margin-top: 2rem; }
 
 .screening-page-content input {
-  border: 0.1rem solid;
-  border-color: #ccc; }
+  border: none;
+  background-color: #efefef; }
 
 .screening-page-content #search-box {
   text-indent: 0.5rem; }
 
-.screening-page-content .screening-item .screening-title {
-  color: #03a9f4; }
+.screening-page-content .n-collapsible-content {
+  display: none; }
+
+.screening-page-content .screening-item {
+  padding: 1rem;
+  padding-bottom: 0;
+  margin-bottom: 0; }
+  .screening-page-content .screening-item .screening-title {
+    color: #03a9f4; }
+
+.screening-page-content .form-juries-container, .screening-page-content .form-candidates-container {
+  padding: 0; }
+  .screening-page-content .form-juries-container li, .screening-page-content .form-candidates-container li {
+    margin-bottom: 0.5rem; }
+    .screening-page-content .form-juries-container li div, .screening-page-content .form-candidates-container li div {
+      padding: 0.5rem;
+      background: #efefef; }
+
+.screening-page-content .form-juries-container li div {
+  border-right: 0.5rem solid;
+  box-sizing: border-box;
+  border-color: #fff; }
