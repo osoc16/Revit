@@ -51,10 +51,6 @@
         var saveGeneralForm = function(formId, data) {
 
 
-
-
-            var callData= {data:data};
-
             $log.info("=========API CALL===========")
             var callUrl = apiBaseUrl + "forms/" + formId;
             $log.info("Url: " + callUrl);
@@ -66,7 +62,6 @@
                     return response.data;
                 });
         }
-
 
 
         var getScreenings = function(searchTerm) {
