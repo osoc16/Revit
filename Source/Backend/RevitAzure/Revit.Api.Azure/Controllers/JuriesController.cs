@@ -12,6 +12,9 @@ using Revit.Api.Azure.Models;
 
 namespace Revit.Api.Azure.Controllers
 {
+
+
+    [RoutePrefix("api")]
     public class JuriesController : ApiController
     {
         private DataContext db = new DataContext();
@@ -45,18 +48,60 @@ namespace Revit.Api.Azure.Controllers
         }
 
 
-        // GET: api/Juries/5
+        // GET: api/Juries/5/forms
+        [Route("juries/{id}/forms")]
         [ResponseType(typeof(Jury))]
         public IHttpActionResult GetJury(int id)
         {
-            Jury jury = db.Juries.Find(id);
-            if (jury == null)
+            //Jury jury = db.Juries.Find(id);
+            //if (jury == null)
+            //{
+            //    return NotFound();
+            //}
+
+            List<DtoForm> result = new List<DtoForm>();
+            //foreach (var item in db.Forms.(o => o.Juries.ToList().Where(j => j.ID == id)));
+            //{
+            //    result.Add(item.ToDto());
+            //}
+
+            var formsForJury = db.Forms.Where(f => f.Juries.Any(j => j.ID == id));
+
+            foreach ( var fj in formsForJury)
             {
-                return NotFound();
+
+                result.Add(fj.ToDto());
             }
 
-            return Ok(jury);
+
+            return Ok(result);
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        //// GET: api/Juries/5
+        //[ResponseType(typeof(Jury))]
+        //public IHttpActionResult GetJury(int id)
+        //{
+        //    Jury jury = db.Juries.Find(id);
+        //    if (jury == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return Ok(jury);
+        //}
 
         // PUT: api/Juries/5
         [ResponseType(typeof(void))]

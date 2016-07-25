@@ -17,7 +17,7 @@ namespace Revit.Api.Azure.Controllers
     public class FormsController : ApiController
     {
         private DataContext db = new DataContext();
-
+        
         [Route("evaluations/juries/{juryId}/forms/{formId}/candidates/{candidatId}")]
         [ResponseType(typeof(DtoForm))]
         // GET: api/juries/{juryId}/forms/{formId}/candidates/{candidatId}
@@ -243,56 +243,59 @@ namespace Revit.Api.Azure.Controllers
         }
 
         //PUT: 
-        [Route("forms/{id}")]
-        [ResponseType(typeof(Form))]
-        public IHttpActionResult Put(int id, DtoForm formNew)
-        {
-            Form formDb = db.Forms.Find(formNew.formId);
-            formDb = formNew.ToEntity();
-            if (id != formNew.formId)
-            {
-                return BadRequest();
-            }
-            if (formDb == null)        
-            {
+        
+        //[Route("forms/{id}")]
+        //[ResponseType(typeof(Form))]
+        //public IHttpActionResult Put(int id, DtoForm formNew)
+        //{
+        //    Form formDb = db.Forms.Find(formNew.formId);
+        //    formDb = formNew.ToEntity();
+        //    if (id != formNew.formId)
+        //    {
+        //        return BadRequest();
+        //    }
+        //    if (formDb == null)        
+        //    {
                 
-                return Post(formNew);
-            }
-            else
-            {
+        //        return Post(formNew);
+        //    }
+        //    else
+        //    {
 
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest(ModelState);
-                }
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return BadRequest(ModelState);
+        //        }
 
-                try
-                {
+        //        try
+        //        {
+        //            db.Entry(formNew.ToEntity()).State = EntityState.Modified;
+        //        }
+        //        catch (Exception e)
+        //        {
 
-                    db.Entry(formDb).State = EntityState.Modified;
-                }
-                catch (Exception e)
-                {
-                    return StatusCode(HttpStatusCode.NotModified);
-                }
+        //            Console.WriteLine(e.Message);
+        //            return StatusCode(HttpStatusCode.NotModified);
+        //        }
               
 
-                try
-                {
-                    db.SaveChanges();
-                }
-                catch (DbUpdateConcurrencyException)
-                {               
-                    return StatusCode(HttpStatusCode.NotModified);
-                }
+        //        try
+        //        {
+        //            db.SaveChanges();
+        //        }
+        //        catch (DbUpdateConcurrencyException)
+        //        {               
+        //            return StatusCode(HttpStatusCode.NotModified);
+        //        }
 
-                return StatusCode(HttpStatusCode.NoContent);
-            }
+        //        return StatusCode(HttpStatusCode.NoContent);
+        //    }
 
-        }
+        //}
 
 
 
+        [Route("forms/{id}")]
         public IHttpActionResult GetForm(int id)
         {
             Form form = db.Forms.Find(id);
@@ -305,7 +308,42 @@ namespace Revit.Api.Azure.Controllers
         }
 
 
+        // PUT: api/Forms/5
 
+        [Route("forms/{id}")]
+        [ResponseType(typeof(void))]
+        public IHttpActionResult PutForm(int id, DtoForm form)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (id != form.formId)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(form.ToEntity()).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FormExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+        }
 
 
 
@@ -343,50 +381,52 @@ namespace Revit.Api.Azure.Controllers
         //        return BadRequest(ModelState);
         //    }
 
-    //        if (id != form.ID)
-    //        {
-    //            return BadRequest();
-    //}
+        //        if (id != form.ID)
+        //        {
+        //            return BadRequest();
+        //}
 
-    //    db.Entry(form).State = EntityState.Modified;
+        //    db.Entry(form).State = EntityState.Modified;
 
-    //    try
-    //    {
-    //        db.SaveChanges();
-    //    }
-    //    catch (DbUpdateConcurrencyException)
-    //    {
-    //        if (!FormExists(id))
-    //        {
-    //            return NotFound();
-    //        }
-    //        else
-    //        {
-    //            throw;
-    //        }
-    //    }
+        //    try
+        //    {
+        //        db.SaveChanges();
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!FormExists(id))
+        //        {
+        //            return NotFound();
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
 
-    //    return StatusCode(HttpStatusCode.NoContent);
-    //}
+        //    return StatusCode(HttpStatusCode.NoContent);
+        //}
 
-    // POST: api/Forms
-    //[ResponseType(typeof(Form))]
-    //public IHttpActionResult PostForm(Form form)
-    //{
-    //    if (!ModelState.IsValid)
-    //    {
+        // POST: api/Forms
+        //[ResponseType(typeof(Form))]
+        //public IHttpActionResult PostForm(Form form)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
 
-    //        return BadRequest(ModelState);
-    //    }
+        //        return BadRequest(ModelState);
+        //    }
 
-    //    db.Forms.Add(form);
-    //    db.SaveChanges();
+        //    db.Forms.Add(form);
+        //    db.SaveChanges();
 
-    //    return CreatedAtRoute("DefaultApi", new { id = form.ID }, form);
-    //}
+        //    return CreatedAtRoute("DefaultApi", new { id = form.ID }, form);
+        //}
 
-    // DELETE: api/Forms/5
-    [ResponseType(typeof(Form))]
+        // DELETE: api/Forms/5
+
+        [Route("forms/{id}")]
+        [ResponseType(typeof(Form))]
         public IHttpActionResult DeleteForm(int id)
         {
             Form form = db.Forms.Find(id);
@@ -401,6 +441,7 @@ namespace Revit.Api.Azure.Controllers
             return Ok(form);
         }
 
+        [Route("forms/")]
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -410,6 +451,7 @@ namespace Revit.Api.Azure.Controllers
             base.Dispose(disposing);
         }
 
+        [Route("forms/{id}")]
         private bool FormExists(int id)
         {
             return db.Forms.Count(e => e.ID == id) > 0;

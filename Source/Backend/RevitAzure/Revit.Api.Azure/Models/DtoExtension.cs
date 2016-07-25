@@ -356,31 +356,26 @@ namespace Revit.Api.Azure.Models
             {
                 case "en":
                     {
-                        result.name = source.name_EN;
                         result.description = source.description_EN;
                         break;
                     }
                 case "fr":
                     {
-                        result.name = source.name_FR;
                         result.description = source.description_FR;
                         break;
                     }
                 case "nl":
                     {
-                        result.name = source.name_NL;
                         result.description = source.description_NL;
                         break;
                     }
                 case "de":
                     {
-                        result.name = source.name_DE;
                         result.description = source.description_DE;
                         break;
                     }
                 default:
                     {
-                        result.name = source.name_EN;
                         result.description = source.description_EN;
                         break;
                     }
@@ -507,12 +502,19 @@ namespace Revit.Api.Azure.Models
                         break;
                     }
             }
-
+            if (result.jugesList==null)
+            {
+                result.jugesList = new List<DtoJury>();
+            }
             foreach (var judge in source.Judges)
             {
                 result.jugesList.Add(judge.ToDto());
             }
 
+            if (result.candidateList == null)
+            {
+                result.candidateList = new List<DtoCandidate>();
+            }
             foreach (var candi in source.Candidates)
             {
                 result.candidateList.Add(candi.ToDto());
