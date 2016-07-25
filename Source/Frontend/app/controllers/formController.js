@@ -206,10 +206,6 @@
 
             var candidate = $scope.form.candidates[candidateIndex];
 
-            alert("cId"+candidateIndex);
-               alert("jId"+juryIndex);
-
-
             $scope.form.candidates[candidateIndex].juries.splice(juryIndex,1);
 
             /*
