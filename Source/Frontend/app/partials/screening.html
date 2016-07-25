@@ -14,7 +14,6 @@
 		</div>
 	</div>
 	<div class=" results-container" >
-
 		<ul >
 			<li class="col s12 m12 screening-result card" ng-repeat="screening in screenings
 				">
@@ -30,13 +29,28 @@
 						<div class="form-juries-container col l6">
 							<h5 class="result-sub-title">Juries</h5>
 							<ul>
-								<li ng-repeat="jury in screening.form.juries"> <div>{{jury.firstName}} {{jury.lastName}}</div></li>
+								<li ng-repeat="jury in screening.form.juries">
+									<div>
+										{{jury.firstName}} {{jury.lastName}}
+									</div>
+								</li>
 							</ul>
 						</div>
 						<div class="form-candidates-container col l6">
 							<h5 class="result-sub-title" >Candidates</h5>
 							<ul>
-								<li ng-repeat="candidate in screening.form.candidates"><div>{{candidate.firstName}} {{candidate.lastName}}</div></li>
+								<li ng-repeat="candidate in screening.form.candidates">
+									<div>
+										{{ candidate.firstName }} {{candidate.lastName }}
+
+										<span class="evaluate-btn" >
+											<a href="#/evaluation/juries/{{currentUserId}}/forms/{{screening.form.formId}}/candidates/{{candidate.candidateId}}">
+											<i class="material-icons right" ng-if="(candidate.juries | filter:{ juryId:currentUserId }).length>0">edit</i>
+											</a>
+										</span>
+
+									</div>
+								</li>
 							</ul>
 						</div>
 						

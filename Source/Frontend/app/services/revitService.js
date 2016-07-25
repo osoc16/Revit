@@ -283,8 +283,8 @@
                     "candidates": [{
                         "candidateId": 1,
                         "name": "ln1 fn1",
-                        "firstName": "fn1",
-                        "lastName": "ln1",
+                        "firstName": "John",
+                        "lastName": "Doe",
                         "nationalNumber": "nN1",
                         "juries": [{
                             "juryId": 1,
@@ -749,7 +749,8 @@
                 finalScoreMin: 0,
 
                 candidate: {
-                    name: "John Doe",
+                    firstName: "John",
+                    lastName:"Doe",
                     candidateId: 1
                 },
                 competences: [{
@@ -888,15 +889,15 @@
                 candidates: [
 
                     {
-                        name: "Sarah Van de Velde",
+                        firstName: "Sarah",lastName:"Van de Velde",
                         candidateId: 2
                     }, {
-                        name: "Peter Janssens",
+                        firstName: "Peter",lastName:"Janssens",
                         candidateId: 3
                     },
 
                     {
-                        name: "Jan Pieters",
+                        firstName: "Jan",lastName:"Pieters",
                         candidateId: 4
                     }
 
