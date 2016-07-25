@@ -43,6 +43,22 @@ namespace Revit.Api.Azure.Controllers
             result = form.ToDto(false);
 
             result.candidate = candidate.ToDto();
+
+
+
+            if (result.candidate.juries ==null)
+            {
+                result.candidate.juries = new List<DtoJury>();
+            }
+            foreach (var item in db.JuryCandidateForms.Where(o => o.candidate_ID == candidatId && o.form_ID == formId))
+            {
+                foreach (var j in db.Juries.Where(j => j.ID == item.jury_ID).ToList())
+                {
+
+                    result.candidate.juries.Add(j.ToDto());
+                }
+            }
+            
             if (form.Scores.Count>0)
             {
                 if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null)!=0)
@@ -84,10 +100,9 @@ namespace Revit.Api.Azure.Controllers
 
             foreach (var compet in form.Competences)
             {
-                result.competencesList.Add(compet.ToDto());
+                result.competencesList.Add(compet.ToDto(language));
                 foreach (var dim in compet.Dimensions)
                 {
-                    //    result.competencesList.Last().dimensions.Add(dim.ToDto());
 
                     if (dim.Scores.Count > 0)
                     {
@@ -108,7 +123,157 @@ namespace Revit.Api.Azure.Controllers
                 result.candidateList.Add(candi.ToDto());
             }
 
+            foreach (var c in result.candidateList)
+            {
+                if (c.juries == null)
+                {
+                    c.juries = new List<DtoJury>();
+                }
+                foreach (var item in db.JuryCandidateForms.Where(o => o.candidate_ID == c.candidateId && o.form_ID == formId))
+                {
+                    foreach (var j in db.Juries.Where(j => j.ID == item.jury_ID).ToList())
+                    {
+
+                        c.juries.Add(j.ToDto());
+                    }
+                }
+            }
+
             return Ok(result);
+        }
+
+
+
+
+
+
+
+        [Route("evaluations/juries/{juryId}/forms/{formId}/candidates/{candidatId}")]
+        [ResponseType(typeof(DtoForm))]
+        // PUT: api/juries/{juryId}/forms/{formId}/candidates/{candidatId}
+        public object Put(int juryId, int formId, int candidatId, [FromBody] DtoForm data, string language = "en")
+        {
+            Form form = db.Forms.Find(formId);
+            if (form == null)
+            {
+                return NotFound();
+            }
+            Candidate candidate = db.Candidates.Find(candidatId);
+            if (candidate == null)
+            {
+                return NotFound();
+            }
+
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (data == null)
+            {
+                return BadRequest();
+            }
+            if (formId != data.formId)
+            {
+                return BadRequest();
+            }
+
+            db.Entry(data.ToEntity()).State = EntityState.Modified;
+            
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FormExists(formId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+
+
+
+
+            //DtoForm result = new DtoForm();
+
+            //result = form.ToDto(false);
+
+            //result.candidate = candidate.ToDto();
+            //if (form.Scores.Count > 0)
+            //{
+            //    if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null) != 0)
+            //    {
+            //        result.score = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).result;
+            //    }
+
+            //}
+            //else
+            //{
+            //    result.score = null;
+            //}
+
+            //if (form.Scores.Count > 0)
+            //{
+            //    if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null) != 0)
+            //    {
+            //        result.finalScore = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).finalResult;
+
+            //    }
+            //}
+            //else
+            //{
+            //    result.score = null;
+            //}
+            //result.scoreMax = form.finalScoreMax;
+            //result.scoreMin = form.finalScoreMin;
+            //if (form.Scores.Count > 0)
+            //{
+            //    if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId) != 0)
+            //    {
+            //        result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId).finalResult;
+            //    }
+            //}
+            //else
+            //{
+            //    result.total = null;
+            //}
+
+            //foreach (var compet in form.Competences)
+            //{
+            //    result.competencesList.Add(compet.ToDto());
+            //    foreach (var dim in compet.Dimensions)
+            //    {
+            //        //    result.competencesList.Last().dimensions.Add(dim.ToDto());
+
+            //        if (dim.Scores.Count > 0)
+            //        {
+            //            if (dim.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID) != 0)
+            //            {
+            //                result.competencesList.Last().dimensions.Last().score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID).result;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            result.competencesList.Last().dimensions.Last().notObserved = true;
+            //        }
+            //    }
+            //}
+            //foreach (var candi in form.Candidates)
+            //{
+
+            //    result.candidateList.Add(candi.ToDto());
+            //}
+
+            //return Ok(result);
         }
 
 
@@ -116,7 +281,7 @@ namespace Revit.Api.Azure.Controllers
         //POST: 
         [Route("forms")]
         [ResponseType(typeof(Form))]
-        public IHttpActionResult Post(DtoForm formNew)
+        public IHttpActionResult Post([FromBody] DtoForm data)
         {
             Form formDb = new Form();
             if (!ModelState.IsValid)
@@ -124,11 +289,11 @@ namespace Revit.Api.Azure.Controllers
 
                 return BadRequest(ModelState);
             }
-            formDb = formNew.ToEntity(false);
+            formDb = data.ToEntity(false);
 
             //competence region
             #region competences
-            foreach (var comp in formNew.competencesList)
+            foreach (var comp in data.competencesList)
             {
                 Competence compDb = db.Competences.Find(comp.competenceId);
 
@@ -169,8 +334,8 @@ namespace Revit.Api.Azure.Controllers
 
             //jury region
             #region jury
-            if (formNew.juryList != null)
-                foreach (var jury in formNew.juryList)
+            if (data.juryList != null)
+                foreach (var jury in data.juryList)
                 {
                     Jury juryDb = db.Juries.Find(jury.juryId);
 
@@ -188,9 +353,9 @@ namespace Revit.Api.Azure.Controllers
 
             //candidate region
             #region candidates
-            if (formNew.candidateList == null)
-                formNew.candidateList = new List<DtoCandidate>();
-            foreach (var candi in formNew.candidateList)
+            if (data.candidateList == null)
+                data.candidateList = new List<DtoCandidate>();
+            foreach (var candi in data.candidateList)
             {
                 Candidate canDb = db.Candidates.Find(candi.candidateId);
                 
@@ -222,7 +387,7 @@ namespace Revit.Api.Azure.Controllers
             db.SaveChanges();
             formDb = db.Forms.Where(f=> f.name==formDb.name).Last();
 
-            foreach (var candi in formNew.candidateList)
+            foreach (var candi in data.candidateList)
             {
                 Candidate canDb = db.Candidates.Find(candi.candidateId);
 
@@ -300,13 +465,35 @@ namespace Revit.Api.Azure.Controllers
         [Route("forms/{id}")]
         public IHttpActionResult GetForm(int id)
         {
-            Form form = db.Forms.Find(id);
+            DtoForm form = db.Forms.Find(id).ToDto();
             if (form == null)
             {
                 return NotFound();
             }
+            if (form.candidate != null)
+            {
+                if (form.candidate.juries == null)
+                {
+                    form.candidate.juries = new List<DtoJury>();
+                }
 
-            return Ok(form.ToDto());
+            }
+            foreach (var c in form.candidateList)
+            {
+                if (c.juries == null)
+                {
+                    c.juries = new List<DtoJury>();
+                }
+                foreach (var item in db.JuryCandidateForms.Where(o => o.candidate_ID == c.candidateId && o.form_ID == id))
+                {
+                    foreach (var j in db.Juries.Where(j => j.ID == item.jury_ID).ToList())
+                    {
+
+                        c.juries.Add(j.ToDto());
+                    }
+                }
+            }
+            return Ok(form);
         }
 
 
@@ -314,19 +501,111 @@ namespace Revit.Api.Azure.Controllers
 
         [Route("forms/{id}")]
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutForm(int id, DtoForm form)
+        [HttpPut]
+        public IHttpActionResult PutForm(int id, [FromBody]  DtoForm content)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != form.formId)
+            if (content == null)
             {
                 return BadRequest();
             }
+            if (id != content.formId)
+            {
+                return BadRequest();
+            }
+            Form dbform = db.Forms.Where(f => f.ID == id).First();
 
-            db.Entry(form.ToEntity()).State = EntityState.Modified;
+            dbform.Juries = content.ToEntity().Juries;
+            dbform.MaxCandidates = content.ToEntity().MaxCandidates;
+            dbform.name = content.ToEntity().name;
+            dbform.name_DE = content.ToEntity().name_DE;
+            dbform.name_EN = content.ToEntity().name_EN;
+            dbform.name_FR = content.ToEntity().name_FR;
+            dbform.name_NL = content.ToEntity().name_NL;
+            dbform.description_DE = content.ToEntity().description_DE;
+            dbform.description_EN = content.ToEntity().description_EN;
+            dbform.description_FR = content.ToEntity().description_FR;
+            dbform.description_NL = content.ToEntity().description_NL;
+            dbform.finalScoreMax = content.ToEntity().finalScoreMax;
+            dbform.finalScoreMin = content.ToEntity().finalScoreMin;
+            dbform.code = content.ToEntity().code;
+
+            foreach (var cand in dbform.Candidates)
+            {
+                var dtoCandidate = content.candidateList.Where(c => c.candidateId == cand.ID).First();
+
+                //Remove candidate if not in dto form
+                if (!content.candidateList.Any(c => c.candidateId == cand.ID))
+                {
+                    dbform.Candidates.Remove(cand);
+                    foreach (var item in db.JuryCandidateForms.Where(o => o.candidate_ID == cand.ID && o.form_ID == id))
+                    {
+                        db.JuryCandidateForms.Remove(item);
+                    }
+                }
+                //Candidate in dto form
+                else
+                {
+
+                    //Assign properties
+                    cand.lastname = dtoCandidate.lastName;
+                    cand.firstname = dtoCandidate.firstName;
+                    cand.nationalNumber = dtoCandidate.nationalNumber;
+
+
+                    foreach (var dtocand in content.candidateList)
+                    {
+                        if (!dbform.Candidates.Any(c => c.ID == dtocand.candidateId))
+                        {
+                            dbform.Candidates.Add(dtocand.ToEntity());
+                        }
+                    }
+
+
+                    //remove in db if removed from dto
+                    foreach (var item in db.JuryCandidateForms.Where(o => o.candidate_ID == cand.ID && o.form_ID == id))
+                    {
+                        if (!dtoCandidate.juries.Any(j=> j.juryId==item.jury_ID))
+                        {
+                            db.JuryCandidateForms.Remove(item);
+                        }
+                    }
+                    
+
+                    //add to db if present in dto
+                    foreach(var assignedJury in dtoCandidate.juries)
+                    {                       
+                        if(!db.JuryCandidateForms.Any(jcf=> jcf.candidate_ID == cand.ID && jcf.form_ID== id && jcf.jury_ID== assignedJury.juryId))
+                        {
+
+                            db.JuryCandidateForms.Add(new juryCandidateForm
+                            {
+                                candidate_ID = cand.ID,
+                                form_ID = id,
+                                jury_ID = assignedJury.juryId
+
+                            });
+                            
+                        }
+
+                    }
+                }
+            }
+
+
+
+            dbform.Scores = content.ToEntity().Scores;
+            dbform.Competences = content.ToEntity().Competences;
+
+
+
+
+            db.Entry(dbform).State = EntityState.Modified;
 
             try
             {
@@ -347,8 +626,7 @@ namespace Revit.Api.Azure.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-
-
+        
 
 
 

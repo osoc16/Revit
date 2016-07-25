@@ -24,7 +24,7 @@ namespace Revit.Api.Azure.DTO
         public string description_NL { get; set; }
         public string description_EN { get; set; }
         public string description_DE { get; set; }
-        public Form form { get; set; }
+        public DtoForm form { get; set; }
 
 
         [JsonProperty(PropertyName = "juries")]

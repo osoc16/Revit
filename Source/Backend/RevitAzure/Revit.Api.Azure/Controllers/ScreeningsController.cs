@@ -19,9 +19,10 @@ namespace Revit.Api.Azure.Controllers
 
         // GET: api/Screenings/?search= ***
         [ResponseType(typeof(DtoScreening))]
-        public IHttpActionResult GetScreening(string search)
+        public IHttpActionResult GetScreening(string search = null)
         {
             ICollection<Screening> screen;
+            
             if (search ==null)
             {
                 screen = db.Screenings.ToList();
@@ -38,6 +39,7 @@ namespace Revit.Api.Azure.Controllers
                                                      c.description_EN.Contains(search) ||
                                                      c.description_NL.Contains(search)).ToList();
             }
+
 
             ICollection<DtoScreening> screenToSend = new List<DtoScreening>();
             if (screen == null)
@@ -56,10 +58,10 @@ namespace Revit.Api.Azure.Controllers
 
 
         // GET: api/Screenings
-        public IQueryable<Screening> GetScreenings()
-        {
-            return db.Screenings;
-        }
+        //public IQueryable<Screening> GetScreenings()
+        //{
+        //    return db.Screenings;
+        //}
 
         // GET: api/Screenings/5
         [ResponseType(typeof(Screening))]

@@ -439,7 +439,7 @@ namespace Revit.Api.Azure.DTO
             result.name_FR = source.name_FR;
             result.name_NL = source.name_NL;
             result.name_EN = source.name_EN;
-           // result.Form = source.form;
+            result.Form = source.form.ToEntity();
 
             result.ID = source.screeningId;
 
@@ -469,7 +469,7 @@ namespace Revit.Api.Azure.DTO
             result.name_FR = source.name_FR;
             result.name_NL = source.name_NL;
             result.name_EN = source.name_EN;
-            //result.form = source.Form;
+            result.form = source.Form.ToDto();
 
             result.screeningId = source.ID;
 
