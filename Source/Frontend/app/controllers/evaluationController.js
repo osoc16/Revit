@@ -75,15 +75,11 @@
 
             revitService.saveEvaluationForm($routeParams.formId, $routeParams.juryId, $routeParams.candidateId, $scope.form).then(onSaveEvaluationForm, onApiCallError);
 
-        }
+        }   
 
         $scope.goToCandidateEvaluationPage = function() {
 
-
             var cId = $(".candidate-selection-dropdown option:selected").val();
-
-            alert(cId);
-
             $location.path("/evaluation/juries/" + $routeParams.juryId + "/forms/" + $routeParams.formId + "/candidates/" + cId);
 
         }

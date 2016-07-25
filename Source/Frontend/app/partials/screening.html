@@ -9,22 +9,16 @@
 		<div class="btn l3 col s12 search-btn" ng-click="search()">Search</div>
 	</div>
 	<div class="row results-container">
-		<ul>
-			
+		<ul>		
 			<li ng-repeat="screening in screenings
 				">
 				<div class="col s12 m12">
 					<div class="card-panel screening-item">
 						<h5 class="screening-title" >{{ screening.name }}
 						</h5>
-						<p>Description</p>
 						<p class="">{{ screening.description}}</p>
 					</div>
-
-
-
-				</div>
-				
+				</div>			
 			</li>
 		</ul>
 	</div>
