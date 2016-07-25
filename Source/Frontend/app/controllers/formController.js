@@ -35,7 +35,7 @@
         $scope.saveGeneralForm= function(){
 
 
-            revitService.saveGeneralForm($routeParams.formId)
+            revitService.saveGeneralForm($routeParams.formId,$scope.form);
         }
 
 

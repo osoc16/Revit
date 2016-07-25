@@ -25,14 +25,11 @@
 
         var saveEvaluationForm = function(formId, juryId, candidateId, data) {
 
-            var callData= {data:data};
-
             $log.info("=========API CALL===========")
             var callUrl = apiBaseUrl + "evaluations/juries/" + juryId + "/forms/" + formId + "/candidates/" + candidateId;
             $log.info("Url: " + callUrl);
 
-
-            return $http.put(callUrl, callData).then(function(response) {
+            return $http.put(callUrl, data).then(function(response) {
                 return response.data;
             });
         }
@@ -53,17 +50,24 @@
 
         var saveGeneralForm = function(formId, data) {
 
+
+
+
             var callData= {data:data};
 
             $log.info("=========API CALL===========")
             var callUrl = apiBaseUrl + "forms/" + formId;
             $log.info("Url: " + callUrl);
+            $log.info("body");
+            $log.info(data);
 
             return $http.put(callUrl, data)
                 .then(function(response) {
                     return response.data;
                 });
         }
+
+
 
         var getScreenings = function(searchTerm) {
             $log.info("=========API CALL===========")
