@@ -57,8 +57,19 @@
                 padding: 0.5rem;
                 background: #efefef;
         
-                width:75%;
             }
         }
     }
+
+     .form-juries-container {
+
+        li{
+            div{
+                border-right:0.5rem solid;
+                box-sizing: border-box;
+                border-color: #fff;
+
+            }
+        }
+     }
 }

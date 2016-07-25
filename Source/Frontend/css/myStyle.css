@@ -6383,5 +6383,9 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
     margin-bottom: 0.5rem; }
     .screening-page-content .form-juries-container li div, .screening-page-content .form-candidates-container li div {
       padding: 0.5rem;
-      background: #efefef;
-      width: 75%; }
+      background: #efefef; }
+
+.screening-page-content .form-juries-container li div {
+  border-right: 0.5rem solid;
+  box-sizing: border-box;
+  border-color: #fff; }
