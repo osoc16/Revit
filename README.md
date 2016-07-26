@@ -19,9 +19,8 @@ See our [project page](https://github.com/osoc16/Revit)
 - test
 
 ## Quick setup
-
-1.Run 'npm install' in the 'Frontend' folder
-2.Navigate to project url from your webserver
+- 1.Run 'npm install' in the 'Frontend' folder
+- 2.Navigate to project url from your webserver
 
 
 ## More: configuration, development tips, ...
