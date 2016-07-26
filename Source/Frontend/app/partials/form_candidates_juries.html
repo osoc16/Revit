@@ -6,7 +6,7 @@
 			
 			<ul class="collection">
 				
-				<li class="collection-item" ng-repeat="candidate in form.candidates  | orderBy:'firstName'">
+				<li class="collection-item" ng-repeat="candidate in form.candidates">
 					{{ candidate.firstName }} {{ candidate.lastName }}
 					<i ng-click="deleteCandidate($index)" class="material-icons right">close</i>
 				</li>
@@ -29,7 +29,7 @@
 			<h4 class="page-title valign">Judges</h4>
 			<ul class="collection">
 				
-				<li class="collection-item" ng-repeat="jury in form.juries | orderBy:'firstName'">
+				<li class="collection-item" ng-repeat="jury in form.juries">
 					{{ jury.firstName }} {{ jury.lastName }}
 					<i ng-click="deleteJury($index)" class="material-icons right">close</i>
 				</li><!-- 
