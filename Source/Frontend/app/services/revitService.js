@@ -19,13 +19,34 @@
 
             return $http.get(callUrl)
                 .then(function(response) {
+
+                    for (var competenceKey in response.data.competences) {
+
+                        var competence = response.data.competences[competenceKey];
+
+                        if (competence.score == null) {
+                            competence.score = NaN;
+                        }
+                        if (competence.finalScore == null) {
+                            competence.finalScore = NaN;
+                        }
+
+                        for (var dimensionKey in competence.dimensions) {
+
+                            var dimension = competence.dimensions[dimensionKey];
+                            if (dimension.score == null) {
+                                dimension.score = NaN;
+                            }
+                        }
+                    }
+                    
                     return response.data;
                 });
         }
 
         var saveEvaluationForm = function(formId, juryId, candidateId, data) {
 
-            
+
 
             $log.info("=========API CALL===========")
             var callUrl = apiBaseUrl + "evaluations/juries/" + juryId + "/forms/" + formId + "/candidates/" + candidateId;
