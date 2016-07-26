@@ -103,7 +103,6 @@
 
             var newCompetence = {
                 name: "New Competence",
-                competenceId: null,
                 description: "",
                 dimensions: []
             };
