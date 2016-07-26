@@ -11,11 +11,17 @@ A backoffice application for Selor to evaluate candidates based on certain metri
 See our [project page](https://github.com/osoc16/Revit)
 
 ## Requirements
+
+Frontend
 - [Node Packet Manager](https://www.npmjs.com/) 
+- 
+Backend
+- 
 
 ## Quick setup
 
-1.
+1.Run 'npm install' in the 'Frontend' folder
+2.Navigate to project url from your webserver
 
 
 ## More: configuration, development tips, ...
