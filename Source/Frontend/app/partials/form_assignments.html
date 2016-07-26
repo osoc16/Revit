@@ -21,7 +21,7 @@
 						<div class="jury-container">
 							<div ng-repeat="jury in candidate.juries"  ng-init="juryIndex = $index" class="chip candidate-jury-chip">
 								{{ jury.firstName }} {{ jury.lastName }} 
-								<i ng-click="removeJuryFromCandidate(candidateIndex,juryIndex)" >teataet</i>
+								<i ng-click="removeJuryFromCandidate(candidateIndex,juryIndex)" class="material-icons">close</i>
 							</div>
 						</div>
 						<div ng-if="candidate.juries.length==0">
