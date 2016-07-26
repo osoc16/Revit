@@ -12,9 +12,9 @@ See our [project page](https://github.com/osoc16/Revit)
 
 ## Requirements
 
-Frontend
+### Frontend
 - [Node Packet Manager](https://www.npmjs.com/) 
-Backend
+### Backend
 - test
 
 ## Quick setup
