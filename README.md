@@ -4,9 +4,19 @@
 [![Stories in Done](https://badge.waffle.io/osoc16/Revit.png?label=Done&title=Done)](http://waffle.io/osoc16/Revit)
 
 # Revit
+
+## Intro
 A backoffice application for Selor to evaluate candidates based on certain metrics
 
+See our [project page](https://github.com/osoc16/Revit)
 
-## Progress overview
+## Requirements
+- [Node Packet Manager](https://www.npmjs.com/) 
 
-[![Throughput Graph](https://graphs.waffle.io/osoc16/Revit/throughput.svg)](https://waffle.io/osoc16/Revit/metrics/throughput)
+## Quick setup
+
+1.
+
+
+## More: configuration, development tips, ...
+See [SETUP.md](SETUP.md)
