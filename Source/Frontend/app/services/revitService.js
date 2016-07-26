@@ -20,9 +20,19 @@
             return $http.get(callUrl)
                 .then(function(response) {
 
-                    for (var competenceKey in response.data.competences) {
+                    var form= response.data;
 
-                        var competence = response.data.competences[competenceKey];
+                    if(form.score==null){
+                        form.score=NaN;
+                    }
+
+                    if(form.finalScore==null){
+                        form.finalScore==NaN;
+                    }
+
+                    for (var competenceKey in form.competences) {
+
+                        var competence = form.competences[competenceKey];
 
                         if (competence.score == null) {
                             competence.score = NaN;
@@ -40,7 +50,7 @@
                         }
                     }
                     
-                    return response.data;
+                    return form;
                 });
         }
 
