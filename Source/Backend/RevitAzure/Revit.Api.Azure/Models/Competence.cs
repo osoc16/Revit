@@ -19,7 +19,7 @@ namespace Revit.Api.Azure.Models
         public string code { get; set; }
 
         //weight of the competence
-        public int weight { get; set; }
+        public int? weight { get; set; }
 
         //name of the competence
         public string name_FR { get; set; }       

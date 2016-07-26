@@ -177,58 +177,70 @@ namespace Revit.Api.Azure.Controllers
             {
                 return NotFound();
             }
+            
 
-            foreach (var dtoScore in data.ToEntity().Scores.Where(s=> s.candidateId == candidatId && s.juryId==juryId))
-            {
-                if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.id== dtoScore.id))
+                if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId== dbForm.ID && s.dimensionId==null && s.competenceId==null))
                 {
-                    dbForm.Scores.Where(s => s.candidateId == candidatId).First().result = dtoScore.result;
-                    dbForm.Scores.Where(s => s.candidateId == candidatId).First().finalResult = dtoScore.finalResult;
+                    dbForm.Scores.Where(s => s.candidateId == candidatId).First().result = data.score;
+                    dbForm.Scores.Where(s => s.candidateId == candidatId).First().finalResult = data.finalScore;
                 }
                 else
                 {
-                    dbForm.Scores.Add(dtoScore);
-                }
-            }
-
-            foreach (var dtoComp in data.ToEntity().Competences)
-            {
-                foreach (var dtoScoreComp in dtoComp.Scores.Where(s => s.candidateId == candidatId && s.juryId == juryId))
-                {
-                    var dbComp = dbForm.Competences.Where(c => c.ID == dtoComp.ID).First();
-
-
-                    if (dbComp.Scores.Any(s => s.candidateId == candidatId && s.id == dtoScoreComp.id))
+                    dbForm.Scores.Add(new Score
                     {
-                        dbComp.Scores.Where(s => s.candidateId == candidatId).First().result = dtoScoreComp.result;
-                        dbComp.Scores.Where(s => s.candidateId == candidatId).First().finalResult = dtoScoreComp.finalResult;
-                    }
+                        candidateId = dbCandidate.ID,
+                        formId = dbForm.ID,
+                        result = data.score,
+                        finalResult=data.finalScore
+                    });
+                }
+
+
+            foreach (var dtoComp in data.competencesList)
+            {
+                var dbComp = dbForm.Competences.Where(c => c.ID == dtoComp.competenceId).First();
+
+                if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == dtoComp.competenceId))
+                {
+                    dbForm.Scores.Where(s => s.candidateId == candidatId).First().result = dtoComp.score;
+                    dbForm.Scores.Where(s => s.candidateId == candidatId).First().finalResult = dtoComp.finalScore;
+                }
+                else
+                {
+                    dbComp.Scores.Add(new Score
+                    {
+                        
+                        candidateId = dbCandidate.ID,
+                        formId = dbForm.ID,
+                        result = dtoComp.score,
+                        finalResult = dtoComp.finalScore,
+                        competenceId = dbComp.ID
+                    });
+                }
+
+
+                foreach (var dtoDim in dtoComp.dimensions)
+                {
+                        var dbDim = dbComp.Dimensions.Where(c => c.ID == dtoDim.dimensionId).First();
+
+                        if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == dbDim.ID && s.competenceId == dtoComp.competenceId))
+                        {
+                            dbForm.Scores.Where(s => s.candidateId == candidatId).First().result = dtoDim.score;
+                        }
                     else
                     {
-                        dbComp.Scores.Add(dtoScoreComp);
-                    }
-                }
-
-                foreach (var dtoDim in dtoComp.Dimensions)
-                {
-                    foreach (var dtoScoreDim in dtoDim.Scores.Where(s => s.candidateId == candidatId && s.juryId == juryId))
-                    {
-                        var dbDim = dbForm.Competences.Where(c => c.ID == dtoComp.ID).First();
-
-
-                        if (dbDim.Scores.Any(s => s.candidateId == candidatId && s.id == dtoScoreDim.id))
+                        dbDim.Scores.Add(new Score
                         {
-                            dbDim.Scores.Where(s => s.candidateId == candidatId).First().result = dtoScoreDim.result;
-                            dbDim.Scores.Where(s => s.candidateId == candidatId).First().finalResult = dtoScoreDim.finalResult;
-                        }
-                        else
-                        {
-                            dbDim.Scores.Add(dtoScoreDim);
-                        }
+                            dimensionId = dbDim.ID,
+                            candidateId = dbCandidate.ID,
+                            formId = dbForm.ID,
+                            result = dtoComp.score,
+                            competenceId = dbComp.ID
+                        });
                     }
 
                 }
-            }
+        }
 
 
             db.Entry(data.ToEntity()).State = EntityState.Modified;
@@ -253,79 +265,7 @@ namespace Revit.Api.Azure.Controllers
             return StatusCode(HttpStatusCode.NoContent);
 
 
-
-
-            //DtoForm result = new DtoForm();
-
-            //result = form.ToDto(false);
-
-            //result.candidate = candidate.ToDto();
-            //if (form.Scores.Count > 0)
-            //{
-            //    if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null) != 0)
-            //    {
-            //        result.score = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).result;
-            //    }
-
-            //}
-            //else
-            //{
-            //    result.score = null;
-            //}
-
-            //if (form.Scores.Count > 0)
-            //{
-            //    if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null) != 0)
-            //    {
-            //        result.finalScore = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).finalResult;
-
-            //    }
-            //}
-            //else
-            //{
-            //    result.score = null;
-            //}
-            //result.scoreMax = form.finalScoreMax;
-            //result.scoreMin = form.finalScoreMin;
-            //if (form.Scores.Count > 0)
-            //{
-            //    if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId) != 0)
-            //    {
-            //        result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId).finalResult;
-            //    }
-            //}
-            //else
-            //{
-            //    result.total = null;
-            //}
-
-            //foreach (var compet in form.Competences)
-            //{
-            //    result.competencesList.Add(compet.ToDto());
-            //    foreach (var dim in compet.Dimensions)
-            //    {
-            //        //    result.competencesList.Last().dimensions.Add(dim.ToDto());
-
-            //        if (dim.Scores.Count > 0)
-            //        {
-            //            if (dim.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID) != 0)
-            //            {
-            //                result.competencesList.Last().dimensions.Last().score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID).result;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            result.competencesList.Last().dimensions.Last().notObserved = true;
-            //        }
-            //    }
-            //}
-            //foreach (var candi in form.Candidates)
-            //{
-
-            //    result.candidateList.Add(candi.ToDto());
-            //}
-
-            //return Ok(result);
+            
         }
 
 
@@ -572,7 +512,7 @@ namespace Revit.Api.Azure.Controllers
             }
             Form dbForm = db.Forms.Where(f => f.ID == id).First();
 
-            dbForm.Juries = content.ToEntity().Juries;
+            
             dbForm.MaxCandidates = content.ToEntity().MaxCandidates;
             dbForm.name = content.ToEntity().name;
             dbForm.name_DE = content.ToEntity().name_DE;
@@ -587,56 +527,155 @@ namespace Revit.Api.Azure.Controllers
             dbForm.finalScoreMin = content.ToEntity().finalScoreMin;
             dbForm.code = content.ToEntity().code;
 
+
+            foreach (var dtoCandi in content.candidateList)
+            {
+                if (dtoCandi.candidateId == 0)
+                {
+                    dbForm.Candidates.Add(new Candidate { firstname = dtoCandi.firstName, lastname = dtoCandi.lastName });
+                    
+                }
+            }
+            db.Entry(dbForm).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+                db = new DataContext();
+                dbForm = db.Forms.Where(f => f.ID == id).First();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FormExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            //db 
+            var dbListjury = db.JuryCandidateForms.Where(o => o.form_ID == id);
+            var dbListJCF = db.JuryCandidateForms.Where(o => o.form_ID == id);
+//db
+
+
+            //dbForm.Juries = content.ToEntity().Juries;
+
+            var listCandToAdd = new List<Candidate>();
+            var listCandToDel = new List<Candidate>();
             foreach (var cand in dbForm.Candidates)
             {
+                if (!content.candidateList.Any(c=> c.candidateId== cand.ID))
+                {
+                    listCandToDel.Add(cand);
+                }
+               
+            }
+            foreach (var item in listCandToDel)
+            {
+                dbForm.Candidates.Remove(item);
+            }
+            listCandToDel.Clear();
+
+            foreach (var dtocand in content.candidateList)
+            {
+                if (!dbForm.Candidates.Any(c => c.ID == dtocand.candidateId))
+                {
+                    listCandToAdd.Add(dtocand.ToEntity());
+                }
+            }
+
+            foreach (var cand in dbForm.Candidates)
+            {
+
                 var dtoCandidate = content.candidateList.Where(c => c.candidateId == cand.ID).First();
 
                 //Remove candidate if not in dto form
                 if (!content.candidateList.Any(c => c.candidateId == cand.ID))
                 {
-                    dbForm.Candidates.Remove(cand);
-                    foreach (var item in db.JuryCandidateForms.Where(o => o.candidate_ID == cand.ID && o.form_ID == id))
+                    listCandToDel.Add(cand);
+                    foreach (var item in dbListjury.Where(o => o.candidate_ID == cand.ID))
                     {
                         db.JuryCandidateForms.Remove(item);
                     }
                 }
-                //Candidate in dto form
+                
+
+            }
+
+            foreach (var item in listCandToDel)
+            {
+                dbForm.Candidates.Remove(item);
+            }
+            listCandToDel.Clear();
+            foreach (var item in listCandToAdd)
+            {
+                dbForm.Candidates.Add(item);
+            }
+            listCandToAdd.Clear();
+
+            db.Entry(dbForm).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+                db = new DataContext();
+                dbForm = db.Forms.Where(f => f.ID == id).First();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FormExists(id))
+                {
+                    return NotFound();
+                }
                 else
                 {
+                    throw;
+                }
+            }
+            foreach (var item in content.candidateList)
+            {
+                if (item.candidateId ==0)
+                {
+                    item.candidateId = dbForm.Candidates.Where(c => c.nationalNumber == item.nationalNumber && c.lastname == item.lastName && c.firstname == item.firstName).Last().ID;
+                }
+            }
 
-                    //Assign properties
-                    cand.lastname = dtoCandidate.lastName;
+            //Candidate in dto form
+            foreach (var cand in dbForm.Candidates)
+            {
+                var dtoCandidate = content.candidateList.Where(c => c.candidateId == cand.ID).First();
+
+                //Assign properties
+                cand.lastname = dtoCandidate.lastName;
                     cand.firstname = dtoCandidate.firstName;
                     cand.nationalNumber = dtoCandidate.nationalNumber;
 
 
-                    foreach (var dtocand in content.candidateList)
-                    {
-                        if (!dbForm.Candidates.Any(c => c.ID == dtocand.candidateId))
-                        {
-                            dbForm.Candidates.Add(dtocand.ToEntity());
-                        }
-                    }
+
 
 
                     //remove in db if removed from dto
-                    foreach (var item in db.JuryCandidateForms.Where(o => o.candidate_ID == cand.ID && o.form_ID == id))
+                    foreach (var item in dbListjury.Where(o => o.candidate_ID == cand.ID))
                     {
-                        if (!dtoCandidate.juries.Any(j=> j.juryId==item.jury_ID))
+                        if (!dtoCandidate.juries.Any(j => j.juryId == item.jury_ID))
                         {
                             db.JuryCandidateForms.Remove(item);
                         }
                     }
 
 
-                    
-                    //add to db if present in dto
-                    foreach(var assignedJury in dtoCandidate.juries)
-                    {                
-                               
-                        if(!db.JuryCandidateForms.Any(jcf=> jcf.candidate_ID == cand.ID && jcf.form_ID== id && jcf.jury_ID== assignedJury.juryId))
-                        {
 
+
+                    //add to db if present in dto
+                    foreach (var assignedJury in dtoCandidate.juries)
+                    {
+
+                        if (!dbListJCF.Any(jcf => jcf.candidate_ID == cand.ID && jcf.jury_ID == assignedJury.juryId))
+                        {
                             db.JuryCandidateForms.Add(new juryCandidateForm
                             {
                                 candidate_ID = cand.ID,
@@ -644,13 +683,16 @@ namespace Revit.Api.Azure.Controllers
                                 jury_ID = assignedJury.juryId
 
                             });
-                            
+
                         }
 
                     }
-                }
+                
             }
 
+
+            var listCompToDel = new List<Competence>();
+            var listCompToAdd = new List<Competence>();
 
             foreach (var dbComp  in dbForm.Competences)
             {
@@ -697,6 +739,7 @@ namespace Revit.Api.Azure.Controllers
                             dbComp.Dimensions.Remove(dbDim);
                         }
                     }
+
                     foreach (var dtodim in compet.Dimensions)
                     {
                         if (!dbComp.Dimensions.Any(d => d.ID == dtodim.ID))
@@ -707,16 +750,33 @@ namespace Revit.Api.Azure.Controllers
                 }
                 else
                 {
-                    dbForm.Competences.Remove(dbComp);
+                    listCompToDel.Add(dbComp);
                 }
             }
+
             foreach (var dtoComp in content.ToEntity().Competences)
             {
                 if (!dbForm.Competences.Any(d => d.ID == dtoComp.ID))
                 {
-                    dbForm.Competences.Add(dtoComp);
+                    listCompToAdd.Add(dtoComp);
                 }
             }
+
+            
+            foreach (var item in listCompToDel)
+            {
+                dbForm.Competences.Remove(item);
+            }
+            listCompToDel.Clear();
+
+
+            foreach (var item in listCompToAdd)
+            {
+                dbForm.Competences.Add(item);
+            }
+            listCompToAdd.Clear();
+
+
             db.Entry(dbForm).State = EntityState.Modified;
 
             try

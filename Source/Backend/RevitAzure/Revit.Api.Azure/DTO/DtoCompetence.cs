@@ -24,6 +24,7 @@ namespace Revit.Api.Azure.DTO
         public string description_EN { get; set; }
         public string description_DE { get; set; }
         public int? score { get; set; }
+        public int? finalScore { get; set; }
         public string status { get; set; }
         public string statusMessage { get; set; }
         public string statusMessage_FR { get; set; }
@@ -31,7 +32,7 @@ namespace Revit.Api.Azure.DTO
         public string statusMessage_EN { get; set; }
         public string statusMessage_DE { get; set; }
         public ICollection<DtoDimension> dimensions { get; set; }
-        public int weight { get; set; }
+        public int? weight { get; set; }
         public string comment { get; set; }
     }
 }
