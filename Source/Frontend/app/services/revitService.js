@@ -2,6 +2,8 @@
 
     var revitService = function($http, $log) {
 
+        var mockMode = true;
+
         /* Variables */
         var apiBaseUrl = "http://revitapiazure20160717113757.azurewebsites.net/api/";
 
@@ -125,8 +127,6 @@
 
             }
         }
-
-        var mockMode = true;
 
         if (mockMode) {
 

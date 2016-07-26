@@ -4,11 +4,7 @@
 
     var ScreeningController = function($scope, revitService,authenticationService, $log) {
 
-        $scope.currentUserId= authenticationService.getCurrentUserId();
-
-        $scope.test = "blabla";
-
-
+        $scope.currentUserId=authenticationService.getCurrentUserId();
         $scope.searchTerm = "";
 
         var onApiCallError = function(reason) {
@@ -20,6 +16,8 @@
 
 
         var onGetScreenings = function(data) {
+
+        $scope.curretUserId=authenticationService.getCurrentUserId();
 
             $scope.screenings=data;
 
