@@ -3,16 +3,27 @@
 
 var authenticationService = function($http, $log) {
 
+			var defaultUserId=1;
+
+			var currentUserId=defaultUserId;
+
+
 			var getCurrentUserId= function(){
 
-					return 1;
+					return currentUserId;
 
+			}
+
+			var setCurrentUserId=function(userId){
+				alert("test");
+				currentUserId=userId;
 			}
 
 			//Service API return
             return {
 
-                getCurrentUserId:getCurrentUserId
+                getCurrentUserId:getCurrentUserId,
+                 setCurrentUserId:setCurrentUserId
 
             };
 

@@ -8,6 +8,10 @@
                 templateUrl: "app/partials/main.html",
                 controller: "MainController"
             })
+            .when("/login", {
+                templateUrl: "app/partials/login.html",
+                controller: "LoginController"
+            })
             .when("/evaluation/juries/:juryId/forms/:formId/candidates/:candidateId",
             {
                 templateUrl: "app/partials/evaluation.html",

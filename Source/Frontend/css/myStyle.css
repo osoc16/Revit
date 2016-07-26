@@ -6339,6 +6339,10 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
   background: #03a9f4;
   color: #fff; }
 
+.form-page-content .candidate-display {
+  color: #000;
+  font-size: 15px; }
+
 .form-page-content .candidate-jury-chip {
   margin-right: 1rem; }
 

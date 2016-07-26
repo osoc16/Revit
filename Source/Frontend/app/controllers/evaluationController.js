@@ -107,6 +107,7 @@
             if ($scope.competenceEditMode == false) {
                 var suggestion = selorRuleService.getFormScoreSuggestion($scope.form.competences);
                 $scope.form.score = suggestion.score;
+                $scope.saveEvaluationForm();
             }
 
 
