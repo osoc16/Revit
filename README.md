@@ -3,11 +3,11 @@
 [![Stories in Progress](https://badge.waffle.io/osoc16/Revit.png?label=In%20Progress&title=In%20Progress)](http://waffle.io/osoc16/Revit)
 [![Stories in Done](https://badge.waffle.io/osoc16/Revit.png?label=Done&title=Done)](http://waffle.io/osoc16/Revit)
 
-# Revit
+
 <h1 align="center">
 <img src="https://github.com/osoc16/Revit/blob/master/Docs/Crest/selor_crest.png" style="margin:0 auto" alt="Revit Crest" height="70">
-Revit
 </h1>
+<h1 align="center">Revit</h1>
 
 
 ## Intro
