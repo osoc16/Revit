@@ -13,6 +13,11 @@
     padding-bottom: 7px;
 }
 
+.role{
+    font-size: 20px;
+    font-weight: bold;
+}
+
 .btn {
     border: 2px solid;
     border-color: #fff;
