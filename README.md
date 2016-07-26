@@ -14,9 +14,8 @@ See our [project page](https://github.com/osoc16/Revit)
 
 Frontend
 - [Node Packet Manager](https://www.npmjs.com/) 
-- 
 Backend
-- 
+- test
 
 ## Quick setup
 
