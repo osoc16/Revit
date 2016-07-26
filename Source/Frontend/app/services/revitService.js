@@ -2,7 +2,7 @@
 
     var revitService = function($http, $log) {
 
-        var mockMode = true;
+        var mockMode = false;
 
         /* Variables */
         var apiBaseUrl = "http://revitapiazure20160717113757.azurewebsites.net/api/";
@@ -24,6 +24,8 @@
         }
 
         var saveEvaluationForm = function(formId, juryId, candidateId, data) {
+
+            
 
             $log.info("=========API CALL===========")
             var callUrl = apiBaseUrl + "evaluations/juries/" + juryId + "/forms/" + formId + "/candidates/" + candidateId;
