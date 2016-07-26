@@ -21,7 +21,7 @@ The frontend makes calls to the backend API hosted on Azure, but you can run the
 - Visual Studio
 
 ## Quick setup
-- 1.Run 'npm install' in the 'Frontend' folder
+- 1.Run `npm install` in the 'Frontend' folder
 - 2.Navigate to the project url from your webserver
 - 3. (optional) Change the apiBasePath URL in revitService.js if you want to make calls to your own hosted backend
 
