@@ -5,12 +5,9 @@
 
 
 <p align="center">
-<img src="https://github.com/osoc16/Revit/blob/master/Docs/Crest/selor_crest.png" style="margin:0 auto" alt="Revit Crest" height="70">
+<img src="https://github.com/osoc16/Revit/blob/master/Docs/Crest/selor_crest.png" style="margin:0 auto" alt="Revit Crest" height="150">
 <p>
 <h1 align="center">Revit</h1>
-
-
-## Intro
 A backoffice application for Selor to evaluate candidates based on certain metrics
 
 See our [project page](https://github.com/osoc16/Revit)
