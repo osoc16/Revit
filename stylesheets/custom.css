@@ -65,3 +65,9 @@ a {
 .screenshot-item img {
     margin-bottom: 10px;
 }
+
+.face-item{
+
+	width:100%;
+	border-radius: 1000px;
+}
