@@ -4,9 +4,9 @@
 [![Stories in Done](https://badge.waffle.io/osoc16/Revit.png?label=Done&title=Done)](http://waffle.io/osoc16/Revit)
 
 
-<span align="center">
+<p align="center">
 <img src="https://github.com/osoc16/Revit/blob/master/Docs/Crest/selor_crest.png" style="margin:0 auto" alt="Revit Crest" height="70">
-<span>
+<p>
 <h1 align="center">Revit</h1>
 
 
