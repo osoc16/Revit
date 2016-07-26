@@ -4,7 +4,7 @@
 [![Stories in Done](https://badge.waffle.io/osoc16/Revit.png?label=Done&title=Done)](http://waffle.io/osoc16/Revit)
 
 # Revit
-
+<img src="https://github.com/osoc16/Revit/blob/master/Source/Frontend/img/icons/logo-min.png" alt="Datex II linker" height="70">
 ## Intro
 A backoffice application for Selor to evaluate candidates based on certain metrics
 
