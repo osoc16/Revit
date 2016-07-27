@@ -15,6 +15,7 @@ namespace Revit.Api.Azure.Models
 
 
         public DbSet<Dimension> Dimensions { get; set; }
+
         public DbSet<juryCandidateForm> JuryCandidateForms { get; set; }
 
         public DbSet<Competence> Competences { get; set; }

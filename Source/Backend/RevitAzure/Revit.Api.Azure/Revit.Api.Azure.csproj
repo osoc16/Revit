@@ -215,8 +215,6 @@
     <Compile Include="Models\Form.cs" />
     <Compile Include="Models\Jury.cs" />
     <Compile Include="Models\juryCandidateForm.cs" />
-    <Compile Include="Models\Repositories\DimRepository.cs" />
-    <Compile Include="Models\Repositories\Repository.cs" />
     <Compile Include="Models\Score.cs" />
     <Compile Include="Models\Screening.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

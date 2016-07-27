@@ -61,9 +61,10 @@ namespace Revit.Api.Azure.Controllers
             
             if (form.Scores.Count>0)
             {
-                if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null)!=0)
+                if (form.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null))
                 {
                     result.score = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).result;
+                    result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).finalResult;
                 }
 
             }
@@ -74,7 +75,7 @@ namespace Revit.Api.Azure.Controllers
 
             if (form.Scores.Count > 0)
             {
-                if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null) != 0)
+                if (form.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null) )
                 {
                     result.finalScore = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).finalResult;
 
@@ -88,9 +89,9 @@ namespace Revit.Api.Azure.Controllers
             result.scoreMin =form.finalScoreMin;
             if (form.Scores.Count > 0)
             {
-                if (form.Scores.Count(o => o.candidateId == candidatId && o.formId == formId) != 0)
+                if (form.Scores.Any(o => o.candidateId == candidatId && o.formId == formId) )
                 {
-                    result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId).finalResult;
+                    result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId ).finalResult;
                 }
             }
             else
@@ -101,15 +102,20 @@ namespace Revit.Api.Azure.Controllers
             foreach (var compet in form.Competences)
             {
                 result.competencesList.Add(compet.ToDto(language));
+                if (compet.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == compet.ID))
+                {
+
+                    result.competencesList.Last().score = compet.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == null && o.competenceId == compet.ID).result;
+                }
                 foreach (var dim in compet.Dimensions)
                 {
 
                     if (dim.Scores.Count > 0)
                     {
-                        if (dim.Scores.Count(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID) != 0)
+                        if (dim.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID))
                         {
-                            result.competencesList.Last().dimensions.Last().score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID).result;
-                        }
+                            result.competencesList.Last().dimensions.Where(di => di.dimensionId == dim.ID).First().score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID).result;
+                         }
                     }
                     else
                     {
@@ -153,6 +159,7 @@ namespace Revit.Api.Azure.Controllers
         // PUT: api/juries/{juryId}/forms/{formId}/candidates/{candidatId}
         public object Put(int juryId, int formId, int candidatId, [FromBody] DtoForm data, string language = "en")
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -181,8 +188,8 @@ namespace Revit.Api.Azure.Controllers
 
                 if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId== dbForm.ID && s.dimensionId==null && s.competenceId==null))
                 {
-                    dbForm.Scores.Where(s => s.candidateId == candidatId).First().result = data.score;
-                    dbForm.Scores.Where(s => s.candidateId == candidatId).First().finalResult = data.finalScore;
+                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == null).First().result = data.score;
+                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == null).First().finalResult = data.finalScore;
                 }
                 else
                 {
@@ -202,8 +209,8 @@ namespace Revit.Api.Azure.Controllers
 
                 if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == dtoComp.competenceId))
                 {
-                    dbForm.Scores.Where(s => s.candidateId == candidatId).First().result = dtoComp.score;
-                    dbForm.Scores.Where(s => s.candidateId == candidatId).First().finalResult = dtoComp.finalScore;
+                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == dtoComp.competenceId).First().result = dtoComp.score;
+                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == dtoComp.competenceId).First().finalResult = dtoComp.score;
                 }
                 else
                 {
@@ -225,7 +232,7 @@ namespace Revit.Api.Azure.Controllers
 
                         if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == dbDim.ID && s.competenceId == dtoComp.competenceId))
                         {
-                            dbForm.Scores.Where(s => s.candidateId == candidatId).First().result = dtoDim.score;
+                            dbForm.Scores.Where(s => s.candidateId == candidatId && s.dimensionId == dbDim.ID).First().result = dtoDim.score;
                         }
                     else
                     {
@@ -243,7 +250,7 @@ namespace Revit.Api.Azure.Controllers
         }
 
 
-            db.Entry(data.ToEntity()).State = EntityState.Modified;
+            db.Entry(dbForm).State = EntityState.Modified;
             
 
             try
@@ -265,7 +272,7 @@ namespace Revit.Api.Azure.Controllers
             return StatusCode(HttpStatusCode.NoContent);
 
 
-            
+///////////////////////////////////////            
         }
 
 
@@ -559,10 +566,25 @@ namespace Revit.Api.Azure.Controllers
             //db 
             var dbListjury = db.JuryCandidateForms.Where(o => o.form_ID == id);
             var dbListJCF = db.JuryCandidateForms.Where(o => o.form_ID == id);
-//db
+            //db
 
 
+
+            var listJugeToDel = new List<Jury>();
             //dbForm.Juries = content.ToEntity().Juries;
+            foreach (var juge in dbForm.Juries)
+            {
+                if (!content.juryList.Any(j=> j.juryId == juge.ID))
+                {
+                    listJugeToDel.Add(juge);
+                }
+            }
+            foreach (var item in listJugeToDel)
+            {
+                dbForm.Juries.Remove(item);
+            }
+            listJugeToDel.Clear();
+
 
             var listCandToAdd = new List<Candidate>();
             var listCandToDel = new List<Candidate>();
@@ -663,7 +685,10 @@ namespace Revit.Api.Azure.Controllers
                     {
                         if (!dtoCandidate.juries.Any(j => j.juryId == item.jury_ID))
                         {
-                            db.JuryCandidateForms.Remove(item);
+
+                        //db.JuryCandidateForms.Find(item);
+                        db.JuryCandidateForms.Attach(item);
+                        db.JuryCandidateForms.Remove(item);
                         }
                     }
 
@@ -674,7 +699,7 @@ namespace Revit.Api.Azure.Controllers
                     foreach (var assignedJury in dtoCandidate.juries)
                     {
 
-                        if (!dbListJCF.Any(jcf => jcf.candidate_ID == cand.ID && jcf.jury_ID == assignedJury.juryId))
+                        if (!db.JuryCandidateForms.Where(o => o.form_ID == id).Any(jcf => jcf.candidate_ID == cand.ID && jcf.jury_ID == assignedJury.juryId))
                         {
                             db.JuryCandidateForms.Add(new juryCandidateForm
                             {
@@ -702,11 +727,12 @@ namespace Revit.Api.Azure.Controllers
                     dbComp.code = compet.code;
                     dbComp.comment = compet.comment;
                     dbComp.description_DE = compet.description_DE;
-                    dbComp.description_EN = dbComp.description_EN;
+                    dbComp.description_EN = content.competencesList.Where(c => c.competenceId == dbComp.ID).First().description;
                     dbComp.description_FR = compet.description_FR;
                     dbComp.description_NL = compet.description_NL;
                     dbComp.name_DE = compet.name_DE;
-                    dbComp.name_EN = compet.name_EN;
+                   // dbComp.name_EN = compet.name_EN;
+                    dbComp.name_EN = content.competencesList.Where(c => c.competenceId == dbComp.ID).First().name;
                     dbComp.name_FR = compet.name_FR;
                     dbComp.name_NL = compet.name_NL;
                     dbComp.weight = compet.weight;
@@ -716,7 +742,7 @@ namespace Revit.Api.Azure.Controllers
                     dbComp.statusMessage_FR = compet.statusMessage_FR;
                     dbComp.statusMessage_NL = compet.statusMessage_NL;
 
-
+                    var listDimToDel = new List<Dimension>();
                     foreach (var dbDim in dbComp.Dimensions)
                     {
 
@@ -725,21 +751,29 @@ namespace Revit.Api.Azure.Controllers
                             var diment = compet.Dimensions.Where(d => d.ID == dbDim.ID).First();
                             dbDim.code = diment.code;
                             dbDim.description_DE = diment.description_DE;
-                            dbDim.description_EN = diment.description_EN;
+                           // dbDim.description_EN = diment.description_EN;
+                            dbDim.description_EN = content.competencesList.Where(c => c.competenceId == dbComp.ID).First().dimensions.Where(d => d.dimensionId == dbDim.ID).First().description;
                             dbDim.description_FR = diment.description_FR;
                             dbDim.description_NL = diment.description_NL;
                             dbDim.name_DE = diment.name_DE;
-                            dbDim.name_EN = diment.name_EN;
+                            //dbDim.name_EN = diment.name_EN;
+                            dbDim.name_EN = content.competencesList.Where(c => c.competenceId == dbComp.ID).First().dimensions.Where(d => d.dimensionId == dbDim.ID).First().name;
                             dbDim.name_FR = diment.name_FR;
                             dbDim.name_NL = diment.name_NL;
 
                         }
                         else
                         {
-                            dbComp.Dimensions.Remove(dbDim);
+                            listDimToDel.Add(dbDim);
                         }
                     }
 
+                    foreach (var item in listDimToDel)
+                    {
+                        dbComp.Dimensions.Remove(item);
+                    }
+
+                    listCompToDel.Clear();
                     foreach (var dtodim in compet.Dimensions)
                     {
                         if (!dbComp.Dimensions.Any(d => d.ID == dtodim.ID))

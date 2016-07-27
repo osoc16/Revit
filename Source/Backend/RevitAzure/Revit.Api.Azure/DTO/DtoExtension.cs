@@ -25,6 +25,14 @@ namespace Revit.Api.Azure.DTO
             result.name_NL = source.name_NL;
             result.name_EN = source.name_EN;
 
+            if (source.name_EN == null && source.name != null)
+            {
+                result.name_EN = source.name;
+            }
+            if (source.description_EN == null && source.description != null)
+            {
+                result.description_EN = source.description;
+            }
             result.ID = source.dimensionId;
             return result;
         }
@@ -50,7 +58,6 @@ namespace Revit.Api.Azure.DTO
             foreach (var item in source.Scores)
             {
                 result.scoresList.Add(item.ToDto());
-
             }
             result.dimensionId = source.ID;
 
@@ -110,7 +117,6 @@ namespace Revit.Api.Azure.DTO
             result.description_FR = source.description_FR;
             result.description_NL = source.description_NL;
             result.description_EN = source.description_EN;
-
             result.statusMessage_DE = source.statusMessage_DE;
             result.statusMessage_FR = source.statusMessage_FR;
             result.statusMessage_NL = source.statusMessage_NL;
@@ -120,6 +126,15 @@ namespace Revit.Api.Azure.DTO
             result.weight = source.weight;
             result.code = source.code;
             result.comment = source.comment;
+
+            if (source.name_EN==null && source.name!=null)
+            {
+                result.name_EN = source.name;
+            }
+            if (source.description_EN == null && source.description != null)
+            {
+                result.description_EN = source.description;
+            }
 
             if (result.Dimensions == null)
             {
