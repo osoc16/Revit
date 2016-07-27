@@ -142,7 +142,12 @@
 
             var suggestion = selorRuleService.getFormScoreSuggestion($scope.form.competences);
 
+            if(isNaN($scope.form.score)|| $scope.form.score>suggestion.maxScore || $scope.form.score<suggestion.minScore ){
+
+
             $scope.form.score = suggestion.score;
+ 
+            }
 
             $scope.form.scoreMinLimit = suggestion.minScore;
             $scope.form.scoreMaxLimit = suggestion.maxScore;
@@ -166,7 +171,14 @@
 
             var suggestion = selorRuleService.getCompetenceScoreSuggestion($scope.form.competences[$scope.currentCompetenceIndex].dimensions);
 
-            $scope.form.competences[$scope.currentCompetenceIndex].score = suggestion.score;
+            var competenceScore= $scope.form.competences[$scope.currentCompetenceIndex].score;
+
+            if(isNaN(competenceScore)|| competenceScore> suggestion.maxScore || competenceScore< suggestion.minScore){
+             
+             $scope.form.competences[$scope.currentCompetenceIndex].score = suggestion.score;
+ 
+            }
+
             $scope.form.competences[$scope.currentCompetenceIndex].scoreMinLimit = suggestion.minScore;
             $scope.form.competences[$scope.currentCompetenceIndex].scoreMaxLimit = suggestion.maxScore;
 
