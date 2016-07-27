@@ -325,6 +325,7 @@ namespace Revit.Api.Azure.DTO
             result.lastName = source.lastname;
             result.nationalNumber = source.nationalNumber;
             result.name = result.lastName + " " + result.firstName;
+            
 
 
             return result;
@@ -416,6 +417,7 @@ namespace Revit.Api.Azure.DTO
         /// <returns></returns>
         public static DtoForm ToDto(this Form source, bool chain = true, String language = "EN")
         {
+            DataContext db = new DataContext();
             DtoForm result = new DtoForm();
 
             result.formId = source.ID;
@@ -476,11 +478,24 @@ namespace Revit.Api.Azure.DTO
             if ( chain == true)
             {
                 if (source.Candidates != null)
-                foreach (var item in source.Candidates)
-                {
-                    result.candidateList.Add(item.ToDto());
-                }
-            if (source.Competences != null)
+                    //foreach (var item in source.Candidates)
+                    //{
+                    //    result.candidateList.Add(item.ToDto());
+                    //}
+                    foreach (var candi in source.Candidates)
+                    {
+                        DtoCandidate candToAdd = candi.ToDto();
+                        if (candToAdd.juries == null)
+                        {
+                            candToAdd.juries = new List<DtoJury>();
+                        }
+                        foreach (var item in db.JuryCandidateForms.Where(o => o.form_ID == source.ID && o.candidate_ID == candToAdd.candidateId))
+                        {
+                            candToAdd.juries.Add(db.Juries.Where(o => o.ID == item.jury_ID).First().ToDto());
+                        }
+                        result.candidateList.Add(candToAdd);
+                    }
+                if (source.Competences != null)
                 foreach (var item in source.Competences)
                 {
                     result.competencesList.Add(item.ToDto());
@@ -547,6 +562,8 @@ namespace Revit.Api.Azure.DTO
         /// <returns></returns>
         public static DtoScreening ToDto(this Screening source, String language = "EN")
         {
+
+            DataContext db = new DataContext();
             DtoScreening result = new DtoScreening();
             result.code = source.code;
             result.description_DE = source.description_DE;
@@ -610,7 +627,16 @@ namespace Revit.Api.Azure.DTO
             }
             foreach (var candi in source.Candidates)
             {
-                result.candidateList.Add(candi.ToDto());
+                DtoCandidate candToAdd = candi.ToDto();
+                if (candToAdd.juries == null)
+                {
+                    candToAdd.juries = new List<DtoJury>();
+                }
+                foreach (var item in db.JuryCandidateForms.Where(o=> o.form_ID == source.Form.ID && o.candidate_ID==candToAdd.candidateId))
+                {
+                    candToAdd.juries.Add(db.Juries.Where(o => o.ID == item.jury_ID).First().ToDto());
+                }
+                    result.candidateList.Add(candToAdd);
             }
 
             return result;

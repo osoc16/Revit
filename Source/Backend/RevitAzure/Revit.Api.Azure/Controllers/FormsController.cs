@@ -388,7 +388,7 @@ namespace Revit.Api.Azure.Controllers
             {
                 if (dtoCandi.candidateId == 0)
                 {
-                    dbForm.Candidates.Add(new Candidate { firstname = dtoCandi.firstName, lastname = dtoCandi.lastName });
+                    dbForm.Candidates.Add(new Candidate { firstname = dtoCandi.firstName, lastname = dtoCandi.lastName});
                     
                 }
             }

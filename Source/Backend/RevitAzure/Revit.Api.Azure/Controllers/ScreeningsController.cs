@@ -57,11 +57,6 @@ namespace Revit.Api.Azure.Controllers
 
 
 
-        // GET: api/Screenings
-        //public IQueryable<Screening> GetScreenings()
-        //{
-        //    return db.Screenings;
-        //}
 
         // GET: api/Screenings/5
         [ResponseType(typeof(Screening))]
