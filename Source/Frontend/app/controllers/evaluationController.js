@@ -7,7 +7,10 @@
 
         var selectedCandidate = null;
 
-        $scope.setCompetenceStatus = function(toUpdateCompetence) {
+        $scope.setCompetenceStatus = function(competenceIndex) {
+
+            var toUpdateCompetence= $scope.form.competences[competenceIndex];
+
             if (isNaN(toUpdateCompetence.score)) {
 
                 toUpdateCompetence.status = "neutral";
@@ -46,7 +49,7 @@
             for (var i in $scope.form.competences) {
 
                 //applyScoringRulesOnCompetenceLevel(i);
-                $scope.setCompetenceStatus($scope.form.competences[i]);
+                $scope.setCompetenceStatus(i);
 
             }
 
@@ -145,9 +148,8 @@
 
                 applyScoringRulesOnFormLevel();
 
-                var currentCompetence = $scope.form.competences[$scope.currentCompetenceIndex];
 
-                $scope.setCompetenceStatus(currentCompetence);
+                $scope.setCompetenceStatus($scope.currentCompetenceIndex);
    
                  $log.info("comp eval");
         }
@@ -170,8 +172,6 @@
 
             /* VALIDATION */
 
-
-
         }
 
 
@@ -179,6 +179,9 @@
 
 
             applyScoringRulesOnCompetenceLevel($scope.currentCompetenceIndex);
+
+            $scope.setCompetenceStatus($scope.currentCompetenceIndex);
+
 
         }
 
@@ -200,6 +203,7 @@
             $scope.form.competences[competenceIndex].scoreMaxLimit = suggestion.maxScore;
 
             applyScoringRulesOnFormLevel();
+
 
         }
 
