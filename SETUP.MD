@@ -16,6 +16,6 @@ The application accesses an api hosted on Azure by default but should you want t
 To change the address the angular application makes calls to, change the `apiBaseUrl` variable value found in <a href="https://github.com/osoc16/Revit/blob/master/Source/Frontend/app/services/revitService.js">here</a>
 
 ### SASS
-The styling of the application is based on sass. <a href="http://gulpjs.com/">Gulp</a> was used for the compilation of scss files. Install it and run ´gulp` command in the 'Frontend' folder to get the automation task started.
+The styling of the application is based on sass. <a href="http://gulpjs.com/">Gulp</a> was used for the compilation of scss files. Install it and run  `gulp` command in the 'Frontend' folder to get the automation task started.
 
 ## Backend
