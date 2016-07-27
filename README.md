@@ -27,4 +27,4 @@ The frontend makes calls to the backend API hosted on Azure, but you can run the
 
 
 ## More: configuration, development tips, ...
-See [SETUP.md](SETUP.md)
+See [SETUP.md](SETUP.MD)
