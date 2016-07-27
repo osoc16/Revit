@@ -18,8 +18,23 @@ namespace Revit.Api.Azure.Controllers
     [RoutePrefix("api")]
     public class FormsController : ApiController
     {
+        /// <summary>
+        /// the DataContext used by the controler
+        /// </summary>
         private DataContext db = new DataContext();
-        
+
+
+
+        /// <summary>
+        /// GET: api/juries/{juryId}/forms/{formId}/candidates/{candidatId}
+        /// 
+        /// Used by the frontend to recieve an evaluation form for a particuliar candidate and a particular jury member
+        /// </summary>
+        /// <param name="juryId"></param>
+        /// <param name="formId"></param>
+        /// <param name="candidatId"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
         [Route("evaluations/juries/{juryId}/forms/{formId}/candidates/{candidatId}")]
         [ResponseType(typeof(DtoForm))]
         // GET: api/juries/{juryId}/forms/{formId}/candidates/{candidatId}
@@ -61,10 +76,10 @@ namespace Revit.Api.Azure.Controllers
             
             if (form.Scores.Count>0)
             {
-                if (form.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null))
+                if (form.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null && o.juryId == juryId))
                 {
-                    result.score = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).result;
-                    result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).finalResult;
+                    result.score = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null && o.juryId == juryId).result;
+                    result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null && o.juryId == juryId).finalResult;
                 }
 
             }
@@ -75,9 +90,9 @@ namespace Revit.Api.Azure.Controllers
 
             if (form.Scores.Count > 0)
             {
-                if (form.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null) )
+                if (form.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null && o.juryId == juryId) )
                 {
-                    result.finalScore = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null).finalResult;
+                    result.finalScore = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == null && o.dimensionId == null && o.juryId == juryId).finalResult;
 
                 }
             }
@@ -89,9 +104,9 @@ namespace Revit.Api.Azure.Controllers
             result.scoreMin =form.finalScoreMin;
             if (form.Scores.Count > 0)
             {
-                if (form.Scores.Any(o => o.candidateId == candidatId && o.formId == formId) )
+                if (form.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.juryId == juryId) )
                 {
-                    result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId ).finalResult;
+                    result.total = form.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.juryId == juryId).finalResult;
                 }
             }
             else
@@ -102,19 +117,19 @@ namespace Revit.Api.Azure.Controllers
             foreach (var compet in form.Competences)
             {
                 result.competencesList.Add(compet.ToDto(language));
-                if (compet.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == compet.ID))
+                if (compet.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.competenceId == compet.ID && o.juryId == juryId))
                 {
 
-                    result.competencesList.Last().score = compet.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == null && o.competenceId == compet.ID).result;
+                    result.competencesList.Last().score = compet.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == null && o.competenceId == compet.ID && o.juryId == juryId).result;
                 }
                 foreach (var dim in compet.Dimensions)
                 {
 
                     if (dim.Scores.Count > 0)
                     {
-                        if (dim.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID))
+                        if (dim.Scores.Any(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID && o.juryId == juryId))
                         {
-                            result.competencesList.Last().dimensions.Where(di => di.dimensionId == dim.ID).First().score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID).result;
+                            result.competencesList.Last().dimensions.Where(di => di.dimensionId == dim.ID).First().score = dim.Scores.First(o => o.candidateId == candidatId && o.formId == formId && o.dimensionId == dim.ID && o.juryId == juryId).result;
                          }
                     }
                     else
@@ -150,318 +165,13 @@ namespace Revit.Api.Azure.Controllers
 
 
 
-
-
-
-
-        [Route("evaluations/juries/{juryId}/forms/{formId}/candidates/{candidatId}")]
-        [ResponseType(typeof(DtoForm))]
-        // PUT: api/juries/{juryId}/forms/{formId}/candidates/{candidatId}
-        public object Put(int juryId, int formId, int candidatId, [FromBody] DtoForm data, string language = "en")
-        {
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (data == null)
-            {
-                return BadRequest();
-            }
-            if (formId != data.formId)
-            {
-                return BadRequest();
-            }
-
-            Form dbForm = db.Forms.Find(formId);
-            if (dbForm == null)
-            {
-                return NotFound();
-            }
-            Candidate dbCandidate = db.Candidates.Find(candidatId);
-            if (dbCandidate == null)
-            {
-                return NotFound();
-            }
-            
-
-                if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId== dbForm.ID && s.dimensionId==null && s.competenceId==null))
-                {
-                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == null).First().result = data.score;
-                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == null).First().finalResult = data.finalScore;
-                }
-                else
-                {
-                    dbForm.Scores.Add(new Score
-                    {
-                        candidateId = dbCandidate.ID,
-                        formId = dbForm.ID,
-                        result = data.score,
-                        finalResult=data.finalScore
-                    });
-                }
-
-
-            foreach (var dtoComp in data.competencesList)
-            {
-                var dbComp = dbForm.Competences.Where(c => c.ID == dtoComp.competenceId).First();
-
-                if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == dtoComp.competenceId))
-                {
-                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == dtoComp.competenceId).First().result = dtoComp.score;
-                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == dtoComp.competenceId).First().finalResult = dtoComp.score;
-                }
-                else
-                {
-                    dbComp.Scores.Add(new Score
-                    {
-                        
-                        candidateId = dbCandidate.ID,
-                        formId = dbForm.ID,
-                        result = dtoComp.score,
-                        finalResult = dtoComp.finalScore,
-                        competenceId = dbComp.ID
-                    });
-                }
-
-
-                foreach (var dtoDim in dtoComp.dimensions)
-                {
-                        var dbDim = dbComp.Dimensions.Where(c => c.ID == dtoDim.dimensionId).First();
-
-                        if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == dbDim.ID && s.competenceId == dtoComp.competenceId))
-                        {
-                            dbForm.Scores.Where(s => s.candidateId == candidatId && s.dimensionId == dbDim.ID).First().result = dtoDim.score;
-                        }
-                    else
-                    {
-                        dbDim.Scores.Add(new Score
-                        {
-                            dimensionId = dbDim.ID,
-                            candidateId = dbCandidate.ID,
-                            formId = dbForm.ID,
-                            result = dtoComp.score,
-                            competenceId = dbComp.ID
-                        });
-                    }
-
-                }
-        }
-
-
-            db.Entry(dbForm).State = EntityState.Modified;
-            
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!FormExists(formId))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return StatusCode(HttpStatusCode.NoContent);
-
-
-///////////////////////////////////////            
-        }
-
-
-
-        //POST: 
-        [Route("forms")]
-        [ResponseType(typeof(Form))]
-        public IHttpActionResult Post([FromBody] DtoForm data)
-        {
-            Form formDb = new Form();
-            if (!ModelState.IsValid)
-            {
-
-                return BadRequest(ModelState);
-            }
-            formDb = data.ToEntity(false);
-
-            //competence region
-            #region competences
-            foreach (var comp in data.competencesList)
-            {
-                Competence compDb = db.Competences.Find(comp.competenceId);
-
-
-                if (compDb == null)
-                {
-                    compDb = new Competence();
-
-                    compDb = comp.ToEntity(false);
-
-                }
-                
-
-                //dimension region
-                #region dimension
-                foreach (var dim in comp.dimensions)
-                {
-                    Dimension dimDb = db.Dimensions.Find(dim.dimensionId);
-
-                    if (dimDb == null)
-                    {
-                        dimDb = new Dimension();
-                        dimDb = dim.ToEntity(); ;
-                        compDb.Dimensions.Add(dimDb);
-                    }
-                    else if (compDb.Dimensions.Contains(dimDb) == false)
-                    {
-                        compDb.Dimensions.Add(dimDb);
-                    }
-                }
-                #endregion
-
-                formDb.Competences.Add(compDb);
-
-            }
-
-            #endregion
-
-            //jury region
-            #region jury
-            if (data.juryList != null)
-                foreach (var jury in data.juryList)
-                {
-                    Jury juryDb = db.Juries.Find(jury.juryId);
-
-                    if (juryDb == null)
-                    {
-                        juryDb = new Jury();
-                        juryDb= jury.ToEntity();
-
-                        formDb.Juries.Add(juryDb);
-                    }
-                    else if (formDb.Juries.Contains(juryDb) == false)
-                        formDb.Juries.Add(juryDb);
-                }
-            #endregion
-
-            //candidate region
-            #region candidates
-            if (data.candidateList == null)
-                data.candidateList = new List<DtoCandidate>();
-            foreach (var candi in data.candidateList)
-            {
-                Candidate canDb = db.Candidates.Find(candi.candidateId);
-                
-                if (canDb == null)
-                {
-                    canDb = new Candidate();
-                    canDb = candi.ToEntity();
-                    db.Candidates.Add(canDb);
-                    db.SaveChanges();
-                    canDb = db.Candidates.Where(c=> c.lastname==canDb.lastname).Where(c => c.firstname == canDb.firstname).Last();                   
-                }
-                
-                if (candi.juries != null)
-                    foreach (var jur in candi.juries)
-                    {
-                        juryCandidateForm JCF = new juryCandidateForm();
-                        JCF.candidate_ID = candi.candidateId;
-                        JCF.form_ID = formDb.ID;
-                        JCF.jury_ID = jur.juryId;
-                        db.JuryCandidateForms.Add(JCF);
-                    }
-
-                if (formDb.Candidates == null)
-                    formDb.Candidates = new List<Candidate>();
-                formDb.Candidates.Add(canDb);
-            }
-
-            db.Forms.Add(formDb);
-            db.SaveChanges();
-            formDb = db.Forms.Where(f=> f.name==formDb.name).Last();
-
-            foreach (var candi in data.candidateList)
-            {
-                Candidate canDb = db.Candidates.Find(candi.candidateId);
-
-                if (candi.juries != null)
-                    foreach (var jur in candi.juries)
-                    {
-                        juryCandidateForm JCF = new juryCandidateForm();
-                        JCF.candidate_ID = candi.candidateId;
-                        JCF.form_ID = formDb.ID;
-                        JCF.jury_ID = jur.juryId;
-                        db.JuryCandidateForms.Add(JCF);
-                    }
-
-            }
-            #endregion
-
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = formDb.ID }, formDb);
-        }
-
-        //PUT: 
-        
-        //[Route("forms/{id}")]
-        //[ResponseType(typeof(Form))]
-        //public IHttpActionResult Put(int id, DtoForm formNew)
-        //{
-        //    Form formDb = db.Forms.Find(formNew.formId);
-        //    formDb = formNew.ToEntity();
-        //    if (id != formNew.formId)
-        //    {
-        //        return BadRequest();
-        //    }
-        //    if (formDb == null)        
-        //    {
-                
-        //        return Post(formNew);
-        //    }
-        //    else
-        //    {
-
-        //        if (!ModelState.IsValid)
-        //        {
-        //            return BadRequest(ModelState);
-        //        }
-
-        //        try
-        //        {
-        //            db.Entry(formNew.ToEntity()).State = EntityState.Modified;
-        //        }
-        //        catch (Exception e)
-        //        {
-
-        //            Console.WriteLine(e.Message);
-        //            return StatusCode(HttpStatusCode.NotModified);
-        //        }
-              
-
-        //        try
-        //        {
-        //            db.SaveChanges();
-        //        }
-        //        catch (DbUpdateConcurrencyException)
-        //        {               
-        //            return StatusCode(HttpStatusCode.NotModified);
-        //        }
-
-        //        return StatusCode(HttpStatusCode.NoContent);
-        //    }
-
-        //}
-
-
-
+        /// <summary>
+        /// used by the frontend to recieve an evaluation form to modify it
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [Route("forms/{id}")]
+        //GET api/Forms/5
         public IHttpActionResult GetForm(int id)
         {
             DtoForm form = db.Forms.Find(id).ToDto();
@@ -496,11 +206,150 @@ namespace Revit.Api.Azure.Controllers
         }
 
 
-        // PUT: api/Forms/5
+        /// <summary>
+        /// Used by the frontend to send an evaluation form for a particuliar candidate and a particular jury member
+        /// </summary>
+        /// <param name="juryId"></param>
+        /// <param name="formId"></param>
+        /// <param name="candidatId"></param>
+        /// <param name="data"></param>
+        /// <param name="language"></param>
+        /// <returns></returns>
+        [Route("evaluations/juries/{juryId}/forms/{formId}/candidates/{candidatId}")]
+        [ResponseType(typeof(DtoForm))]
+        // PUT: api/juries/{juryId}/forms/{formId}/candidates/{candidatId}
+        public object Put(int juryId, int formId, int candidatId, [FromBody] DtoForm data, string language = "en")
+        {
 
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            if (data == null)
+            {
+                return BadRequest();
+            }
+            if (formId != data.formId)
+            {
+                return BadRequest();
+            }
+
+            Form dbForm = db.Forms.Find(formId);
+            if (dbForm == null)
+            {
+                return NotFound();
+            }
+            Candidate dbCandidate = db.Candidates.Find(candidatId);
+            if (dbCandidate == null)
+            {
+                return NotFound();
+            }
+            
+
+                if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId== dbForm.ID && s.dimensionId==null && s.competenceId==null && s.juryId==juryId))
+                {
+                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == null && s.juryId == juryId).First().result = data.score;
+                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == null && s.juryId == juryId).First().finalResult = data.finalScore;
+                }
+                else
+                {
+                    dbForm.Scores.Add(new Score
+                    {
+                        candidateId = dbCandidate.ID,
+                        formId = dbForm.ID,
+                        result = data.score,
+                        finalResult=data.finalScore,
+                        juryId = juryId
+                    });
+                }
+
+
+            foreach (var dtoComp in data.competencesList)
+            {
+                var dbComp = dbForm.Competences.Where(c => c.ID == dtoComp.competenceId).First();
+
+                if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == dtoComp.competenceId && s.juryId == juryId))
+                {
+                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == dtoComp.competenceId && s.juryId == juryId).First().result = dtoComp.score;
+                    dbForm.Scores.Where(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == null && s.competenceId == dtoComp.competenceId && s.juryId == juryId).First().finalResult = dtoComp.score;
+                }
+                else
+                {
+                    dbComp.Scores.Add(new Score
+                    {
+                        
+                        candidateId = dbCandidate.ID,
+                        formId = dbForm.ID,
+                        result = dtoComp.score,
+                        finalResult = dtoComp.finalScore,
+                        competenceId = dbComp.ID,
+                        juryId = juryId
+                    });
+                }
+
+
+                foreach (var dtoDim in dtoComp.dimensions)
+                {
+                        var dbDim = dbComp.Dimensions.Where(c => c.ID == dtoDim.dimensionId).First();
+
+                        if (dbForm.Scores.Any(s => s.candidateId == candidatId && s.formId == dbForm.ID && s.dimensionId == dbDim.ID && s.competenceId == dtoComp.competenceId && s.juryId == juryId))
+                        {
+                            dbForm.Scores.Where(s => s.candidateId == candidatId && s.dimensionId == dbDim.ID && s.juryId == juryId).First().result = dtoDim.score;
+                        }
+                    else
+                    {
+                        dbDim.Scores.Add(new Score
+                        {
+                            dimensionId = dbDim.ID,
+                            candidateId = dbCandidate.ID,
+                            formId = dbForm.ID,
+                            result = dtoComp.score,
+                            competenceId = dbComp.ID,
+                            juryId = juryId
+                        });
+                    }
+
+                }
+        }
+
+
+            db.Entry(dbForm).State = EntityState.Modified;
+            
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FormExists(formId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return StatusCode(HttpStatusCode.NoContent);
+
+
+///////////////////////////////////////            
+        }
+
+
+        /// <summary>
+        /// Used by the frontend to send an evaluation form modified or create a new one
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="content"></param>
+        /// <returns></returns>
         [Route("forms/{id}")]
         [ResponseType(typeof(void))]
         [HttpPut]
+        // PUT: api/Forms/5
         public IHttpActionResult PutForm(int id, [FromBody]  DtoForm content)
         {
 
@@ -832,7 +681,151 @@ namespace Revit.Api.Azure.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+
+
+        /// <summary>
+        /// used by the PUT function
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        //POST: 
+        [Route("forms")]
+        [ResponseType(typeof(Form))]
+        public IHttpActionResult Post([FromBody] DtoForm data)
+        {
+            Form formDb = new Form();
+            if (!ModelState.IsValid)
+            {
+
+                return BadRequest(ModelState);
+            }
+            formDb = data.ToEntity(false);
+
+            //competence region
+            #region competences
+            foreach (var comp in data.competencesList)
+            {
+                Competence compDb = db.Competences.Find(comp.competenceId);
+
+
+                if (compDb == null)
+                {
+                    compDb = new Competence();
+
+                    compDb = comp.ToEntity(false);
+
+                }
+                
+
+                //dimension region
+                #region dimension
+                foreach (var dim in comp.dimensions)
+                {
+                    Dimension dimDb = db.Dimensions.Find(dim.dimensionId);
+
+                    if (dimDb == null)
+                    {
+                        dimDb = new Dimension();
+                        dimDb = dim.ToEntity(); ;
+                        compDb.Dimensions.Add(dimDb);
+                    }
+                    else if (compDb.Dimensions.Contains(dimDb) == false)
+                    {
+                        compDb.Dimensions.Add(dimDb);
+                    }
+                }
+                #endregion
+
+                formDb.Competences.Add(compDb);
+
+            }
+
+            #endregion
+
+            //jury region
+            #region jury
+            if (data.juryList != null)
+                foreach (var jury in data.juryList)
+                {
+                    Jury juryDb = db.Juries.Find(jury.juryId);
+
+                    if (juryDb == null)
+                    {
+                        juryDb = new Jury();
+                        juryDb= jury.ToEntity();
+
+                        formDb.Juries.Add(juryDb);
+                    }
+                    else if (formDb.Juries.Contains(juryDb) == false)
+                        formDb.Juries.Add(juryDb);
+                }
+            #endregion
+
+            //candidate region
+            #region candidates
+            if (data.candidateList == null)
+                data.candidateList = new List<DtoCandidate>();
+            foreach (var candi in data.candidateList)
+            {
+                Candidate canDb = db.Candidates.Find(candi.candidateId);
+                
+                if (canDb == null)
+                {
+                    canDb = new Candidate();
+                    canDb = candi.ToEntity();
+                    db.Candidates.Add(canDb);
+                    db.SaveChanges();
+                    canDb = db.Candidates.Where(c=> c.lastname==canDb.lastname).Where(c => c.firstname == canDb.firstname).Last();                   
+                }
+                
+                if (candi.juries != null)
+                    foreach (var jur in candi.juries)
+                    {
+                        juryCandidateForm JCF = new juryCandidateForm();
+                        JCF.candidate_ID = candi.candidateId;
+                        JCF.form_ID = formDb.ID;
+                        JCF.jury_ID = jur.juryId;
+                        db.JuryCandidateForms.Add(JCF);
+                    }
+
+                if (formDb.Candidates == null)
+                    formDb.Candidates = new List<Candidate>();
+                formDb.Candidates.Add(canDb);
+            }
+
+            db.Forms.Add(formDb);
+            db.SaveChanges();
+            formDb = db.Forms.Where(f=> f.name==formDb.name).Last();
+
+            foreach (var candi in data.candidateList)
+            {
+                Candidate canDb = db.Candidates.Find(candi.candidateId);
+
+                if (candi.juries != null)
+                    foreach (var jur in candi.juries)
+                    {
+                        juryCandidateForm JCF = new juryCandidateForm();
+                        JCF.candidate_ID = candi.candidateId;
+                        JCF.form_ID = formDb.ID;
+                        JCF.jury_ID = jur.juryId;
+                        db.JuryCandidateForms.Add(JCF);
+                    }
+
+            }
+            #endregion
+
+            db.SaveChanges();
+
+            return CreatedAtRoute("DefaultApi", new { id = formDb.ID }, formDb);
+        }
+
+ 
+
+
+
         
+
+
 
 
 
@@ -845,71 +838,7 @@ namespace Revit.Api.Azure.Controllers
             return db.Forms;
         }
 
-        //// GET: api/Forms/5
-        //[ResponseType(typeof(Form))]
-        //public IHttpActionResult GetForm(int id)
-        //{
-        //    Form form = db.Forms.Find(id);
-        //    if (form == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return Ok(form);
-        //}
-
-        //// PUT: api/Forms/5
-        //[ResponseType(typeof(void))]
-        //public IHttpActionResult PutForm(int id, Form form)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //        if (id != form.ID)
-        //        {
-        //            return BadRequest();
-        //}
-
-        //    db.Entry(form).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        db.SaveChanges();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!FormExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return StatusCode(HttpStatusCode.NoContent);
-        //}
-
-        // POST: api/Forms
-        //[ResponseType(typeof(Form))]
-        //public IHttpActionResult PostForm(Form form)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    db.Forms.Add(form);
-        //    db.SaveChanges();
-
-        //    return CreatedAtRoute("DefaultApi", new { id = form.ID }, form);
-        //}
-
-        // DELETE: api/Forms/5
+        
 
         [Route("forms/{id}")]
         [ResponseType(typeof(Form))]

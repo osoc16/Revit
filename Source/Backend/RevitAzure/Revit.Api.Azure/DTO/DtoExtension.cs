@@ -11,6 +11,11 @@ namespace Revit.Api.Azure.DTO
     {
 
         #region Dimension
+        /// <summary>
+        /// translate a DTO recieve from the frontend to item usable by the database
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static Dimension ToEntity(this DtoDimension source)
         {
             Dimension result = new Dimension();
@@ -36,7 +41,11 @@ namespace Revit.Api.Azure.DTO
             result.ID = source.dimensionId;
             return result;
         }
-
+        /// <summary>
+        /// translate a database object to item usable by the frontend
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static DtoDimension ToDto(this Dimension source,String language = "EN")
         {
             DtoDimension result = new DtoDimension();
@@ -102,6 +111,13 @@ namespace Revit.Api.Azure.DTO
 
 
         #region Competence
+
+        /// <summary>
+        /// translate a DTO recieve from the frontend to item usable by the database
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="chain">allow to choise if the functon translate all the sub item or not</param>
+        /// <returns></returns>
         public static Competence ToEntity(this DtoCompetence source, bool chain = true)
         {
             Competence result = new Competence();
@@ -150,6 +166,13 @@ namespace Revit.Api.Azure.DTO
             return result;
         }
 
+        /// <summary>
+        /// translate a database object to item usable by the frontend
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="chain">allow to choise if the functon translate all the sub item or not</param>
+        /// <param name="language">parameter for language</param>
+        /// <returns></returns>
         public static DtoCompetence ToDto(this Competence source, String language = "EN", bool chain = true)
         {
 
@@ -233,6 +256,12 @@ namespace Revit.Api.Azure.DTO
 
 
         #region Jury
+
+        /// <summary>
+        /// translate a DTO recieve from the frontend to item usable by the database
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static Jury ToEntity(this DtoJury source)
         {
             Jury result = new Jury();
@@ -244,6 +273,11 @@ namespace Revit.Api.Azure.DTO
             return result;
         }
 
+        /// <summary>
+        /// translate a database object to item usable by the frontend
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static DtoJury ToDto(this Jury source)
         {
             DtoJury result = new DtoJury();
@@ -260,6 +294,12 @@ namespace Revit.Api.Azure.DTO
 
 
         #region Candidate
+
+        /// <summary>
+        /// translate a DTO recieve from the frontend to item usable by the database
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static Candidate ToEntity(this DtoCandidate source)
         {
             Candidate result = new Candidate();
@@ -272,6 +312,11 @@ namespace Revit.Api.Azure.DTO
             return result;
         }
 
+        /// <summary>
+        /// translate a database object to item usable by the frontend
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static DtoCandidate ToDto(this Candidate source)
         {
             DtoCandidate result = new DtoCandidate();
@@ -288,7 +333,14 @@ namespace Revit.Api.Azure.DTO
 
 
 
-        #region Form
+        #region Form       
+
+        /// <summary>
+        /// translate a DTO recieve from the frontend to item usable by the database
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="chain">allow to choise if the functon translate all the sub item or not </param>
+        /// <returns></returns>
         public static Form ToEntity(this DtoForm source, bool chain = true)
         {
             Form result = new Form();
@@ -352,6 +404,16 @@ namespace Revit.Api.Azure.DTO
             return result;
         }
 
+
+
+
+        /// <summary>
+        /// translate a database object to item usable by the frontend
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="chain">allow to choise if the functon translate all the sub item or not</param>
+        /// <param name="language">parameter for language</param>
+        /// <returns></returns>
         public static DtoForm ToDto(this Form source, bool chain = true, String language = "EN")
         {
             DtoForm result = new DtoForm();
@@ -440,7 +502,14 @@ namespace Revit.Api.Azure.DTO
         #endregion
 
 
+
         #region Screening
+
+        /// <summary>
+        /// translate a DTO recieve from the frontend to item usable by the database
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static Screening ToEntity(this DtoScreening source)
         {
             Screening result = new Screening();
@@ -471,6 +540,11 @@ namespace Revit.Api.Azure.DTO
             return result;
         }
 
+        /// <summary>
+        /// translate a database object to item usable by the frontend
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static DtoScreening ToDto(this Screening source, String language = "EN")
         {
             DtoScreening result = new DtoScreening();
@@ -547,6 +621,12 @@ namespace Revit.Api.Azure.DTO
 
 
         #region Score
+
+        /// <summary>
+        /// translate a DTO recieve from the frontend to item usable by the database
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static Score ToEntity(this DtoScore source)
         {
             Score result = new Score();
@@ -563,6 +643,11 @@ namespace Revit.Api.Azure.DTO
             return result;
         }
 
+        /// <summary>
+        /// translate a database object to item usable by the frontend
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
         public static DtoScore ToDto(this Score source)
         {
             DtoScore result = new DtoScore();
