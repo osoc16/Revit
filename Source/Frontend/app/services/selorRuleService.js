@@ -57,7 +57,7 @@
             if (allNA) {
                 $log.info("All Score NA");
                 return {
-                    score: null,
+                    score: NaN,
                     minScore: null,
                     maxScore: null
                 };

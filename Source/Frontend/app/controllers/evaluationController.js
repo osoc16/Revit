@@ -45,12 +45,12 @@
             //Set status for each competence
             for (var i in $scope.form.competences) {
 
-                applyScoringRulesOnCompetenceLevel(i);
+                //applyScoringRulesOnCompetenceLevel(i);
                 $scope.setCompetenceStatus($scope.form.competences[i]);
 
             }
 
-            applyScoringRulesOnFormLevel();
+           // applyScoringRulesOnFormLevel();
 
             $(document).ready(function() {
                 $('select').material_select();

@@ -22,29 +22,29 @@
 
                     var form= response.data;
 
-                    if(form.score==null){
+                    if(form.score==null||form.score==0){
                         form.score=NaN;
                     }
 
-                    if(form.finalScore==null){
-                        form.finalScore==NaN;
+                    if(form.finalScore==null||form.finalScore==0){
+                        form.finalScore=NaN;
                     }
 
                     for (var competenceKey in form.competences) {
 
                         var competence = form.competences[competenceKey];
 
-                        if (competence.score == null) {
+                        if (competence.score == null||competence.score == 0) {
                             competence.score = NaN;
                         }
-                        if (competence.finalScore == null) {
+                        if (competence.finalScore == null||competence.finalScore == 0) {
                             competence.finalScore = NaN;
                         }
 
                         for (var dimensionKey in competence.dimensions) {
 
                             var dimension = competence.dimensions[dimensionKey];
-                            if (dimension.score == null) {
+                            if (dimension.score == null||dimension.score == 0) {
                                 dimension.score = NaN;
                             }
                         }
