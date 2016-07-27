@@ -19,10 +19,16 @@
 
             $log.info("Form successfully saved");
 
+             $log.info("Form has been saved successfully");
+            Materialize.toast('Form saved successfully', 1000);
+
+
+
         }
 
         var onApiCallError=function(reason){
-            $scope.error=reason;
+            $scope.error = reason;
+            Materialize.toast('An error has occured while processing your request, try again later please', 3000);
         }
 
         revitService.getGeneralForm($routeParams.formId).then(onGetGeneralForm,onApiCallError);
@@ -33,9 +39,7 @@
 
 
         $scope.saveGeneralForm= function(){
-
-            alert("test");
-            revitService.saveGeneralForm($routeParams.formId,$scope.form);
+            revitService.saveGeneralForm($routeParams.formId,$scope.form).then(onSaveGeneralForm, onApiCallError);;
         }
 
 

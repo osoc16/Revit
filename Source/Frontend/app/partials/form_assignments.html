@@ -16,7 +16,7 @@
 						<input id="checkbox-assign-jury-{{ $index }}" class="assign-jury-checkbox filled-in" data-candidate-index="{{ $index }}" type="checkbox"/>
 						<label class="assignment-checkbox-faker" for="checkbox-assign-jury-{{ $index }}"></label>
 					</td>
-					<td><label class="candidate-display" for="checkbox-assign-jury-{{ $index }}">{{ candidate.firstName }} {{ candidate.lastname }}</label></td>
+					<td><label class="candidate-display" for="checkbox-assign-jury-{{ $index }}">{{ candidate.firstName }} {{ candidate.lastName }}</label></td>
 					<td>
 						<div class="jury-container">
 							<div ng-repeat="jury in candidate.juries"  ng-init="juryIndex = $index" class="chip candidate-jury-chip">

@@ -38,7 +38,7 @@
         //API callback Functions
         var onGetEvaluationForm = function(data) {
 
-            $log.info("Evaulation form fethced:");
+            $log.info("Evaulation form fetched:");
             $log.info(data);
             $scope.form = data;
 
@@ -57,11 +57,15 @@
         var onSaveEvaluationForm = function(data) {
 
             $log.info("Form has been saved successfully");
+            Materialize.toast('Evaluation form saved successfully', 1000);
+
+
 
         }
 
         var onApiCallError = function(reason) {
             $scope.error = reason;
+            Materialize.toast('An error has occured while processing your request, try again later please', 3000);
         }
 
         revitService.getEvaluationForm($routeParams.formId, $routeParams.juryId, $routeParams.candidateId).then(onGetEvaluationForm, onApiCallError);
@@ -127,9 +131,8 @@
         //Save form to service
         $scope.saveForm = function() {
 
-            alert("test");
-
             revitService.saveForm($scope.form.formId,$scope.form);
+
         }
 
 
