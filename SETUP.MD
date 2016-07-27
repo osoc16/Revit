@@ -19,3 +19,9 @@ To change the address the angular application makes calls to, change the `apiBas
 The styling of the application is based on sass. <a href="http://gulpjs.com/">Gulp</a> was used for the compilation of scss files. Install it and run  `gulp` command in the 'Frontend' folder to get the automation task started.
 
 ## Backend
+
+1) launch the visual studio project
+2) edit the Web.config file to add your <connectionStrings>
+3) in the DataContext.cs : change the base name
+4) compile the project
+5) publish the api to your favorite host
