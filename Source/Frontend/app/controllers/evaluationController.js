@@ -44,9 +44,13 @@
 
             //Set status for each competence
             for (var i in $scope.form.competences) {
+
+                applyScoringRulesOnCompetenceLevel(i);
                 $scope.setCompetenceStatus($scope.form.competences[i]);
+
             }
 
+            applyScoringRulesOnFormLevel();
 
             $(document).ready(function() {
                 $('select').material_select();
@@ -139,8 +143,19 @@
 
         $scope.competenceEvaluated = function() {
 
+                applyScoringRulesOnFormLevel();
 
-            var suggestion = selorRuleService.getFormScoreSuggestion($scope.form.competences);
+                var currentCompetence = $scope.form.competences[$scope.currentCompetenceIndex];
+
+                $scope.setCompetenceStatus(currentCompetence);
+   
+                 $log.info("comp eval");
+        }
+
+        var applyScoringRulesOnFormLevel=function(){
+
+
+             var suggestion = selorRuleService.getFormScoreSuggestion($scope.form.competences);
 
             if(isNaN($scope.form.score)|| $scope.form.score>suggestion.maxScore || $scope.form.score<suggestion.minScore ){
 
@@ -156,34 +171,38 @@
             /* VALIDATION */
 
 
-            var currentCompetence = $scope.form.competences[$scope.currentCompetenceIndex];
-
-            $scope.setCompetenceStatus(currentCompetence);
-
-            $log.info("comp eval");
-
-
 
         }
 
 
         $scope.dimensionEvaluated = function() {
 
-            var suggestion = selorRuleService.getCompetenceScoreSuggestion($scope.form.competences[$scope.currentCompetenceIndex].dimensions);
 
-            var competenceScore= $scope.form.competences[$scope.currentCompetenceIndex].score;
+            applyScoringRulesOnCompetenceLevel($scope.currentCompetenceIndex);
+
+        }
+
+
+        var applyScoringRulesOnCompetenceLevel=function(competenceIndex){
+
+
+           var suggestion = selorRuleService.getCompetenceScoreSuggestion($scope.form.competences[competenceIndex].dimensions);
+
+            var competenceScore= $scope.form.competences[competenceIndex].score;
 
             if(isNaN(competenceScore)|| competenceScore> suggestion.maxScore || competenceScore< suggestion.minScore){
              
-             $scope.form.competences[$scope.currentCompetenceIndex].score = suggestion.score;
+             $scope.form.competences[competenceIndex].score = suggestion.score;
  
             }
 
-            $scope.form.competences[$scope.currentCompetenceIndex].scoreMinLimit = suggestion.minScore;
-            $scope.form.competences[$scope.currentCompetenceIndex].scoreMaxLimit = suggestion.maxScore;
+            $scope.form.competences[competenceIndex].scoreMinLimit = suggestion.minScore;
+            $scope.form.competences[competenceIndex].scoreMaxLimit = suggestion.maxScore;
 
-            $scope.competenceEvaluated();
+            applyScoringRulesOnFormLevel();
+
         }
+
 
         //Get slider tick color
         var tickColor = function(value, min, max) {
