@@ -3,7 +3,7 @@
 ## Frontend 
 
 ### Angular
-You need to have Node and Node Package Manager (NPM) installed to run this project[Node and NPM](https://docs.npmjs.com/getting-started/installing-node).
+You need to have Node and Node Package Manager (NPM) installed to run this project [Node and NPM](https://docs.npmjs.com/getting-started/installing-node).
 
 Run the following commands to solve package dependencies
 ```
