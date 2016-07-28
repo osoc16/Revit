@@ -69,8 +69,11 @@ namespace Revit.Api.Azure.Controllers
             {
                 foreach (var j in db.Juries.Where(j => j.ID == item.jury_ID).ToList())
                 {
+                    if (!result.candidate.juries.Contains(j.ToDto()))
+                    {
 
-                    result.candidate.juries.Add(j.ToDto());
+                        result.candidate.juries.Add(j.ToDto());
+                    }
                 }
             }
             
@@ -154,8 +157,10 @@ namespace Revit.Api.Azure.Controllers
                 {
                     foreach (var j in db.Juries.Where(j => j.ID == item.jury_ID).ToList())
                     {
-
-                        c.juries.Add(j.ToDto());
+                        if (!c.juries.Contains(j.ToDto()))
+                        {
+                            c.juries.Add(j.ToDto());
+                        }
                     }
                 }
             }
@@ -197,8 +202,11 @@ namespace Revit.Api.Azure.Controllers
                 {
                     foreach (var j in db.Juries.Where(j => j.ID == item.jury_ID).ToList())
                     {
+                        if (c.juries.Contains(j.ToDto()))
+                        {
 
                         c.juries.Add(j.ToDto());
+                        }
                     }
                 }
             }
