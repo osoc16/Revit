@@ -1,6 +1,6 @@
 (function() {
 
-
+//Fake authentication service
 var authenticationService = function($http, $log) {
 
 			var defaultUserId=1;

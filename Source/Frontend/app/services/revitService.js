@@ -1,5 +1,6 @@
 (function() {
 
+//
     var revitService = function($http, $log) {
 
         var mockMode = false;
@@ -10,7 +11,7 @@
         //API Functions
         //
         //
-        //
+        //Get evaluation form
         var getEvaluationForm = function(formId, juryId, candidateId) {
 
             $log.info("=========API CALL===========")
@@ -53,7 +54,7 @@
                     return form;
                 });
         }
-
+        //Save evaluation form on API
         var saveEvaluationForm = function(formId, juryId, candidateId, data) {
 
 
@@ -66,7 +67,7 @@
                 return response.data;
             });
         }
-
+        //Get general form
         var getGeneralForm = function(formId) {
 
             $log.info("=========API CALL===========")
@@ -78,7 +79,7 @@
                     return response.data;
                 });
         }
-
+        //Save general form
         var saveGeneralForm = function(formId, data) {
 
             $log.info("=========API CALL===========")
@@ -92,7 +93,7 @@
                     return response.data;
                 });
         }
-
+        //Get screenings
         var getScreenings = function(searchTerm) {
             $log.info("=========API CALL===========")
             var callUrl = apiBaseUrl + "screenings/?search=" + searchTerm;
@@ -173,7 +174,6 @@
                 saveGeneralForm: saveGeneralFormMock
             };
 
-
         } else {
 
             //Service API return
@@ -186,14 +186,14 @@
                 saveGeneralForm: saveGeneralForm
 
             };
-
-
         }
     };
 
+    //Module for API calls
     var module = angular.module("RevitApp");
     module.factory("revitService", revitService);
 
+    //Mock data
     var mockRepository = {
 
         evaluationForm: {

@@ -1,12 +1,14 @@
+
 (function() {
 
     var app = angular.module("RevitApp");
 
+    //Evaluation Page Controllerr
     var EvaluationController = function($scope, $routeParams, $location, revitService, github, selorRuleService, $log) {
-
 
         var selectedCandidate = null;
 
+        //Set validation status for a competence
         $scope.setCompetenceStatus = function(competenceIndex) {
 
             var toUpdateCompetence= $scope.form.competences[competenceIndex];
@@ -34,11 +36,11 @@
 
             toUpdateCompetence.status = "success";
             toUpdateCompetence.statusMessage = "Evaluated";
-
-
         }
 
         //API callback Functions
+        //
+        //Get eval form
         var onGetEvaluationForm = function(data) {
 
             $log.info("Evaulation form fetched:");
@@ -58,39 +60,34 @@
             $(document).ready(function() {
                 $('select').material_select();
             });
-
         }
-
+        //Save eval form
         var onSaveEvaluationForm = function(data) {
 
             $log.info("Form has been saved successfully");
             Materialize.toast('Evaluation form saved successfully', 1000);
-
-
-
         }
-
+        //Notify error
         var onApiCallError = function(reason) {
             $scope.error = reason;
             Materialize.toast('An error has occured while processing your request, try again later please', 3000);
         }
 
+        //Get evaluation form
         revitService.getEvaluationForm($routeParams.formId, $routeParams.juryId, $routeParams.candidateId).then(onGetEvaluationForm, onApiCallError);
-
-
+        
         $scope.competenceEditMode = false;
         $scope.currentCompetenceIndex = null;
 
-
         $scope.saveEvaluationForm = function() {
-
             revitService.saveEvaluationForm($routeParams.formId, $routeParams.juryId, $routeParams.candidateId, $scope.form).then(onSaveEvaluationForm, onApiCallError);
-
         }   
 
+        //Change candidate selected for evaluation
         $scope.goToCandidateEvaluationPage = function() {
 
             var cId = $(".candidate-selection-dropdown option:selected").val();
+
             $location.path("/evaluation/juries/" + $routeParams.juryId + "/forms/" + $routeParams.formId + "/candidates/" + cId);
 
         }
@@ -107,9 +104,8 @@
             $scope.toggleEditMode();
         };
 
+        //toggle visual for edit mode
         $scope.toggleEditMode = function() {
-
-
             //Invert edit mode
             $scope.competenceEditMode = $scope.competenceEditMode === false ? true : false;
             display();
@@ -125,6 +121,7 @@
             $scope.$broadcast('rzSliderForceRender');
         };
 
+        //update display for edit Sections
         var display = function() {
             if ($scope.competenceEditMode) {
                 $(".show-when-edit").show();
@@ -137,26 +134,20 @@
 
         //Save form to service
         $scope.saveForm = function() {
-
             revitService.saveForm($scope.form.formId,$scope.form);
-
         }
 
 
-
+        //Execute after a competence is evaluated
         $scope.competenceEvaluated = function() {
-
                 applyScoringRulesOnFormLevel();
-
-
                 $scope.setCompetenceStatus($scope.currentCompetenceIndex);
    
                  $log.info("comp eval");
         }
 
+        //Apply scoring rule on form fields
         var applyScoringRulesOnFormLevel=function(){
-
-
              var suggestion = selorRuleService.getFormScoreSuggestion($scope.form.competences);
 
             if(isNaN($scope.form.score)|| $scope.form.score>suggestion.maxScore || $scope.form.score<suggestion.minScore ){
@@ -169,23 +160,17 @@
             $scope.form.scoreMinLimit = suggestion.minScore;
             $scope.form.scoreMaxLimit = suggestion.maxScore;
 
-
-            /* VALIDATION */
-
         }
 
-
+        //Execute after a dimention is evaluated
         $scope.dimensionEvaluated = function() {
-
 
             applyScoringRulesOnCompetenceLevel($scope.currentCompetenceIndex);
 
             $scope.setCompetenceStatus($scope.currentCompetenceIndex);
-
-
         }
 
-
+        //Apply scoring rule for a competence
         var applyScoringRulesOnCompetenceLevel=function(competenceIndex){
 
 
@@ -203,10 +188,7 @@
             $scope.form.competences[competenceIndex].scoreMaxLimit = suggestion.maxScore;
 
             applyScoringRulesOnFormLevel();
-
-
         }
-
 
         //Get slider tick color
         var tickColor = function(value, min, max) {
@@ -252,7 +234,6 @@
             return tickColor(value, min, max);
         }
 
-
         //Return tick color for competence total
         $scope.tickColorCompetence = function(value) {
 
@@ -263,7 +244,6 @@
                 min = $scope.form.competences[$scope.currentCompetenceIndex].scoreMinLimit;
                 max = $scope.form.competences[$scope.currentCompetenceIndex].scoreMaxLimit;
             } catch (ex) {}
-
 
             return tickColor(value, min, max);
         }

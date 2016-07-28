@@ -1,5 +1,6 @@
 (function() {
 
+    //Rule Service for scoring
     var selorRuleService = function($http, $log) {
 
         //Get score suggestion for competence based on dimensions
@@ -16,7 +17,6 @@
             }
 
             return getScoreSuggestion(dimensionScores);
-
         };
 
         //Get score suggestion for form based on competences
@@ -76,18 +76,10 @@
                 minScore: rankMin,
                 maxScore: rankMax
             };
-
         };
 
         //Get score min suggestion
         var getScoreMinSuggestion = function(scores) {
-
-
-
-
-
-
-
 
             $log.info("------------------");
 
@@ -145,7 +137,6 @@
             $log.info("------------------");
 
             return minRounded;
-
         };
 
         //Get score max suggestion
@@ -203,7 +194,6 @@
 
             return maxRounded;
         };
-
 
         /* HELPER FUNCTIONS */
 
