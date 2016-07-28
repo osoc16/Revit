@@ -1,0 +1,64 @@
+<div class="main-page-content">
+  {{ countdown }}
+  <form name="searchUser" ng-submit="search(username)">
+    <input type="search" required="" ng-model="username" />
+    <input type="submit" value="Search" />
+  </form>
+  <form action="#">
+    <div class="input-field s12 m6">
+      <select multiple>
+        <optgroup label="team 1">
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </optgroup>
+        <optgroup label="team 2">
+          <option value="3">Option 3</option>
+          <option value="4">Option 4</option>
+        </optgroup>
+      </select>
+      <label>Optgroups</label>
+    </div>
+
+
+<div>
+    <rzslider
+         rz-slider-model="slider.value"
+         rz-slider-options="slider.options"></rzslider>
+</div>
+
+<span ng-bind="slider.value"></span>
+
+<span ng-bind="model.age.min"></span>
+    
+  </form>  <div data-role="main" class="ui-content">
+    <form method="post" action="demoform.asp">
+      <label for="points">Points:</label>
+      <input type="range" name="points" id="points" value="50" min="0" max="100" data-highlight="true">
+      <input type="submit" data-inline="true" value="Submit">
+    </form>
+  </div>
+  
+</div>
+
+<div id="range"></div>
+
+<ul>
+  
+<li ng-repeat="suggestion in suggestions">
+  
+
+
+<span>score min : {{ suggestion.minScore }}</span>
+</br>
+<span>proposition: {{ suggestion.score }}</span>
+</br>
+<span>score max : {{ suggestion.maxScore }}</span>
+
+
+</br>
+
+</li>
+
+
+
+</ul>

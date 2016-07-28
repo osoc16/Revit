@@ -1,0 +1,106 @@
+.evaluation-page-content {
+
+
+    .slider-resetter{
+        float:right;
+        margin:0 auto;
+        cursor:pointer;
+        color:$warning-color; 
+        padding:0.2rem;
+
+   
+    }
+
+    .slider-container{
+        position:relative;
+    }
+
+    .candidate-selection {
+        position: relative;
+        top: 0;
+    }
+
+    .page-title {
+        display: inline-block;
+        margin-top: 2rem;
+    }
+
+    .competence-card {
+        border-top: 0.3rem solid;
+        border-color: $primary-color;
+
+        .card-title {
+            font-weight: 400;
+        }
+
+        .competence-slider {
+            padding-top: 2rem;
+        }
+
+        &.neutral {
+            border-color: $neutral-color;
+        }
+
+        &.success {
+            border-color: $success-color;
+        }
+
+        &.warning {
+            border-color: $warning-color;
+        }
+
+        &.fill {
+            background-color: $primary-color;
+
+            &.neutral {
+                background-color: $neutral-color;
+            }
+
+            &.success {
+                background-color: $success-color;
+            }
+
+            &.warning {
+                background-color: $warning-color;
+            }
+        }
+
+        .status-message {
+            &.neutral {
+                color: $neutral-color;
+            }
+
+            &.success {
+                color: $success-color;
+            }
+
+            &.warning {
+                color: $warning-color;
+            }
+        }
+    }
+
+
+    .total-card{
+        padding-top:2rem;
+        padding-bottom:2rem;
+    }
+    .back-to-overview {
+        float: right;
+        cursor: pointer;
+
+        &:hover {
+            color: $secondary-color;
+        }
+    }
+
+    .dimension-item {
+        position: relative;
+
+        .disable-dimension-checkbox {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+    }
+}
