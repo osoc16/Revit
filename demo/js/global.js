@@ -10,7 +10,7 @@
 
     var bindCollapsibles = function() {
 
-    	$(document).on("click, tap",".n-collapsible-toggler",function(){
+    	$(document).on("click touchstart",".n-collapsible-toggler",function(){
 
     		$(this).closest(".n-collapsible-wrapper").children(".n-collapsible-content").toggle();
 
